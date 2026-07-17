@@ -151,5 +151,230 @@
     "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
     "reviewedAt": "2026-07-17",
     "note": "Отклонение относится к составной атрибуции в представленном виде; точное издание «Фань тянь лу» остаётся неразысканным."
+  },
+  {
+    "claimId": "prod-maocha-process",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed tea technologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Операции сверены с официальным полным текстом; внешняя технологическая рецензия не получена."
+  },
+  {
+    "claimId": "prod-sheng-shou-distinct",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed tea technologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Категории сверены со стандартами; внешняя рецензия не получена."
+  },
+  {
+    "claimId": "prod-shou-wodui-operations",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed tea technologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Режимы ограничены областью местного регламента; внешняя рецензия не получена."
+  },
+  {
+    "claimId": "prod-green-removal-scope",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed tea technologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Сенсорный ориентир ограничен стадией 杀青; внешняя рецензия не получена."
+  },
+  {
+    "claimId": "prod-ten-percent-moisture",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed tea technologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Область числа не установлена; тезис исключён до точной сверки."
+  },
+  {
+    "claimId": "prod-fire-drying-always-worse",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed tea technologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Безусловная сенсорная иерархия не поддержана; внешняя рецензия не получена."
+  },
+  {
+    "claimId": "prod-age-rules",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed tea technologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Обязательные сроки не найдены в нормативных определениях; внешняя рецензия не получена."
+  },
+  {
+    "claimId": "prod-sheng-shortened-shou",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed tea technologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Раздельные маршруты сверены с официальным полным текстом; внешняя рецензия не получена."
+  },
+  {
+    "claimId": "storage-controlled-conditions",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed tea technologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Пункты 4.2–5.2 стандарта проверены постранично; внешняя рецензия не получена."
+  },
+  {
+    "claimId": "storage-mould-is-damage",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed tea technologist or microbiologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Технические признаки порчи не превращены в медицинскую рекомендацию; внешняя рецензия не получена."
+  },
+  {
+    "claimId": "prod-shou-chronology-disagreement",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed tea historian",
+    "reviewedAt": "2026-07-17",
+    "note": "Расхождение официальной, региональной и корпоративной версий сохранено; архивная внешняя рецензия не получена."
+  },
+  {
+    "claimId": "prod-shou-antecedents",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed tea historian",
+    "reviewedAt": "2026-07-17",
+    "note": "Antecedents отделены от кодифицированного юньнаньского процесса; первичные архивы командировки недоступны."
+  },
+  {
+    "claimId": "prod-other-provinces-gi",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed tea technologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Вердикт ограничен географическим указанием GB/T 22111 и не отрицает иные постферментированные чаи."
+  },
+  {
+    "claimId": "prod-120-subspecies",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed tea technologist or botanist",
+    "reviewedAt": "2026-07-17",
+    "note": "Число и таксономическая категория не найдены в проверенных стандартах; внешняя рецензия не получена."
+  },
+  {
+    "claimId": "storage-rh-aw-distinction",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed food technologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Равновесное соотношение aw/ERH не перенесено на неравновесный складской чай; внешняя рецензия не получена."
+  },
+  {
+    "claimId": "storage-regional-labels",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed tea storage technologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Региональные ярлыки не представлены как воспроизводимые режимы без измерений; внешняя рецензия не получена."
+  },
+  {
+    "claimId": "micro-method-boundaries",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed microbiologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Методические границы сверены с дизайнами первичных статей; внешняя микробиологическая рецензия не получена."
+  },
+  {
+    "claimId": "micro-abe-timecourse",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed microbiologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Вывод ограничен одной 50-дневной фабричной серией и доступной методической информацией."
+  },
+  {
+    "claimId": "micro-ma-lab-succession",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed microbiologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Доминирование рода не превращено в видовое или универсальное утверждение; внешняя рецензия не получена."
+  },
+  {
+    "claimId": "micro-ma-chemical-shifts",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed microbiologist or food chemist",
+    "reviewedAt": "2026-07-17",
+    "note": "Химические изменения описаны для двух лабораторных серий без причинной атрибуции таксонам."
+  },
+  {
+    "claimId": "micro-zhang-cross-sectional",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed microbiologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Поперечный дизайн, неоднородность продукта и примесь растительной ДНК сохранены как ограничения."
+  },
+  {
+    "claimId": "micro-zhao-metaomics",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed microbiologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Мультиомные связи трактуются как функциональная поддержка в двух сериях, не как универсальная причинность."
+  },
+  {
+    "claimId": "micro-haas-market-safety",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed microbiologist or toxicologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Результаты ограничены 36 магазинными образцами, культурой и целевым набором токсинов."
+  },
+  {
+    "claimId": "micro-chau-market-safety",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed microbiologist or toxicologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Значения ниже применённых MRL не превращены в заключение о других партиях или всей категории."
+  },
+  {
+    "claimId": "micro-safety-method-dependent",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed microbiologist or toxicologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Различия результатов привязаны к выборке, analyte list и аналитическим пределам; медицинский вывод не делается."
   }
 ]
