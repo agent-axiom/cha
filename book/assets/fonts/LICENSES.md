@@ -86,24 +86,107 @@ above are a workflow summary, not a substitute for those files.
 
 ## Noto Serif CJK SC
 
-- **Required normalized proof filename:** `NotoSerifSC-Regular.ttf`
-- **Official pin:** `notofonts/noto-cjk` release/tag `Serif2.003`, tag commit
-  `9b0f1436e455d902de067a2501422e5dc71ad16b`; official release asset
-  `14_NotoSerifSC.zip` (GitHub API size `68,960,596` bytes).
-- **Release-declared version:** Noto Serif CJK `2.003`. This is a release label,
-  not a locally inspected name-table value.
+- **Normalized proof filename:** `NotoSerifSC-Regular.ttf`
+- **Status:** approved local proof artifact; derived deterministically from an
+  official TrueType variable source at `wght=400` and verified as static.
+- **Official release pin:** `notofonts/noto-cjk` release/tag `Serif2.003`, tag
+  commit `9b0f1436e455d902de067a2501422e5dc71ad16b`; complete release asset
+  `14_NotoSerifSC.zip`, `68,960,596` bytes, SHA-256
+  `c58cd035ab2adb003510846db9ec80c35b1b97755d329486c3a1e88edfe6e98e`.
+  `unzip -t` reports no errors.
+- **Release member inspected:**
+  `SubsetOTF/SC/NotoSerifSC-Regular.otf`, `11,625,800` bytes, SHA-256
+  `e8f396decc1f0963a016a989c3d8852e863d1350996f573860a80767c83a1cd3`.
+  It is a genuine static OpenType/CFF Regular, not a TTF, so it was not renamed
+  to satisfy the proof filename. Its official 2,310-byte `name` table supplies
+  the Regular names in the derived TTF.
+- **TrueType source:** official Google Fonts artifact
+  `ofl/notoserifsc/NotoSerifSC[wght].ttf` at commit
+  `389b770410cc0b7c21c85673bfa2077420fe7f65`, `25,125,512` bytes, SHA-256
+  `050080d9255a86808f2945bffac582b31ef32bc36411ce29563b4961670c66f9`.
+  Its inspected named Regular instance and version `2.003` match the pinned
+  Noto Serif CJK release.
+- **Derivation tool:** HarfBuzz `hb-subset 14.2.1`; Python fontTools was not
+  available offline. The full-glyph instance command was:
+
+  ```bash
+  hb-subset 'book/assets/fonts/files/NotoSerifSC[wght].ttf' \
+    --output-file=book/assets/fonts/files/NotoSerifSC-Regular.ttf.candidate \
+    --unicodes='*' --variations='wght=400' \
+    --name-IDs='*' --name-languages='*' \
+    --layout-features='*' --glyph-names
+  ```
+
+  Repeating this command produced byte-identical candidates with SHA-256
+  `4a6db95a007099d7123f417d16af404d05451446b3accbc582cd77e1fbd55c04`.
+  HarfBuzz correctly removed the variable tables but retained the source's
+  legacy ExtraLight name strings. To avoid inventing or hand-authoring names,
+  Node `24.14.1` copied the `name` table byte-for-byte from the official static
+  Regular OTF member into the candidate, updated its directory checksum and
+  length, then recalculated `head.checkSumAdjustment`. The final whole-font
+  checksum is the required `0xB1B0AFBA`. This is the exact normalization step:
+
+  ```bash
+  node <<'NODE'
+  const fs = require('node:fs')
+  const candidate = fs.readFileSync('book/assets/fonts/files/NotoSerifSC-Regular.ttf.candidate')
+  const namesFont = fs.readFileSync('book/assets/fonts/files/NotoSerifSC-Regular.otf')
+  const tables = (buffer) => {
+    const result = new Map()
+    for (let index = 0; index < buffer.readUInt16BE(4); index += 1) {
+      const directoryOffset = 12 + index * 16
+      result.set(buffer.toString('ascii', directoryOffset, directoryOffset + 4), {
+        directoryOffset,
+        offset: buffer.readUInt32BE(directoryOffset + 8),
+        length: buffer.readUInt32BE(directoryOffset + 12),
+      })
+    }
+    return result
+  }
+  const checksum = (buffer, offset = 0, length = buffer.length) => {
+    let sum = 0
+    for (let index = 0; index < length; index += 4) {
+      let word = 0
+      for (let byte = 0; byte < 4; byte += 1) {
+        word = (word << 8) | (index + byte < length ? buffer[offset + index + byte] : 0)
+      }
+      sum = (sum + (word >>> 0)) >>> 0
+    }
+    return sum >>> 0
+  }
+  const targetTables = tables(candidate)
+  const sourceTables = tables(namesFont)
+  const targetName = targetTables.get('name')
+  const sourceName = sourceTables.get('name')
+  const head = targetTables.get('head')
+  if (!targetName || !sourceName || !head || sourceName.length > targetName.length) {
+    throw new Error('incompatible sfnt tables')
+  }
+  candidate.fill(0, targetName.offset, targetName.offset + targetName.length)
+  namesFont.copy(candidate, targetName.offset, sourceName.offset, sourceName.offset + sourceName.length)
+  candidate.writeUInt32BE(checksum(namesFont, sourceName.offset, sourceName.length), targetName.directoryOffset + 4)
+  candidate.writeUInt32BE(sourceName.length, targetName.directoryOffset + 12)
+  candidate.writeUInt32BE(0, head.offset + 8)
+  candidate.writeUInt32BE((0xB1B0AFBA - checksum(candidate)) >>> 0, head.offset + 8)
+  if (checksum(candidate) !== 0xB1B0AFBA) throw new Error('invalid sfnt checksum')
+  fs.writeFileSync('book/assets/fonts/files/NotoSerifSC-Regular.ttf', candidate)
+  NODE
+  ```
+- **Inspected output:** TrueType/glyf sfnt with 19 tables and no `fvar`, `gvar`,
+  `avar`, `HVAR` or `MVAR`; `variable=false`; `14,807,596` bytes. Family
+  `Noto Serif SC`; style `Regular`; full name `Noto Serif SC`; PostScript name
+  `NotoSerifSC-Regular`; version `2.003` (`fc-scan` raw fixed-point value
+  `131269`). HarfBuzz successfully shaped Simplified Chinese and Cyrillic text.
+- **Output SHA-256:**
+  `3f1c014c06b68dd4416d1c9be4720fed6a066504ce9355c42d6f7c50e434f222`
 - **Official source:**
   <https://github.com/notofonts/noto-cjk/releases/tag/Serif2.003>
+- **Official TrueType source:**
+  <https://github.com/google/fonts/blob/389b770410cc0b7c21c85673bfa2077420fe7f65/ofl/notoserifsc/NotoSerifSC%5Bwght%5D.ttf>
 - **Official licence:**
   <https://github.com/notofonts/noto-cjk/blob/Serif2.003/Serif/LICENSE>
 - **Attribution record:** the Noto Serif CJK Project Authors; preserve the exact
   embedded notice and pinned `Serif/LICENSE` whenever the font itself is
-  redistributed.
-- **Inspection blocker:** the bounded downloads did not complete. The local ZIP
-  failed `unzip -t`, and the partial TTF did not contain a complete inspectable
-  artifact; all incomplete files carry a `.partial` suffix and must not be used.
-  Before proof generation, download the complete pinned official artifact,
-  identify the actual Regular TTF inside it (or derive a Regular instance only
-  as permitted by the OFL), normalize it to `NotoSerifSC-Regular.ttf`, inspect
-  family/style/PostScript/version tables, and record its SHA-256 here. Until
-  that gate is closed, Noto Serif CJK SC is **not approved for proof output**.
+  redistributed. The OFL permits the recorded `wght=400` instancing and name
+  table normalization; the derived binary remains under OFL-1.1 and must travel
+  with the licence and copyright notice when redistributed.
