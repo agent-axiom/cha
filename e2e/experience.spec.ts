@@ -24,7 +24,7 @@ test('supports keyboard entry and reduced motion', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' })
   await page.goto('./')
 
-  await page.keyboard.press('Tab')
+  await page.locator('body').press('Tab')
   const skipLink = page.getByRole('link', { name: 'Перейти к основному содержанию' })
   await expect(skipLink).toBeFocused()
   await expect(skipLink).toBeVisible()
