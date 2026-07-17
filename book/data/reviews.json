@@ -27,6 +27,15 @@
     "note": "Источники и формулировка проверены редакционно; внешняя рецензия историка ожидается."
   },
   {
+    "claimId": "hist-warring-states-remains",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-17",
+    "note": "Методы и границы вывода статьи проверены редакционно по странице издателя; внешняя археологическая и историческая рецензия ожидается."
+  },
+  {
     "claimId": "hist-fan-chuo-yinsheng",
     "role": "historian",
     "status": "pending",

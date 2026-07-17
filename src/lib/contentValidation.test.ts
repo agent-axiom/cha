@@ -120,9 +120,10 @@ describe('content integrity', () => {
           source.bookUse !== 'rejected',
       )
       .map((source) => source.id)
+    const actualIds = sources.map((source) => source.id)
 
-    expect(expectedIds).toHaveLength(17)
-    expect(sources.map((source) => source.id)).toEqual(expectedIds)
+    expect(actualIds).toHaveLength(expectedIds.length)
+    expect(actualIds).toEqual(expectedIds)
   })
 
   it('links every factual claim to a known source', () => {

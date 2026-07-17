@@ -59,7 +59,7 @@ export const history: HistoryEntry[] = [
     summary: 'Жуань Фу связывает старую область Иньшэн, название Пуэра и западную торговлю эпохи Тан.',
     detail: 'Это учёная реконструкция XIX века, а не прямое сообщение танского автора о продукте с современным названием.',
     kind: 'source',
-    sourceIds: ['ruan-1825', 'fan-chuo-863'],
+    sourceIds: ['ruan-puer-cha-ji-access', 'fan-chuo-863'],
   },
   {
     id: 'caravan-commodity',
