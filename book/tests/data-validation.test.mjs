@@ -357,13 +357,39 @@ test('defines and validates the exact 48-page guide allocation and reader spread
   assert.doesNotThrow(() => validateFlatplan(guide, 48, templates, assetIds))
 })
 
-test('rejects a wrong total or signature page count', () => {
+test('rejects a total that differs from the expected page count', () => {
   const { templates, album, assets } = flatplanData()
   album.totalPages = 207
 
   assert.throws(
     () => validateFlatplan(album, 208, templates, new Set(assets.map(({ id }) => id))),
     /flatplan album: totalPages must equal 208/,
+  )
+})
+
+test('rejects a matching expected total that does not form 16-page signatures', () => {
+  const { templates, album, assets } = flatplanData()
+  album.totalPages = 207
+
+  assert.throws(
+    () => validateFlatplan(album, 207, templates, new Set(assets.map(({ id }) => id))),
+    {
+      name: 'Error',
+      message: 'flatplan album: totalPages must use complete 16-page signatures',
+    },
+  )
+})
+
+test('rejects a declared signature size other than 16 pages', () => {
+  const { templates, album, assets } = flatplanData()
+  album.signatureSize = 8
+
+  assert.throws(
+    () => validateFlatplan(album, 208, templates, new Set(assets.map(({ id }) => id))),
+    {
+      name: 'Error',
+      message: 'flatplan album: totalPages must use complete 16-page signatures',
+    },
   )
 })
 
