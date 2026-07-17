@@ -3,9 +3,9 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const defaultBookRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
-const exactClaimMarker = /^<!-- claim:([a-z0-9-]+) -->$/
-const exactPageMarker = /^<!-- page:([AG]-P\d{3}) -->$/
-const markerOpening = /<!--\s*(claim|page)\b/gi
+const exactClaimMarker = /^<!--[ \t]+claim:([a-z0-9-]+)[ \t]+-->$/
+const exactPageMarker = /^<!--[ \t]+page:([AG]-P\d{3})[ \t]+-->$/
+const markerBodyOpening = /^(claim|page)\b/i
 const draftToken = /\b(?:TODO|TBD|FIXME|TBC|TK|XXX|PLACEHOLDER)\b|\bLorem[ \t]+ipsum\b/gi
 const toolToken = /\bturn\d+(?:search|fetch|view|open)\d+\b|cite|<in-app-browser-context/giu
 const yearToken = /\b(?:1\d{3}|20\d{2})\b/
@@ -50,36 +50,41 @@ const lineForOffset = (lines, offset) => {
   return lines[Math.max(0, high)].line
 }
 
-const scanMarkers = (lines, file, knownClaimIds, expectedPageIds) => {
+const scanMarkers = (text, lines, file, knownClaimIds, expectedPageIds) => {
   const errors = []
   const claimMarkers = []
   const pageMarkers = []
+  let searchFrom = 0
 
-  for (const current of lines) {
-    markerOpening.lastIndex = 0
-    let opening
-    while ((opening = markerOpening.exec(current.text)) !== null) {
-      const start = opening.index
-      const close = current.text.indexOf('-->', markerOpening.lastIndex)
-      const end = close === -1 ? current.text.length : close + 3
-      const raw = current.text.slice(start, end)
+  while (searchFrom < text.length) {
+    const start = text.indexOf('<!--', searchFrom)
+    if (start === -1) break
+    const close = text.indexOf('-->', start + 4)
+    const end = close === -1 ? text.length : close + 3
+    const raw = text.slice(start, end)
+    const body = text.slice(start + 4, close === -1 ? text.length : close).trim()
+    const opening = body.match(markerBodyOpening)
+
+    if (opening) {
       const kind = opening[1].toLowerCase()
+      const line = lineForOffset(lines, start)
       const exact = kind === 'claim' ? raw.match(exactClaimMarker) : raw.match(exactPageMarker)
 
       if (!exact) {
+        const display = raw.replaceAll('\r', '\\r').replaceAll('\n', '\\n')
         errors.push({
           file,
-          line: current.line,
+          line,
           code: `malformed-${kind}-marker`,
-          message: `malformed ${kind} marker: ${raw}`,
+          message: `malformed ${kind} marker: ${display}`,
         })
       } else if (kind === 'claim') {
         const id = exact[1]
-        claimMarkers.push({ id, file, line: current.line })
+        claimMarkers.push({ id, file, line })
         if (!knownClaimIds.has(id)) {
           errors.push({
             file,
-            line: current.line,
+            line,
             code: 'unknown-claim',
             claimId: id,
             message: `unknown claim id: ${id}`,
@@ -87,21 +92,21 @@ const scanMarkers = (lines, file, knownClaimIds, expectedPageIds) => {
         }
       } else {
         const id = exact[1]
-        pageMarkers.push({ id, file, line: current.line })
+        pageMarkers.push({ id, file, line })
         if (!expectedPageIds.has(id)) {
           errors.push({
             file,
-            line: current.line,
+            line,
             code: 'unknown-page',
             pageId: id,
             message: `unknown page id: ${id}`,
           })
         }
       }
-
-      markerOpening.lastIndex = Math.max(end, start + 1)
-      if (close === -1) break
     }
+
+    if (close === -1) break
+    searchFrom = end
   }
 
   return { errors, claimMarkers, pageMarkers }
@@ -136,14 +141,21 @@ const proseParagraphs = (lines) => {
 
   for (let index = 0; index < lines.length; index += 1) {
     const current = lines[index]
-    const fenceMatch = current.text.match(/^\s{0,3}(`{3,}|~{3,})/)
     if (fence) {
-      if (fenceMatch && fenceMatch[1][0] === fence.character && fenceMatch[1].length >= fence.length) fence = null
+      const closingFence = current.text.match(/^ {0,3}(`+|~+)[ \t]*$/)
+      if (
+        closingFence
+        && closingFence[1][0] === fence.character
+        && closingFence[1].length >= fence.length
+      ) {
+        fence = null
+      }
       continue
     }
-    if (fenceMatch) {
+    const openingFence = current.text.match(/^ {0,3}(`{3,}|~{3,})/)
+    if (openingFence) {
       flush()
-      fence = { character: fenceMatch[1][0], length: fenceMatch[1].length }
+      fence = { character: openingFence[1][0], length: openingFence[1].length }
       continue
     }
     if (!current.text.trim()) {
@@ -201,7 +213,7 @@ export function validateText(text, {
   if (!(expectedPageIds instanceof Set)) throw new TypeError('expectedPageIds must be a Set')
 
   const lines = linesWithOffsets(text)
-  const markerResult = scanMarkers(lines, file, knownClaimIds, expectedPageIds)
+  const markerResult = scanMarkers(text, lines, file, knownClaimIds, expectedPageIds)
   const errors = [
     ...markerResult.errors,
     ...scanGlobalTokens(text, lines, file, draftToken, 'draft-token', 'draft token'),

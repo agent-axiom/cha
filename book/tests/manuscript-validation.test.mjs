@@ -71,13 +71,37 @@ test('accepts exact claim and album or guide page markers', () => {
   ])
 })
 
+test('keeps multiple exact markers on one line at the correct line', () => {
+  const result = validateText(
+    '<!-- claim:hist-known --> <!-- page:A-P001 --> <!-- page:G-P001 -->',
+    textOptions(),
+  )
+
+  assert.deepEqual(result.errors, [])
+  assert.deepEqual(result.claimMarkers.map(({ id, line }) => [id, line]), [['hist-known', 1]])
+  assert.deepEqual(result.pageMarkers.map(({ id, line }) => [id, line]), [
+    ['A-P001', 1],
+    ['G-P001', 1],
+  ])
+})
+
+test('accepts horizontal whitespace but never newlines inside exact markers', () => {
+  const result = validateText(
+    '<!--\tclaim:hist-known\t-->\n<!--   page:A-P001 \t-->',
+    textOptions(),
+  )
+
+  assert.deepEqual(result.errors, [])
+  assert.deepEqual(result.claimMarkers.map(({ id, line }) => [id, line]), [['hist-known', 1]])
+  assert.deepEqual(result.pageMarkers.map(({ id, line }) => [id, line]), [['A-P001', 2]])
+})
+
 test('rejects malformed claim and page marker syntax instead of ignoring it', () => {
   const result = validateText([
     '<!-- claim:Hist-known -->',
     '<!-- claim:hist_known -->',
     '<!-- claim: hist-known -->',
     '<!-- claim:hist-known extra -->',
-    '<!-- claim:hist-known',
     '<!-- page:A-P01 -->',
     '<!-- page:a-P001 -->',
     '<!-- page: A-P001 -->',
@@ -91,14 +115,43 @@ test('rejects malformed claim and page marker syntax instead of ignoring it', ()
     ['malformed-claim-marker', 2],
     ['malformed-claim-marker', 3],
     ['malformed-claim-marker', 4],
-    ['malformed-claim-marker', 5],
+    ['malformed-page-marker', 5],
     ['malformed-page-marker', 6],
     ['malformed-page-marker', 7],
     ['malformed-page-marker', 8],
-    ['malformed-page-marker', 9],
-    ['malformed-claim-marker', 10],
-    ['malformed-page-marker', 11],
+    ['malformed-claim-marker', 9],
+    ['malformed-page-marker', 10],
   ])
+})
+
+test('rejects multiline and unclosed claim or page marker comments at their opening line', () => {
+  const cases = [
+    ['<!--\nclaim:hist-known -->', 'malformed-claim-marker', 1],
+    ['Prelude.\n<!--\npage:A-P001 -->', 'malformed-page-marker', 2],
+    ['<!-- claim:hist-known\n-->', 'malformed-claim-marker', 1],
+    ['Prelude.\n<!-- page:A-P001', 'malformed-page-marker', 2],
+    ['<!--\nclaim:hist-known', 'malformed-claim-marker', 1],
+  ]
+
+  for (const [text, code, line] of cases) {
+    const result = validateText(text, textOptions())
+    assert.deepEqual(result.errors.map((error) => [error.code, error.line]), [[code, line]], text)
+    assert.deepEqual(result.claimMarkers, [], text)
+    assert.deepEqual(result.pageMarkers, [], text)
+  }
+})
+
+test('preserves unrelated closed and unclosed HTML comments', () => {
+  const result = validateText([
+    '<!--',
+    'editorial note mentioning claim:hist-known without being a marker',
+    '-->',
+    '<!-- another unfinished editorial note',
+  ].join('\n'), textOptions())
+
+  assert.deepEqual(result.errors, [])
+  assert.deepEqual(result.claimMarkers, [])
+  assert.deepEqual(result.pageMarkers, [])
 })
 
 test('rejects an unknown claim id and does not let it satisfy year evidence', () => {
@@ -231,6 +284,26 @@ test('exempts ATX and setext headings and fenced code from year evidence', () =>
   ].join('\n'), textOptions())
 
   assert.deepEqual(result.errors, [])
+})
+
+test('keeps invalid closing-fence forms inside code until a valid longer clean closer', () => {
+  const result = validateText([
+    '```text',
+    '``',
+    'archive 1996',
+    '~~~',
+    'archive 1997',
+    '```not-a-closing-fence',
+    'archive 1999',
+    '    ````',
+    'archive 1998',
+    '```` \t',
+    'Outside prose from 2000.',
+  ].join('\n'), textOptions())
+
+  assert.deepEqual(result.errors.map(({ code, line }) => [code, line]), [
+    ['missing-year-claim', 11],
+  ])
 })
 
 test('still rejects draft and tool tokens inside fenced code', () => {
