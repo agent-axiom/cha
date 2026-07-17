@@ -438,6 +438,59 @@ test('stops raw URLs and path masking at forbidden delimiters', () => {
   }
 })
 
+test('masks years inside balanced and nested www URLs', () => {
+  const result = validateText([
+    'Read www.example.test/Foo_(1973).',
+    'Compare WWW.example.test/Foo_(Bar_(1974)).',
+  ].join('\n'), textOptions())
+
+  assert.deepEqual(result.errors, [])
+})
+
+test('keeps a genuine year after a parenthesized www URL visible', () => {
+  const result = validateText(
+    'Read www.example.test/Foo_(1973) before the revised 2000 edition.',
+    textOptions(),
+  )
+
+  assert.deepEqual(result.errors.map(({ code, line, year }) => [code, line, year]), [
+    ['missing-year-claim', 1, '2000'],
+  ])
+})
+
+test('stops a www URL at unmatched surrounding punctuation', () => {
+  const result = validateText(
+    'Read (www.example.test/Foo_(1973))2000 remains prose.',
+    textOptions(),
+  )
+
+  assert.deepEqual(result.errors.map(({ code, line, year }) => [code, line, year]), [
+    ['missing-year-claim', 1, '2000'],
+  ])
+})
+
+test('does not treat embedded www text or a simple dotted word as a URL', () => {
+  const result = validateText([
+    'The token notwww.example.test_(1973) remains prose.',
+    '',
+    'The dotted token not.www.example.test_(1974) remains prose.',
+    '',
+    'The hyphenated token not-www.example.test_(1975) remains prose.',
+    '',
+    'The email-like token user@www.example.test_(1976) remains prose.',
+    '',
+    'The simple dotted word www.chapter_(1977) remains prose.',
+  ].join('\n'), textOptions())
+
+  assert.deepEqual(result.errors.map(({ code, line, year }) => [code, line, year]), [
+    ['missing-year-claim', 1, '1973'],
+    ['missing-year-claim', 3, '1974'],
+    ['missing-year-claim', 5, '1975'],
+    ['missing-year-claim', 7, '1976'],
+    ['missing-year-claim', 9, '1977'],
+  ])
+})
+
 test('keeps numeric slash years and dates visible to evidence checks', () => {
   const result = validateText([
     'The paired years are 1973/1974.',

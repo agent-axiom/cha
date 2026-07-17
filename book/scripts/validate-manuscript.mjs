@@ -394,16 +394,44 @@ const maskMatches = (characters, text, pattern) => {
   pattern.lastIndex = 0
 }
 
-const maskHttpUrls = (characters, text) => {
+const wwwUrlPrefixLength = (text, start) => {
+  if (text.slice(start, start + 4).toLowerCase() !== 'www.') return 0
+  if (start > 0 && /[\p{L}\p{N}_.@-]/u.test(text[start - 1])) return 0
+
+  let cursor = start + 4
+  let labelLength = 0
+  let domainSeparators = 0
+  while (cursor < text.length) {
+    const character = text[cursor]
+    if (character === '.') {
+      if (labelLength === 0) return 0
+      domainSeparators += 1
+      labelLength = 0
+    } else if (/[\p{L}\p{N}-]/u.test(character)) {
+      labelLength += 1
+    } else {
+      break
+    }
+    cursor += 1
+  }
+
+  return domainSeparators > 0 && labelLength > 0 ? 4 : 0
+}
+
+const maskRawUrls = (characters, text) => {
   for (let start = 0; start < text.length;) {
-    const scheme = text.slice(start, start + 8).toLowerCase()
-    const schemeLength = scheme.startsWith('https://') ? 8 : scheme.startsWith('http://') ? 7 : 0
-    if (schemeLength === 0) {
+    const prefix = text.slice(start, start + 8).toLowerCase()
+    const prefixLength = prefix.startsWith('https://')
+      ? 8
+      : prefix.startsWith('http://')
+        ? 7
+        : wwwUrlPrefixLength(text, start)
+    if (prefixLength === 0) {
       start += 1
       continue
     }
 
-    let end = start + schemeLength
+    let end = start + prefixLength
     let parenthesisDepth = 0
     while (end < text.length) {
       const character = text[end]
@@ -426,7 +454,7 @@ const sanitizedYearText = (text) => {
   for (const pattern of [markdownDestination, pathToken, measurementToken]) {
     maskMatches(characters, text, pattern)
   }
-  maskHttpUrls(characters, text)
+  maskRawUrls(characters, text)
   return characters.join('')
 }
 
