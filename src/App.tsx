@@ -15,8 +15,11 @@ export function App() {
 
   return (
     <div className="app" data-tea={teaPath}>
+      <a className="skip-link" href="#content">
+        Перейти к основному содержанию
+      </a>
       <SiteHeader />
-      <main>
+      <main id="content">
         <Hero teaPath={teaPath} onTeaPathChange={setTeaPath} />
         <HistoryTimeline />
         <TeaMountainsMap />

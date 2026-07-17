@@ -46,7 +46,7 @@ export const sources: Source[] = [
     title: 'Записка о пуэрском чае',
     author: 'Жуань Фу',
     year: '1825',
-    href: 'https://zh.wikisource.org/wiki/%E6%99%AE%E6%B4%B1%E8%8C%B6%E8%A8%98',
+    href: 'https://www.newton.com.tw/wiki/%E6%99%AE%E6%B4%B1%E8%8C%B6%E8%A8%98/19266168',
     group: 'primary-asian',
     origin: 'Китайский историко-географический текст эпохи Цин',
     note: 'Ретроспективная связь Пуэра с Иньшэном и танской торговлей.',

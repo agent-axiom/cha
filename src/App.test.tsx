@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+import axe from 'axe-core'
 import { describe, expect, it } from 'vitest'
 import { App } from './App'
 
@@ -19,5 +20,27 @@ describe('application shell', () => {
     )
     expect(screen.getByRole('button', { name: /шэн/i })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /шу/i })).toBeInTheDocument()
+  })
+
+  it('lets keyboard users skip directly to the main story', () => {
+    render(<App />)
+
+    expect(screen.getByRole('link', { name: /перейти к основному содержанию/i })).toHaveAttribute(
+      'href',
+      '#content',
+    )
+    expect(screen.getByRole('main')).toHaveAttribute('id', 'content')
+  })
+
+  it('has no automatically detectable accessibility violations', async () => {
+    render(<App />)
+
+    const results = await axe.run(document.body, {
+      rules: {
+        'color-contrast': { enabled: false },
+      },
+    })
+
+    expect(results.violations).toEqual([])
   })
 })
