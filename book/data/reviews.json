@@ -234,6 +234,15 @@
     "note": "Пункты 4.2–5.2 стандарта проверены постранично; внешняя рецензия не получена."
   },
   {
+    "claimId": "storage-gbt30375-current",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal catalogue-status audit; not a credentialed tea storage technologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Статусы стандарта и плана сверены только по официальной карточке SAMR; недоступные clauses не реконструированы, внешняя рецензия не получена."
+  },
+  {
     "claimId": "storage-mould-is-damage",
     "role": "technologist",
     "status": "pending",
@@ -348,7 +357,7 @@
     "reviewer": "Codex editorial evidence audit",
     "qualification": "internal evidence audit; not a credentialed microbiologist",
     "reviewedAt": "2026-07-17",
-    "note": "Мультиомные связи трактуются как функциональная поддержка в двух сериях, не как универсальная причинность."
+    "note": "Разделены охваты методов: 36 образцов для metabarcoding/metaproteomics/HPLC и 12 для UPLC-MS/MS metabolomics; связи не универсализированы и не объявлены причинными."
   },
   {
     "claimId": "micro-haas-market-safety",
@@ -366,7 +375,7 @@
     "reviewer": "Codex editorial evidence audit",
     "qualification": "internal evidence audit; not a credentialed microbiologist or toxicologist",
     "reviewedAt": "2026-07-17",
-    "note": "Значения ниже применённых MRL не превращены в заключение о других партиях или всей категории."
+    "note": "Выборка обозначена как предоставленная отраслевыми организациями, а не розничная; значения ниже применённых MRL не превращены в заключение о других партиях или всей категории."
   },
   {
     "claimId": "micro-safety-method-dependent",
