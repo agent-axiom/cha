@@ -1,11 +1,74 @@
-import test from 'node:test'
+import test, { after } from 'node:test'
 import assert from 'node:assert/strict'
-import {
+import fs from 'node:fs'
+import os from 'node:os'
+import path from 'node:path'
+import * as dataValidator from '../scripts/validate-data.mjs'
+
+const {
   validateSources,
   validateClaims,
   validateReviews,
   validateAssets,
-} from '../scripts/validate-data.mjs'
+} = dataValidator
+
+const temporaryRoots = []
+after(() => {
+  for (const temporaryRoot of temporaryRoots) fs.rmSync(temporaryRoot, { recursive: true, force: true })
+})
+
+const temporaryRepo = () => {
+  const temporaryRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'book-asset-files-'))
+  temporaryRoots.push(temporaryRoot)
+  return temporaryRoot
+}
+
+const writeFixture = (temporaryRoot, relativePath, contents = 'fixture') => {
+  const filename = path.join(temporaryRoot, relativePath)
+  fs.mkdirSync(path.dirname(filename), { recursive: true })
+  fs.writeFileSync(filename, contents)
+  return filename
+}
+
+const printReadyAsset = (overrides = {}) => ({
+  id: 'img-1',
+  kind: 'photo',
+  title: 'Licensed print image',
+  creator: 'Example photographer',
+  createdAt: '2026-07-17',
+  location: 'Example studio',
+  sourceUrl: 'https://assets.example/img-1',
+  rights: 'licensed',
+  licenseFile: 'book/assets/rights/img-1.md',
+  creditLine: 'Example photographer',
+  path: 'book/assets/private/a.tif',
+  pixelWidth: 3000,
+  pixelHeight: 3000,
+  effectiveDpi: 300,
+  status: 'print-ready',
+  spreadIds: ['A-P001'],
+  placementWidthMm: 254,
+  placementHeightMm: 254,
+  ...overrides,
+})
+
+const printReadyVector = (overrides = {}) => ({
+  ...printReadyAsset(),
+  id: 'map-1',
+  kind: 'map',
+  path: 'book/assets/maps/map-1.svg',
+  licenseFile: 'book/assets/rights/map-1.md',
+  pixelWidth: null,
+  pixelHeight: null,
+  effectiveDpi: null,
+  viewBox: '0 0 1000 800',
+  ...overrides,
+})
+
+const validateAssetFiles = (...args) => {
+  assert.equal(typeof dataValidator.validateAssetFiles, 'function', 'validateAssetFiles must be exported')
+  return dataValidator.validateAssetFiles(...args)
+}
 
 test('rejects duplicate source ids', () => {
   assert.throws(() => validateSources([{ id: 'a', title: 'A', href: 'https://a.example', group: 'guidance', status: 'checked', bookUse: 'core', siteVisible: true }, { id: 'a', title: 'B', href: 'https://b.example', group: 'guidance', status: 'checked', bookUse: 'core', siteVisible: true }]), /duplicate source id: a/)
@@ -90,25 +153,92 @@ test('accepts a complete valid evidence and rights registry', () => {
   ]
 
   assert.doesNotThrow(() => validateReviews(reviews, claimIds, new Set(['c1'])))
-  const printReadyAsset = {
-    id: 'img-1',
-    kind: 'photo',
-    title: 'Licensed print image',
-    creator: 'Example photographer',
-    createdAt: '2026-07-17',
-    location: 'Example studio',
-    sourceUrl: 'https://assets.example/img-1',
-    rights: 'licensed',
-    licenseFile: 'book/assets/rights/img-1.md',
-    creditLine: 'Example photographer',
-    path: 'book/assets/private/a.tif',
-    pixelWidth: 3000,
-    pixelHeight: 3000,
-    effectiveDpi: 300,
-    status: 'print-ready',
-    spreadIds: ['A-P001'],
-    placementWidthMm: 254,
-    placementHeightMm: 254,
+  assert.deepEqual(validateAssets([printReadyAsset()]), new Set(['img-1']))
+})
+
+test('filesystem gate accepts existing regular master and rights files', () => {
+  const repo = temporaryRepo()
+  writeFixture(repo, 'book/assets/private/a.tif')
+  writeFixture(repo, 'book/assets/rights/img-1.md', 'licensed for print')
+
+  assert.doesNotThrow(() => validateAssetFiles([printReadyAsset()], repo))
+})
+
+test('filesystem gate rejects a missing print master', () => {
+  const repo = temporaryRepo()
+  writeFixture(repo, 'book/assets/rights/img-1.md', 'licensed for print')
+
+  assert.throws(
+    () => validateAssetFiles([printReadyAsset()], repo),
+    /asset img-1: master file missing or not regular: book\/assets\/private\/a\.tif/,
+  )
+})
+
+test('filesystem gate rejects missing rights evidence', () => {
+  const repo = temporaryRepo()
+  writeFixture(repo, 'book/assets/private/a.tif')
+
+  assert.throws(
+    () => validateAssetFiles([printReadyAsset()], repo),
+    /asset img-1: rights evidence file missing or not regular: book\/assets\/rights\/img-1\.md/,
+  )
+})
+
+test('filesystem gate rejects traversal, absolute, and outside-assets paths', () => {
+  const repo = temporaryRepo()
+  const invalidPaths = [
+    'book/assets/private/../a.tif',
+    'outside/a.tif',
+    path.join(repo, 'book/assets/private/a.tif'),
+  ]
+  for (const assetPath of invalidPaths) {
+    assert.throws(
+      () => validateAssetFiles([printReadyAsset({ path: assetPath })], repo),
+      /asset img-1: unsafe master path:/,
+    )
   }
-  assert.deepEqual(validateAssets([printReadyAsset]), new Set(['img-1']))
+})
+
+test('filesystem gate rejects directories in place of regular files', () => {
+  const repo = temporaryRepo()
+  fs.mkdirSync(path.join(repo, 'book/assets/private/a.tif'), { recursive: true })
+  writeFixture(repo, 'book/assets/rights/img-1.md', 'licensed for print')
+
+  assert.throws(
+    () => validateAssetFiles([printReadyAsset()], repo),
+    /asset img-1: master file missing or not regular:/,
+  )
+})
+
+test('filesystem gate enforces master and rights evidence extensions', () => {
+  const repo = temporaryRepo()
+  for (const asset of [
+    printReadyAsset({ path: 'book/assets/private/a.txt' }),
+    printReadyVector({ path: 'book/assets/maps/map-1.tif' }),
+    printReadyAsset({ licenseFile: 'book/assets/rights/img-1.exe' }),
+  ]) {
+    assert.throws(
+      () => validateAssetFiles([asset], repo),
+      /asset (?:img-1|map-1): invalid (?:master|rights evidence) extension:/,
+    )
+  }
+})
+
+test('filesystem gate accepts an SVG whose root viewBox matches the register', () => {
+  const repo = temporaryRepo()
+  writeFixture(repo, 'book/assets/maps/map-1.svg', '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 800"></svg>')
+  writeFixture(repo, 'book/assets/rights/map-1.md', 'owned map')
+
+  assert.doesNotThrow(() => validateAssetFiles([printReadyVector()], repo))
+})
+
+test('filesystem gate rejects an SVG whose root viewBox differs from the register', () => {
+  const repo = temporaryRepo()
+  writeFixture(repo, 'book/assets/maps/map-1.svg', '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 80"></svg>')
+  writeFixture(repo, 'book/assets/rights/map-1.md', 'owned map')
+
+  assert.throws(
+    () => validateAssetFiles([printReadyVector()], repo),
+    /asset map-1: SVG viewBox mismatch for book\/assets\/maps\/map-1\.svg/,
+  )
 })

@@ -51,21 +51,54 @@ const vectorAsset = (overrides = {}) => ({
   ...overrides,
 })
 
+const conceptRasterAsset = (overrides = {}) => {
+  const asset = rasterAsset({
+    creator: null,
+    createdAt: null,
+    location: null,
+    sourceUrl: null,
+    rights: 'pending',
+    licenseFile: null,
+    creditLine: 'Pending creator and rights clearance',
+    effectiveDpi: null,
+    status: 'concept',
+    ...overrides,
+  })
+  delete asset.placementWidthMm
+  delete asset.placementHeightMm
+  return asset
+}
+
 test('exports exact effective DPI calculation', () => {
   assert.equal(typeof validator.effectiveDpi, 'function')
   assert.equal(validator.effectiveDpi?.(3000, 254), 300)
 })
 
-test('accepts 2906 by 3614 pixels for a full 246 by 306 mm page', () => {
+test('rejects rounded 2906 by 3614 floor for a 246 by 306 mm page', () => {
+  assert.throws(
+    () => validator.validateAssets([
+      rasterAsset({ pixelWidth: 2906, pixelHeight: 3614, placementWidthMm: 246, placementHeightMm: 306 }),
+    ]),
+    /asset test-raster: effective dpi below 300/,
+  )
+})
+
+test('accepts the strict 2906 by 3615 minimum for a 246 by 306 mm page', () => {
   assert.doesNotThrow(() => validator.validateAssets([
-    rasterAsset({ pixelWidth: 2906, pixelHeight: 3614, placementWidthMm: 246, placementHeightMm: 306 }),
+    rasterAsset({
+      pixelWidth: 2906,
+      pixelHeight: 3615,
+      effectiveDpi: 300.1,
+      placementWidthMm: 246,
+      placementHeightMm: 306,
+    }),
   ]))
 })
 
-test('rejects either dimension below the full-page pixel floor', () => {
+test('rejects either dimension below the strict full-page pixel floor', () => {
   for (const dimensions of [
-    { pixelWidth: 2905, pixelHeight: 3614 },
-    { pixelWidth: 2906, pixelHeight: 3613 },
+    { pixelWidth: 2905, pixelHeight: 3615 },
+    { pixelWidth: 2906, pixelHeight: 3614 },
   ]) {
     assert.throws(
       () => validator.validateAssets([rasterAsset({ ...dimensions, placementWidthMm: 246, placementHeightMm: 306 })]),
@@ -74,16 +107,31 @@ test('rejects either dimension below the full-page pixel floor', () => {
   }
 })
 
-test('accepts 5811 by 3614 pixels for a full-bleed 492 by 306 mm spread', () => {
+test('rejects rounded 5811 by 3614 floor for a 492 by 306 mm spread', () => {
+  assert.throws(
+    () => validator.validateAssets([
+      rasterAsset({ pixelWidth: 5811, pixelHeight: 3614, placementWidthMm: 492, placementHeightMm: 306 }),
+    ]),
+    /asset test-raster: effective dpi below 300/,
+  )
+})
+
+test('accepts the strict 5812 by 3615 minimum for a 492 by 306 mm spread', () => {
   assert.doesNotThrow(() => validator.validateAssets([
-    rasterAsset({ pixelWidth: 5811, pixelHeight: 3614, placementWidthMm: 492, placementHeightMm: 306 }),
+    rasterAsset({
+      pixelWidth: 5812,
+      pixelHeight: 3615,
+      effectiveDpi: 300.1,
+      placementWidthMm: 492,
+      placementHeightMm: 306,
+    }),
   ]))
 })
 
-test('rejects either dimension below the full-spread pixel floor', () => {
+test('rejects either dimension below the strict full-spread pixel floor', () => {
   for (const dimensions of [
-    { pixelWidth: 5810, pixelHeight: 3614 },
-    { pixelWidth: 5811, pixelHeight: 3613 },
+    { pixelWidth: 5811, pixelHeight: 3615 },
+    { pixelWidth: 5812, pixelHeight: 3614 },
   ]) {
     assert.throws(
       () => validator.validateAssets([rasterAsset({ ...dimensions, placementWidthMm: 492, placementHeightMm: 306 })]),
@@ -94,7 +142,7 @@ test('rejects either dimension below the full-spread pixel floor', () => {
 
 test('allows a smaller registered placement only at 300 effective DPI', () => {
   assert.doesNotThrow(() => validator.validateAssets([
-    rasterAsset({ pixelWidth: 1417, pixelHeight: 945, placementWidthMm: 120, placementHeightMm: 80 }),
+    rasterAsset({ pixelWidth: 1418, pixelHeight: 945, placementWidthMm: 120, placementHeightMm: 80 }),
   ]))
 })
 
@@ -111,6 +159,31 @@ test('does not trust a stale registered effective DPI', () => {
     () => validator.validateAssets([rasterAsset({ effectiveDpi: 350 })]),
     /asset test-raster: registered effectiveDpi 350 does not match calculated 300/,
   )
+})
+
+test('requires effectiveDpi to be null or a positive finite number for every raster status', () => {
+  for (const effectiveDpi of ['300', 0, -1, Number.NaN, Number.POSITIVE_INFINITY]) {
+    assert.throws(
+      () => validator.validateAssets([conceptRasterAsset({ effectiveDpi })]),
+      /asset test-raster: effectiveDpi must be null or a positive finite number/,
+    )
+  }
+})
+
+test('requires registered DPI to match calculated DPI whenever placement is present', () => {
+  const asset = conceptRasterAsset({ effectiveDpi: 320 })
+  asset.placementWidthMm = 254
+  asset.placementHeightMm = 254
+  assert.throws(
+    () => validator.validateAssets([asset]),
+    /asset test-raster: registered effectiveDpi 320 does not match calculated 300/,
+  )
+})
+
+test('allows known concept pixels with null DPI when no placement is registered', () => {
+  assert.doesNotThrow(() => validator.validateAssets([
+    conceptRasterAsset({ pixelWidth: 1672, pixelHeight: 941, effectiveDpi: null }),
+  ]))
 })
 
 test('rejects pending or rejected rights for print-ready raster assets', () => {
@@ -130,6 +203,21 @@ test('requires a numeric four-value viewBox for print-ready vectors', () => {
     )
   }
   assert.doesNotThrow(() => validator.validateAssets([vectorAsset()]))
+})
+
+test('rejects non-decimal and non-finite SVG viewBox tokens and malformed separators', () => {
+  for (const viewBox of ['0 0 0x10 20', '0 0 NaN 20', '0 0 Infinity 20', '0,,0,100,20', '0 0,10020']) {
+    assert.throws(
+      () => validator.validateAssets([vectorAsset({ viewBox })]),
+      /asset test-vector: print-ready vector requires valid viewBox/,
+    )
+  }
+})
+
+test('accepts strict decimal and exponent SVG viewBox tokens', () => {
+  assert.doesNotThrow(() => validator.validateAssets([
+    vectorAsset({ viewBox: '-1.5e1, +2.5 1e3,8E2' }),
+  ]))
 })
 
 test('rejects duplicate ids and reports the asset id', () => {
@@ -165,28 +253,32 @@ test('requires every base metadata key', () => {
 })
 
 test('accepts honest null dimensions for concepts but not for print-ready raster', () => {
-  const concept = rasterAsset({
+  const concept = conceptRasterAsset({
     id: 'planned-photo',
-    creator: null,
-    createdAt: null,
-    location: null,
-    sourceUrl: null,
-    rights: 'pending',
-    licenseFile: null,
-    creditLine: 'Pending creator and rights clearance',
     pixelWidth: null,
     pixelHeight: null,
-    effectiveDpi: null,
-    status: 'concept',
   })
-  delete concept.placementWidthMm
-  delete concept.placementHeightMm
 
   assert.doesNotThrow(() => validator.validateAssets([concept]))
   assert.throws(
     () => validator.validateAssets([{ ...concept, rights: 'owned', status: 'print-ready' }]),
     /asset planned-photo: print-ready raster requires positive pixel and placement dimensions/,
   )
+})
+
+test('requires nonempty unique spreadIds for active assets', () => {
+  for (const spreadIds of [[], ['A-P001', 'A-P001'], ['   ']]) {
+    assert.throws(
+      () => validator.validateAssets([conceptRasterAsset({ spreadIds })]),
+      /asset test-raster: active asset requires nonempty unique spreadIds/,
+    )
+  }
+})
+
+test('allows an empty spreadIds array for rejected assets', () => {
+  assert.doesNotThrow(() => validator.validateAssets([
+    conceptRasterAsset({ rights: 'rejected', status: 'rejected', spreadIds: [] }),
+  ]))
 })
 
 test('registers all four existing site WebP files as pending concepts at measured dimensions', () => {
