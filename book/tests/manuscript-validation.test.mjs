@@ -394,6 +394,50 @@ test('ignores years in Markdown destinations, URLs, and path identifiers', () =>
   assert.deepEqual(result.errors, [])
 })
 
+test('masks years inside raw URLs with balanced and nested parentheses', () => {
+  const result = validateText([
+    'Read http://example.test/Foo_(1973).',
+    'Compare HTTPS://example.test/Foo_(Bar_(1974)).',
+  ].join('\n'), textOptions())
+
+  assert.deepEqual(result.errors, [])
+})
+
+test('keeps a genuine year after a parenthesized raw URL visible', () => {
+  const result = validateText(
+    'Read https://example.test/Foo_(1973) before the revised 2000 edition.',
+    textOptions(),
+  )
+
+  assert.deepEqual(result.errors.map(({ code, line, year }) => [code, line, year]), [
+    ['missing-year-claim', 1, '2000'],
+  ])
+})
+
+test('stops a raw URL at unmatched closing-parenthesis punctuation', () => {
+  const result = validateText(
+    'Read https://example.test/archive)2000 remains prose.',
+    textOptions(),
+  )
+
+  assert.deepEqual(result.errors.map(({ code, line, year }) => [code, line, year]), [
+    ['missing-year-claim', 1, '2000'],
+  ])
+})
+
+test('stops raw URLs and path masking at forbidden delimiters', () => {
+  for (const delimiter of ['"', '|']) {
+    const result = validateText(
+      `Read https://example.test/archive${delimiter}2000 remains prose.`,
+      textOptions(),
+    )
+
+    assert.deepEqual(result.errors.map(({ code, line, year }) => [code, line, year]), [
+      ['missing-year-claim', 1, '2000'],
+    ], delimiter)
+  }
+})
+
 test('keeps numeric slash years and dates visible to evidence checks', () => {
   const result = validateText([
     'The paired years are 1973/1974.',

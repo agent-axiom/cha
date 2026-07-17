@@ -11,8 +11,8 @@ const draftToken = /\b(?:TODOs?|TBDs?|FIXMEs?|TBCs?|TKs?|XXX|PLACEHOLDERS?)\b|\b
 const toolToken = /\bturn\d+(?:search|fetch|view|open|image|file)\d+\b|(?:file)?cite(?![\p{L}\p{N}_])|<in-app-browser-context/giu
 const yearToken = /\b(?:1\d{3}|20\d{2})\b/
 const markdownDestination = /\]\((?:\\.|[^)\r\n])*\)/g
-const urlToken = /(?:https?:\/\/|www\.)[^\s<>()]+/gi
-const pathToken = /(?=[^\s()[\]<>]*\p{L})[^\s()[\]<>]*[\\/][^\s()[\]<>]*/gu
+const forbiddenUrlCharacter = /[\s<>"{}|\\^`]/u
+const pathToken = /(?=[^\s()[\]<>"{}|\\^`]*\p{L})[^\s()[\]<>"{}|\\^`]*[\\/][^\s()[\]<>"{}|\\^`]*/gu
 const measurementUnit = [
   'micrograms?', 'milligrams?', 'kilograms?', 'grams?', 'µg', 'μg', 'ug', 'mg', 'kg', 'g',
   'milliliters?', 'millilitres?', 'centiliters?', 'centilitres?', 'deciliters?', 'decilitres?',
@@ -394,11 +394,39 @@ const maskMatches = (characters, text, pattern) => {
   pattern.lastIndex = 0
 }
 
+const maskHttpUrls = (characters, text) => {
+  for (let start = 0; start < text.length;) {
+    const scheme = text.slice(start, start + 8).toLowerCase()
+    const schemeLength = scheme.startsWith('https://') ? 8 : scheme.startsWith('http://') ? 7 : 0
+    if (schemeLength === 0) {
+      start += 1
+      continue
+    }
+
+    let end = start + schemeLength
+    let parenthesisDepth = 0
+    while (end < text.length) {
+      const character = text[end]
+      if (forbiddenUrlCharacter.test(character)) break
+      if (character === '(') parenthesisDepth += 1
+      else if (character === ')') {
+        if (parenthesisDepth === 0) break
+        parenthesisDepth -= 1
+      }
+      end += 1
+    }
+
+    maskRange(characters, start, end)
+    start = end
+  }
+}
+
 const sanitizedYearText = (text) => {
   const characters = text.split('')
-  for (const pattern of [markdownDestination, urlToken, pathToken, measurementToken]) {
+  for (const pattern of [markdownDestination, pathToken, measurementToken]) {
     maskMatches(characters, text, pattern)
   }
+  maskHttpUrls(characters, text)
   return characters.join('')
 }
 
