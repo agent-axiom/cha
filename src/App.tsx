@@ -1,7 +1,10 @@
 import { useState } from 'react'
 import type { TeaPath } from './content/types'
 import { Hero } from './components/Hero'
+import { HistoryTimeline } from './components/HistoryTimeline'
+import { MythologyCabinet } from './components/MythologyCabinet'
 import { SiteHeader } from './components/SiteHeader'
+import { TeaMountainsMap } from './components/TeaMountainsMap'
 
 export function App() {
   const [teaPath, setTeaPath] = useState<TeaPath>('sheng')
@@ -11,7 +14,9 @@ export function App() {
       <SiteHeader />
       <main>
         <Hero teaPath={teaPath} onTeaPathChange={setTeaPath} />
-        <div id="history" aria-hidden="true" />
+        <HistoryTimeline />
+        <TeaMountainsMap />
+        <MythologyCabinet />
       </main>
     </div>
   )
