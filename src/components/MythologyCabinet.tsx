@@ -13,6 +13,16 @@ export function MythologyCabinet() {
         </p>
       </header>
 
+      <figure className="myths-still-life">
+        <img
+          src="/cha/images/puer-material-culture.webp"
+          alt="Прессованный блин пуэра, волокнистая обёртка, чайный нож и гайвань в традиционной мастерской"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption>Материальные вещи переживают рассказы — и помогают им меняться.</figcaption>
+      </figure>
+
       <div className="myth-grid">
         {myths.map((myth, index) => (
           <article className="myth-card" key={myth.id}>

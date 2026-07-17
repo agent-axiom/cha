@@ -21,6 +21,13 @@ export function FermentationLab() {
 
       <div className="fermentation-lab">
         <div className="fermentation-lab__visual">
+          <img
+            className="fermentation-lab__image"
+            src="/cha/images/fermentation-microcosm.webp"
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
           <svg viewBox="0 0 640 540" role="img" aria-labelledby="micro-title micro-desc">
             <title id="micro-title">Художественная модель ферментации пуэра</title>
             <desc id="micro-desc">
@@ -97,4 +104,3 @@ export function FermentationLab() {
     </section>
   )
 }
-

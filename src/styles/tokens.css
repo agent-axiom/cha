@@ -1,0 +1,39 @@
+:root {
+  color-scheme: dark;
+  font-family: Inter, Manrope, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  --ink: #f1ebdc;
+  --ink-muted: #b9b5a8;
+  --ink-dim: #7f8179;
+  --night: #08100d;
+  --night-soft: #0e1713;
+  --forest: #14251d;
+  --forest-light: #294334;
+  --moss: #71866a;
+  --gold: #c4a460;
+  --gold-light: #e2cc91;
+  --amber: #b2742e;
+  --vermilion: #aa4a34;
+  --line: rgba(226, 204, 145, 0.18);
+  --line-strong: rgba(226, 204, 145, 0.42);
+  --panel: rgba(16, 27, 22, 0.78);
+  --panel-solid: #101a16;
+  --shadow: 0 28px 80px rgba(0, 0, 0, 0.34);
+  --serif: "Iowan Old Style", "Baskerville", "Times New Roman", serif;
+  --sans: Inter, Manrope, ui-sans-serif, system-ui, sans-serif;
+  --content: min(1180px, calc(100vw - 48px));
+  --section-space: clamp(6.5rem, 12vw, 11rem);
+  --accent: var(--gold);
+  --accent-glow: rgba(196, 164, 96, 0.24);
+}
+
+.app[data-tea='sheng'] {
+  --accent: #c9ad63;
+  --accent-glow: rgba(201, 173, 99, 0.24);
+}
+
+.app[data-tea='shou'] {
+  --accent: #bf6346;
+  --accent-glow: rgba(191, 99, 70, 0.26);
+}

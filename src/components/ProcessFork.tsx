@@ -25,6 +25,19 @@ export function ProcessFork({ selectedPath }: ProcessForkProps) {
         </p>
       </header>
 
+      <figure className="process-plate">
+        <img
+          src="/cha/images/sheng-shou-paths.webp"
+          alt="Свежий чайный лист между светлым янтарным настоем шэн и тёмным рубиновым настоем шу"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption>
+          Разница заметна в чашке, но начинается гораздо раньше — в выборе
+          технологического пути.
+        </figcaption>
+      </figure>
+
       <div className="process-fork">
         {(['sheng', 'shou'] as const).map((path) => {
           const meta = pathMeta[path]
@@ -82,4 +95,3 @@ export function ProcessFork({ selectedPath }: ProcessForkProps) {
     </section>
   )
 }
-

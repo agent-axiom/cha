@@ -1,4 +1,5 @@
 import type { TeaPath } from '../content/types'
+import { FogCanvas } from './FogCanvas'
 import { TeaPathSwitch } from './TeaPathSwitch'
 
 interface HeroProps {
@@ -22,7 +23,14 @@ export function Hero({ teaPath, onTeaPathChange }: HeroProps) {
 
   return (
     <section className="hero" id="top" aria-labelledby="hero-title">
+      <img
+        className="hero__image"
+        src="/cha/images/puer-hero.webp"
+        alt="Старинное чайное дерево над туманными горными склонами Юньнани"
+        fetchPriority="high"
+      />
       <div className="hero__mist" aria-hidden="true" />
+      <FogCanvas />
       <div className="hero__content">
         <p className="eyebrow">Пуэр · Юньнань · проверяемая история</p>
         <h1 id="hero-title">
@@ -32,6 +40,11 @@ export function Hero({ teaPath, onTeaPathChange }: HeroProps) {
         <p className="hero__lede">
           Чайный лес помнит больше одной правды. Проследите путь от древних
           легенд до микробиологии шэн- и шу-пуэра.
+        </p>
+        <p className="hero__taxonomy">
+          В русской торговой речи пуэр часто зовут «чёрным». В китайской
+          классификации выдержанный и постферментированный чай относят к{' '}
+          <i>хэй ча</i> — «тёмным чаям»; шэн и шу при этом идут разными путями.
         </p>
         <TeaPathSwitch value={teaPath} onChange={onTeaPathChange} />
         <p className="hero__path-note">
