@@ -326,7 +326,7 @@ const flatplanTemplateKeys = [
 ]
 const flatplanPlanKeys = ['id', 'title', 'pagePrefix', 'signatureSize', 'totalPages', 'sections', 'pages']
 const flatplanSectionKeys = ['id', 'title', 'pageCount', 'start', 'end', 'allowedLeftStart', 'requiredTopics']
-const flatplanTopicKeys = ['id', 'title']
+const flatplanTopicKeys = ['id', 'title', 'expectedMethodIds']
 const flatplanPageKeys = [
   'number',
   'id',
@@ -505,6 +505,7 @@ export function validateFlatplan(plan, expectedPages, templates, assetIds) {
   const sectionByPage = new Map()
   const topicsBySection = new Map()
   const topicOwners = new Map()
+  const methodTopicOwners = new Map()
   let nextSectionStart = 1
   for (const section of plan.sections) {
     if (!section || typeof section !== 'object' || typeof section.id !== 'string' || !section.id.trim()) {
@@ -535,12 +536,28 @@ export function validateFlatplan(plan, expectedPages, templates, assetIds) {
     const sectionTopics = new Map()
     for (const topic of section.requiredTopics) {
       if (!topic || typeof topic !== 'object' || Array.isArray(topic)) fail(`section ${section.id} topic must be an object`)
-      requireExactKeys(topic, flatplanTopicKeys, flatplanTopicKeys, `section ${section.id} topic`, fail)
+      requireExactKeys(topic, flatplanTopicKeys, ['id', 'title'], `section ${section.id} topic`, fail)
       if (typeof topic.id !== 'string' || !topicIdPattern.test(topic.id)) fail(`section ${section.id} topic id is invalid`)
       if (typeof topic.title !== 'string' || !topic.title.trim()) fail(`section ${section.id} topic title must be nonblank`)
       if (genericRolePattern.test(topic.title)) fail(`section ${section.id} generic counter topic title is forbidden`)
+      if (hasOwn(topic, 'expectedMethodIds')) {
+        if (
+          !Array.isArray(topic.expectedMethodIds)
+          || topic.expectedMethodIds.length === 0
+          || topic.expectedMethodIds.some((methodId) => typeof methodId !== 'string' || !methodId.trim())
+          || new Set(topic.expectedMethodIds).size !== topic.expectedMethodIds.length
+        ) {
+          fail(`section ${section.id} topic ${topic.id} expectedMethodIds must contain unique nonblank strings`)
+        }
+        for (const methodId of topic.expectedMethodIds) {
+          if (methodTopicOwners.has(methodId)) {
+            fail(`recipe methodId ${methodId} is mapped by multiple topics`)
+          }
+          methodTopicOwners.set(methodId, topic.id)
+        }
+      }
       if (sectionTopics.has(topic.id) || topicOwners.has(topic.id)) fail(`duplicate topic id: ${topic.id}`)
-      sectionTopics.set(topic.id, topic.title)
+      sectionTopics.set(topic.id, topic)
       topicOwners.set(topic.id, section.id)
     }
     topicsBySection.set(section.id, sectionTopics)
@@ -560,6 +577,7 @@ export function validateFlatplan(plan, expectedPages, templates, assetIds) {
   const recipeIds = new Set()
   const recipeObjects = new Set()
   const recipePages = []
+  const usedMethodIdsByTopic = new Map()
   const pad = (number) => String(number).padStart(3, '0')
   for (let index = 0; index < plan.pages.length; index += 1) {
     const page = plan.pages[index]
@@ -589,9 +607,8 @@ export function validateFlatplan(plan, expectedPages, templates, assetIds) {
     if (typeof page.topicId !== 'string' || !sectionTopics.has(page.topicId)) {
       pageFail(`undeclared topic ${page.topicId}`)
     }
-    if (typeof page.spreadTitle !== 'string' || page.spreadTitle !== sectionTopics.get(page.topicId)) {
-      pageFail(`spreadTitle must match declared topic ${page.topicId}`)
-    }
+    const topic = sectionTopics.get(page.topicId)
+    if (typeof page.spreadTitle !== 'string' || !page.spreadTitle.trim()) pageFail('spreadTitle must be nonblank')
     usedTopics.get(section.id).add(page.topicId)
     if (typeof page.spreadTemplate !== 'string' || !templateById.has(page.spreadTemplate)) {
       pageFail(`unknown spreadTemplate ${page.spreadTemplate}`)
@@ -642,6 +659,12 @@ export function validateFlatplan(plan, expectedPages, templates, assetIds) {
     if (page.template === 'guide-recipe') {
       if (plan.id !== 'guide') pageFail('guide-recipe template is only allowed in the guide')
       const recipe = validateGuideRecipe(page, pageFail)
+      if (!Array.isArray(topic.expectedMethodIds) || !topic.expectedMethodIds.includes(recipe.methodId)) {
+        pageFail(`recipe methodId ${recipe.methodId} is not allowed by topic ${page.topicId}`)
+      }
+      const usedMethodIds = usedMethodIdsByTopic.get(page.topicId) ?? new Set()
+      usedMethodIds.add(recipe.methodId)
+      usedMethodIdsByTopic.set(page.topicId, usedMethodIds)
       if (recipeIds.has(recipe.recipeId)) pageFail(`duplicate recipe id: ${recipe.recipeId}`)
       recipeIds.add(recipe.recipeId)
       const serialized = JSON.stringify(recipe)
@@ -650,12 +673,22 @@ export function validateFlatplan(plan, expectedPages, templates, assetIds) {
       recipePages.push(page)
     } else if (hasOwn(page, 'recipe')) {
       pageFail('recipe is only allowed on guide-recipe pages')
+    } else {
+      if (hasOwn(topic, 'expectedMethodIds')) pageFail(`nonrecipe page cannot use method-mapped topic ${page.topicId}`)
+      if (page.spreadTitle !== topic.title) pageFail(`spreadTitle must match declared topic ${page.topicId}`)
     }
   }
 
   for (const section of plan.sections) {
     for (const topicId of topicsBySection.get(section.id).keys()) {
       if (!usedTopics.get(section.id).has(topicId)) fail(`section ${section.id} required topic ${topicId} is not used`)
+      const topic = topicsBySection.get(section.id).get(topicId)
+      if (
+        hasOwn(topic, 'expectedMethodIds')
+        && JSON.stringify([...(usedMethodIdsByTopic.get(topicId) ?? [])].sort()) !== JSON.stringify([...topic.expectedMethodIds].sort())
+      ) {
+        fail(`section ${section.id} topic ${topicId} must use every expectedMethodId exactly as declared`)
+      }
     }
   }
 
@@ -749,8 +782,15 @@ export function validateFlatplan(plan, expectedPages, templates, assetIds) {
     if (!crossesSection && (left.crossSectionSpread === true || right.crossSectionSpread === true)) {
       fail(`spread ${left.spreadId} marks crossSectionSpread within one section`)
     }
-    if (!crossesSection && (left.topicId !== right.topicId || left.spreadTitle !== right.spreadTitle)) {
-      fail(`normal spread ${left.spreadId} must use one topicId and spreadTitle`)
+    if (!crossesSection && left.spreadTitle !== right.spreadTitle) {
+      fail(`normal spread ${left.spreadId} must use one explicit spreadTitle`)
+    }
+    if (
+      !crossesSection
+      && left.topicId !== right.topicId
+      && (left.template !== 'guide-recipe' || right.template !== 'guide-recipe')
+    ) {
+      fail(`normal spread ${left.spreadId} with distinct topics requires two guide-recipe pages`)
     }
   }
   return { pages: pageIds, spreads: new Set(spreadCounts.keys()), sections: sectionIds }

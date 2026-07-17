@@ -86,6 +86,24 @@ const simpleMethodIds = [
   'thermos-sheng',
   'thermos-shou',
 ]
+const expectedGuideRecipePages = [
+  ['G-P018', 'tools-water-t04', 'calibrate-water-temperature', 'water-temperature-calibration'],
+  ['G-P019', 'tools-water-t05', 'calibrate-leaf-ratio', 'leaf-ratio-calibration'],
+  ['G-P022', 'sheng-t02', 'gaiwan-young-sheng', 'gaiwan-sheng-young'],
+  ['G-P023', 'sheng-t03', 'gaiwan-aged-sheng', 'gaiwan-sheng-aged'],
+  ['G-P024', 'sheng-t04', 'teapot-young-sheng', 'teapot-sheng-young'],
+  ['G-P025', 'sheng-t05', 'teapot-aged-sheng', 'teapot-sheng-aged'],
+  ['G-P030', 'shou-t02', 'gaiwan-loose-shou', 'gaiwan-shou-loose'],
+  ['G-P031', 'shou-t03', 'gaiwan-compressed-shou', 'gaiwan-shou-compressed'],
+  ['G-P032', 'shou-t04', 'teapot-loose-shou', 'teapot-shou-loose'],
+  ['G-P033', 'shou-t05', 'teapot-compressed-shou', 'teapot-shou-compressed'],
+  ['G-P037', 'simple-methods-t01', 'mug-sheng', 'mug-sheng'],
+  ['G-P038', 'simple-methods-t02', 'large-pot-sheng', 'large-pot-sheng'],
+  ['G-P039', 'simple-methods-t03', 'large-pot-shou', 'large-pot-shou'],
+  ['G-P040', 'simple-methods-t04', 'thermos-sheng', 'thermos-sheng'],
+  ['G-P041', 'simple-methods-t05', 'thermos-shou', 'thermos-shou'],
+  ['G-P042', 'simple-methods-t06', 'mug-shou', 'mug-shou'],
+]
 const genericRolePattern = /(?:полоса|шаг)\s+\d+|\b\d+\s+из\s+\d+/iu
 
 const pagesBySpread = (plan) => Map.groupBy(plan.pages, ({ spreadId }) => spreadId)
@@ -94,21 +112,30 @@ const assertEditorialTopics = (plan) => {
   const roles = new Set()
   for (const section of plan.sections) {
     assert.ok(Array.isArray(section.requiredTopics) && section.requiredTopics.length > 0)
-    const declared = new Map(section.requiredTopics.map(({ id, title }) => [id, title]))
+    const declared = new Map(section.requiredTopics.map((topic) => [topic.id, topic]))
     const pages = plan.pages.filter(({ sectionId }) => sectionId === section.id)
     const used = new Set()
     for (const page of pages) {
       assert.ok(!genericRolePattern.test(page.role), `${page.id} has generic role: ${page.role}`)
       assert.ok(!roles.has(page.role), `${page.id} repeats role: ${page.role}`)
       roles.add(page.role)
-      assert.equal(declared.get(page.topicId), page.spreadTitle, `${page.id} topic/title is undeclared`)
+      const topic = declared.get(page.topicId)
+      assert.ok(topic, `${page.id} topic is undeclared`)
+      if (page.template === 'guide-recipe') {
+        assert.deepEqual(topic.expectedMethodIds, [page.recipe.methodId], `${page.id} topic/method is ambiguous`)
+      } else {
+        assert.equal(topic.expectedMethodIds, undefined, `${page.id} nonrecipe topic carries a recipe mapping`)
+        assert.equal(topic.title, page.spreadTitle, `${page.id} topic/title is undeclared`)
+      }
       used.add(page.topicId)
     }
     assert.deepEqual([...used].sort(), [...declared.keys()].sort(), `${section.id} has unused required topics`)
   }
   for (const [spreadId, pages] of pagesBySpread(plan)) {
     if (new Set(pages.map(({ sectionId }) => sectionId)).size === 1) {
-      assert.equal(new Set(pages.map(({ topicId }) => topicId)).size, 1, `${spreadId} has multiple normal-spread topics`)
+      if (new Set(pages.map(({ topicId }) => topicId)).size > 1) {
+        assert.ok(pages.every(({ template }) => template === 'guide-recipe'), `${spreadId} has multiple ordinary-spread topics`)
+      }
       assert.equal(new Set(pages.map(({ spreadTitle }) => spreadTitle)).size, 1, `${spreadId} has multiple normal-spread titles`)
     }
   }
@@ -483,6 +510,56 @@ test('defines sixteen unique bounded recipes in the required section distributio
   }
 })
 
+test('maps all sixteen guide recipe pages to one exact declared method topic', () => {
+  const { guide } = flatplanData()
+  const topics = new Map(guide.sections.flatMap(({ requiredTopics }) => requiredTopics.map((topic) => [topic.id, topic])))
+  const recipePages = guide.pages.filter(({ template }) => template === 'guide-recipe')
+
+  assert.deepEqual(
+    recipePages.map((page) => [page.id, page.topicId, page.recipe.recipeId, page.recipe.methodId]),
+    expectedGuideRecipePages,
+  )
+  for (const [, topicId, , methodId] of expectedGuideRecipePages) {
+    assert.deepEqual(topics.get(topicId)?.expectedMethodIds, [methodId], `${topicId} must map only ${methodId}`)
+  }
+})
+
+test('allows distinct mapped recipe topics on one guide spread and rejects ordinary distinct topics', () => {
+  const { templates, guide, assets } = flatplanData()
+  const assetIds = new Set(assets.map(({ id }) => id))
+  const recipeSpreadIds = ['G-S010', 'G-S012', 'G-S013', 'G-S016', 'G-S017', 'G-S020', 'G-S021']
+
+  for (const spreadId of recipeSpreadIds) {
+    const pages = guide.pages.filter((page) => page.spreadId === spreadId)
+    assert.ok(pages.every(({ template }) => template === 'guide-recipe'))
+    assert.equal(new Set(pages.map(({ topicId }) => topicId)).size, 2, `${spreadId} must carry two method topics`)
+    assert.equal(new Set(pages.map(({ spreadTitle }) => spreadTitle)).size, 1, `${spreadId} must carry one combined title`)
+  }
+  const expectedBookends = new Map([
+    ['G-S019', 'От коротких проливов шоу — к шэну в кружке'],
+    ['G-S022', 'Шоу в кружке — к внимательной дегустации'],
+  ])
+  for (const [spreadId, expectedTitle] of expectedBookends) {
+    const pages = guide.pages.filter((page) => page.spreadId === spreadId)
+    assert.equal(new Set(pages.map(({ spreadTitle }) => spreadTitle)).size, 1)
+    assert.equal(pages[0].spreadTitle, expectedTitle)
+  }
+  assert.doesNotThrow(() => validateFlatplan(guide, 48, templates, assetIds))
+
+  const ordinary = structuredClone(guide)
+  const ordinaryRight = ordinary.pages.find(({ id }) => id === 'G-P003')
+  const ordinaryLeft = ordinary.pages.find(({ id }) => id === 'G-P002')
+  ordinary.sections
+    .find(({ id }) => id === 'quick-start')
+    .requiredTopics.push({ id: 'quick-start-ordinary-mutant', title: ordinaryLeft.spreadTitle })
+  ordinaryRight.topicId = 'quick-start-ordinary-mutant'
+  ordinaryRight.spreadTitle = ordinaryLeft.spreadTitle
+  assert.throws(
+    () => validateFlatplan(ordinary, 48, templates, assetIds),
+    /normal spread G-S002 with distinct topics requires two guide-recipe pages/,
+  )
+})
+
 test('rejects a total that differs from the expected page count', () => {
   const { templates, album, assets } = flatplanData()
   album.totalPages = 207
@@ -654,12 +731,23 @@ test('rejects a guide recipe with a missing required field', () => {
   )
 })
 
+test('rejects a guide recipe whose method is not declared by its topic', () => {
+  const { templates, guide, assets } = flatplanData()
+  guide.pages.find(({ id }) => id === 'G-P031').recipe.methodId = 'teapot-shou-loose'
+
+  assert.throws(
+    () => validateFlatplan(guide, 48, templates, new Set(assets.map(({ id }) => id))),
+    /page G-P031: recipe methodId teapot-shou-loose is not allowed by topic shou-t03/,
+  )
+})
+
 test('rejects duplicate recipes, implausible bounds, and recipes on nonrecipe pages', () => {
   const { templates, guide, assets } = flatplanData()
   const assetIds = new Set(assets.map(({ id }) => id))
   const duplicates = structuredClone(guide)
   const duplicatePages = duplicates.pages.filter(({ template }) => template === 'guide-recipe').slice(0, 2)
   duplicatePages[1].recipe = structuredClone(duplicatePages[0].recipe)
+  duplicatePages[1].topicId = duplicatePages[0].topicId
   const implausible = structuredClone(guide)
   implausible.pages.find(({ template }) => template === 'guide-recipe').recipe.vesselVolumeMl = 1_000_000_000
   const misplaced = structuredClone(guide)
