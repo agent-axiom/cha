@@ -1,0 +1,739 @@
+{
+  "id": "guide",
+  "title": "Пуэр без лишнего: практический гид",
+  "pagePrefix": "G",
+  "signatureSize": 16,
+  "totalPages": 48,
+  "sections": [
+    {
+      "id": "quick-start",
+      "title": "Быстрый старт",
+      "pageCount": 6,
+      "start": 1,
+      "end": 6
+    },
+    {
+      "id": "choosing-tea",
+      "title": "Как выбрать чай",
+      "pageCount": 6,
+      "start": 7,
+      "end": 12
+    },
+    {
+      "id": "tools-water",
+      "title": "Посуда и вода",
+      "pageCount": 8,
+      "start": 13,
+      "end": 20
+    },
+    {
+      "id": "sheng",
+      "title": "Заваривание шэна",
+      "pageCount": 8,
+      "start": 21,
+      "end": 28
+    },
+    {
+      "id": "shou",
+      "title": "Заваривание шоу",
+      "pageCount": 8,
+      "start": 29,
+      "end": 36
+    },
+    {
+      "id": "simple-methods",
+      "title": "Простые методы",
+      "pageCount": 6,
+      "start": 37,
+      "end": 42
+    },
+    {
+      "id": "tasting",
+      "title": "Дегустация",
+      "pageCount": 4,
+      "start": 43,
+      "end": 46
+    },
+    {
+      "id": "safety",
+      "title": "Безопасность и хранение",
+      "pageCount": 2,
+      "start": 47,
+      "end": 48
+    }
+  ],
+  "pages": [
+    {
+      "number": 1,
+      "id": "G-P001",
+      "spreadId": "G-S001",
+      "sectionId": "quick-start",
+      "role": "Открытие раздела «Быстрый старт»",
+      "template": "chapter-gate",
+      "assetIds": [
+        "illustration-guide-spots"
+      ],
+      "chapterStart": true
+    },
+    {
+      "number": 2,
+      "id": "G-P002",
+      "spreadId": "G-S002",
+      "sectionId": "quick-start",
+      "role": "Раздел «Быстрый старт»: шаг 2 из 6",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 3,
+      "id": "G-P003",
+      "spreadId": "G-S002",
+      "sectionId": "quick-start",
+      "role": "Раздел «Быстрый старт»: шаг 3 из 6",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 4,
+      "id": "G-P004",
+      "spreadId": "G-S003",
+      "sectionId": "quick-start",
+      "role": "Раздел «Быстрый старт»: шаг 4 из 6",
+      "template": "guide-troubleshooting",
+      "assetIds": []
+    },
+    {
+      "number": 5,
+      "id": "G-P005",
+      "spreadId": "G-S003",
+      "sectionId": "quick-start",
+      "role": "Раздел «Быстрый старт»: шаг 5 из 6",
+      "template": "guide-troubleshooting",
+      "assetIds": []
+    },
+    {
+      "number": 6,
+      "id": "G-P006",
+      "spreadId": "G-S004",
+      "sectionId": "quick-start",
+      "role": "Раздел «Быстрый старт»: шаг 6 из 6",
+      "template": "chapter-gate",
+      "assetIds": [],
+      "crossSectionSpread": true
+    },
+    {
+      "number": 7,
+      "id": "G-P007",
+      "spreadId": "G-S004",
+      "sectionId": "choosing-tea",
+      "role": "Открытие раздела «Как выбрать чай»",
+      "template": "chapter-gate",
+      "assetIds": [],
+      "chapterStart": true,
+      "crossSectionSpread": true
+    },
+    {
+      "number": 8,
+      "id": "G-P008",
+      "spreadId": "G-S005",
+      "sectionId": "choosing-tea",
+      "role": "Раздел «Как выбрать чай»: шаг 2 из 6",
+      "template": "photo-plus-essay",
+      "assetIds": []
+    },
+    {
+      "number": 9,
+      "id": "G-P009",
+      "spreadId": "G-S005",
+      "sectionId": "choosing-tea",
+      "role": "Раздел «Как выбрать чай»: шаг 3 из 6",
+      "template": "photo-plus-essay",
+      "assetIds": []
+    },
+    {
+      "number": 10,
+      "id": "G-P010",
+      "spreadId": "G-S006",
+      "sectionId": "choosing-tea",
+      "role": "Раздел «Как выбрать чай»: шаг 4 из 6",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 11,
+      "id": "G-P011",
+      "spreadId": "G-S006",
+      "sectionId": "choosing-tea",
+      "role": "Раздел «Как выбрать чай»: шаг 5 из 6",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 12,
+      "id": "G-P012",
+      "spreadId": "G-S007",
+      "sectionId": "choosing-tea",
+      "role": "Раздел «Как выбрать чай»: шаг 6 из 6",
+      "template": "chapter-gate",
+      "assetIds": [],
+      "crossSectionSpread": true
+    },
+    {
+      "number": 13,
+      "id": "G-P013",
+      "spreadId": "G-S007",
+      "sectionId": "tools-water",
+      "role": "Открытие раздела «Посуда и вода»",
+      "template": "chapter-gate",
+      "assetIds": [
+        "photo-tea-tools-still-life"
+      ],
+      "chapterStart": true,
+      "crossSectionSpread": true
+    },
+    {
+      "number": 14,
+      "id": "G-P014",
+      "spreadId": "G-S008",
+      "sectionId": "tools-water",
+      "role": "Раздел «Посуда и вода»: шаг 2 из 8",
+      "template": "object-atlas",
+      "assetIds": []
+    },
+    {
+      "number": 15,
+      "id": "G-P015",
+      "spreadId": "G-S008",
+      "sectionId": "tools-water",
+      "role": "Раздел «Посуда и вода»: шаг 3 из 8",
+      "template": "object-atlas",
+      "assetIds": [
+        "photo-water-brewing-detail"
+      ]
+    },
+    {
+      "number": 16,
+      "id": "G-P016",
+      "spreadId": "G-S009",
+      "sectionId": "tools-water",
+      "role": "Раздел «Посуда и вода»: шаг 4 из 8",
+      "template": "guide-troubleshooting",
+      "assetIds": []
+    },
+    {
+      "number": 17,
+      "id": "G-P017",
+      "spreadId": "G-S009",
+      "sectionId": "tools-water",
+      "role": "Раздел «Посуда и вода»: шаг 5 из 8",
+      "template": "guide-troubleshooting",
+      "assetIds": []
+    },
+    {
+      "number": 18,
+      "id": "G-P018",
+      "spreadId": "G-S010",
+      "sectionId": "tools-water",
+      "role": "Раздел «Посуда и вода»: шаг 6 из 8",
+      "template": "guide-recipe",
+      "assetIds": [],
+      "recipe": {
+        "vesselVolumeMl": 100,
+        "leafMassG": 6,
+        "temperatureRangeC": [
+          85,
+          95
+        ],
+        "firstInfusionRangeSec": [
+          5,
+          12
+        ],
+        "adjustmentNote": "Если настой резкий, снизьте температуру на 3–5 °C или сократите настаивание."
+      }
+    },
+    {
+      "number": 19,
+      "id": "G-P019",
+      "spreadId": "G-S010",
+      "sectionId": "tools-water",
+      "role": "Раздел «Посуда и вода»: шаг 7 из 8",
+      "template": "guide-recipe",
+      "assetIds": [],
+      "recipe": {
+        "vesselVolumeMl": 120,
+        "leafMassG": 6,
+        "temperatureRangeC": [
+          85,
+          95
+        ],
+        "firstInfusionRangeSec": [
+          5,
+          12
+        ],
+        "adjustmentNote": "Если настой резкий, снизьте температуру на 3–5 °C или сократите настаивание."
+      }
+    },
+    {
+      "number": 20,
+      "id": "G-P020",
+      "spreadId": "G-S011",
+      "sectionId": "tools-water",
+      "role": "Раздел «Посуда и вода»: шаг 8 из 8",
+      "template": "chapter-gate",
+      "assetIds": [],
+      "crossSectionSpread": true
+    },
+    {
+      "number": 21,
+      "id": "G-P021",
+      "spreadId": "G-S011",
+      "sectionId": "sheng",
+      "role": "Открытие раздела «Заваривание шэна»",
+      "template": "chapter-gate",
+      "assetIds": [],
+      "chapterStart": true,
+      "crossSectionSpread": true
+    },
+    {
+      "number": 22,
+      "id": "G-P022",
+      "spreadId": "G-S012",
+      "sectionId": "sheng",
+      "role": "Раздел «Заваривание шэна»: шаг 2 из 8",
+      "template": "guide-recipe",
+      "assetIds": [],
+      "recipe": {
+        "vesselVolumeMl": 100,
+        "leafMassG": 6,
+        "temperatureRangeC": [
+          85,
+          95
+        ],
+        "firstInfusionRangeSec": [
+          5,
+          12
+        ],
+        "adjustmentNote": "Если настой резкий, снизьте температуру на 3–5 °C или сократите настаивание."
+      }
+    },
+    {
+      "number": 23,
+      "id": "G-P023",
+      "spreadId": "G-S012",
+      "sectionId": "sheng",
+      "role": "Раздел «Заваривание шэна»: шаг 3 из 8",
+      "template": "guide-recipe",
+      "assetIds": [],
+      "recipe": {
+        "vesselVolumeMl": 120,
+        "leafMassG": 6,
+        "temperatureRangeC": [
+          85,
+          95
+        ],
+        "firstInfusionRangeSec": [
+          5,
+          12
+        ],
+        "adjustmentNote": "Если настой резкий, снизьте температуру на 3–5 °C или сократите настаивание."
+      }
+    },
+    {
+      "number": 24,
+      "id": "G-P024",
+      "spreadId": "G-S013",
+      "sectionId": "sheng",
+      "role": "Раздел «Заваривание шэна»: шаг 4 из 8",
+      "template": "guide-recipe",
+      "assetIds": [],
+      "recipe": {
+        "vesselVolumeMl": 100,
+        "leafMassG": 6,
+        "temperatureRangeC": [
+          85,
+          95
+        ],
+        "firstInfusionRangeSec": [
+          5,
+          12
+        ],
+        "adjustmentNote": "Если настой резкий, снизьте температуру на 3–5 °C или сократите настаивание."
+      }
+    },
+    {
+      "number": 25,
+      "id": "G-P025",
+      "spreadId": "G-S013",
+      "sectionId": "sheng",
+      "role": "Раздел «Заваривание шэна»: шаг 5 из 8",
+      "template": "guide-recipe",
+      "assetIds": [],
+      "recipe": {
+        "vesselVolumeMl": 120,
+        "leafMassG": 6,
+        "temperatureRangeC": [
+          85,
+          95
+        ],
+        "firstInfusionRangeSec": [
+          5,
+          12
+        ],
+        "adjustmentNote": "Если настой резкий, снизьте температуру на 3–5 °C или сократите настаивание."
+      }
+    },
+    {
+      "number": 26,
+      "id": "G-P026",
+      "spreadId": "G-S014",
+      "sectionId": "sheng",
+      "role": "Раздел «Заваривание шэна»: шаг 6 из 8",
+      "template": "guide-recipe",
+      "assetIds": [],
+      "recipe": {
+        "vesselVolumeMl": 100,
+        "leafMassG": 6,
+        "temperatureRangeC": [
+          85,
+          95
+        ],
+        "firstInfusionRangeSec": [
+          5,
+          12
+        ],
+        "adjustmentNote": "Если настой резкий, снизьте температуру на 3–5 °C или сократите настаивание."
+      }
+    },
+    {
+      "number": 27,
+      "id": "G-P027",
+      "spreadId": "G-S014",
+      "sectionId": "sheng",
+      "role": "Раздел «Заваривание шэна»: шаг 7 из 8",
+      "template": "guide-recipe",
+      "assetIds": [],
+      "recipe": {
+        "vesselVolumeMl": 120,
+        "leafMassG": 6,
+        "temperatureRangeC": [
+          85,
+          95
+        ],
+        "firstInfusionRangeSec": [
+          5,
+          12
+        ],
+        "adjustmentNote": "Если настой резкий, снизьте температуру на 3–5 °C или сократите настаивание."
+      }
+    },
+    {
+      "number": 28,
+      "id": "G-P028",
+      "spreadId": "G-S015",
+      "sectionId": "sheng",
+      "role": "Раздел «Заваривание шэна»: шаг 8 из 8",
+      "template": "guide-recipe",
+      "assetIds": [],
+      "crossSectionSpread": true,
+      "recipe": {
+        "vesselVolumeMl": 100,
+        "leafMassG": 6,
+        "temperatureRangeC": [
+          85,
+          95
+        ],
+        "firstInfusionRangeSec": [
+          5,
+          12
+        ],
+        "adjustmentNote": "Если настой резкий, снизьте температуру на 3–5 °C или сократите настаивание."
+      }
+    },
+    {
+      "number": 29,
+      "id": "G-P029",
+      "spreadId": "G-S015",
+      "sectionId": "shou",
+      "role": "Открытие раздела «Заваривание шоу»",
+      "template": "guide-recipe",
+      "assetIds": [],
+      "chapterStart": true,
+      "crossSectionSpread": true,
+      "recipe": {
+        "vesselVolumeMl": 120,
+        "leafMassG": 7,
+        "temperatureRangeC": [
+          95,
+          100
+        ],
+        "firstInfusionRangeSec": [
+          8,
+          15
+        ],
+        "adjustmentNote": "Если настой слишком плотный, сократите первое настаивание на 2–3 секунды."
+      }
+    },
+    {
+      "number": 30,
+      "id": "G-P030",
+      "spreadId": "G-S016",
+      "sectionId": "shou",
+      "role": "Раздел «Заваривание шоу»: шаг 2 из 8",
+      "template": "guide-recipe",
+      "assetIds": [],
+      "recipe": {
+        "vesselVolumeMl": 100,
+        "leafMassG": 7,
+        "temperatureRangeC": [
+          95,
+          100
+        ],
+        "firstInfusionRangeSec": [
+          8,
+          15
+        ],
+        "adjustmentNote": "Если настой слишком плотный, сократите первое настаивание на 2–3 секунды."
+      }
+    },
+    {
+      "number": 31,
+      "id": "G-P031",
+      "spreadId": "G-S016",
+      "sectionId": "shou",
+      "role": "Раздел «Заваривание шоу»: шаг 3 из 8",
+      "template": "guide-recipe",
+      "assetIds": [],
+      "recipe": {
+        "vesselVolumeMl": 120,
+        "leafMassG": 7,
+        "temperatureRangeC": [
+          95,
+          100
+        ],
+        "firstInfusionRangeSec": [
+          8,
+          15
+        ],
+        "adjustmentNote": "Если настой слишком плотный, сократите первое настаивание на 2–3 секунды."
+      }
+    },
+    {
+      "number": 32,
+      "id": "G-P032",
+      "spreadId": "G-S017",
+      "sectionId": "shou",
+      "role": "Раздел «Заваривание шоу»: шаг 4 из 8",
+      "template": "guide-recipe",
+      "assetIds": [],
+      "recipe": {
+        "vesselVolumeMl": 100,
+        "leafMassG": 7,
+        "temperatureRangeC": [
+          95,
+          100
+        ],
+        "firstInfusionRangeSec": [
+          8,
+          15
+        ],
+        "adjustmentNote": "Если настой слишком плотный, сократите первое настаивание на 2–3 секунды."
+      }
+    },
+    {
+      "number": 33,
+      "id": "G-P033",
+      "spreadId": "G-S017",
+      "sectionId": "shou",
+      "role": "Раздел «Заваривание шоу»: шаг 5 из 8",
+      "template": "guide-recipe",
+      "assetIds": [],
+      "recipe": {
+        "vesselVolumeMl": 120,
+        "leafMassG": 7,
+        "temperatureRangeC": [
+          95,
+          100
+        ],
+        "firstInfusionRangeSec": [
+          8,
+          15
+        ],
+        "adjustmentNote": "Если настой слишком плотный, сократите первое настаивание на 2–3 секунды."
+      }
+    },
+    {
+      "number": 34,
+      "id": "G-P034",
+      "spreadId": "G-S018",
+      "sectionId": "shou",
+      "role": "Раздел «Заваривание шоу»: шаг 6 из 8",
+      "template": "guide-recipe",
+      "assetIds": [],
+      "recipe": {
+        "vesselVolumeMl": 100,
+        "leafMassG": 7,
+        "temperatureRangeC": [
+          95,
+          100
+        ],
+        "firstInfusionRangeSec": [
+          8,
+          15
+        ],
+        "adjustmentNote": "Если настой слишком плотный, сократите первое настаивание на 2–3 секунды."
+      }
+    },
+    {
+      "number": 35,
+      "id": "G-P035",
+      "spreadId": "G-S018",
+      "sectionId": "shou",
+      "role": "Раздел «Заваривание шоу»: шаг 7 из 8",
+      "template": "guide-recipe",
+      "assetIds": [],
+      "recipe": {
+        "vesselVolumeMl": 120,
+        "leafMassG": 7,
+        "temperatureRangeC": [
+          95,
+          100
+        ],
+        "firstInfusionRangeSec": [
+          8,
+          15
+        ],
+        "adjustmentNote": "Если настой слишком плотный, сократите первое настаивание на 2–3 секунды."
+      }
+    },
+    {
+      "number": 36,
+      "id": "G-P036",
+      "spreadId": "G-S019",
+      "sectionId": "shou",
+      "role": "Раздел «Заваривание шоу»: шаг 8 из 8",
+      "template": "guide-troubleshooting",
+      "assetIds": [],
+      "crossSectionSpread": true
+    },
+    {
+      "number": 37,
+      "id": "G-P037",
+      "spreadId": "G-S019",
+      "sectionId": "simple-methods",
+      "role": "Открытие раздела «Простые методы»",
+      "template": "guide-troubleshooting",
+      "assetIds": [],
+      "chapterStart": true,
+      "crossSectionSpread": true
+    },
+    {
+      "number": 38,
+      "id": "G-P038",
+      "spreadId": "G-S020",
+      "sectionId": "simple-methods",
+      "role": "Раздел «Простые методы»: шаг 2 из 6",
+      "template": "guide-troubleshooting",
+      "assetIds": []
+    },
+    {
+      "number": 39,
+      "id": "G-P039",
+      "spreadId": "G-S020",
+      "sectionId": "simple-methods",
+      "role": "Раздел «Простые методы»: шаг 3 из 6",
+      "template": "guide-troubleshooting",
+      "assetIds": []
+    },
+    {
+      "number": 40,
+      "id": "G-P040",
+      "spreadId": "G-S021",
+      "sectionId": "simple-methods",
+      "role": "Раздел «Простые методы»: шаг 4 из 6",
+      "template": "guide-troubleshooting",
+      "assetIds": []
+    },
+    {
+      "number": 41,
+      "id": "G-P041",
+      "spreadId": "G-S021",
+      "sectionId": "simple-methods",
+      "role": "Раздел «Простые методы»: шаг 5 из 6",
+      "template": "guide-troubleshooting",
+      "assetIds": []
+    },
+    {
+      "number": 42,
+      "id": "G-P042",
+      "spreadId": "G-S022",
+      "sectionId": "simple-methods",
+      "role": "Раздел «Простые методы»: шаг 6 из 6",
+      "template": "chapter-gate",
+      "assetIds": [],
+      "crossSectionSpread": true
+    },
+    {
+      "number": 43,
+      "id": "G-P043",
+      "spreadId": "G-S022",
+      "sectionId": "tasting",
+      "role": "Открытие раздела «Дегустация»",
+      "template": "chapter-gate",
+      "assetIds": [
+        "photo-tea-liquor-cups"
+      ],
+      "chapterStart": true,
+      "crossSectionSpread": true
+    },
+    {
+      "number": 44,
+      "id": "G-P044",
+      "spreadId": "G-S023",
+      "sectionId": "tasting",
+      "role": "Раздел «Дегустация»: шаг 2 из 4",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 45,
+      "id": "G-P045",
+      "spreadId": "G-S023",
+      "sectionId": "tasting",
+      "role": "Раздел «Дегустация»: шаг 3 из 4",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 46,
+      "id": "G-P046",
+      "spreadId": "G-S024",
+      "sectionId": "tasting",
+      "role": "Раздел «Дегустация»: шаг 4 из 4",
+      "template": "guide-safety",
+      "assetIds": [],
+      "crossSectionSpread": true
+    },
+    {
+      "number": 47,
+      "id": "G-P047",
+      "spreadId": "G-S024",
+      "sectionId": "safety",
+      "role": "Открытие раздела «Безопасность и хранение»",
+      "template": "guide-safety",
+      "assetIds": [
+        "diagram-storage-variables"
+      ],
+      "chapterStart": true,
+      "crossSectionSpread": true
+    },
+    {
+      "number": 48,
+      "id": "G-P048",
+      "spreadId": "G-S025",
+      "sectionId": "safety",
+      "role": "Раздел «Безопасность и хранение»: шаг 2 из 2",
+      "template": "guide-safety",
+      "assetIds": []
+    }
+  ]
+}

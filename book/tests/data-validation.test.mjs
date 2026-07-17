@@ -3,6 +3,7 @@ import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import * as dataValidator from '../scripts/validate-data.mjs'
 
 const {
@@ -11,6 +12,61 @@ const {
   validateReviews,
   validateAssets,
 } = dataValidator
+
+const bookRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
+const readBookJson = (relativePath) => JSON.parse(fs.readFileSync(path.join(bookRoot, relativePath), 'utf8'))
+const expectedTemplateIds = [
+  'chapter-gate',
+  'full-bleed-photo',
+  'photo-plus-essay',
+  'source-window',
+  'map',
+  'process',
+  'scientific-plate',
+  'object-atlas',
+  'quiet-text',
+  'bibliography',
+  'guide-recipe',
+  'guide-troubleshooting',
+  'guide-safety',
+]
+const expectedAlbumSections = [
+  ['entry', 20, 1, 20],
+  ['living-mountain', 26, 21, 46],
+  ['roads-name', 30, 47, 76],
+  ['maocha', 24, 77, 100],
+  ['sheng-shou', 30, 101, 130],
+  ['microcosm', 24, 131, 154],
+  ['body', 22, 155, 176],
+  ['tea-room', 16, 177, 192],
+  ['apparatus', 16, 193, 208],
+]
+const expectedGuideSections = [
+  ['quick-start', 6, 1, 6],
+  ['choosing-tea', 6, 7, 12],
+  ['tools-water', 8, 13, 20],
+  ['sheng', 8, 21, 28],
+  ['shou', 8, 29, 36],
+  ['simple-methods', 6, 37, 42],
+  ['tasting', 4, 43, 46],
+  ['safety', 2, 47, 48],
+]
+
+const flatplanData = () => ({
+  templates: readBookJson('flatplan/templates.json').templates,
+  album: readBookJson('flatplan/album.json'),
+  guide: readBookJson('flatplan/guide.json'),
+  assets: readBookJson('data/assets.json'),
+})
+
+const validateFlatplan = (...args) => {
+  assert.equal(typeof dataValidator.validateFlatplan, 'function', 'validateFlatplan must be exported')
+  return dataValidator.validateFlatplan(...args)
+}
+
+const expectedPageId = (prefix, number) => `${prefix}-P${String(number).padStart(3, '0')}`
+const expectedSpreadId = (prefix, number) => `${prefix}-S${String(Math.floor(number / 2) + 1).padStart(3, '0')}`
+const sectionSummary = (sections) => sections.map(({ id, pageCount, start, end }) => [id, pageCount, start, end])
 
 const temporaryRoots = []
 after(() => {
@@ -241,4 +297,168 @@ test('filesystem gate rejects an SVG whose root viewBox differs from the registe
     () => validateAssetFiles([printReadyVector()], repo),
     /asset map-1: SVG viewBox mismatch for book\/assets\/maps\/map-1\.svg/,
   )
+})
+
+test('exports the reusable flatplan validator', () => {
+  assert.equal(typeof dataValidator.validateFlatplan, 'function')
+})
+
+test('defines exactly the thirteen reusable templates with auditable metadata', () => {
+  const { templates } = flatplanData()
+
+  assert.deepEqual(templates.map(({ id }) => id), expectedTemplateIds)
+  for (const template of templates) {
+    assert.equal(typeof template.label, 'string')
+    assert.ok(template.label.trim())
+    assert.equal(typeof template.purpose, 'string')
+    assert.ok(template.purpose.trim())
+    assert.ok(Array.isArray(template.constraints) && template.constraints.length > 0)
+    assert.ok(Array.isArray(template.expectedContent) && template.expectedContent.length > 0)
+  }
+})
+
+test('defines and validates the exact 208-page album allocation and reader spreads', () => {
+  const { templates, album, assets } = flatplanData()
+  const assetIds = new Set(assets.map(({ id }) => id))
+
+  assert.equal(album.totalPages, 208)
+  assert.equal(album.totalPages % 16, 0)
+  assert.equal(album.pages.length, 208)
+  assert.deepEqual(sectionSummary(album.sections), expectedAlbumSections)
+  assert.deepEqual(album.pages.map(({ id }) => id), Array.from({ length: 208 }, (_, index) => expectedPageId('A', index + 1)))
+  assert.deepEqual(album.pages.map(({ spreadId }, index) => spreadId), Array.from({ length: 208 }, (_, index) => expectedSpreadId('A', index + 1)))
+  assert.equal(new Set(album.pages.map(({ spreadId }) => spreadId)).size, 105)
+  assert.doesNotThrow(() => validateFlatplan(album, 208, templates, assetIds))
+})
+
+test('assigns every planned non-legacy visual asset to an album or guide page', () => {
+  const { album, guide, assets } = flatplanData()
+  const referenced = new Set([...album.pages, ...guide.pages].flatMap(({ assetIds }) => assetIds))
+  const plannedNonLegacy = assets.filter(({ id }) => !id.startsWith('site-')).map(({ id }) => id)
+
+  assert.equal(plannedNonLegacy.length, 40)
+  assert.deepEqual(plannedNonLegacy.filter((id) => !referenced.has(id)), [])
+})
+
+test('defines and validates the exact 48-page guide allocation and reader spreads', () => {
+  const { templates, guide, assets } = flatplanData()
+  const assetIds = new Set(assets.map(({ id }) => id))
+
+  assert.equal(guide.totalPages, 48)
+  assert.equal(guide.totalPages % 16, 0)
+  assert.equal(guide.pages.length, 48)
+  assert.deepEqual(sectionSummary(guide.sections), expectedGuideSections)
+  assert.deepEqual(guide.pages.map(({ id }) => id), Array.from({ length: 48 }, (_, index) => expectedPageId('G', index + 1)))
+  assert.deepEqual(guide.pages.map(({ spreadId }, index) => spreadId), Array.from({ length: 48 }, (_, index) => expectedSpreadId('G', index + 1)))
+  assert.equal(new Set(guide.pages.map(({ spreadId }) => spreadId)).size, 25)
+  assert.equal(guide.pages.filter(({ template }) => template === 'guide-recipe').length, 16)
+  assert.equal(guide.pages[45].crossSectionSpread, true)
+  assert.equal(guide.pages[46].crossSectionSpread, true)
+  assert.doesNotThrow(() => validateFlatplan(guide, 48, templates, assetIds))
+})
+
+test('rejects a wrong total or signature page count', () => {
+  const { templates, album, assets } = flatplanData()
+  album.totalPages = 207
+
+  assert.throws(
+    () => validateFlatplan(album, 208, templates, new Set(assets.map(({ id }) => id))),
+    /flatplan album: totalPages must equal 208/,
+  )
+})
+
+test('rejects page number gaps and duplicates', () => {
+  const { templates, album, assets } = flatplanData()
+  const assetIds = new Set(assets.map(({ id }) => id))
+  for (const number of [10, 12]) {
+    const mutated = structuredClone(album)
+    mutated.pages[10].number = number
+    assert.throws(
+      () => validateFlatplan(mutated, 208, templates, assetIds),
+      /flatplan album: page 11 must have number 11/,
+    )
+  }
+})
+
+test('rejects unknown page templates and asset references', () => {
+  const { templates, album, assets } = flatplanData()
+  const assetIds = new Set(assets.map(({ id }) => id))
+  const unknownTemplate = structuredClone(album)
+  unknownTemplate.pages[0].template = 'unknown-template'
+  const unknownAsset = structuredClone(album)
+  unknownAsset.pages[0].assetIds = ['unknown-asset']
+
+  assert.throws(() => validateFlatplan(unknownTemplate, 208, templates, assetIds), /unknown template unknown-template/)
+  assert.throws(() => validateFlatplan(unknownAsset, 208, templates, assetIds), /unknown asset unknown-asset/)
+})
+
+test('rejects a malformed reader-spread pairing', () => {
+  const { templates, album, assets } = flatplanData()
+  album.pages[2].spreadId = 'A-S003'
+
+  assert.throws(
+    () => validateFlatplan(album, 208, templates, new Set(assets.map(({ id }) => id))),
+    /flatplan album: page A-P003 must use spread A-S002/,
+  )
+})
+
+test('rejects an even chapter start unless explicitly allowed', () => {
+  const { templates, guide, assets } = flatplanData()
+  guide.pages[1].chapterStart = true
+
+  assert.throws(
+    () => validateFlatplan(guide, 48, templates, new Set(assets.map(({ id }) => id))),
+    /flatplan guide: chapter start G-P002 must be recto\/odd/,
+  )
+})
+
+test('rejects a guide recipe with a missing required field', () => {
+  const { templates, guide, assets } = flatplanData()
+  const recipePage = guide.pages.find(({ template }) => template === 'guide-recipe')
+  delete recipePage.recipe.firstInfusionRangeSec
+
+  assert.throws(
+    () => validateFlatplan(guide, 48, templates, new Set(assets.map(({ id }) => id))),
+    /firstInfusionRangeSec must be a positive ascending range/,
+  )
+})
+
+test('rejects a section whose declared count does not match its range', () => {
+  const { templates, album, assets } = flatplanData()
+  album.sections[2].pageCount += 1
+
+  assert.throws(
+    () => validateFlatplan(album, 208, templates, new Set(assets.map(({ id }) => id))),
+    /flatplan album: section roads-name pageCount does not match its range/,
+  )
+})
+
+test('rejects a zero-page section even when later sections still cover the plan', () => {
+  const { templates, album, assets } = flatplanData()
+  album.sections.unshift({ id: 'empty', title: 'Empty section', pageCount: 0, start: 1, end: 0 })
+
+  assert.throws(
+    () => validateFlatplan(album, 208, templates, new Set(assets.map(({ id }) => id))),
+    /flatplan album: section empty must contain at least one page/,
+  )
+})
+
+test('rejects an apparatus page without an allowed marker', () => {
+  const { templates, album, assets } = flatplanData()
+  delete album.pages.find(({ sectionId }) => sectionId === 'apparatus').apparatus
+
+  assert.throws(
+    () => validateFlatplan(album, 208, templates, new Set(assets.map(({ id }) => id))),
+    /flatplan album: apparatus page A-P193 requires chronology, glossary, or bibliography/,
+  )
+})
+
+test('rejects duplicate or missing required template registrations', () => {
+  const { templates, album, assets } = flatplanData()
+  const assetIds = new Set(assets.map(({ id }) => id))
+  const duplicate = [...templates, structuredClone(templates[0])]
+  const missing = templates.filter(({ id }) => id !== 'guide-safety')
+
+  assert.throws(() => validateFlatplan(album, 208, duplicate, assetIds), /duplicate template id: chapter-gate/)
+  assert.throws(() => validateFlatplan(album, 208, missing, assetIds), /missing required template: guide-safety/)
 })

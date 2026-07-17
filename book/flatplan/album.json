@@ -1,0 +1,2059 @@
+{
+  "id": "album",
+  "title": "Пуэр: живая гора",
+  "pagePrefix": "A",
+  "signatureSize": 16,
+  "totalPages": 208,
+  "sections": [
+    {
+      "id": "entry",
+      "title": "Вход",
+      "pageCount": 20,
+      "start": 1,
+      "end": 20
+    },
+    {
+      "id": "living-mountain",
+      "title": "Живая гора",
+      "pageCount": 26,
+      "start": 21,
+      "end": 46
+    },
+    {
+      "id": "roads-name",
+      "title": "Дороги и имя",
+      "pageCount": 30,
+      "start": 47,
+      "end": 76
+    },
+    {
+      "id": "maocha",
+      "title": "Маоча",
+      "pageCount": 24,
+      "start": 77,
+      "end": 100
+    },
+    {
+      "id": "sheng-shou",
+      "title": "Шэн и шоу",
+      "pageCount": 30,
+      "start": 101,
+      "end": 130
+    },
+    {
+      "id": "microcosm",
+      "title": "Микрокосм",
+      "pageCount": 24,
+      "start": 131,
+      "end": 154
+    },
+    {
+      "id": "body",
+      "title": "Тело и свидетельства",
+      "pageCount": 22,
+      "start": 155,
+      "end": 176
+    },
+    {
+      "id": "tea-room",
+      "title": "Чайная комната",
+      "pageCount": 16,
+      "start": 177,
+      "end": 192
+    },
+    {
+      "id": "apparatus",
+      "title": "Справочный аппарат",
+      "pageCount": 16,
+      "start": 193,
+      "end": 208
+    }
+  ],
+  "pages": [
+    {
+      "number": 1,
+      "id": "A-P001",
+      "spreadId": "A-S001",
+      "sectionId": "entry",
+      "role": "Открытие раздела «Вход»",
+      "template": "chapter-gate",
+      "assetIds": [],
+      "chapterStart": true
+    },
+    {
+      "number": 2,
+      "id": "A-P002",
+      "spreadId": "A-S002",
+      "sectionId": "entry",
+      "role": "Раздел «Вход»: полоса 2 из 20",
+      "template": "photo-plus-essay",
+      "assetIds": []
+    },
+    {
+      "number": 3,
+      "id": "A-P003",
+      "spreadId": "A-S002",
+      "sectionId": "entry",
+      "role": "Раздел «Вход»: полоса 3 из 20",
+      "template": "photo-plus-essay",
+      "assetIds": [
+        "illustration-shennong-gate"
+      ]
+    },
+    {
+      "number": 4,
+      "id": "A-P004",
+      "spreadId": "A-S003",
+      "sectionId": "entry",
+      "role": "Раздел «Вход»: полоса 4 из 20",
+      "template": "photo-plus-essay",
+      "assetIds": []
+    },
+    {
+      "number": 5,
+      "id": "A-P005",
+      "spreadId": "A-S003",
+      "sectionId": "entry",
+      "role": "Раздел «Вход»: полоса 5 из 20",
+      "template": "photo-plus-essay",
+      "assetIds": [
+        "illustration-zhuge-liang-legend"
+      ]
+    },
+    {
+      "number": 6,
+      "id": "A-P006",
+      "spreadId": "A-S004",
+      "sectionId": "entry",
+      "role": "Раздел «Вход»: полоса 6 из 20",
+      "template": "photo-plus-essay",
+      "assetIds": []
+    },
+    {
+      "number": 7,
+      "id": "A-P007",
+      "spreadId": "A-S004",
+      "sectionId": "entry",
+      "role": "Раздел «Вход»: полоса 7 из 20",
+      "template": "photo-plus-essay",
+      "assetIds": []
+    },
+    {
+      "number": 8,
+      "id": "A-P008",
+      "spreadId": "A-S005",
+      "sectionId": "entry",
+      "role": "Раздел «Вход»: полоса 8 из 20",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 9,
+      "id": "A-P009",
+      "spreadId": "A-S005",
+      "sectionId": "entry",
+      "role": "Раздел «Вход»: полоса 9 из 20",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 10,
+      "id": "A-P010",
+      "spreadId": "A-S006",
+      "sectionId": "entry",
+      "role": "Раздел «Вход»: полоса 10 из 20",
+      "template": "source-window",
+      "assetIds": []
+    },
+    {
+      "number": 11,
+      "id": "A-P011",
+      "spreadId": "A-S006",
+      "sectionId": "entry",
+      "role": "Раздел «Вход»: полоса 11 из 20",
+      "template": "source-window",
+      "assetIds": []
+    },
+    {
+      "number": 12,
+      "id": "A-P012",
+      "spreadId": "A-S007",
+      "sectionId": "entry",
+      "role": "Раздел «Вход»: полоса 12 из 20",
+      "template": "photo-plus-essay",
+      "assetIds": []
+    },
+    {
+      "number": 13,
+      "id": "A-P013",
+      "spreadId": "A-S007",
+      "sectionId": "entry",
+      "role": "Раздел «Вход»: полоса 13 из 20",
+      "template": "photo-plus-essay",
+      "assetIds": []
+    },
+    {
+      "number": 14,
+      "id": "A-P014",
+      "spreadId": "A-S008",
+      "sectionId": "entry",
+      "role": "Раздел «Вход»: полоса 14 из 20",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 15,
+      "id": "A-P015",
+      "spreadId": "A-S008",
+      "sectionId": "entry",
+      "role": "Раздел «Вход»: полоса 15 из 20",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 16,
+      "id": "A-P016",
+      "spreadId": "A-S009",
+      "sectionId": "entry",
+      "role": "Раздел «Вход»: полоса 16 из 20",
+      "template": "source-window",
+      "assetIds": []
+    },
+    {
+      "number": 17,
+      "id": "A-P017",
+      "spreadId": "A-S009",
+      "sectionId": "entry",
+      "role": "Раздел «Вход»: полоса 17 из 20",
+      "template": "source-window",
+      "assetIds": []
+    },
+    {
+      "number": 18,
+      "id": "A-P018",
+      "spreadId": "A-S010",
+      "sectionId": "entry",
+      "role": "Раздел «Вход»: полоса 18 из 20",
+      "template": "photo-plus-essay",
+      "assetIds": []
+    },
+    {
+      "number": 19,
+      "id": "A-P019",
+      "spreadId": "A-S010",
+      "sectionId": "entry",
+      "role": "Раздел «Вход»: полоса 19 из 20",
+      "template": "photo-plus-essay",
+      "assetIds": []
+    },
+    {
+      "number": 20,
+      "id": "A-P020",
+      "spreadId": "A-S011",
+      "sectionId": "entry",
+      "role": "Раздел «Вход»: полоса 20 из 20",
+      "template": "chapter-gate",
+      "assetIds": [],
+      "crossSectionSpread": true
+    },
+    {
+      "number": 21,
+      "id": "A-P021",
+      "spreadId": "A-S011",
+      "sectionId": "living-mountain",
+      "role": "Открытие раздела «Живая гора»",
+      "template": "chapter-gate",
+      "assetIds": [
+        "illustration-cover-living-mountain"
+      ],
+      "chapterStart": true,
+      "crossSectionSpread": true
+    },
+    {
+      "number": 22,
+      "id": "A-P022",
+      "spreadId": "A-S012",
+      "sectionId": "living-mountain",
+      "role": "Раздел «Живая гора»: полоса 2 из 26",
+      "template": "photo-plus-essay",
+      "assetIds": []
+    },
+    {
+      "number": 23,
+      "id": "A-P023",
+      "spreadId": "A-S012",
+      "sectionId": "living-mountain",
+      "role": "Раздел «Живая гора»: полоса 3 из 26",
+      "template": "photo-plus-essay",
+      "assetIds": [
+        "photo-yunnan-mountain-landscape"
+      ]
+    },
+    {
+      "number": 24,
+      "id": "A-P024",
+      "spreadId": "A-S013",
+      "sectionId": "living-mountain",
+      "role": "Раздел «Живая гора»: полоса 4 из 26",
+      "template": "photo-plus-essay",
+      "assetIds": []
+    },
+    {
+      "number": 25,
+      "id": "A-P025",
+      "spreadId": "A-S013",
+      "sectionId": "living-mountain",
+      "role": "Раздел «Живая гора»: полоса 5 из 26",
+      "template": "photo-plus-essay",
+      "assetIds": [
+        "photo-tea-forest-landscape"
+      ]
+    },
+    {
+      "number": 26,
+      "id": "A-P026",
+      "spreadId": "A-S014",
+      "sectionId": "living-mountain",
+      "role": "Раздел «Живая гора»: полоса 6 из 26",
+      "template": "photo-plus-essay",
+      "assetIds": []
+    },
+    {
+      "number": 27,
+      "id": "A-P027",
+      "spreadId": "A-S014",
+      "sectionId": "living-mountain",
+      "role": "Раздел «Живая гора»: полоса 7 из 26",
+      "template": "photo-plus-essay",
+      "assetIds": [
+        "photo-tea-garden-documentary"
+      ]
+    },
+    {
+      "number": 28,
+      "id": "A-P028",
+      "spreadId": "A-S015",
+      "sectionId": "living-mountain",
+      "role": "Раздел «Живая гора»: полоса 8 из 26",
+      "template": "photo-plus-essay",
+      "assetIds": []
+    },
+    {
+      "number": 29,
+      "id": "A-P029",
+      "spreadId": "A-S015",
+      "sectionId": "living-mountain",
+      "role": "Раздел «Живая гора»: полоса 9 из 26",
+      "template": "photo-plus-essay",
+      "assetIds": [
+        "photo-assamica-botanical-macro"
+      ]
+    },
+    {
+      "number": 30,
+      "id": "A-P030",
+      "spreadId": "A-S016",
+      "sectionId": "living-mountain",
+      "role": "Раздел «Живая гора»: полоса 10 из 26",
+      "template": "photo-plus-essay",
+      "assetIds": []
+    },
+    {
+      "number": 31,
+      "id": "A-P031",
+      "spreadId": "A-S016",
+      "sectionId": "living-mountain",
+      "role": "Раздел «Живая гора»: полоса 11 из 26",
+      "template": "photo-plus-essay",
+      "assetIds": [
+        "photo-old-tea-tree-portraits"
+      ]
+    },
+    {
+      "number": 32,
+      "id": "A-P032",
+      "spreadId": "A-S017",
+      "sectionId": "living-mountain",
+      "role": "Раздел «Живая гора»: полоса 12 из 26",
+      "template": "map",
+      "assetIds": []
+    },
+    {
+      "number": 33,
+      "id": "A-P033",
+      "spreadId": "A-S017",
+      "sectionId": "living-mountain",
+      "role": "Раздел «Живая гора»: полоса 13 из 26",
+      "template": "map",
+      "assetIds": [
+        "map-yunnan-relief"
+      ]
+    },
+    {
+      "number": 34,
+      "id": "A-P034",
+      "spreadId": "A-S018",
+      "sectionId": "living-mountain",
+      "role": "Раздел «Живая гора»: полоса 14 из 26",
+      "template": "map",
+      "assetIds": []
+    },
+    {
+      "number": 35,
+      "id": "A-P035",
+      "spreadId": "A-S018",
+      "sectionId": "living-mountain",
+      "role": "Раздел «Живая гора»: полоса 15 из 26",
+      "template": "map",
+      "assetIds": [
+        "map-six-mountains"
+      ]
+    },
+    {
+      "number": 36,
+      "id": "A-P036",
+      "spreadId": "A-S019",
+      "sectionId": "living-mountain",
+      "role": "Раздел «Живая гора»: полоса 16 из 26",
+      "template": "map",
+      "assetIds": []
+    },
+    {
+      "number": 37,
+      "id": "A-P037",
+      "spreadId": "A-S019",
+      "sectionId": "living-mountain",
+      "role": "Раздел «Живая гора»: полоса 17 из 26",
+      "template": "map",
+      "assetIds": [
+        "map-jingmai-landscape"
+      ]
+    },
+    {
+      "number": 38,
+      "id": "A-P038",
+      "spreadId": "A-S020",
+      "sectionId": "living-mountain",
+      "role": "Раздел «Живая гора»: полоса 18 из 26",
+      "template": "photo-plus-essay",
+      "assetIds": []
+    },
+    {
+      "number": 39,
+      "id": "A-P039",
+      "spreadId": "A-S020",
+      "sectionId": "living-mountain",
+      "role": "Раздел «Живая гора»: полоса 19 из 26",
+      "template": "photo-plus-essay",
+      "assetIds": [
+        "photo-tea-worker-portrait"
+      ]
+    },
+    {
+      "number": 40,
+      "id": "A-P040",
+      "spreadId": "A-S021",
+      "sectionId": "living-mountain",
+      "role": "Раздел «Живая гора»: полоса 20 из 26",
+      "template": "object-atlas",
+      "assetIds": []
+    },
+    {
+      "number": 41,
+      "id": "A-P041",
+      "spreadId": "A-S021",
+      "sectionId": "living-mountain",
+      "role": "Раздел «Живая гора»: полоса 21 из 26",
+      "template": "object-atlas",
+      "assetIds": []
+    },
+    {
+      "number": 42,
+      "id": "A-P042",
+      "spreadId": "A-S022",
+      "sectionId": "living-mountain",
+      "role": "Раздел «Живая гора»: полоса 22 из 26",
+      "template": "full-bleed-photo",
+      "assetIds": []
+    },
+    {
+      "number": 43,
+      "id": "A-P043",
+      "spreadId": "A-S022",
+      "sectionId": "living-mountain",
+      "role": "Раздел «Живая гора»: полоса 23 из 26",
+      "template": "full-bleed-photo",
+      "assetIds": []
+    },
+    {
+      "number": 44,
+      "id": "A-P044",
+      "spreadId": "A-S023",
+      "sectionId": "living-mountain",
+      "role": "Раздел «Живая гора»: полоса 24 из 26",
+      "template": "photo-plus-essay",
+      "assetIds": []
+    },
+    {
+      "number": 45,
+      "id": "A-P045",
+      "spreadId": "A-S023",
+      "sectionId": "living-mountain",
+      "role": "Раздел «Живая гора»: полоса 25 из 26",
+      "template": "photo-plus-essay",
+      "assetIds": []
+    },
+    {
+      "number": 46,
+      "id": "A-P046",
+      "spreadId": "A-S024",
+      "sectionId": "living-mountain",
+      "role": "Раздел «Живая гора»: полоса 26 из 26",
+      "template": "chapter-gate",
+      "assetIds": [],
+      "crossSectionSpread": true
+    },
+    {
+      "number": 47,
+      "id": "A-P047",
+      "spreadId": "A-S024",
+      "sectionId": "roads-name",
+      "role": "Открытие раздела «Дороги и имя»",
+      "template": "chapter-gate",
+      "assetIds": [],
+      "chapterStart": true,
+      "crossSectionSpread": true
+    },
+    {
+      "number": 48,
+      "id": "A-P048",
+      "spreadId": "A-S025",
+      "sectionId": "roads-name",
+      "role": "Раздел «Дороги и имя»: полоса 2 из 30",
+      "template": "source-window",
+      "assetIds": []
+    },
+    {
+      "number": 49,
+      "id": "A-P049",
+      "spreadId": "A-S025",
+      "sectionId": "roads-name",
+      "role": "Раздел «Дороги и имя»: полоса 3 из 30",
+      "template": "source-window",
+      "assetIds": [
+        "archive-qing-tribute-record"
+      ]
+    },
+    {
+      "number": 50,
+      "id": "A-P050",
+      "spreadId": "A-S026",
+      "sectionId": "roads-name",
+      "role": "Раздел «Дороги и имя»: полоса 4 из 30",
+      "template": "source-window",
+      "assetIds": []
+    },
+    {
+      "number": 51,
+      "id": "A-P051",
+      "spreadId": "A-S026",
+      "sectionId": "roads-name",
+      "role": "Раздел «Дороги и имя»: полоса 5 из 30",
+      "template": "source-window",
+      "assetIds": [
+        "archive-tea-route-document"
+      ]
+    },
+    {
+      "number": 52,
+      "id": "A-P052",
+      "spreadId": "A-S027",
+      "sectionId": "roads-name",
+      "role": "Раздел «Дороги и имя»: полоса 6 из 30",
+      "template": "map",
+      "assetIds": []
+    },
+    {
+      "number": 53,
+      "id": "A-P053",
+      "spreadId": "A-S027",
+      "sectionId": "roads-name",
+      "role": "Раздел «Дороги и имя»: полоса 7 из 30",
+      "template": "map",
+      "assetIds": [
+        "map-tea-routes"
+      ]
+    },
+    {
+      "number": 54,
+      "id": "A-P054",
+      "spreadId": "A-S028",
+      "sectionId": "roads-name",
+      "role": "Раздел «Дороги и имя»: полоса 8 из 30",
+      "template": "map",
+      "assetIds": []
+    },
+    {
+      "number": 55,
+      "id": "A-P055",
+      "spreadId": "A-S028",
+      "sectionId": "roads-name",
+      "role": "Раздел «Дороги и имя»: полоса 9 из 30",
+      "template": "map",
+      "assetIds": [
+        "map-puer-administration-history"
+      ]
+    },
+    {
+      "number": 56,
+      "id": "A-P056",
+      "spreadId": "A-S029",
+      "sectionId": "roads-name",
+      "role": "Раздел «Дороги и имя»: полоса 10 из 30",
+      "template": "source-window",
+      "assetIds": []
+    },
+    {
+      "number": 57,
+      "id": "A-P057",
+      "spreadId": "A-S029",
+      "sectionId": "roads-name",
+      "role": "Раздел «Дороги и имя»: полоса 11 из 30",
+      "template": "source-window",
+      "assetIds": []
+    },
+    {
+      "number": 58,
+      "id": "A-P058",
+      "spreadId": "A-S030",
+      "sectionId": "roads-name",
+      "role": "Раздел «Дороги и имя»: полоса 12 из 30",
+      "template": "map",
+      "assetIds": []
+    },
+    {
+      "number": 59,
+      "id": "A-P059",
+      "spreadId": "A-S030",
+      "sectionId": "roads-name",
+      "role": "Раздел «Дороги и имя»: полоса 13 из 30",
+      "template": "map",
+      "assetIds": []
+    },
+    {
+      "number": 60,
+      "id": "A-P060",
+      "spreadId": "A-S031",
+      "sectionId": "roads-name",
+      "role": "Раздел «Дороги и имя»: полоса 14 из 30",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 61,
+      "id": "A-P061",
+      "spreadId": "A-S031",
+      "sectionId": "roads-name",
+      "role": "Раздел «Дороги и имя»: полоса 15 из 30",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 62,
+      "id": "A-P062",
+      "spreadId": "A-S032",
+      "sectionId": "roads-name",
+      "role": "Раздел «Дороги и имя»: полоса 16 из 30",
+      "template": "source-window",
+      "assetIds": []
+    },
+    {
+      "number": 63,
+      "id": "A-P063",
+      "spreadId": "A-S032",
+      "sectionId": "roads-name",
+      "role": "Раздел «Дороги и имя»: полоса 17 из 30",
+      "template": "source-window",
+      "assetIds": []
+    },
+    {
+      "number": 64,
+      "id": "A-P064",
+      "spreadId": "A-S033",
+      "sectionId": "roads-name",
+      "role": "Раздел «Дороги и имя»: полоса 18 из 30",
+      "template": "map",
+      "assetIds": []
+    },
+    {
+      "number": 65,
+      "id": "A-P065",
+      "spreadId": "A-S033",
+      "sectionId": "roads-name",
+      "role": "Раздел «Дороги и имя»: полоса 19 из 30",
+      "template": "map",
+      "assetIds": []
+    },
+    {
+      "number": 66,
+      "id": "A-P066",
+      "spreadId": "A-S034",
+      "sectionId": "roads-name",
+      "role": "Раздел «Дороги и имя»: полоса 20 из 30",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 67,
+      "id": "A-P067",
+      "spreadId": "A-S034",
+      "sectionId": "roads-name",
+      "role": "Раздел «Дороги и имя»: полоса 21 из 30",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 68,
+      "id": "A-P068",
+      "spreadId": "A-S035",
+      "sectionId": "roads-name",
+      "role": "Раздел «Дороги и имя»: полоса 22 из 30",
+      "template": "source-window",
+      "assetIds": []
+    },
+    {
+      "number": 69,
+      "id": "A-P069",
+      "spreadId": "A-S035",
+      "sectionId": "roads-name",
+      "role": "Раздел «Дороги и имя»: полоса 23 из 30",
+      "template": "source-window",
+      "assetIds": []
+    },
+    {
+      "number": 70,
+      "id": "A-P070",
+      "spreadId": "A-S036",
+      "sectionId": "roads-name",
+      "role": "Раздел «Дороги и имя»: полоса 24 из 30",
+      "template": "map",
+      "assetIds": []
+    },
+    {
+      "number": 71,
+      "id": "A-P071",
+      "spreadId": "A-S036",
+      "sectionId": "roads-name",
+      "role": "Раздел «Дороги и имя»: полоса 25 из 30",
+      "template": "map",
+      "assetIds": []
+    },
+    {
+      "number": 72,
+      "id": "A-P072",
+      "spreadId": "A-S037",
+      "sectionId": "roads-name",
+      "role": "Раздел «Дороги и имя»: полоса 26 из 30",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 73,
+      "id": "A-P073",
+      "spreadId": "A-S037",
+      "sectionId": "roads-name",
+      "role": "Раздел «Дороги и имя»: полоса 27 из 30",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 74,
+      "id": "A-P074",
+      "spreadId": "A-S038",
+      "sectionId": "roads-name",
+      "role": "Раздел «Дороги и имя»: полоса 28 из 30",
+      "template": "source-window",
+      "assetIds": []
+    },
+    {
+      "number": 75,
+      "id": "A-P075",
+      "spreadId": "A-S038",
+      "sectionId": "roads-name",
+      "role": "Раздел «Дороги и имя»: полоса 29 из 30",
+      "template": "source-window",
+      "assetIds": []
+    },
+    {
+      "number": 76,
+      "id": "A-P076",
+      "spreadId": "A-S039",
+      "sectionId": "roads-name",
+      "role": "Раздел «Дороги и имя»: полоса 30 из 30",
+      "template": "chapter-gate",
+      "assetIds": [],
+      "crossSectionSpread": true
+    },
+    {
+      "number": 77,
+      "id": "A-P077",
+      "spreadId": "A-S039",
+      "sectionId": "maocha",
+      "role": "Открытие раздела «Маоча»",
+      "template": "chapter-gate",
+      "assetIds": [],
+      "chapterStart": true,
+      "crossSectionSpread": true
+    },
+    {
+      "number": 78,
+      "id": "A-P078",
+      "spreadId": "A-S040",
+      "sectionId": "maocha",
+      "role": "Раздел «Маоча»: полоса 2 из 24",
+      "template": "process",
+      "assetIds": []
+    },
+    {
+      "number": 79,
+      "id": "A-P079",
+      "spreadId": "A-S040",
+      "sectionId": "maocha",
+      "role": "Раздел «Маоча»: полоса 3 из 24",
+      "template": "process",
+      "assetIds": [
+        "diagram-maocha-process"
+      ]
+    },
+    {
+      "number": 80,
+      "id": "A-P080",
+      "spreadId": "A-S041",
+      "sectionId": "maocha",
+      "role": "Раздел «Маоча»: полоса 4 из 24",
+      "template": "process",
+      "assetIds": []
+    },
+    {
+      "number": 81,
+      "id": "A-P081",
+      "spreadId": "A-S041",
+      "sectionId": "maocha",
+      "role": "Раздел «Маоча»: полоса 5 из 24",
+      "template": "process",
+      "assetIds": [
+        "photo-harvest-hands"
+      ]
+    },
+    {
+      "number": 82,
+      "id": "A-P082",
+      "spreadId": "A-S042",
+      "sectionId": "maocha",
+      "role": "Раздел «Маоча»: полоса 6 из 24",
+      "template": "process",
+      "assetIds": []
+    },
+    {
+      "number": 83,
+      "id": "A-P083",
+      "spreadId": "A-S042",
+      "sectionId": "maocha",
+      "role": "Раздел «Маоча»: полоса 7 из 24",
+      "template": "process",
+      "assetIds": [
+        "photo-shaqing-worker-tools"
+      ]
+    },
+    {
+      "number": 84,
+      "id": "A-P084",
+      "spreadId": "A-S043",
+      "sectionId": "maocha",
+      "role": "Раздел «Маоча»: полоса 8 из 24",
+      "template": "process",
+      "assetIds": []
+    },
+    {
+      "number": 85,
+      "id": "A-P085",
+      "spreadId": "A-S043",
+      "sectionId": "maocha",
+      "role": "Раздел «Маоча»: полоса 9 из 24",
+      "template": "process",
+      "assetIds": [
+        "photo-rolling-hands"
+      ]
+    },
+    {
+      "number": 86,
+      "id": "A-P086",
+      "spreadId": "A-S044",
+      "sectionId": "maocha",
+      "role": "Раздел «Маоча»: полоса 10 из 24",
+      "template": "process",
+      "assetIds": []
+    },
+    {
+      "number": 87,
+      "id": "A-P087",
+      "spreadId": "A-S044",
+      "sectionId": "maocha",
+      "role": "Раздел «Маоча»: полоса 11 из 24",
+      "template": "process",
+      "assetIds": [
+        "photo-sun-drying-terraces"
+      ]
+    },
+    {
+      "number": 88,
+      "id": "A-P088",
+      "spreadId": "A-S045",
+      "sectionId": "maocha",
+      "role": "Раздел «Маоча»: полоса 12 из 24",
+      "template": "process",
+      "assetIds": []
+    },
+    {
+      "number": 89,
+      "id": "A-P089",
+      "spreadId": "A-S045",
+      "sectionId": "maocha",
+      "role": "Раздел «Маоча»: полоса 13 из 24",
+      "template": "process",
+      "assetIds": [
+        "photo-sorting-workers"
+      ]
+    },
+    {
+      "number": 90,
+      "id": "A-P090",
+      "spreadId": "A-S046",
+      "sectionId": "maocha",
+      "role": "Раздел «Маоча»: полоса 14 из 24",
+      "template": "process",
+      "assetIds": []
+    },
+    {
+      "number": 91,
+      "id": "A-P091",
+      "spreadId": "A-S046",
+      "sectionId": "maocha",
+      "role": "Раздел «Маоча»: полоса 15 из 24",
+      "template": "process",
+      "assetIds": [
+        "photo-maocha-production-sequence"
+      ]
+    },
+    {
+      "number": 92,
+      "id": "A-P092",
+      "spreadId": "A-S047",
+      "sectionId": "maocha",
+      "role": "Раздел «Маоча»: полоса 16 из 24",
+      "template": "process",
+      "assetIds": []
+    },
+    {
+      "number": 93,
+      "id": "A-P093",
+      "spreadId": "A-S047",
+      "sectionId": "maocha",
+      "role": "Раздел «Маоча»: полоса 17 из 24",
+      "template": "process",
+      "assetIds": [
+        "photo-steaming-tools"
+      ]
+    },
+    {
+      "number": 94,
+      "id": "A-P094",
+      "spreadId": "A-S048",
+      "sectionId": "maocha",
+      "role": "Раздел «Маоча»: полоса 18 из 24",
+      "template": "process",
+      "assetIds": []
+    },
+    {
+      "number": 95,
+      "id": "A-P095",
+      "spreadId": "A-S048",
+      "sectionId": "maocha",
+      "role": "Раздел «Маоча»: полоса 19 из 24",
+      "template": "process",
+      "assetIds": [
+        "photo-pressing-workers"
+      ]
+    },
+    {
+      "number": 96,
+      "id": "A-P096",
+      "spreadId": "A-S049",
+      "sectionId": "maocha",
+      "role": "Раздел «Маоча»: полоса 20 из 24",
+      "template": "process",
+      "assetIds": []
+    },
+    {
+      "number": 97,
+      "id": "A-P097",
+      "spreadId": "A-S049",
+      "sectionId": "maocha",
+      "role": "Раздел «Маоча»: полоса 21 из 24",
+      "template": "process",
+      "assetIds": [
+        "photo-drying-racks"
+      ]
+    },
+    {
+      "number": 98,
+      "id": "A-P098",
+      "spreadId": "A-S050",
+      "sectionId": "maocha",
+      "role": "Раздел «Маоча»: полоса 22 из 24",
+      "template": "process",
+      "assetIds": []
+    },
+    {
+      "number": 99,
+      "id": "A-P099",
+      "spreadId": "A-S050",
+      "sectionId": "maocha",
+      "role": "Раздел «Маоча»: полоса 23 из 24",
+      "template": "process",
+      "assetIds": []
+    },
+    {
+      "number": 100,
+      "id": "A-P100",
+      "spreadId": "A-S051",
+      "sectionId": "maocha",
+      "role": "Раздел «Маоча»: полоса 24 из 24",
+      "template": "chapter-gate",
+      "assetIds": [],
+      "crossSectionSpread": true
+    },
+    {
+      "number": 101,
+      "id": "A-P101",
+      "spreadId": "A-S051",
+      "sectionId": "sheng-shou",
+      "role": "Открытие раздела «Шэн и шоу»",
+      "template": "chapter-gate",
+      "assetIds": [],
+      "chapterStart": true,
+      "crossSectionSpread": true
+    },
+    {
+      "number": 102,
+      "id": "A-P102",
+      "spreadId": "A-S052",
+      "sectionId": "sheng-shou",
+      "role": "Раздел «Шэн и шоу»: полоса 2 из 30",
+      "template": "process",
+      "assetIds": []
+    },
+    {
+      "number": 103,
+      "id": "A-P103",
+      "spreadId": "A-S052",
+      "sectionId": "sheng-shou",
+      "role": "Раздел «Шэн и шоу»: полоса 3 из 30",
+      "template": "process",
+      "assetIds": [
+        "diagram-sheng-shou-fork"
+      ]
+    },
+    {
+      "number": 104,
+      "id": "A-P104",
+      "spreadId": "A-S053",
+      "sectionId": "sheng-shou",
+      "role": "Раздел «Шэн и шоу»: полоса 4 из 30",
+      "template": "object-atlas",
+      "assetIds": []
+    },
+    {
+      "number": 105,
+      "id": "A-P105",
+      "spreadId": "A-S053",
+      "sectionId": "sheng-shou",
+      "role": "Раздел «Шэн и шоу»: полоса 5 из 30",
+      "template": "object-atlas",
+      "assetIds": [
+        "photo-pressings-object-atlas"
+      ]
+    },
+    {
+      "number": 106,
+      "id": "A-P106",
+      "spreadId": "A-S054",
+      "sectionId": "sheng-shou",
+      "role": "Раздел «Шэн и шоу»: полоса 6 из 30",
+      "template": "object-atlas",
+      "assetIds": []
+    },
+    {
+      "number": 107,
+      "id": "A-P107",
+      "spreadId": "A-S054",
+      "sectionId": "sheng-shou",
+      "role": "Раздел «Шэн и шоу»: полоса 7 из 30",
+      "template": "object-atlas",
+      "assetIds": [
+        "photo-wrappers-object-atlas"
+      ]
+    },
+    {
+      "number": 108,
+      "id": "A-P108",
+      "spreadId": "A-S055",
+      "sectionId": "sheng-shou",
+      "role": "Раздел «Шэн и шоу»: полоса 8 из 30",
+      "template": "map",
+      "assetIds": []
+    },
+    {
+      "number": 109,
+      "id": "A-P109",
+      "spreadId": "A-S055",
+      "sectionId": "sheng-shou",
+      "role": "Раздел «Шэн и шоу»: полоса 9 из 30",
+      "template": "map",
+      "assetIds": [
+        "map-storage-climates"
+      ]
+    },
+    {
+      "number": 110,
+      "id": "A-P110",
+      "spreadId": "A-S056",
+      "sectionId": "sheng-shou",
+      "role": "Раздел «Шэн и шоу»: полоса 10 из 30",
+      "template": "process",
+      "assetIds": []
+    },
+    {
+      "number": 111,
+      "id": "A-P111",
+      "spreadId": "A-S056",
+      "sectionId": "sheng-shou",
+      "role": "Раздел «Шэн и шоу»: полоса 11 из 30",
+      "template": "process",
+      "assetIds": [
+        "diagram-storage-variables"
+      ]
+    },
+    {
+      "number": 112,
+      "id": "A-P112",
+      "spreadId": "A-S057",
+      "sectionId": "sheng-shou",
+      "role": "Раздел «Шэн и шоу»: полоса 12 из 30",
+      "template": "object-atlas",
+      "assetIds": []
+    },
+    {
+      "number": 113,
+      "id": "A-P113",
+      "spreadId": "A-S057",
+      "sectionId": "sheng-shou",
+      "role": "Раздел «Шэн и шоу»: полоса 13 из 30",
+      "template": "object-atlas",
+      "assetIds": []
+    },
+    {
+      "number": 114,
+      "id": "A-P114",
+      "spreadId": "A-S058",
+      "sectionId": "sheng-shou",
+      "role": "Раздел «Шэн и шоу»: полоса 14 из 30",
+      "template": "photo-plus-essay",
+      "assetIds": []
+    },
+    {
+      "number": 115,
+      "id": "A-P115",
+      "spreadId": "A-S058",
+      "sectionId": "sheng-shou",
+      "role": "Раздел «Шэн и шоу»: полоса 15 из 30",
+      "template": "photo-plus-essay",
+      "assetIds": []
+    },
+    {
+      "number": 116,
+      "id": "A-P116",
+      "spreadId": "A-S059",
+      "sectionId": "sheng-shou",
+      "role": "Раздел «Шэн и шоу»: полоса 16 из 30",
+      "template": "process",
+      "assetIds": []
+    },
+    {
+      "number": 117,
+      "id": "A-P117",
+      "spreadId": "A-S059",
+      "sectionId": "sheng-shou",
+      "role": "Раздел «Шэн и шоу»: полоса 17 из 30",
+      "template": "process",
+      "assetIds": []
+    },
+    {
+      "number": 118,
+      "id": "A-P118",
+      "spreadId": "A-S060",
+      "sectionId": "sheng-shou",
+      "role": "Раздел «Шэн и шоу»: полоса 18 из 30",
+      "template": "object-atlas",
+      "assetIds": []
+    },
+    {
+      "number": 119,
+      "id": "A-P119",
+      "spreadId": "A-S060",
+      "sectionId": "sheng-shou",
+      "role": "Раздел «Шэн и шоу»: полоса 19 из 30",
+      "template": "object-atlas",
+      "assetIds": []
+    },
+    {
+      "number": 120,
+      "id": "A-P120",
+      "spreadId": "A-S061",
+      "sectionId": "sheng-shou",
+      "role": "Раздел «Шэн и шоу»: полоса 20 из 30",
+      "template": "photo-plus-essay",
+      "assetIds": []
+    },
+    {
+      "number": 121,
+      "id": "A-P121",
+      "spreadId": "A-S061",
+      "sectionId": "sheng-shou",
+      "role": "Раздел «Шэн и шоу»: полоса 21 из 30",
+      "template": "photo-plus-essay",
+      "assetIds": []
+    },
+    {
+      "number": 122,
+      "id": "A-P122",
+      "spreadId": "A-S062",
+      "sectionId": "sheng-shou",
+      "role": "Раздел «Шэн и шоу»: полоса 22 из 30",
+      "template": "process",
+      "assetIds": []
+    },
+    {
+      "number": 123,
+      "id": "A-P123",
+      "spreadId": "A-S062",
+      "sectionId": "sheng-shou",
+      "role": "Раздел «Шэн и шоу»: полоса 23 из 30",
+      "template": "process",
+      "assetIds": []
+    },
+    {
+      "number": 124,
+      "id": "A-P124",
+      "spreadId": "A-S063",
+      "sectionId": "sheng-shou",
+      "role": "Раздел «Шэн и шоу»: полоса 24 из 30",
+      "template": "object-atlas",
+      "assetIds": []
+    },
+    {
+      "number": 125,
+      "id": "A-P125",
+      "spreadId": "A-S063",
+      "sectionId": "sheng-shou",
+      "role": "Раздел «Шэн и шоу»: полоса 25 из 30",
+      "template": "object-atlas",
+      "assetIds": []
+    },
+    {
+      "number": 126,
+      "id": "A-P126",
+      "spreadId": "A-S064",
+      "sectionId": "sheng-shou",
+      "role": "Раздел «Шэн и шоу»: полоса 26 из 30",
+      "template": "photo-plus-essay",
+      "assetIds": []
+    },
+    {
+      "number": 127,
+      "id": "A-P127",
+      "spreadId": "A-S064",
+      "sectionId": "sheng-shou",
+      "role": "Раздел «Шэн и шоу»: полоса 27 из 30",
+      "template": "photo-plus-essay",
+      "assetIds": []
+    },
+    {
+      "number": 128,
+      "id": "A-P128",
+      "spreadId": "A-S065",
+      "sectionId": "sheng-shou",
+      "role": "Раздел «Шэн и шоу»: полоса 28 из 30",
+      "template": "process",
+      "assetIds": []
+    },
+    {
+      "number": 129,
+      "id": "A-P129",
+      "spreadId": "A-S065",
+      "sectionId": "sheng-shou",
+      "role": "Раздел «Шэн и шоу»: полоса 29 из 30",
+      "template": "process",
+      "assetIds": []
+    },
+    {
+      "number": 130,
+      "id": "A-P130",
+      "spreadId": "A-S066",
+      "sectionId": "sheng-shou",
+      "role": "Раздел «Шэн и шоу»: полоса 30 из 30",
+      "template": "chapter-gate",
+      "assetIds": [],
+      "crossSectionSpread": true
+    },
+    {
+      "number": 131,
+      "id": "A-P131",
+      "spreadId": "A-S066",
+      "sectionId": "microcosm",
+      "role": "Открытие раздела «Микрокосм»",
+      "template": "chapter-gate",
+      "assetIds": [],
+      "chapterStart": true,
+      "crossSectionSpread": true
+    },
+    {
+      "number": 132,
+      "id": "A-P132",
+      "spreadId": "A-S067",
+      "sectionId": "microcosm",
+      "role": "Раздел «Микрокосм»: полоса 2 из 24",
+      "template": "scientific-plate",
+      "assetIds": []
+    },
+    {
+      "number": 133,
+      "id": "A-P133",
+      "spreadId": "A-S067",
+      "sectionId": "microcosm",
+      "role": "Раздел «Микрокосм»: полоса 3 из 24",
+      "template": "scientific-plate",
+      "assetIds": [
+        "diagram-wodui-heat"
+      ]
+    },
+    {
+      "number": 134,
+      "id": "A-P134",
+      "spreadId": "A-S068",
+      "sectionId": "microcosm",
+      "role": "Раздел «Микрокосм»: полоса 4 из 24",
+      "template": "scientific-plate",
+      "assetIds": []
+    },
+    {
+      "number": 135,
+      "id": "A-P135",
+      "spreadId": "A-S068",
+      "sectionId": "microcosm",
+      "role": "Раздел «Микрокосм»: полоса 5 из 24",
+      "template": "scientific-plate",
+      "assetIds": [
+        "diagram-microbiology-community"
+      ]
+    },
+    {
+      "number": 136,
+      "id": "A-P136",
+      "spreadId": "A-S069",
+      "sectionId": "microcosm",
+      "role": "Раздел «Микрокосм»: полоса 6 из 24",
+      "template": "scientific-plate",
+      "assetIds": []
+    },
+    {
+      "number": 137,
+      "id": "A-P137",
+      "spreadId": "A-S069",
+      "sectionId": "microcosm",
+      "role": "Раздел «Микрокосм»: полоса 7 из 24",
+      "template": "scientific-plate",
+      "assetIds": [
+        "diagram-microbiology-safety-methods"
+      ]
+    },
+    {
+      "number": 138,
+      "id": "A-P138",
+      "spreadId": "A-S070",
+      "sectionId": "microcosm",
+      "role": "Раздел «Микрокосм»: полоса 8 из 24",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 139,
+      "id": "A-P139",
+      "spreadId": "A-S070",
+      "sectionId": "microcosm",
+      "role": "Раздел «Микрокосм»: полоса 9 из 24",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 140,
+      "id": "A-P140",
+      "spreadId": "A-S071",
+      "sectionId": "microcosm",
+      "role": "Раздел «Микрокосм»: полоса 10 из 24",
+      "template": "scientific-plate",
+      "assetIds": []
+    },
+    {
+      "number": 141,
+      "id": "A-P141",
+      "spreadId": "A-S071",
+      "sectionId": "microcosm",
+      "role": "Раздел «Микрокосм»: полоса 11 из 24",
+      "template": "scientific-plate",
+      "assetIds": []
+    },
+    {
+      "number": 142,
+      "id": "A-P142",
+      "spreadId": "A-S072",
+      "sectionId": "microcosm",
+      "role": "Раздел «Микрокосм»: полоса 12 из 24",
+      "template": "process",
+      "assetIds": []
+    },
+    {
+      "number": 143,
+      "id": "A-P143",
+      "spreadId": "A-S072",
+      "sectionId": "microcosm",
+      "role": "Раздел «Микрокосм»: полоса 13 из 24",
+      "template": "process",
+      "assetIds": []
+    },
+    {
+      "number": 144,
+      "id": "A-P144",
+      "spreadId": "A-S073",
+      "sectionId": "microcosm",
+      "role": "Раздел «Микрокосм»: полоса 14 из 24",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 145,
+      "id": "A-P145",
+      "spreadId": "A-S073",
+      "sectionId": "microcosm",
+      "role": "Раздел «Микрокосм»: полоса 15 из 24",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 146,
+      "id": "A-P146",
+      "spreadId": "A-S074",
+      "sectionId": "microcosm",
+      "role": "Раздел «Микрокосм»: полоса 16 из 24",
+      "template": "scientific-plate",
+      "assetIds": []
+    },
+    {
+      "number": 147,
+      "id": "A-P147",
+      "spreadId": "A-S074",
+      "sectionId": "microcosm",
+      "role": "Раздел «Микрокосм»: полоса 17 из 24",
+      "template": "scientific-plate",
+      "assetIds": []
+    },
+    {
+      "number": 148,
+      "id": "A-P148",
+      "spreadId": "A-S075",
+      "sectionId": "microcosm",
+      "role": "Раздел «Микрокосм»: полоса 18 из 24",
+      "template": "process",
+      "assetIds": []
+    },
+    {
+      "number": 149,
+      "id": "A-P149",
+      "spreadId": "A-S075",
+      "sectionId": "microcosm",
+      "role": "Раздел «Микрокосм»: полоса 19 из 24",
+      "template": "process",
+      "assetIds": []
+    },
+    {
+      "number": 150,
+      "id": "A-P150",
+      "spreadId": "A-S076",
+      "sectionId": "microcosm",
+      "role": "Раздел «Микрокосм»: полоса 20 из 24",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 151,
+      "id": "A-P151",
+      "spreadId": "A-S076",
+      "sectionId": "microcosm",
+      "role": "Раздел «Микрокосм»: полоса 21 из 24",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 152,
+      "id": "A-P152",
+      "spreadId": "A-S077",
+      "sectionId": "microcosm",
+      "role": "Раздел «Микрокосм»: полоса 22 из 24",
+      "template": "scientific-plate",
+      "assetIds": []
+    },
+    {
+      "number": 153,
+      "id": "A-P153",
+      "spreadId": "A-S077",
+      "sectionId": "microcosm",
+      "role": "Раздел «Микрокосм»: полоса 23 из 24",
+      "template": "scientific-plate",
+      "assetIds": []
+    },
+    {
+      "number": 154,
+      "id": "A-P154",
+      "spreadId": "A-S078",
+      "sectionId": "microcosm",
+      "role": "Раздел «Микрокосм»: полоса 24 из 24",
+      "template": "chapter-gate",
+      "assetIds": [],
+      "crossSectionSpread": true
+    },
+    {
+      "number": 155,
+      "id": "A-P155",
+      "spreadId": "A-S078",
+      "sectionId": "body",
+      "role": "Открытие раздела «Тело и свидетельства»",
+      "template": "chapter-gate",
+      "assetIds": [],
+      "chapterStart": true,
+      "crossSectionSpread": true
+    },
+    {
+      "number": 156,
+      "id": "A-P156",
+      "spreadId": "A-S079",
+      "sectionId": "body",
+      "role": "Раздел «Тело и свидетельства»: полоса 2 из 22",
+      "template": "scientific-plate",
+      "assetIds": []
+    },
+    {
+      "number": 157,
+      "id": "A-P157",
+      "spreadId": "A-S079",
+      "sectionId": "body",
+      "role": "Раздел «Тело и свидетельства»: полоса 3 из 22",
+      "template": "scientific-plate",
+      "assetIds": [
+        "diagram-medical-evidence-scale"
+      ]
+    },
+    {
+      "number": 158,
+      "id": "A-P158",
+      "spreadId": "A-S080",
+      "sectionId": "body",
+      "role": "Раздел «Тело и свидетельства»: полоса 4 из 22",
+      "template": "scientific-plate",
+      "assetIds": []
+    },
+    {
+      "number": 159,
+      "id": "A-P159",
+      "spreadId": "A-S080",
+      "sectionId": "body",
+      "role": "Раздел «Тело и свидетельства»: полоса 5 из 22",
+      "template": "scientific-plate",
+      "assetIds": [
+        "diagram-medical-study-limitations"
+      ]
+    },
+    {
+      "number": 160,
+      "id": "A-P160",
+      "spreadId": "A-S081",
+      "sectionId": "body",
+      "role": "Раздел «Тело и свидетельства»: полоса 6 из 22",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 161,
+      "id": "A-P161",
+      "spreadId": "A-S081",
+      "sectionId": "body",
+      "role": "Раздел «Тело и свидетельства»: полоса 7 из 22",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 162,
+      "id": "A-P162",
+      "spreadId": "A-S082",
+      "sectionId": "body",
+      "role": "Раздел «Тело и свидетельства»: полоса 8 из 22",
+      "template": "source-window",
+      "assetIds": []
+    },
+    {
+      "number": 163,
+      "id": "A-P163",
+      "spreadId": "A-S082",
+      "sectionId": "body",
+      "role": "Раздел «Тело и свидетельства»: полоса 9 из 22",
+      "template": "source-window",
+      "assetIds": []
+    },
+    {
+      "number": 164,
+      "id": "A-P164",
+      "spreadId": "A-S083",
+      "sectionId": "body",
+      "role": "Раздел «Тело и свидетельства»: полоса 10 из 22",
+      "template": "scientific-plate",
+      "assetIds": []
+    },
+    {
+      "number": 165,
+      "id": "A-P165",
+      "spreadId": "A-S083",
+      "sectionId": "body",
+      "role": "Раздел «Тело и свидетельства»: полоса 11 из 22",
+      "template": "scientific-plate",
+      "assetIds": []
+    },
+    {
+      "number": 166,
+      "id": "A-P166",
+      "spreadId": "A-S084",
+      "sectionId": "body",
+      "role": "Раздел «Тело и свидетельства»: полоса 12 из 22",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 167,
+      "id": "A-P167",
+      "spreadId": "A-S084",
+      "sectionId": "body",
+      "role": "Раздел «Тело и свидетельства»: полоса 13 из 22",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 168,
+      "id": "A-P168",
+      "spreadId": "A-S085",
+      "sectionId": "body",
+      "role": "Раздел «Тело и свидетельства»: полоса 14 из 22",
+      "template": "source-window",
+      "assetIds": []
+    },
+    {
+      "number": 169,
+      "id": "A-P169",
+      "spreadId": "A-S085",
+      "sectionId": "body",
+      "role": "Раздел «Тело и свидетельства»: полоса 15 из 22",
+      "template": "source-window",
+      "assetIds": []
+    },
+    {
+      "number": 170,
+      "id": "A-P170",
+      "spreadId": "A-S086",
+      "sectionId": "body",
+      "role": "Раздел «Тело и свидетельства»: полоса 16 из 22",
+      "template": "scientific-plate",
+      "assetIds": []
+    },
+    {
+      "number": 171,
+      "id": "A-P171",
+      "spreadId": "A-S086",
+      "sectionId": "body",
+      "role": "Раздел «Тело и свидетельства»: полоса 17 из 22",
+      "template": "scientific-plate",
+      "assetIds": []
+    },
+    {
+      "number": 172,
+      "id": "A-P172",
+      "spreadId": "A-S087",
+      "sectionId": "body",
+      "role": "Раздел «Тело и свидетельства»: полоса 18 из 22",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 173,
+      "id": "A-P173",
+      "spreadId": "A-S087",
+      "sectionId": "body",
+      "role": "Раздел «Тело и свидетельства»: полоса 19 из 22",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 174,
+      "id": "A-P174",
+      "spreadId": "A-S088",
+      "sectionId": "body",
+      "role": "Раздел «Тело и свидетельства»: полоса 20 из 22",
+      "template": "source-window",
+      "assetIds": []
+    },
+    {
+      "number": 175,
+      "id": "A-P175",
+      "spreadId": "A-S088",
+      "sectionId": "body",
+      "role": "Раздел «Тело и свидетельства»: полоса 21 из 22",
+      "template": "source-window",
+      "assetIds": []
+    },
+    {
+      "number": 176,
+      "id": "A-P176",
+      "spreadId": "A-S089",
+      "sectionId": "body",
+      "role": "Раздел «Тело и свидетельства»: полоса 22 из 22",
+      "template": "chapter-gate",
+      "assetIds": [],
+      "crossSectionSpread": true
+    },
+    {
+      "number": 177,
+      "id": "A-P177",
+      "spreadId": "A-S089",
+      "sectionId": "tea-room",
+      "role": "Открытие раздела «Чайная комната»",
+      "template": "chapter-gate",
+      "assetIds": [],
+      "chapterStart": true,
+      "crossSectionSpread": true
+    },
+    {
+      "number": 178,
+      "id": "A-P178",
+      "spreadId": "A-S090",
+      "sectionId": "tea-room",
+      "role": "Раздел «Чайная комната»: полоса 2 из 16",
+      "template": "photo-plus-essay",
+      "assetIds": []
+    },
+    {
+      "number": 179,
+      "id": "A-P179",
+      "spreadId": "A-S090",
+      "sectionId": "tea-room",
+      "role": "Раздел «Чайная комната»: полоса 3 из 16",
+      "template": "photo-plus-essay",
+      "assetIds": []
+    },
+    {
+      "number": 180,
+      "id": "A-P180",
+      "spreadId": "A-S091",
+      "sectionId": "tea-room",
+      "role": "Раздел «Чайная комната»: полоса 4 из 16",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 181,
+      "id": "A-P181",
+      "spreadId": "A-S091",
+      "sectionId": "tea-room",
+      "role": "Раздел «Чайная комната»: полоса 5 из 16",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 182,
+      "id": "A-P182",
+      "spreadId": "A-S092",
+      "sectionId": "tea-room",
+      "role": "Раздел «Чайная комната»: полоса 6 из 16",
+      "template": "object-atlas",
+      "assetIds": []
+    },
+    {
+      "number": 183,
+      "id": "A-P183",
+      "spreadId": "A-S092",
+      "sectionId": "tea-room",
+      "role": "Раздел «Чайная комната»: полоса 7 из 16",
+      "template": "object-atlas",
+      "assetIds": []
+    },
+    {
+      "number": 184,
+      "id": "A-P184",
+      "spreadId": "A-S093",
+      "sectionId": "tea-room",
+      "role": "Раздел «Чайная комната»: полоса 8 из 16",
+      "template": "photo-plus-essay",
+      "assetIds": []
+    },
+    {
+      "number": 185,
+      "id": "A-P185",
+      "spreadId": "A-S093",
+      "sectionId": "tea-room",
+      "role": "Раздел «Чайная комната»: полоса 9 из 16",
+      "template": "photo-plus-essay",
+      "assetIds": []
+    },
+    {
+      "number": 186,
+      "id": "A-P186",
+      "spreadId": "A-S094",
+      "sectionId": "tea-room",
+      "role": "Раздел «Чайная комната»: полоса 10 из 16",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 187,
+      "id": "A-P187",
+      "spreadId": "A-S094",
+      "sectionId": "tea-room",
+      "role": "Раздел «Чайная комната»: полоса 11 из 16",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 188,
+      "id": "A-P188",
+      "spreadId": "A-S095",
+      "sectionId": "tea-room",
+      "role": "Раздел «Чайная комната»: полоса 12 из 16",
+      "template": "object-atlas",
+      "assetIds": []
+    },
+    {
+      "number": 189,
+      "id": "A-P189",
+      "spreadId": "A-S095",
+      "sectionId": "tea-room",
+      "role": "Раздел «Чайная комната»: полоса 13 из 16",
+      "template": "object-atlas",
+      "assetIds": []
+    },
+    {
+      "number": 190,
+      "id": "A-P190",
+      "spreadId": "A-S096",
+      "sectionId": "tea-room",
+      "role": "Раздел «Чайная комната»: полоса 14 из 16",
+      "template": "photo-plus-essay",
+      "assetIds": []
+    },
+    {
+      "number": 191,
+      "id": "A-P191",
+      "spreadId": "A-S096",
+      "sectionId": "tea-room",
+      "role": "Раздел «Чайная комната»: полоса 15 из 16",
+      "template": "photo-plus-essay",
+      "assetIds": []
+    },
+    {
+      "number": 192,
+      "id": "A-P192",
+      "spreadId": "A-S097",
+      "sectionId": "tea-room",
+      "role": "Раздел «Чайная комната»: полоса 16 из 16",
+      "template": "chapter-gate",
+      "assetIds": [],
+      "crossSectionSpread": true
+    },
+    {
+      "number": 193,
+      "id": "A-P193",
+      "spreadId": "A-S097",
+      "sectionId": "apparatus",
+      "role": "Хронология: полоса 193",
+      "template": "chapter-gate",
+      "assetIds": [],
+      "chapterStart": true,
+      "crossSectionSpread": true,
+      "apparatus": "chronology"
+    },
+    {
+      "number": 194,
+      "id": "A-P194",
+      "spreadId": "A-S098",
+      "sectionId": "apparatus",
+      "role": "Хронология: полоса 194",
+      "template": "quiet-text",
+      "assetIds": [],
+      "apparatus": "chronology"
+    },
+    {
+      "number": 195,
+      "id": "A-P195",
+      "spreadId": "A-S098",
+      "sectionId": "apparatus",
+      "role": "Хронология: полоса 195",
+      "template": "quiet-text",
+      "assetIds": [],
+      "apparatus": "chronology"
+    },
+    {
+      "number": 196,
+      "id": "A-P196",
+      "spreadId": "A-S099",
+      "sectionId": "apparatus",
+      "role": "Хронология: полоса 196",
+      "template": "quiet-text",
+      "assetIds": [],
+      "apparatus": "chronology"
+    },
+    {
+      "number": 197,
+      "id": "A-P197",
+      "spreadId": "A-S099",
+      "sectionId": "apparatus",
+      "role": "Хронология: полоса 197",
+      "template": "quiet-text",
+      "assetIds": [],
+      "apparatus": "chronology"
+    },
+    {
+      "number": 198,
+      "id": "A-P198",
+      "spreadId": "A-S100",
+      "sectionId": "apparatus",
+      "role": "Хронология: полоса 198",
+      "template": "quiet-text",
+      "assetIds": [],
+      "apparatus": "chronology"
+    },
+    {
+      "number": 199,
+      "id": "A-P199",
+      "spreadId": "A-S100",
+      "sectionId": "apparatus",
+      "role": "Глоссарий: полоса 199",
+      "template": "quiet-text",
+      "assetIds": [],
+      "apparatus": "glossary"
+    },
+    {
+      "number": 200,
+      "id": "A-P200",
+      "spreadId": "A-S101",
+      "sectionId": "apparatus",
+      "role": "Глоссарий: полоса 200",
+      "template": "quiet-text",
+      "assetIds": [],
+      "apparatus": "glossary"
+    },
+    {
+      "number": 201,
+      "id": "A-P201",
+      "spreadId": "A-S101",
+      "sectionId": "apparatus",
+      "role": "Глоссарий: полоса 201",
+      "template": "quiet-text",
+      "assetIds": [],
+      "apparatus": "glossary"
+    },
+    {
+      "number": 202,
+      "id": "A-P202",
+      "spreadId": "A-S102",
+      "sectionId": "apparatus",
+      "role": "Глоссарий: полоса 202",
+      "template": "bibliography",
+      "assetIds": [],
+      "apparatus": "glossary"
+    },
+    {
+      "number": 203,
+      "id": "A-P203",
+      "spreadId": "A-S102",
+      "sectionId": "apparatus",
+      "role": "Библиография: полоса 203",
+      "template": "bibliography",
+      "assetIds": [],
+      "apparatus": "bibliography"
+    },
+    {
+      "number": 204,
+      "id": "A-P204",
+      "spreadId": "A-S103",
+      "sectionId": "apparatus",
+      "role": "Библиография: полоса 204",
+      "template": "bibliography",
+      "assetIds": [],
+      "apparatus": "bibliography"
+    },
+    {
+      "number": 205,
+      "id": "A-P205",
+      "spreadId": "A-S103",
+      "sectionId": "apparatus",
+      "role": "Библиография: полоса 205",
+      "template": "bibliography",
+      "assetIds": [],
+      "apparatus": "bibliography"
+    },
+    {
+      "number": 206,
+      "id": "A-P206",
+      "spreadId": "A-S104",
+      "sectionId": "apparatus",
+      "role": "Библиография: полоса 206",
+      "template": "bibliography",
+      "assetIds": [],
+      "apparatus": "bibliography"
+    },
+    {
+      "number": 207,
+      "id": "A-P207",
+      "spreadId": "A-S104",
+      "sectionId": "apparatus",
+      "role": "Библиография: полоса 207",
+      "template": "bibliography",
+      "assetIds": [],
+      "apparatus": "bibliography"
+    },
+    {
+      "number": 208,
+      "id": "A-P208",
+      "spreadId": "A-S105",
+      "sectionId": "apparatus",
+      "role": "Библиография: полоса 208",
+      "template": "bibliography",
+      "assetIds": [],
+      "apparatus": "bibliography"
+    }
+  ]
+}

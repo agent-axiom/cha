@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const read = (name) => JSON.parse(fs.readFileSync(path.join(root, 'data', name), 'utf8'))
+const readFlatplan = (name) => JSON.parse(fs.readFileSync(path.join(root, 'flatplan', name), 'utf8'))
 const oneOf = (value, values, label) => {
   if (!values.includes(value)) throw new Error(`${label}: ${value}`)
 }
@@ -106,6 +107,22 @@ const dpiRegistrationTolerance = 0.050000001
 const rasterExtensions = new Set(['.tif', '.tiff', '.png', '.jpg', '.jpeg', '.webp'])
 const vectorExtensions = new Set(['.svg'])
 const rightsEvidenceExtensions = new Set(['.md', '.pdf', '.txt', '.json', '.eml'])
+const requiredFlatplanTemplateIds = [
+  'chapter-gate',
+  'full-bleed-photo',
+  'photo-plus-essay',
+  'source-window',
+  'map',
+  'process',
+  'scientific-plate',
+  'object-atlas',
+  'quiet-text',
+  'bibliography',
+  'guide-recipe',
+  'guide-troubleshooting',
+  'guide-safety',
+]
+const apparatusKinds = ['chronology', 'glossary', 'bibliography']
 
 export const effectiveDpi = (pixels, millimetres) => pixels / (millimetres / 25.4)
 
@@ -298,17 +315,214 @@ export function validateAssetFiles(assets, repoRoot) {
   return ready
 }
 
+const validateFlatplanTemplates = (templates, planId) => {
+  if (!Array.isArray(templates)) throw new Error(`flatplan ${planId}: templates must be an array`)
+  const seen = new Set()
+  for (const template of templates) {
+    if (!template || typeof template !== 'object') throw new Error(`flatplan ${planId}: template must be an object`)
+    if (typeof template.id !== 'string' || !template.id.trim()) {
+      throw new Error(`flatplan ${planId}: template requires nonblank id`)
+    }
+    if (seen.has(template.id)) throw new Error(`duplicate template id: ${template.id}`)
+    if (!requiredFlatplanTemplateIds.includes(template.id)) throw new Error(`unexpected template id: ${template.id}`)
+    seen.add(template.id)
+    for (const field of ['label', 'purpose']) {
+      if (typeof template[field] !== 'string' || !template[field].trim()) {
+        throw new Error(`template ${template.id}: ${field} must be nonblank`)
+      }
+    }
+    for (const field of ['constraints', 'expectedContent']) {
+      if (
+        !Array.isArray(template[field])
+        || template[field].length === 0
+        || template[field].some((value) => typeof value !== 'string' || !value.trim())
+      ) {
+        throw new Error(`template ${template.id}: ${field} must contain nonblank strings`)
+      }
+    }
+  }
+  for (const templateId of requiredFlatplanTemplateIds) {
+    if (!seen.has(templateId)) throw new Error(`missing required template: ${templateId}`)
+  }
+  return seen
+}
+
+const positiveRange = (value, maximum = Number.POSITIVE_INFINITY) => (
+  Array.isArray(value)
+  && value.length === 2
+  && value.every(positiveNumber)
+  && value[0] <= value[1]
+  && value[1] <= maximum
+)
+
+const validateGuideRecipe = (page, fail) => {
+  const recipe = page.recipe
+  if (!recipe || typeof recipe !== 'object' || Array.isArray(recipe)) fail('recipe must be an object')
+  for (const field of ['vesselVolumeMl', 'leafMassG']) {
+    if (!positiveNumber(recipe[field])) fail(`${field} must be a positive number`)
+  }
+  if (!positiveRange(recipe.temperatureRangeC, 100)) {
+    fail('temperatureRangeC must be a positive ascending range at or below 100')
+  }
+  if (!positiveRange(recipe.firstInfusionRangeSec)) {
+    fail('firstInfusionRangeSec must be a positive ascending range')
+  }
+  if (typeof recipe.adjustmentNote !== 'string' || !recipe.adjustmentNote.trim()) {
+    fail('adjustmentNote must be nonblank')
+  }
+}
+
+export function validateFlatplan(plan, expectedPages, templates, assetIds) {
+  const planId = plan?.id
+  const fail = (reason) => {
+    throw new Error(`flatplan ${planId ?? 'unknown'}: ${reason}`)
+  }
+  if (!plan || typeof plan !== 'object' || Array.isArray(plan)) fail('plan must be an object')
+  if (typeof planId !== 'string' || !planId.trim()) fail('id must be nonblank')
+  if (typeof plan.title !== 'string' || !plan.title.trim()) fail('title must be nonblank')
+  if (typeof plan.pagePrefix !== 'string' || !/^[A-Z][A-Z0-9]*$/.test(plan.pagePrefix)) {
+    fail('pagePrefix must be uppercase alphanumeric')
+  }
+  if (!Number.isInteger(expectedPages) || expectedPages <= 0) fail('expectedPages must be a positive integer')
+  if (plan.totalPages !== expectedPages) fail(`totalPages must equal ${expectedPages}`)
+  if (plan.signatureSize !== 16 || plan.totalPages % plan.signatureSize !== 0) {
+    fail('totalPages must use complete 16-page signatures')
+  }
+  if (!(assetIds instanceof Set)) fail('assetIds must be a Set')
+  const templateIds = validateFlatplanTemplates(templates, planId)
+
+  if (!Array.isArray(plan.sections) || plan.sections.length === 0) fail('sections must be a nonempty array')
+  const sectionIds = new Set()
+  const sectionByPage = new Map()
+  let nextSectionStart = 1
+  for (const section of plan.sections) {
+    if (!section || typeof section !== 'object' || typeof section.id !== 'string' || !section.id.trim()) {
+      fail('section requires nonblank id')
+    }
+    if (sectionIds.has(section.id)) fail(`duplicate section id: ${section.id}`)
+    sectionIds.add(section.id)
+    if (typeof section.title !== 'string' || !section.title.trim()) fail(`section ${section.id} title must be nonblank`)
+    if (section.allowedLeftStart !== undefined && typeof section.allowedLeftStart !== 'boolean') {
+      fail(`section ${section.id} allowedLeftStart must be boolean`)
+    }
+    if (!Number.isInteger(section.start) || !Number.isInteger(section.end) || section.start !== nextSectionStart) {
+      fail(`section ${section.id} must start at contiguous page ${nextSectionStart}`)
+    }
+    if (section.end < section.start || section.pageCount <= 0) {
+      fail(`section ${section.id} must contain at least one page`)
+    }
+    if (!Number.isInteger(section.pageCount) || section.pageCount !== section.end - section.start + 1) {
+      fail(`section ${section.id} pageCount does not match its range`)
+    }
+    if (section.start % 2 === 0 && section.allowedLeftStart !== true) {
+      fail(`section ${section.id} must start recto/odd or declare allowedLeftStart`)
+    }
+    for (let number = section.start; number <= section.end; number += 1) sectionByPage.set(number, section)
+    nextSectionStart = section.end + 1
+  }
+  if (nextSectionStart !== plan.totalPages + 1) fail('sections must cover every page exactly once')
+
+  if (!Array.isArray(plan.pages) || plan.pages.length !== plan.totalPages) {
+    fail(`pages array must contain ${plan.totalPages} entries`)
+  }
+  const pageIds = new Set()
+  const spreadCounts = new Map()
+  const pad = (number) => String(number).padStart(3, '0')
+  for (let index = 0; index < plan.pages.length; index += 1) {
+    const page = plan.pages[index]
+    const number = index + 1
+    if (!page || typeof page !== 'object' || Array.isArray(page)) fail(`page ${number} must be an object`)
+    const expectedPageId = `${plan.pagePrefix}-P${pad(number)}`
+    const pageFail = (reason) => fail(`page ${page.id ?? expectedPageId}: ${reason}`)
+    if (page.number !== number) fail(`page ${number} must have number ${number}`)
+    if (page.id !== expectedPageId) fail(`page ${number} must have id ${expectedPageId}`)
+    if (pageIds.has(page.id)) pageFail('duplicate page id')
+    pageIds.add(page.id)
+
+    const section = sectionByPage.get(number)
+    if (!section || page.sectionId !== section.id) pageFail(`must belong to section ${section?.id ?? 'none'}`)
+    if (typeof page.role !== 'string' || !page.role.trim()) pageFail('role must be nonblank')
+    if (typeof page.template !== 'string' || !templateIds.has(page.template)) {
+      pageFail(`unknown template ${page.template}`)
+    }
+    if (
+      !Array.isArray(page.assetIds)
+      || page.assetIds.some((id) => typeof id !== 'string' || !id.trim())
+      || new Set(page.assetIds).size !== page.assetIds.length
+    ) {
+      pageFail('assetIds must contain unique nonblank strings')
+    }
+    for (const assetId of page.assetIds) {
+      if (!assetIds.has(assetId)) pageFail(`unknown asset ${assetId}`)
+    }
+    if (page.chapterStart !== undefined && typeof page.chapterStart !== 'boolean') {
+      pageFail('chapterStart must be boolean')
+    }
+    if (page.chapterStart === true && number % 2 === 0 && section.allowedLeftStart !== true) {
+      fail(`chapter start ${page.id} must be recto/odd`)
+    }
+    const startsSection = number === section.start
+    if ((page.chapterStart === true) !== startsSection) pageFail('chapterStart must match section start')
+    if (page.crossSectionSpread !== undefined && typeof page.crossSectionSpread !== 'boolean') {
+      pageFail('crossSectionSpread must be boolean')
+    }
+
+    const expectedSpreadId = `${plan.pagePrefix}-S${pad(Math.floor(number / 2) + 1)}`
+    if (page.spreadId !== expectedSpreadId) fail(`page ${page.id} must use spread ${expectedSpreadId}`)
+    spreadCounts.set(page.spreadId, (spreadCounts.get(page.spreadId) ?? 0) + 1)
+
+    if (plan.id === 'album' && page.sectionId === 'apparatus' && !apparatusKinds.includes(page.apparatus)) {
+      fail(`apparatus page ${page.id} requires chronology, glossary, or bibliography`)
+    }
+    if (page.template === 'guide-recipe') validateGuideRecipe(page, pageFail)
+  }
+
+  const expectedSpreadCount = plan.totalPages / 2 + 1
+  if (spreadCounts.size !== expectedSpreadCount) fail(`must contain ${expectedSpreadCount} reader spreads`)
+  const firstPage = plan.pages[0]
+  const lastPage = plan.pages.at(-1)
+  if (spreadCounts.get(firstPage.spreadId) !== 1 || spreadCounts.get(lastPage.spreadId) !== 1) {
+    fail('first and final pages must be singleton reader spreads')
+  }
+  if (firstPage.crossSectionSpread === true || lastPage.crossSectionSpread === true) {
+    fail('singleton pages cannot be cross-section spreads')
+  }
+  for (let index = 1; index < plan.pages.length - 1; index += 2) {
+    const left = plan.pages[index]
+    const right = plan.pages[index + 1]
+    if (left.spreadId !== right.spreadId || spreadCounts.get(left.spreadId) !== 2) {
+      fail(`spread ${left.spreadId} must pair adjacent pages ${left.id} and ${right.id}`)
+    }
+    if (left.template !== right.template) {
+      fail(`spread ${left.spreadId} has incompatible templates ${left.template} and ${right.template}`)
+    }
+    const crossesSection = left.sectionId !== right.sectionId
+    if (crossesSection && (left.crossSectionSpread !== true || right.crossSectionSpread !== true)) {
+      fail(`spread ${left.spreadId} crosses sections without two-sided crossSectionSpread`)
+    }
+    if (!crossesSection && (left.crossSectionSpread === true || right.crossSectionSpread === true)) {
+      fail(`spread ${left.spreadId} marks crossSectionSpread within one section`)
+    }
+  }
+  return { pages: pageIds, spreads: new Set(spreadCounts.keys()), sections: sectionIds }
+}
+
 export function validateAll() {
   const sources = read('sources.json')
   const claims = read('claims.json')
   const reviews = read('reviews.json')
   const assets = read('assets.json')
+  const templates = readFlatplan('templates.json').templates
+  const album = readFlatplan('album.json')
+  const guide = readFlatplan('guide.json')
   const sourceIds = validateSources(sources)
   const claimIds = validateClaims(claims, sourceIds)
   const verified = new Set(claims.filter((claim) => claim.status === 'verified').map((claim) => claim.id))
   validateReviews(reviews, claimIds, verified)
-  validateAssets(assets)
+  const assetIds = validateAssets(assets)
   validateAssetFiles(assets, path.resolve(root, '..'))
+  validateFlatplan(album, 208, templates, assetIds)
+  validateFlatplan(guide, 48, templates, assetIds)
   return { sources: sources.length, claims: claims.length, assets: assets.length }
 }
 
