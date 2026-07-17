@@ -351,31 +351,31 @@
   },
   {
     "id": "medical-human-efficacy-is-extract-evidence",
-    "text": "Найденные человеческие efficacy studies пуэра исследовали водорастворимые или концентрированные экстракты, часто в таблетках, капсулах или добавленном порошке; они не доказывают эквивалентный эффект обычного домашнего настоя. Отдельная human metabonomic work Xie et al. изучала метаболическую судьбу компонентов, а не клиническое лечение.",
+    "text": "Шесть найденных human efficacy/safety studies пуэра исследовали водорастворимые или концентрированные экстракты, часто в таблетках, капсулах или добавленном порошке; они не доказывают эквивалентный эффект обычного домашнего настоя. Две отдельные beverage records Xie et al. и Zielińska-Przyjemska et al. изучали метаболическую судьбу компонентов либо ROS/CRP biomarkers, а не клиническое лечение.",
     "evidence": "medical-c",
     "status": "checked",
-    "sourceIds": ["fujita-2008-safety", "fujita-2008-trial", "kubota-2011", "chu-2011", "xie-2012", "jensen-2016"]
+    "sourceIds": ["fujita-2008-safety", "fujita-2008-trial", "kubota-2011", "chu-2011", "xie-2012", "jensen-2016", "yang-2014-weight", "zielinska-przyjemska-2005"]
   },
   {
     "id": "medical-weight-extract-evidence",
-    "text": "Несколько малых и коротких human studies экстрактов сообщили изменения массы, BMI, талии или surrogate body-composition endpoints, но неизвестная attrition в большинстве abstracts, multiple outcomes, post-randomization exclusion у Jensen et al. и отсутствие испытаний обычного настоя не позволяют утверждать, что пуэр как напиток вызывает клинически значимое или устойчивое снижение веса.",
+    "text": "Несколько малых и коротких human studies экстрактов сообщили изменения массы, BMI, талии или surrogate body-composition endpoints, но неизвестная attrition в большинстве abstracts, multiple outcomes, post-randomization exclusion у Jensen et al. и лишь subgroup signal у Yang et al. не позволяют утверждать, что пуэр как напиток вызывает клинически значимое или устойчивое снижение веса.",
     "evidence": "medical-c",
     "status": "checked",
-    "sourceIds": ["fujita-2008-safety", "fujita-2008-trial", "kubota-2011", "chu-2011", "jensen-2016"]
+    "sourceIds": ["fujita-2008-safety", "fujita-2008-trial", "kubota-2011", "chu-2011", "jensen-2016", "yang-2014-weight"]
   },
   {
     "id": "medical-lipid-extract-evidence",
-    "text": "Малые human studies экстрактов сообщали изменения lipid surrogate endpoints, но они не оценивали инфаркт, инсульт или смертность и не поддерживают замену лекарств; в Jensen et al. часть lipid findings была within-group или не достигала conventional between-group significance.",
+    "text": "Малые human studies экстрактов сообщали изменения lipid surrogate endpoints, но они не оценивали инфаркт, инсульт или смертность и не поддерживают замену лекарств; Jensen et al. не показал значимых between-group различий cholesterol/HDL/LDL, а Yang et al. — cholesterol/triglycerides.",
     "evidence": "medical-c",
     "status": "checked",
-    "sourceIds": ["fujita-2008-safety", "fujita-2008-trial", "chu-2011", "jensen-2016"]
+    "sourceIds": ["fujita-2008-safety", "fujita-2008-trial", "chu-2011", "jensen-2016", "yang-2014-weight"]
   },
   {
     "id": "medical-glycaemia-inconclusive",
-    "text": "Clinical glycaemic evidence пуэра недостаточно и непоследовательно: abstract Chu et al. сообщает ряд glucose changes без дозы, attrition и численных between-group effects, тогда как Jensen et al. не нашёл значимого between-group изменения fasting glucose. Пуэр не следует описывать как средство лечения или профилактики диабета.",
+    "text": "Clinical glycaemic evidence пуэра недостаточно и непоследовательно: abstract Chu et al. сообщает ряд glucose changes без дозы, attrition и численных between-group effects, тогда как Jensen et al. не нашёл значимого between-group изменения fasting glucose, а Yang et al. — HbA1c. Пуэр не следует описывать как средство лечения или профилактики диабета.",
     "evidence": "medical-c",
     "status": "checked",
-    "sourceIds": ["chu-2011", "jensen-2016"]
+    "sourceIds": ["chu-2011", "jensen-2016", "yang-2014-weight"]
   },
   {
     "id": "medical-enzyme-review-not-clinical",
@@ -466,13 +466,13 @@
     "text": "Пуэр и его экстракты не заменяют диагностику, назначенное лечение, питание и иные доказанные меры; найденный human corpus мал, краток и ориентирован на surrogate endpoints, а clinical outcomes не изучены.",
     "evidence": "medical-c",
     "status": "checked",
-    "sourceIds": ["fujita-2008-safety", "fujita-2008-trial", "kubota-2011", "chu-2011", "jensen-2016"]
+    "sourceIds": ["fujita-2008-safety", "fujita-2008-trial", "kubota-2011", "chu-2011", "jensen-2016", "yang-2014-weight", "zielinska-przyjemska-2005"]
   },
   {
     "id": "medical-disease-claims-rejected",
     "text": "Для книги отклонены утверждения, что пуэр лечит заболевание, вызывает гарантированное похудение, detoxifies, заменяет лекарства, предотвращает рак или сердечно-сосудистые события: включённые human studies экстрактов и nonhuman reviews таких выводов не поддерживают.",
     "evidence": "medical-c",
     "status": "rejected",
-    "sourceIds": ["fujita-2008-trial", "kubota-2011", "chu-2011", "jensen-2016", "yang-2019-systematic", "lin-2019-meta"]
+    "sourceIds": ["fujita-2008-trial", "kubota-2011", "chu-2011", "jensen-2016", "yang-2014-weight", "zielinska-przyjemska-2005", "yang-2019-systematic", "lin-2019-meta"]
   }
 ]

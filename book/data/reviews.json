@@ -393,7 +393,7 @@
     "reviewer": "Codex internal evidence search",
     "qualification": "internal evidence audit; not a licensed clinician",
     "reviewedAt": "2026-07-17",
-    "note": "Тип вмешательства сверён по доступным abstracts/full text; внешний медицинский reviewer не назначен."
+    "note": "Тип вмешательства сверён по доступным abstracts/full text, включая corrected Puerh search и две новые human records; внешний медицинский reviewer не назначен."
   },
   {
     "claimId": "medical-weight-extract-evidence",
@@ -402,7 +402,7 @@
     "reviewer": "Codex internal evidence search",
     "qualification": "internal evidence audit; not a licensed clinician",
     "reviewedAt": "2026-07-17",
-    "note": "Сохранены ограничения n, duration, attrition и extract-to-beverage applicability; требуется внешняя медицинская рецензия."
+    "note": "Сохранены ограничения n, duration, attrition, extract-to-beverage applicability и subgroup-only signal Yang et al.; требуется внешняя медицинская рецензия."
   },
   {
     "claimId": "medical-lipid-extract-evidence",
@@ -411,7 +411,7 @@
     "reviewer": "Codex internal evidence search",
     "qualification": "internal evidence audit; not a licensed clinician",
     "reviewedAt": "2026-07-17",
-    "note": "Surrogate lipid endpoints отделены от clinical cardiovascular outcomes; требуется внешняя медицинская рецензия."
+    "note": "Surrogate lipid endpoints, включая null abstract result Yang et al., отделены от clinical cardiovascular outcomes; требуется внешняя медицинская рецензия."
   },
   {
     "claimId": "medical-glycaemia-inconclusive",
@@ -420,7 +420,7 @@
     "reviewer": "Codex internal evidence search",
     "qualification": "internal evidence audit; not a licensed clinician",
     "reviewedAt": "2026-07-17",
-    "note": "Противоречие abstracts сохранено без причинного или лечебного вывода; требуется внешняя медицинская рецензия."
+    "note": "Abstract findings, включая отсутствие значимого HbA1c result у Yang et al., сохранены без причинного или лечебного вывода; требуется внешняя медицинская рецензия."
   },
   {
     "claimId": "medical-enzyme-review-not-clinical",
@@ -537,7 +537,7 @@
     "reviewer": "Codex internal evidence search",
     "qualification": "internal evidence audit; not a licensed clinician",
     "reviewedAt": "2026-07-17",
-    "note": "Editorial non-substitution warning based on limited clinical corpus; внешний medical review pending."
+    "note": "Editorial non-substitution warning обновлён по corrected 8-record human corpus; внешний medical review pending."
   },
   {
     "claimId": "medical-disease-claims-rejected",
@@ -546,6 +546,6 @@
     "reviewer": "Codex internal evidence search",
     "qualification": "internal evidence audit; not a licensed clinician",
     "reviewedAt": "2026-07-17",
-    "note": "Unsupported treatment/detox/cancer/medicine-replacement claims rejected; внешний medical review pending."
+    "note": "Unsupported treatment/detox/cancer/medicine-replacement claims остаются rejected после corrected Puerh search; внешний medical review pending."
   }
 ]
