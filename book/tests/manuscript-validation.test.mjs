@@ -364,14 +364,50 @@ test('does not treat four-digit measurements or measurement ranges as years', ()
   assert.deepEqual(result.errors, [])
 })
 
+test('masks expanded Latin and Russian measurement units but not year abbreviations', () => {
+  const measurements = [
+    '1500 g', '2000 kg', '1500 mg', '1500 µg', '1500 μg', '1500 ug',
+    '1500 L', '1500 l', '1500 cl', '1500 dl',
+    '1500 m', '1500 cm', '1500 mm', '1500 km',
+    '1500 seconds', '1500 minutes', '1500 hours',
+    '1500 г', '1500 кг', '1500 мг', '1500 мкг',
+    '1500 л', '1500 сл', '1500 дл',
+    '1500 с', '1500 секунд', '1500 мин', '1500 минут', '1500 ч', '1500 часов',
+    '1500-2000 kg', '1500–2000 минут',
+  ]
+
+  for (const measurement of measurements) {
+    const result = validateText(`The measured value is ${measurement}`, textOptions())
+    assert.deepEqual(result.errors, [], measurement)
+  }
+})
+
 test('ignores years in Markdown destinations, URLs, and path identifiers', () => {
   const result = validateText([
     'Read [the archive](https://example.test/1973/item).',
+    'The numeric local destination is [an edition](1973/1974).',
     'The raw URL is https://example.test/1988/item.',
     'The local identifiers are archive/1999/item and /records/2001/source.',
+    'Specified path examples are /archive/1973/report.md and book/2020/file.',
   ].join('\n'), textOptions())
 
   assert.deepEqual(result.errors, [])
+})
+
+test('keeps numeric slash years and dates visible to evidence checks', () => {
+  const result = validateText([
+    'The paired years are 1973/1974.',
+    '',
+    'The full date is 01/02/1973.',
+    '',
+    'The slash range is 1973/1974–1975/1976.',
+  ].join('\n'), textOptions())
+
+  assert.deepEqual(result.errors.map(({ code, line, year }) => [code, line, year]), [
+    ['missing-year-claim', 1, '1973'],
+    ['missing-year-claim', 3, '1973'],
+    ['missing-year-claim', 5, '1973'],
+  ])
 })
 
 test('still requires evidence for genuine year forms and bare four-digit years', () => {
@@ -415,6 +451,32 @@ test('keeps claim evidence local to one list item and its continuations', () => 
   ])
 })
 
+test('treats four-space list continuations as prose relative to list content indentation', () => {
+  const unsupported = validateText([
+    '- A list item introduces a continuation:',
+    '    The continuation refers to 1973.',
+  ].join('\n'), textOptions())
+  const supported = validateText([
+    '- <!-- claim:hist-known -->',
+    '    The same list item refers to 1973.',
+  ].join('\n'), textOptions())
+
+  assert.deepEqual(unsupported.errors.map(({ code, line }) => [code, line]), [
+    ['missing-year-claim', 2],
+  ])
+  assert.deepEqual(supported.errors, [])
+  assert.deepEqual(supported.claimMarkers.map(({ id, line }) => [id, line]), [['hist-known', 1]])
+})
+
+test('exempts list-indented code at content indent plus four spaces', () => {
+  const result = validateText([
+    '- A list item introduces code:',
+    '      archive 1973',
+  ].join('\n'), textOptions())
+
+  assert.deepEqual(result.errors, [])
+})
+
 test('does not let a later blockquote paragraph satisfy an earlier quoted paragraph', () => {
   const result = validateText([
     '> The earlier quoted assertion refers to 1973.',
@@ -424,6 +486,25 @@ test('does not let a later blockquote paragraph satisfy an earlier quoted paragr
   ].join('\n'), textOptions())
 
   assert.deepEqual(result.claimMarkers.map(({ id, line }) => [id, line]), [['hist-known', 3]])
+  assert.deepEqual(result.errors.map(({ code, line }) => [code, line]), [
+    ['missing-year-claim', 1],
+  ])
+})
+
+test('separates list items inside blockquotes and keeps same-item continuations together', () => {
+  const result = validateText([
+    '> - The first quoted item refers to 1973.',
+    '> - <!-- claim:hist-known -->',
+    '>   The second quoted item refers to 1974.',
+    '>',
+    '> - <!-- claim:science-known -->',
+    '>   A post-blank quoted item refers to 1975.',
+  ].join('\r\n'), textOptions())
+
+  assert.deepEqual(result.claimMarkers.map(({ id, line }) => [id, line]), [
+    ['hist-known', 2],
+    ['science-known', 5],
+  ])
   assert.deepEqual(result.errors.map(({ code, line }) => [code, line]), [
     ['missing-year-claim', 1],
   ])
@@ -488,6 +569,27 @@ test('keeps invalid closing-fence forms inside code until a valid longer clean c
 
   assert.deepEqual(result.errors.map(({ code, line }) => [code, line]), [
     ['missing-year-claim', 11],
+  ])
+})
+
+test('ends unclosed fences when prose leaves a quote or list container', () => {
+  const quoted = validateText([
+    '> ```text',
+    '> archive 1999',
+    'Outside quoted code from 2000.',
+  ].join('\n'), textOptions())
+  const listed = validateText([
+    '- ```text',
+    '  archive 1999',
+    '',
+    'Outside listed code from 2000.',
+  ].join('\n'), textOptions())
+
+  assert.deepEqual(quoted.errors.map(({ code, line }) => [code, line]), [
+    ['missing-year-claim', 3],
+  ])
+  assert.deepEqual(listed.errors.map(({ code, line }) => [code, line]), [
+    ['missing-year-claim', 4],
   ])
 })
 

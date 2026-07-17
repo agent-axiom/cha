@@ -12,8 +12,26 @@ const toolToken = /\bturn\d+(?:search|fetch|view|open|image|file)\d+\b|(?:fil
 const yearToken = /\b(?:1\d{3}|20\d{2})\b/
 const markdownDestination = /\]\((?:\\.|[^)\r\n])*\)/g
 const urlToken = /(?:https?:\/\/|www\.)[^\s<>()]+/gi
-const pathToken = /[^\s()[\]<>]*[\\/][^\s()[\]<>]*/g
-const measurementToken = /(?<![\p{L}\p{N}_])(?:1\d{3}|20\d{2})(?:[ \t]*(?:-|–|—)[ \t]*(?:1\d{3}|20\d{2}))?[ \t]*(?:миллилитр(?:а|ов)?|milliliters?|секунд(?:а|ы)?|seconds?|secs?|мл|ml|мм|mm|см|cm|км|km|м|m)(?![\p{L}\p{N}_])/giu
+const pathToken = /(?=[^\s()[\]<>]*\p{L})[^\s()[\]<>]*[\\/][^\s()[\]<>]*/gu
+const measurementUnit = [
+  'micrograms?', 'milligrams?', 'kilograms?', 'grams?', 'µg', 'μg', 'ug', 'mg', 'kg', 'g',
+  'milliliters?', 'millilitres?', 'centiliters?', 'centilitres?', 'deciliters?', 'decilitres?',
+  'liters?', 'litres?', 'ml', 'cl', 'dl', 'l',
+  'millimeters?', 'millimetres?', 'centimeters?', 'centimetres?', 'kilometers?', 'kilometres?',
+  'meters?', 'metres?', 'mm', 'cm', 'km', 'm',
+  'seconds?', 'secs?', 'sec', 'minutes?', 'mins?', 'min', 'hours?', 'hrs?', 'hr', 's', 'h',
+  'микрограмм(?:а|ов)?', 'миллиграмм(?:а|ов)?', 'килограмм(?:а|ов)?', 'грамм(?:а|ов)?',
+  'мкг', 'мг', 'кг', 'г(?!\\.)',
+  'миллилитр(?:а|ов)?', 'сантилитр(?:а|ов)?', 'децилитр(?:а|ов)?', 'литр(?:а|ов)?',
+  'мл', 'сл', 'дл', 'л',
+  'миллиметр(?:а|ов)?', 'сантиметр(?:а|ов)?', 'километр(?:а|ов)?', 'метр(?:а|ов)?',
+  'мм', 'см', 'км', 'м',
+  'секунд(?:а|ы)?', 'сек\\.?', 'минут(?:а|ы)?', 'мин\\.?', 'час(?:а|ов)?', 'ч\\.?', 'с',
+].join('|')
+const measurementToken = new RegExp(
+  String.raw`(?<![\p{L}\p{N}_])(?:1\d{3}|20\d{2})(?:[ \t]*(?:-|–|—)[ \t]*(?:1\d{3}|20\d{2}))?[ \t]*(?:${measurementUnit})(?![\p{L}\p{N}_])`,
+  'giu',
+)
 const apparatusYearExemption = /^album\/(?:91|92)-[^/]*\.md$/i
 
 const compareNames = (left, right) => {
@@ -61,31 +79,109 @@ const maskRange = (characters, start, end) => {
   }
 }
 
+const markdownContainerLine = (text, maximumQuoteDepth = Number.POSITIVE_INFINITY) => {
+  let content = text
+  let contentStart = 0
+  let quoteDepth = 0
+
+  while (quoteDepth < maximumQuoteDepth) {
+    const quote = content.match(/^ {0,3}>[ \t]?/)
+    if (!quote) break
+    contentStart += quote[0].length
+    content = content.slice(quote[0].length)
+    quoteDepth += 1
+  }
+
+  return { content, contentStart, quoteDepth }
+}
+
+const listItemLine = (text) => {
+  const match = text.match(/^( {0,3}(?:[-+*]|\d+[.)])[ \t]+)(.*)$/)
+  return match ? { content: match[2], contentStart: match[1].length } : null
+}
+
 const sanitizedMarkdownCode = (text, lines) => {
   const characters = text.split('')
   let fence = null
+  let activeList = null
 
   for (const line of lines) {
     if (fence) {
-      const closingFence = line.text.match(/^ {0,3}(`+|~+)[ \t]*$/)
-      maskRange(characters, line.offset, line.offset + line.text.length)
-      if (
-        closingFence
-        && closingFence[1][0] === fence.character
-        && closingFence[1].length >= fence.length
-      ) {
-        fence = null
+      const fencedContainer = markdownContainerLine(line.text, fence.quoteDepth)
+      const blankLine = !fencedContainer.content.trim()
+      const hasRequiredQuote = fence.quoteDepth === 0
+        || fencedContainer.quoteDepth === fence.quoteDepth
+        || !line.text.trim()
+      const leadingSpaces = fencedContainer.content.match(/^ */)[0].length
+      const hasRequiredListIndent = fence.listIndent === null
+        || blankLine
+        || leadingSpaces >= fence.listIndent
+        || fencedContainer.content.startsWith('\t')
+
+      if (hasRequiredQuote && hasRequiredListIndent) {
+        const relativeContent = fence.listIndent !== null && !blankLine
+          ? fencedContainer.content.startsWith('\t')
+            ? fencedContainer.content.slice(1)
+            : fencedContainer.content.slice(fence.listIndent)
+          : fencedContainer.content
+        const closingFence = relativeContent.match(/^ {0,3}(`+|~+)[ \t]*$/)
+        maskRange(characters, line.offset, line.offset + line.text.length)
+        if (
+          closingFence
+          && closingFence[1][0] === fence.character
+          && closingFence[1].length >= fence.length
+        ) {
+          fence = null
+        }
+        continue
       }
-      continue
+
+      fence = null
+      activeList = null
     }
 
-    const openingFence = line.text.match(/^ {0,3}(`{3,}|~{3,})/)
+    const container = markdownContainerLine(line.text)
+    const listItem = listItemLine(container.content)
+    if (!container.content.trim()) activeList = null
+    else if (listItem) {
+      activeList = {
+        quoteDepth: container.quoteDepth,
+        contentIndent: listItem.contentStart,
+      }
+    } else if (activeList?.quoteDepth !== container.quoteDepth) {
+      activeList = null
+    }
+
+    const relativeContent = listItem
+      ? listItem.content
+      : activeList && container.content.startsWith(' '.repeat(activeList.contentIndent))
+        ? container.content.slice(activeList.contentIndent)
+        : container.content
+
+    const openingFence = relativeContent.match(/^ {0,3}(`{3,}|~{3,})/)
     if (openingFence) {
-      fence = { character: openingFence[1][0], length: openingFence[1].length }
+      const leadingSpaces = container.content.match(/^ */)[0].length
+      const listIndent = listItem
+        ? listItem.contentStart
+        : activeList && (
+          leadingSpaces >= activeList.contentIndent || container.content.startsWith('\t')
+        )
+          ? activeList.contentIndent
+          : null
+      fence = {
+        character: openingFence[1][0],
+        length: openingFence[1].length,
+        quoteDepth: container.quoteDepth,
+        listIndent,
+      }
       maskRange(characters, line.offset, line.offset + line.text.length)
       continue
     }
-    if (/^(?: {4}|\t)/.test(line.text)) {
+    const leadingSpaces = container.content.match(/^ */)[0].length
+    const indentedCode = activeList
+      ? leadingSpaces >= activeList.contentIndent + 4 || container.content.startsWith('\t')
+      : /^(?: {4}|\t)/.test(container.content)
+    if (indentedCode) {
       maskRange(characters, line.offset, line.offset + line.text.length)
     }
   }
@@ -124,16 +220,6 @@ const sanitizedMarkdownCode = (text, lines) => {
   return characters.join('')
 }
 
-const blockquoteLine = (text) => {
-  const match = text.match(/^( {0,3}(?:>[ \t]?)+)(.*)$/)
-  return match ? { content: match[2], contentStart: match[1].length } : null
-}
-
-const listItemLine = (text) => {
-  const match = text.match(/^( {0,3}(?:[-+*]|\d+[.)])[ \t]+)(.*)$/)
-  return match ? { content: match[2], contentStart: match[1].length } : null
-}
-
 const atxHeading = (text) => /^ {0,3}#{1,6}(?:[ \t]+|$)/.test(text)
 const setextUnderline = (text) => /^ {0,3}(?:=+|-+)[ \t]*$/.test(text)
 
@@ -145,8 +231,8 @@ const tokenizeLogicalBlocks = (lines) => {
   const flush = () => {
     current = null
   }
-  const start = (type) => {
-    current = { id: blocks.length, type, lines: [] }
+  const start = (type, quoteDepth) => {
+    current = { id: blocks.length, type, quoteDepth, lines: [] }
     blocks.push(current)
   }
   const append = (line, contentStart) => {
@@ -157,61 +243,48 @@ const tokenizeLogicalBlocks = (lines) => {
 
   for (let index = 0; index < lines.length; index += 1) {
     const line = lines[index]
-    if (!line.text.trim()) {
+    const container = markdownContainerLine(line.text)
+    if (!container.content.trim()) {
       flush()
       continue
     }
 
-    const quote = blockquoteLine(line.text)
-    if (quote) {
-      if (!quote.content.trim()) {
-        flush()
-        continue
-      }
-      const nextQuote = lines[index + 1] ? blockquoteLine(lines[index + 1].text) : null
-      if (atxHeading(quote.content) || (nextQuote && setextUnderline(nextQuote.content))) {
-        flush()
-        if (nextQuote && setextUnderline(nextQuote.content)) index += 1
-        continue
-      }
-      if (!current || current.type !== 'quote') {
-        flush()
-        start('quote')
-      }
-      append(line, quote.contentStart)
-      continue
-    }
-
-    if (current?.type === 'quote') flush()
-    const listItem = listItemLine(line.text)
+    const listItem = listItemLine(container.content)
     if (listItem) {
       flush()
       if (atxHeading(listItem.content)) continue
-      start('list')
-      append(line, listItem.contentStart)
+      start('list', container.quoteDepth)
+      append(line, container.contentStart + listItem.contentStart)
       continue
     }
 
-    if (current?.type === 'list') {
-      if (atxHeading(line.text)) {
+    if (current?.type === 'list' && current.quoteDepth === container.quoteDepth) {
+      if (atxHeading(container.content)) {
         flush()
         continue
       }
-      append(line, 0)
+      append(line, container.contentStart)
       continue
     }
+    if (current?.type === 'list') flush()
 
     const next = lines[index + 1]
-    if (atxHeading(line.text) || (next && !blockquoteLine(next.text) && !listItemLine(next.text) && setextUnderline(next.text))) {
+    const nextContainer = next ? markdownContainerLine(next.text) : null
+    const nextIsSetext = nextContainer
+      && nextContainer.quoteDepth === container.quoteDepth
+      && !listItemLine(nextContainer.content)
+      && setextUnderline(nextContainer.content)
+    if (atxHeading(container.content) || nextIsSetext) {
       flush()
-      if (next && setextUnderline(next.text)) index += 1
+      if (nextIsSetext) index += 1
       continue
     }
-    if (!current || current.type !== 'top') {
+    const type = container.quoteDepth > 0 ? 'quote' : 'top'
+    if (!current || current.type !== type || current.quoteDepth !== container.quoteDepth) {
       flush()
-      start('top')
+      start(type, container.quoteDepth)
     }
-    append(line, 0)
+    append(line, container.contentStart)
   }
 
   return { blocks, lineContexts }
