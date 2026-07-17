@@ -61,17 +61,127 @@ export function validateReviews(reviews, claimIds, verifiedClaimIds) {
   }
 }
 
+const assetKinds = ['photo', 'archive', 'illustration', 'map', 'diagram']
+const rasterKinds = ['photo', 'archive', 'illustration']
+const assetRights = ['owned', 'licensed', 'public-domain', 'pending', 'rejected']
+const assetStatuses = ['concept', 'preview', 'print-ready', 'rejected']
+const clearedRights = ['owned', 'licensed', 'public-domain']
+const requiredAssetMetadata = [
+  'id',
+  'kind',
+  'title',
+  'creator',
+  'createdAt',
+  'location',
+  'sourceUrl',
+  'rights',
+  'licenseFile',
+  'creditLine',
+  'path',
+  'pixelWidth',
+  'pixelHeight',
+  'effectiveDpi',
+  'status',
+  'spreadIds',
+]
+
+const hasOwn = (object, key) => Object.prototype.hasOwnProperty.call(object, key)
+const roundedDpi = (value) => Number(value.toFixed(1))
+const minimumPixels = (millimetres) => Math.round((millimetres / 25.4) * 300)
+const nullableString = (value) => value === null || (typeof value === 'string' && value.trim().length > 0)
+const positiveNumber = (value) => Number.isFinite(value) && value > 0
+const validViewBox = (value) => {
+  if (typeof value !== 'string' || !value.trim()) return false
+  const numbers = value.trim().split(/[\s,]+/).map(Number)
+  return numbers.length === 4 && numbers.every(Number.isFinite) && numbers[2] > 0 && numbers[3] > 0
+}
+
+export const effectiveDpi = (pixels, millimetres) => pixels / (millimetres / 25.4)
+
 export function validateAssets(assets) {
   const seen = new Set()
   for (const asset of assets) {
     requireNonblankId(asset.id, 'asset')
-    if (seen.has(asset.id)) throw new Error(`duplicate asset id: ${asset.id}`)
+    const fail = (reason) => {
+      throw new Error(`asset ${asset.id}: ${reason}`)
+    }
+    if (seen.has(asset.id)) fail('duplicate asset id')
     seen.add(asset.id)
-    oneOf(asset.kind, ['photo', 'archive', 'illustration', 'map', 'diagram'], 'invalid asset kind')
-    oneOf(asset.rights, ['owned', 'licensed', 'public-domain', 'pending', 'rejected'], 'invalid asset rights')
-    oneOf(asset.status, ['concept', 'preview', 'print-ready', 'rejected'], 'invalid asset status')
-    if (asset.status === 'print-ready' && !['owned', 'licensed', 'public-domain'].includes(asset.rights)) {
-      throw new Error(`print-ready asset requires cleared rights: ${asset.id}`)
+
+    if (asset.status === 'print-ready' && ['pending', 'rejected'].includes(asset.rights)) {
+      fail(`print-ready asset requires cleared rights: ${asset.rights}`)
+    }
+
+    for (const field of requiredAssetMetadata) {
+      if (!hasOwn(asset, field)) fail(`missing required metadata: ${field}`)
+    }
+
+    if (!assetKinds.includes(asset.kind)) fail(`invalid asset kind: ${asset.kind}`)
+    if (!assetRights.includes(asset.rights)) fail(`invalid asset rights: ${asset.rights}`)
+    if (!assetStatuses.includes(asset.status)) fail(`invalid asset status: ${asset.status}`)
+    if (typeof asset.title !== 'string' || !asset.title.trim()) fail('title must be a nonblank string')
+    if (!nullableString(asset.creator)) fail('creator must be a nonblank string or null')
+    if (!nullableString(asset.createdAt)) fail('createdAt must be a nonblank string or null')
+    if (!nullableString(asset.location)) fail('location must be a nonblank string or null')
+    if (!nullableString(asset.sourceUrl)) fail('sourceUrl must be a nonblank string or null')
+    if (asset.sourceUrl !== null) {
+      try {
+        const source = new URL(asset.sourceUrl)
+        if (!['http:', 'https:'].includes(source.protocol)) fail('sourceUrl must use http or https')
+      } catch {
+        fail('sourceUrl must be a valid URL or null')
+      }
+    }
+    if (!nullableString(asset.licenseFile)) fail('licenseFile must be a nonblank string or null')
+    if (!nullableString(asset.creditLine)) fail('creditLine must be a nonblank string or null')
+    if (typeof asset.path !== 'string' || !asset.path.trim()) fail('path must be a nonblank string')
+    if (!Array.isArray(asset.spreadIds) || asset.spreadIds.some((id) => typeof id !== 'string' || !id.trim())) {
+      fail('spreadIds must be an array of nonblank strings')
+    }
+
+    const raster = rasterKinds.includes(asset.kind)
+    if (raster) {
+      const pixelValues = [asset.pixelWidth, asset.pixelHeight]
+      const nullPixelCount = pixelValues.filter((value) => value === null).length
+      if (nullPixelCount !== 0 && nullPixelCount !== 2) fail('pixel dimensions must both be positive integers or both be null')
+      if (nullPixelCount === 0 && pixelValues.some((value) => !Number.isInteger(value) || value <= 0)) {
+        fail('pixel dimensions must both be positive integers or both be null')
+      }
+    } else if (asset.pixelWidth !== null || asset.pixelHeight !== null || asset.effectiveDpi !== null) {
+      fail('vector pixel dimensions and effectiveDpi must be null')
+    }
+
+    if (asset.status === 'print-ready' && !clearedRights.includes(asset.rights)) {
+      fail(`print-ready asset requires cleared rights: ${asset.rights}`)
+    }
+
+    if (asset.status === 'print-ready' && raster) {
+      const dimensions = ['pixelWidth', 'pixelHeight', 'placementWidthMm', 'placementHeightMm']
+      if (dimensions.some((field) => !positiveNumber(asset[field]))) {
+        fail('print-ready raster requires positive pixel and placement dimensions')
+      }
+      if (!positiveNumber(asset.effectiveDpi)) fail('print-ready raster requires positive effectiveDpi')
+
+      const calculated = Math.min(
+        effectiveDpi(asset.pixelWidth, asset.placementWidthMm),
+        effectiveDpi(asset.pixelHeight, asset.placementHeightMm),
+      )
+      if (
+        asset.pixelWidth < minimumPixels(asset.placementWidthMm)
+        || asset.pixelHeight < minimumPixels(asset.placementHeightMm)
+      ) {
+        fail(`effective dpi below 300 (${calculated.toFixed(1)})`)
+      }
+      const registered = calculated < 300 ? 300 : roundedDpi(calculated)
+      if (asset.effectiveDpi !== registered) {
+        fail(`registered effectiveDpi ${asset.effectiveDpi} does not match calculated ${registered}`)
+      }
+    }
+    if (asset.status === 'print-ready' && !raster && !validViewBox(asset.viewBox)) {
+      fail('print-ready vector requires valid viewBox')
+    }
+    if (asset.status === 'print-ready' && (!asset.creditLine || !asset.licenseFile)) {
+      fail('print-ready asset requires creditLine and licenseFile')
     }
   }
   return seen

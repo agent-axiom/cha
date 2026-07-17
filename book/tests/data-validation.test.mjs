@@ -90,5 +90,25 @@ test('accepts a complete valid evidence and rights registry', () => {
   ]
 
   assert.doesNotThrow(() => validateReviews(reviews, claimIds, new Set(['c1'])))
-  assert.deepEqual(validateAssets([{ id: 'img-1', kind: 'photo', rights: 'licensed', status: 'print-ready', path: 'book/assets/private/a.tif' }]), new Set(['img-1']))
+  const printReadyAsset = {
+    id: 'img-1',
+    kind: 'photo',
+    title: 'Licensed print image',
+    creator: 'Example photographer',
+    createdAt: '2026-07-17',
+    location: 'Example studio',
+    sourceUrl: 'https://assets.example/img-1',
+    rights: 'licensed',
+    licenseFile: 'book/assets/rights/img-1.md',
+    creditLine: 'Example photographer',
+    path: 'book/assets/private/a.tif',
+    pixelWidth: 3000,
+    pixelHeight: 3000,
+    effectiveDpi: 300,
+    status: 'print-ready',
+    spreadIds: ['A-P001'],
+    placementWidthMm: 254,
+    placementHeightMm: 254,
+  }
+  assert.deepEqual(validateAssets([printReadyAsset]), new Set(['img-1']))
 })

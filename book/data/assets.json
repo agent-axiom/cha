@@ -1,1 +1,906 @@
-[]
+[
+  {
+    "id": "site-puer-hero-concept",
+    "kind": "illustration",
+    "title": "Site hero: old tea tree above misted mountains",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending — repository import has no embedded creator, source or licence metadata.",
+    "path": "public/images/puer-hero.webp",
+    "pixelWidth": 1672,
+    "pixelHeight": 941,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-opening"
+    ]
+  },
+  {
+    "id": "site-fermentation-microcosm-concept",
+    "kind": "illustration",
+    "title": "Site fermentation microcosm visual",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending — repository import has no embedded creator, source or licence metadata.",
+    "path": "public/images/fermentation-microcosm.webp",
+    "pixelWidth": 1672,
+    "pixelHeight": 941,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-fermentation"
+    ]
+  },
+  {
+    "id": "site-puer-material-culture-concept",
+    "kind": "illustration",
+    "title": "Site material-culture still life",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending — repository import has no embedded creator, source or licence metadata.",
+    "path": "public/images/puer-material-culture.webp",
+    "pixelWidth": 1672,
+    "pixelHeight": 941,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-object-atlas"
+    ]
+  },
+  {
+    "id": "site-sheng-shou-paths-concept",
+    "kind": "illustration",
+    "title": "Site sheng and shou paths visual",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending — repository import has no embedded creator, source or licence metadata.",
+    "path": "public/images/sheng-shou-paths.webp",
+    "pixelWidth": 1672,
+    "pixelHeight": 941,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-sheng-shou"
+    ]
+  },
+  {
+    "id": "photo-yunnan-mountain-landscape",
+    "kind": "photo",
+    "title": "Yunnan mountain landscape documentary plate",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/yunnan-mountain-landscape.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-yunnan-ecology"
+    ]
+  },
+  {
+    "id": "photo-tea-forest-landscape",
+    "kind": "photo",
+    "title": "Tea forest landscape documentary plate",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/tea-forest-landscape.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-yunnan-ecology"
+    ]
+  },
+  {
+    "id": "photo-tea-garden-documentary",
+    "kind": "photo",
+    "title": "Old tea garden documentary plate",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/tea-garden-documentary.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-tea-gardens"
+    ]
+  },
+  {
+    "id": "photo-assamica-botanical-macro",
+    "kind": "photo",
+    "title": "Camellia sinensis var. assamica botanical macro",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/assamica-botanical-macro.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-botany"
+    ]
+  },
+  {
+    "id": "photo-old-tea-tree-portraits",
+    "kind": "photo",
+    "title": "Old tea tree portrait series",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/old-tea-tree-portraits.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-tea-gardens"
+    ]
+  },
+  {
+    "id": "photo-maocha-production-sequence",
+    "kind": "photo",
+    "title": "Maocha production sequence overview",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/maocha-production-sequence.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-maocha-process"
+    ]
+  },
+  {
+    "id": "photo-harvest-hands",
+    "kind": "photo",
+    "title": "Harvest hands and fresh leaf detail",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/harvest-hands.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-maocha-process"
+    ]
+  },
+  {
+    "id": "photo-shaqing-worker-tools",
+    "kind": "photo",
+    "title": "Sha qing worker and tools",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/shaqing-worker-tools.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-maocha-process"
+    ]
+  },
+  {
+    "id": "photo-rolling-hands",
+    "kind": "photo",
+    "title": "Rolling hands documentary detail",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/rolling-hands.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-maocha-process"
+    ]
+  },
+  {
+    "id": "photo-sun-drying-terraces",
+    "kind": "photo",
+    "title": "Sun-drying terraces documentary plate",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/sun-drying-terraces.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-maocha-process"
+    ]
+  },
+  {
+    "id": "photo-sorting-workers",
+    "kind": "photo",
+    "title": "Sorting workers documentary plate",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/sorting-workers.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-maocha-process"
+    ]
+  },
+  {
+    "id": "photo-steaming-tools",
+    "kind": "photo",
+    "title": "Steaming tools and leaf detail",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/steaming-tools.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-pressing"
+    ]
+  },
+  {
+    "id": "photo-pressing-workers",
+    "kind": "photo",
+    "title": "Pressing workers and moulds",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/pressing-workers.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-pressing"
+    ]
+  },
+  {
+    "id": "photo-drying-racks",
+    "kind": "photo",
+    "title": "Pressed tea drying racks",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/drying-racks.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-pressing"
+    ]
+  },
+  {
+    "id": "photo-tea-worker-portrait",
+    "kind": "photo",
+    "title": "Tea worker portrait",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/tea-worker-portrait.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-living-culture"
+    ]
+  },
+  {
+    "id": "photo-tea-tools-still-life",
+    "kind": "photo",
+    "title": "Tea tools still life",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/tea-tools-still-life.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-object-atlas",
+      "guide-tools-water"
+    ]
+  },
+  {
+    "id": "photo-pressings-object-atlas",
+    "kind": "photo",
+    "title": "Pressed cakes and forms object atlas",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/pressings-object-atlas.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-object-atlas"
+    ]
+  },
+  {
+    "id": "photo-wrappers-object-atlas",
+    "kind": "photo",
+    "title": "Wrappers and seals object atlas",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/wrappers-object-atlas.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-object-atlas"
+    ]
+  },
+  {
+    "id": "photo-water-brewing-detail",
+    "kind": "photo",
+    "title": "Water and brewing detail",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/water-brewing-detail.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "guide-tools-water"
+    ]
+  },
+  {
+    "id": "photo-tea-liquor-cups",
+    "kind": "photo",
+    "title": "Tea liquor and cups comparison",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/tea-liquor-cups.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-cup",
+      "guide-tasting"
+    ]
+  },
+  {
+    "id": "archive-qing-tribute-record",
+    "kind": "archive",
+    "title": "Qing tribute-tea record facsimile",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/archive/qing-tribute-record.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-qing-history"
+    ]
+  },
+  {
+    "id": "archive-tea-route-document",
+    "kind": "archive",
+    "title": "Historical tea-route document facsimile",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/archive/tea-route-document.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-tea-routes"
+    ]
+  },
+  {
+    "id": "map-yunnan-relief",
+    "kind": "map",
+    "title": "Yunnan relief and watersheds map",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/maps/yunnan-relief.svg",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-yunnan-ecology"
+    ],
+    "viewBox": null
+  },
+  {
+    "id": "map-six-mountains",
+    "kind": "map",
+    "title": "Six historic tea mountains map",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/maps/six-mountains.svg",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-six-mountains"
+    ],
+    "viewBox": null
+  },
+  {
+    "id": "map-tea-routes",
+    "kind": "map",
+    "title": "Tea routes evidence map",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/maps/tea-routes.svg",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-tea-routes"
+    ],
+    "viewBox": null
+  },
+  {
+    "id": "map-jingmai-landscape",
+    "kind": "map",
+    "title": "Jingmai cultural landscape map",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/maps/jingmai-landscape.svg",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-tea-gardens"
+    ],
+    "viewBox": null
+  },
+  {
+    "id": "map-puer-administration-history",
+    "kind": "map",
+    "title": "Pu'er administrative history map",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/maps/puer-administration-history.svg",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-puer-history"
+    ],
+    "viewBox": null
+  },
+  {
+    "id": "map-storage-climates",
+    "kind": "map",
+    "title": "Comparative storage climates map",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/maps/storage-climates.svg",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-storage"
+    ],
+    "viewBox": null
+  },
+  {
+    "id": "diagram-maocha-process",
+    "kind": "diagram",
+    "title": "Maocha process diagram",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/diagrams/maocha-process.svg",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-maocha-process"
+    ],
+    "viewBox": null
+  },
+  {
+    "id": "diagram-sheng-shou-fork",
+    "kind": "diagram",
+    "title": "Sheng and shou process fork",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/diagrams/sheng-shou-fork.svg",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-sheng-shou"
+    ],
+    "viewBox": null
+  },
+  {
+    "id": "diagram-wodui-heat",
+    "kind": "diagram",
+    "title": "Wodui moisture and heat diagram",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/diagrams/wodui-heat.svg",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-fermentation"
+    ],
+    "viewBox": null
+  },
+  {
+    "id": "diagram-storage-variables",
+    "kind": "diagram",
+    "title": "Storage variables diagram",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/diagrams/storage-map.svg",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-storage",
+      "guide-storage-safety"
+    ],
+    "viewBox": null
+  },
+  {
+    "id": "diagram-microbiology-community",
+    "kind": "diagram",
+    "title": "Microbial community explanatory plate",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/diagrams/microbiology-community.svg",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-microbiology"
+    ],
+    "viewBox": null
+  },
+  {
+    "id": "diagram-microbiology-safety-methods",
+    "kind": "diagram",
+    "title": "Microbiology safety and method limits plate",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/diagrams/microbiology-safety-methods.svg",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-microbiology-safety"
+    ],
+    "viewBox": null
+  },
+  {
+    "id": "diagram-medical-evidence-scale",
+    "kind": "diagram",
+    "title": "Medical evidence scale diagram",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/diagrams/evidence-scale.svg",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-medical-evidence"
+    ],
+    "viewBox": null
+  },
+  {
+    "id": "diagram-medical-study-limitations",
+    "kind": "diagram",
+    "title": "Medical study limitations diagram",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/diagrams/medical-study-limitations.svg",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-medical-evidence"
+    ],
+    "viewBox": null
+  },
+  {
+    "id": "illustration-shennong-gate",
+    "kind": "illustration",
+    "title": "Shennong legend chapter-gate art",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/illustrations/shennong-gate.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-shennong-gate"
+    ]
+  },
+  {
+    "id": "illustration-zhuge-liang-legend",
+    "kind": "illustration",
+    "title": "Zhuge Liang tea legend art",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/illustrations/zhuge-liang-legend.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-zhuge-legend"
+    ]
+  },
+  {
+    "id": "illustration-cover-living-mountain",
+    "kind": "illustration",
+    "title": "Living Mountain cover art",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/illustrations/cover-living-mountain.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-cover"
+    ]
+  },
+  {
+    "id": "illustration-guide-spots",
+    "kind": "illustration",
+    "title": "Brewing guide spot illustration set",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/illustrations/guide-spots.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "guide-quick-start",
+      "guide-choose-tea",
+      "guide-tools-water",
+      "guide-sheng",
+      "guide-shou",
+      "guide-simple-methods",
+      "guide-tasting",
+      "guide-storage-safety"
+    ]
+  }
+]
