@@ -385,5 +385,167 @@
     "qualification": "internal evidence audit; not a credentialed microbiologist or toxicologist",
     "reviewedAt": "2026-07-17",
     "note": "Различия результатов привязаны к выборке, analyte list и аналитическим пределам; медицинский вывод не делается."
+  },
+  {
+    "claimId": "medical-human-efficacy-is-extract-evidence",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician",
+    "reviewedAt": "2026-07-17",
+    "note": "Тип вмешательства сверён по доступным abstracts/full text; внешний медицинский reviewer не назначен."
+  },
+  {
+    "claimId": "medical-weight-extract-evidence",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician",
+    "reviewedAt": "2026-07-17",
+    "note": "Сохранены ограничения n, duration, attrition и extract-to-beverage applicability; требуется внешняя медицинская рецензия."
+  },
+  {
+    "claimId": "medical-lipid-extract-evidence",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician",
+    "reviewedAt": "2026-07-17",
+    "note": "Surrogate lipid endpoints отделены от clinical cardiovascular outcomes; требуется внешняя медицинская рецензия."
+  },
+  {
+    "claimId": "medical-glycaemia-inconclusive",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician",
+    "reviewedAt": "2026-07-17",
+    "note": "Противоречие abstracts сохранено без причинного или лечебного вывода; требуется внешняя медицинская рецензия."
+  },
+  {
+    "claimId": "medical-enzyme-review-not-clinical",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician",
+    "reviewedAt": "2026-07-17",
+    "note": "Systematic review не повышен до human clinical evidence; требуется внешняя медицинская рецензия."
+  },
+  {
+    "claimId": "medical-caffeine-general-guidance",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician",
+    "reviewedAt": "2026-07-17",
+    "note": "EFSA/FDA jurisdiction and population scope retained; требуется внешняя медицинская рецензия."
+  },
+  {
+    "claimId": "medical-pregnancy-caffeine-guidance",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician",
+    "reviewedAt": "2026-07-17",
+    "note": "WHO >300 мг lowering recommendation и EFSA up-to-200 мг safety conclusion не слиты в один порог; требуется внешняя медицинская рецензия."
+  },
+  {
+    "claimId": "medical-caffeine-alertness-sleep",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician",
+    "reviewedAt": "2026-07-17",
+    "note": "Alertness и sleep wording ограничены official guidance; требуется внешняя медицинская рецензия."
+  },
+  {
+    "claimId": "medical-chemistry-not-clinical-efficacy",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician",
+    "reviewedAt": "2026-07-17",
+    "note": "Chemical composition and assays не перенесены на clinical efficacy; внешний медицинский reviewer pending."
+  },
+  {
+    "claimId": "medical-microbiome-preclinical",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician",
+    "reviewedAt": "2026-07-17",
+    "note": "Animal/in vitro/association evidence не превращено в human gut claim; внешний медицинский reviewer pending."
+  },
+  {
+    "claimId": "medical-antioxidant-assays-not-outcomes",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician",
+    "reviewedAt": "2026-07-17",
+    "note": "Assay endpoints отделены от disease outcomes; внешний медицинский reviewer pending."
+  },
+  {
+    "claimId": "medical-historical-hundred-illnesses",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician",
+    "reviewedAt": "2026-07-17",
+    "note": "Historical representation не оформлена как recommendation; внешний медицинский reviewer pending."
+  },
+  {
+    "claimId": "medical-food-storage-safety",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician or food-safety specialist",
+    "reviewedAt": "2026-07-17",
+    "note": "Storage guidance согласована с Task 5 dossier; внешний medical/food-safety reviewer pending."
+  },
+  {
+    "claimId": "medical-mycotoxin-evidence-limited",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician or toxicologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Samples, target panels, matrix and exposure limitations retained; внешний medical/toxicology reviewer pending."
+  },
+  {
+    "claimId": "medical-interactions-individualize",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician or pharmacist",
+    "reviewedAt": "2026-07-17",
+    "note": "No universal contraindication list was invented; внешний clinician/pharmacist review pending."
+  },
+  {
+    "claimId": "medical-no-universal-cup-limit",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician",
+    "reviewedAt": "2026-07-17",
+    "note": "Official caffeine values not converted into cups of unmeasured pu-erh; внешний medical review pending."
+  },
+  {
+    "claimId": "medical-tea-not-treatment",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician",
+    "reviewedAt": "2026-07-17",
+    "note": "Editorial non-substitution warning based on limited clinical corpus; внешний medical review pending."
+  },
+  {
+    "claimId": "medical-disease-claims-rejected",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician",
+    "reviewedAt": "2026-07-17",
+    "note": "Unsupported treatment/detox/cancer/medicine-replacement claims rejected; внешний medical review pending."
   }
 ]

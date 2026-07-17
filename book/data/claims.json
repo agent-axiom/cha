@@ -348,5 +348,131 @@
     "evidence": "modern",
     "status": "checked",
     "sourceIds": ["haas-2013", "zhang-microbiome-2016", "chau-2023", "sedova-2018"]
+  },
+  {
+    "id": "medical-human-efficacy-is-extract-evidence",
+    "text": "Найденные человеческие efficacy studies пуэра исследовали водорастворимые или концентрированные экстракты, часто в таблетках, капсулах или добавленном порошке; они не доказывают эквивалентный эффект обычного домашнего настоя. Отдельная human metabonomic work Xie et al. изучала метаболическую судьбу компонентов, а не клиническое лечение.",
+    "evidence": "medical-c",
+    "status": "checked",
+    "sourceIds": ["fujita-2008-safety", "fujita-2008-trial", "kubota-2011", "chu-2011", "xie-2012", "jensen-2016"]
+  },
+  {
+    "id": "medical-weight-extract-evidence",
+    "text": "Несколько малых и коротких human studies экстрактов сообщили изменения массы, BMI, талии или surrogate body-composition endpoints, но неизвестная attrition в большинстве abstracts, multiple outcomes, post-randomization exclusion у Jensen et al. и отсутствие испытаний обычного настоя не позволяют утверждать, что пуэр как напиток вызывает клинически значимое или устойчивое снижение веса.",
+    "evidence": "medical-c",
+    "status": "checked",
+    "sourceIds": ["fujita-2008-safety", "fujita-2008-trial", "kubota-2011", "chu-2011", "jensen-2016"]
+  },
+  {
+    "id": "medical-lipid-extract-evidence",
+    "text": "Малые human studies экстрактов сообщали изменения lipid surrogate endpoints, но они не оценивали инфаркт, инсульт или смертность и не поддерживают замену лекарств; в Jensen et al. часть lipid findings была within-group или не достигала conventional between-group significance.",
+    "evidence": "medical-c",
+    "status": "checked",
+    "sourceIds": ["fujita-2008-safety", "fujita-2008-trial", "chu-2011", "jensen-2016"]
+  },
+  {
+    "id": "medical-glycaemia-inconclusive",
+    "text": "Clinical glycaemic evidence пуэра недостаточно и непоследовательно: abstract Chu et al. сообщает ряд glucose changes без дозы, attrition и численных between-group effects, тогда как Jensen et al. не нашёл значимого between-group изменения fasting glucose. Пуэр не следует описывать как средство лечения или профилактики диабета.",
+    "evidence": "medical-c",
+    "status": "checked",
+    "sourceIds": ["chu-2011", "jensen-2016"]
+  },
+  {
+    "id": "medical-enzyme-review-not-clinical",
+    "text": "Найдены два pu-erh-specific systematic reviews: Yang et al. суммировал heterogeneous enzyme assays/in vitro/mouse work, а Lin et al. meta-analyzed только две mouse studies (16 records). Ни один не устанавливает снижение glucose, осложнений диабета или иных clinical outcomes у людей.",
+    "evidence": "medical-b",
+    "status": "checked",
+    "sourceIds": ["yang-2019-systematic", "lin-2019-meta"]
+  },
+  {
+    "id": "medical-caffeine-general-guidance",
+    "text": "EFSA указывает для здоровых взрослых отсутствие safety concern при single caffeine dose до 200 мг и intake до 400 мг/день из всех источников; FDA также cites 400 мг/день для большинства взрослых, но подчёркивает широкую индивидуальную вариабельность и влияние состояний и лекарств. Эти ориентиры не являются универсальным числом чашек пуэра.",
+    "evidence": "medical-a",
+    "status": "checked",
+    "sourceIds": ["efsa-caffeine", "fda-caffeine-2024"]
+  },
+  {
+    "id": "medical-pregnancy-caffeine-guidance",
+    "text": "WHO рекомендует беременным с высоким caffeine intake свыше 300 мг/день снижать его, а EFSA считает intake до 200 мг/день из всех источников не вызывающим concern для плода; это разные юрисдикционные формулировки, обе относятся к суммарному кофеину, а не к числу чашек пуэра.",
+    "evidence": "medical-a",
+    "status": "checked",
+    "sourceIds": ["who-pregnancy", "efsa-caffeine"]
+  },
+  {
+    "id": "medical-caffeine-alertness-sleep",
+    "text": "Кофеин может повышать бодрость и уменьшать сонливость, но EFSA указывает, что single dose 100 мг у некоторых взрослых может влиять на длительность и pattern сна, особенно близко ко времени сна; timing и индивидуальная чувствительность важнее универсального обещания бодрости.",
+    "evidence": "medical-a",
+    "status": "checked",
+    "sourceIds": ["efsa-caffeine", "fda-caffeine-2024"]
+  },
+  {
+    "id": "medical-chemistry-not-clinical-efficacy",
+    "text": "Формулировка «состав изучен лучше, чем клинический эффект» описывает разницу в зрелости evidence: обнаружение полифенолов, пигментов, кофеина, полисахаридов или antioxidant activity в chemical assay не доказывает, что напиток лечит, предотвращает болезнь или является медицински «сильнее» другого чая.",
+    "evidence": "medical-d",
+    "status": "checked",
+    "sourceIds": ["lv-2013", "fan-2022"]
+  },
+  {
+    "id": "medical-microbiome-preclinical",
+    "text": "Pu-erh microbiome/gut findings в доступном корпусе являются главным образом animal, in vitro, cross-sectional tea microbiome или mechanistic associations; они не устанавливают клиническое улучшение кишечника, обмена веществ или иммунитета у людей.",
+    "evidence": "medical-d",
+    "status": "checked",
+    "sourceIds": ["fan-2022", "zhang-microbiome-2016", "zhao-metaomics-2019", "xie-2012"]
+  },
+  {
+    "id": "medical-antioxidant-assays-not-outcomes",
+    "text": "Antioxidant/free-radical-scavenging результаты пуэра являются chemical or cell assay endpoints и не равны предотвращению рака, сердечно-сосудистых событий, старения или иной болезни у человека.",
+    "evidence": "medical-d",
+    "status": "checked",
+    "sourceIds": ["lv-2013", "fan-2022"]
+  },
+  {
+    "id": "medical-historical-hundred-illnesses",
+    "text": "Формула `能治百病` относится к приписанному Чжао Сюэминю представлению эпохи Цин о пуэрской пасте; её допустимо цитировать только как историческую медицинскую репрезентацию, не как современную рекомендацию или evidence of efficacy.",
+    "evidence": "medical-e",
+    "status": "checked",
+    "sourceIds": ["zhao-facsimile-pku"]
+  },
+  {
+    "id": "medical-food-storage-safety",
+    "text": "Пуэр следует хранить сухо, чисто, без намокания, вредителей и посторонних запахов, с защитой от света и повреждения упаковки; видимая плесень, затхлый/чужой запах или следы воды являются признаками повреждения, а не «благородной выдержки». Warehouse limits DB5308/T 53—2020 не являются универсальной домашней формулой старения.",
+    "evidence": "medical-a",
+    "status": "checked",
+    "sourceIds": ["db5308-storage-2020", "sedova-2018"]
+  },
+  {
+    "id": "medical-mycotoxin-evidence-limited",
+    "text": "Pu-erh mycotoxin evidence ограничено небольшими неодинаковыми product samples и target panels; сухой лист, настой и фактическая exposure не взаимозаменяемы, поэтому ни обнаружение в одной выборке, ни `not detected` в другой не доказывает риск или безопасность всей категории.",
+    "evidence": "medical-d",
+    "status": "checked",
+    "sourceIds": ["haas-2013", "zhang-microbiome-2016", "chau-2023", "sedova-2018"]
+  },
+  {
+    "id": "medical-interactions-individualize",
+    "text": "EFSA caffeine assessment не оценивала сочетание с medicines или disease states, а FDA указывает, что sensitivity зависит от состояний и лекарств; при беременности, comorbidity или препаратах с narrow therapeutic index вопрос пуэра/кофеина следует обсуждать с врачом или фармацевтом, не заменяя это универсальным списком противопоказаний.",
+    "evidence": "medical-a",
+    "status": "checked",
+    "sourceIds": ["efsa-caffeine", "fda-caffeine-2024"]
+  },
+  {
+    "id": "medical-no-universal-cup-limit",
+    "text": "Универсального безопасного числа чашек пуэра нет: caffeine concentration зависит от продукта и приготовления, а общая exposure — от всех источников, размера порции, timing, индивидуальной чувствительности, беременности, заболеваний и лекарств.",
+    "evidence": "medical-a",
+    "status": "checked",
+    "sourceIds": ["efsa-caffeine", "fda-caffeine-2024"]
+  },
+  {
+    "id": "medical-tea-not-treatment",
+    "text": "Пуэр и его экстракты не заменяют диагностику, назначенное лечение, питание и иные доказанные меры; найденный human corpus мал, краток и ориентирован на surrogate endpoints, а clinical outcomes не изучены.",
+    "evidence": "medical-c",
+    "status": "checked",
+    "sourceIds": ["fujita-2008-safety", "fujita-2008-trial", "kubota-2011", "chu-2011", "jensen-2016"]
+  },
+  {
+    "id": "medical-disease-claims-rejected",
+    "text": "Для книги отклонены утверждения, что пуэр лечит заболевание, вызывает гарантированное похудение, detoxifies, заменяет лекарства, предотвращает рак или сердечно-сосудистые события: включённые human studies экстрактов и nonhuman reviews таких выводов не поддерживают.",
+    "evidence": "medical-c",
+    "status": "rejected",
+    "sourceIds": ["fujita-2008-trial", "kubota-2011", "chu-2011", "jensen-2016", "yang-2019-systematic", "lin-2019-meta"]
   }
 ]
