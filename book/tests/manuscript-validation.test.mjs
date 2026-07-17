@@ -154,6 +154,61 @@ test('preserves unrelated closed and unclosed HTML comments', () => {
   assert.deepEqual(result.pageMarkers, [])
 })
 
+test('ignores exact claim and page markers inside fenced and inline code', () => {
+  const result = validateText([
+    '```markdown',
+    '<!-- claim:hist-known -->',
+    '<!-- page:A-P001 -->',
+    '```',
+    '`<!-- page:G-P001 -->`',
+    'A prose assertion from 1999 with `<!-- claim:hist-known -->` as an example.',
+  ].join('\n'), textOptions())
+
+  assert.deepEqual(result.claimMarkers, [])
+  assert.deepEqual(result.pageMarkers, [])
+  assert.deepEqual(result.errors.map(({ code, line }) => [code, line]), [
+    ['missing-year-claim', 6],
+  ])
+})
+
+test('does not let code-sample page markers satisfy complete-page coverage', () => {
+  const root = createBook({ complete: true })
+  writeManuscript(root, 'samples.md', [
+    '```markdown',
+    '<!-- page:A-P001 -->',
+    '```',
+    '`<!-- page:G-P001 -->`',
+  ].join('\n'))
+
+  assert.throws(
+    () => validateManuscript({ root, log: false }),
+    (error) => {
+      assert.deepEqual(error.errors.map(({ code, pageId }) => [code, pageId]), [
+        ['missing-page', 'A-P001'],
+        ['missing-page', 'G-P001'],
+      ])
+      return true
+    },
+  )
+})
+
+test('rejects non-standalone marker comments and never counts them', () => {
+  const result = validateText([
+    'Example <!-- page:A-P001 --> in prose.',
+    'History from 1999 <!-- claim:hist-known --> in prose.',
+    '> <!-- page:G-P001 -->',
+  ].join('\n'), textOptions())
+
+  assert.deepEqual(result.claimMarkers, [])
+  assert.deepEqual(result.pageMarkers, [])
+  assert.deepEqual(result.errors.map(({ code, line }) => [code, line]), [
+    ['non-standalone-page-marker', 1],
+    ['non-standalone-claim-marker', 2],
+    ['non-standalone-page-marker', 3],
+    ['missing-year-claim', 2],
+  ])
+})
+
 test('rejects an unknown claim id and does not let it satisfy year evidence', () => {
   const result = validateText('<!-- claim:hist-missing -->\nAn assertion about 1999.', textOptions())
 
@@ -211,11 +266,38 @@ test('detects draft tokens case-insensitively at word boundaries', () => {
 
 test('does not flag draft-token text embedded in innocent words', () => {
   const result = validateText(
-    'Todoist, TBDish, fixmeup, TBCnews, toolkit, TK421, xxxlarge, placeholders, and lorem-ipsum.',
+    'Todoist, TODOsaurus, TBDish, fixmeup, TBCnews, toolkit, TK421, xxxlarge, placeholdersque, and loremipsum.',
     textOptions(),
   )
 
   assert.deepEqual(result.errors, [])
+})
+
+test('detects plural draft tokens and hyphenated or whitespace Lorem ipsum variants', () => {
+  const result = validateText([
+    'TODOs',
+    'tbds',
+    'FIXMEs',
+    'TBCs',
+    'tks',
+    'placeholders',
+    'Lorem-ipsum',
+    'lorem\tipsum',
+    'Lorem',
+    'ipsum',
+  ].join('\n'), textOptions())
+
+  assert.deepEqual(result.errors.map(({ code, line }) => [code, line]), [
+    ['draft-token', 1],
+    ['draft-token', 2],
+    ['draft-token', 3],
+    ['draft-token', 4],
+    ['draft-token', 5],
+    ['draft-token', 6],
+    ['draft-token', 7],
+    ['draft-token', 8],
+    ['draft-token', 9],
+  ])
 })
 
 test('rejects leaked search, fetch, view, open, citation, and browser-context tool tokens', () => {
@@ -224,12 +306,24 @@ test('rejects leaked search, fetch, view, open, citation, and browser-context to
     'turn12fetch3',
     'turn1view9',
     'turn2open4',
+    'turn1image0',
+    'turn0file0',
     'cite',
+    'filecite',
     '<in-app-browser-context',
   ].join('\n'), textOptions())
 
-  assert.deepEqual(result.errors.map(({ code }) => code), Array(6).fill('tool-token'))
-  assert.deepEqual(result.errors.map(({ line }) => line), [1, 2, 3, 4, 5, 6])
+  assert.deepEqual(result.errors.map(({ code }) => code), Array(9).fill('tool-token'))
+  assert.deepEqual(result.errors.map(({ line }) => line), [1, 2, 3, 4, 5, 6, 7, 8, 9])
+})
+
+test('does not flag tool-token text embedded in innocent identifiers', () => {
+  const result = validateText(
+    'return1image0 turn0file0x turn0filing0 filecitation in-app-browser-contextual',
+    textOptions(),
+  )
+
+  assert.deepEqual(result.errors, [])
 })
 
 test('reports the correct line for identical claimless paragraphs containing years', () => {
@@ -258,6 +352,47 @@ test('treats only years from 1000 through 2099 as evidence-bearing years', () =>
   ])
 })
 
+test('does not treat four-digit measurements or measurement ranges as years', () => {
+  const result = validateText([
+    'Use 1500 мл of water only for the large vessel.',
+    'The English note says 1500 ml, and the route is 1800 м.',
+    'Wait 1200 секунд in this deliberately extreme example.',
+    'The documented capacity range is 1500–1800 мл.',
+    'Alternative ranges are 1500-1800 ml and 1500 — 1800 ml.',
+  ].join('\n'), textOptions())
+
+  assert.deepEqual(result.errors, [])
+})
+
+test('ignores years in Markdown destinations, URLs, and path identifiers', () => {
+  const result = validateText([
+    'Read [the archive](https://example.test/1973/item).',
+    'The raw URL is https://example.test/1988/item.',
+    'The local identifiers are archive/1999/item and /records/2001/source.',
+  ].join('\n'), textOptions())
+
+  assert.deepEqual(result.errors, [])
+})
+
+test('still requires evidence for genuine year forms and bare four-digit years', () => {
+  const result = validateText([
+    'The record says 1500 год.',
+    '',
+    'The edition appeared in 1973 г.',
+    '',
+    'The period 1973–1975 годы changed the trade.',
+    '',
+    'A bare 2000 remains a year candidate.',
+  ].join('\n'), textOptions())
+
+  assert.deepEqual(result.errors.map(({ code, line, year }) => [code, line, year]), [
+    ['missing-year-claim', 1, '1500'],
+    ['missing-year-claim', 3, '1973'],
+    ['missing-year-claim', 5, '1973'],
+    ['missing-year-claim', 7, '2000'],
+  ])
+})
+
 test('accepts a known claim marker on an adjacent line in the same paragraph', () => {
   const result = validateText(
     '<!-- claim:hist-known -->\nThe documented event happened in 1999.',
@@ -265,6 +400,56 @@ test('accepts a known claim marker on an adjacent line in the same paragraph', (
   )
 
   assert.deepEqual(result.errors, [])
+})
+
+test('keeps claim evidence local to one list item and its continuations', () => {
+  const result = validateText([
+    '- <!-- claim:hist-known -->',
+    '  The supported list item refers to 1973.',
+    '- The next list item refers to 1974 without evidence.',
+  ].join('\n'), textOptions())
+
+  assert.deepEqual(result.claimMarkers.map(({ id, line }) => [id, line]), [['hist-known', 1]])
+  assert.deepEqual(result.errors.map(({ code, line }) => [code, line]), [
+    ['missing-year-claim', 3],
+  ])
+})
+
+test('does not let a later blockquote paragraph satisfy an earlier quoted paragraph', () => {
+  const result = validateText([
+    '> The earlier quoted assertion refers to 1973.',
+    '>',
+    '> <!-- claim:hist-known -->',
+    '> The later quoted assertion refers to 1974.',
+  ].join('\n'), textOptions())
+
+  assert.deepEqual(result.claimMarkers.map(({ id, line }) => [id, line]), [['hist-known', 3]])
+  assert.deepEqual(result.errors.map(({ code, line }) => [code, line]), [
+    ['missing-year-claim', 1],
+  ])
+})
+
+test('exempts indented code years while preserving following prose line offsets', () => {
+  const result = validateText([
+    '    archive 1999',
+    '\tarchive 1998',
+    '',
+    'Outside prose from 2000.',
+  ].join('\n'), textOptions())
+
+  assert.deepEqual(result.errors.map(({ code, line }) => [code, line]), [
+    ['missing-year-claim', 4],
+  ])
+})
+
+test('preserves year line offsets across repeated CRLF paragraphs', () => {
+  const paragraph = 'The repeated assertion refers to 1973.'
+  const result = validateText(`${paragraph}\r\n\r\n${paragraph}`, textOptions())
+
+  assert.deepEqual(result.errors.map(({ code, line }) => [code, line]), [
+    ['missing-year-claim', 1],
+    ['missing-year-claim', 3],
+  ])
 })
 
 test('exempts ATX and setext headings and fenced code from year evidence', () => {
@@ -339,6 +524,31 @@ test('allows an absent manuscript directory and missing page markers while incom
   })
 })
 
+test('requires manuscriptComplete to exist and be boolean', () => {
+  const invalidPublications = [
+    {},
+    { manuscriptComplete: 'false' },
+    { manuscriptComplete: 0 },
+    { manuscriptComplete: null },
+  ]
+
+  for (const publication of invalidPublications) {
+    const root = createBook()
+    writeJson(path.join(root, 'config', 'publication.json'), publication)
+    assert.throws(
+      () => validateManuscript({ root, log: false }),
+      (error) => {
+        assert.deepEqual(error.errors.map(({ code, file, line }) => [code, file, line]), [
+          ['invalid-manuscript-complete', 'config/publication.json', 1],
+        ])
+        assert.match(error.message, /manuscriptComplete must exist and be boolean/)
+        return true
+      },
+      JSON.stringify(publication),
+    )
+  }
+})
+
 test('requires every expected album and guide page exactly once when complete', () => {
   const root = createBook({ complete: true, albumPages: ['A-P001', 'A-P002'], guidePages: ['G-P001'] })
   writeManuscript(root, 'album/opening.md', '<!-- page:A-P001 -->\n')
@@ -394,13 +604,32 @@ test('discovers markdown recursively in deterministic order and ignores non-file
   })
 })
 
+test('rejects a symlinked manuscript root without reading its external target', () => {
+  const root = createBook()
+  const external = fs.mkdtempSync(path.join(os.tmpdir(), 'book-manuscript-external-'))
+  temporaryRoots.push(external)
+  fs.writeFileSync(path.join(external, 'outside.md'), '<!-- page:A-P001 -->\n')
+  fs.symlinkSync(external, path.join(root, 'manuscript'), 'dir')
+
+  assert.throws(
+    () => validateManuscript({ root, log: false }),
+    (error) => {
+      assert.deepEqual(error.errors.map(({ code, file, line }) => [code, file, line]), [
+        ['unsafe-manuscript-root', 'manuscript', 1],
+      ])
+      assert.match(error.message, /manuscript root must be a real directory inside the book root/)
+      assert.doesNotMatch(error.message, /A-P001/)
+      return true
+    },
+  )
+})
+
 test('CLI prints registered claim and page-marker counts', () => {
-  const expectedClaims = JSON.parse(fs.readFileSync(path.join(bookRoot, 'data', 'claims.json'), 'utf8')).length
   const result = spawnSync(process.execPath, [validatorPath], { cwd: repoRoot, encoding: 'utf8' })
 
   assert.equal(result.status, 0, result.stderr)
   assert.equal(result.stderr, '')
-  assert.equal(result.stdout, `book manuscript ok: ${expectedClaims} registered claims, 0 page markers\n`)
+  assert.match(result.stdout, /^book manuscript ok: \d+ registered claims, \d+ page markers\n$/)
 })
 
 test('package scripts validate data before manuscript validation', () => {

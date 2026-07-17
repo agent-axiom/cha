@@ -5,10 +5,15 @@ import { fileURLToPath } from 'node:url'
 const defaultBookRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const exactClaimMarker = /^<!--[ \t]+claim:([a-z0-9-]+)[ \t]+-->$/
 const exactPageMarker = /^<!--[ \t]+page:([AG]-P\d{3})[ \t]+-->$/
+const exactMarkerOnLine = /<!--[ \t]+(?:claim:[a-z0-9-]+|page:[AG]-P\d{3})[ \t]+-->/g
 const markerBodyOpening = /^(claim|page)\b/i
-const draftToken = /\b(?:TODO|TBD|FIXME|TBC|TK|XXX|PLACEHOLDER)\b|\bLorem[ \t]+ipsum\b/gi
-const toolToken = /\bturn\d+(?:search|fetch|view|open)\d+\b|cite|<in-app-browser-context/giu
+const draftToken = /\b(?:TODOs?|TBDs?|FIXMEs?|TBCs?|TKs?|XXX|PLACEHOLDERS?)\b|\bLorem(?:\s+|-)ipsum\b/gi
+const toolToken = /\bturn\d+(?:search|fetch|view|open|image|file)\d+\b|(?:file)?cite(?![\p{L}\p{N}_])|<in-app-browser-context/giu
 const yearToken = /\b(?:1\d{3}|20\d{2})\b/
+const markdownDestination = /\]\((?:\\.|[^)\r\n])*\)/g
+const urlToken = /(?:https?:\/\/|www\.)[^\s<>()]+/gi
+const pathToken = /[^\s()[\]<>]*[\\/][^\s()[\]<>]*/g
+const measurementToken = /(?<![\p{L}\p{N}_])(?:1\d{3}|20\d{2})(?:[ \t]*(?:-|–|—)[ \t]*(?:1\d{3}|20\d{2}))?[ \t]*(?:миллилитр(?:а|ов)?|milliliters?|секунд(?:а|ы)?|seconds?|secs?|мл|ml|мм|mm|см|cm|км|km|м|m)(?![\p{L}\p{N}_])/giu
 const apparatusYearExemption = /^album\/(?:91|92)-[^/]*\.md$/i
 
 const compareNames = (left, right) => {
@@ -50,19 +55,187 @@ const lineForOffset = (lines, offset) => {
   return lines[Math.max(0, high)].line
 }
 
-const scanMarkers = (text, lines, file, knownClaimIds, expectedPageIds) => {
+const maskRange = (characters, start, end) => {
+  for (let index = start; index < end; index += 1) {
+    if (characters[index] !== '\n' && characters[index] !== '\r') characters[index] = ' '
+  }
+}
+
+const sanitizedMarkdownCode = (text, lines) => {
+  const characters = text.split('')
+  let fence = null
+
+  for (const line of lines) {
+    if (fence) {
+      const closingFence = line.text.match(/^ {0,3}(`+|~+)[ \t]*$/)
+      maskRange(characters, line.offset, line.offset + line.text.length)
+      if (
+        closingFence
+        && closingFence[1][0] === fence.character
+        && closingFence[1].length >= fence.length
+      ) {
+        fence = null
+      }
+      continue
+    }
+
+    const openingFence = line.text.match(/^ {0,3}(`{3,}|~{3,})/)
+    if (openingFence) {
+      fence = { character: openingFence[1][0], length: openingFence[1].length }
+      maskRange(characters, line.offset, line.offset + line.text.length)
+      continue
+    }
+    if (/^(?: {4}|\t)/.test(line.text)) {
+      maskRange(characters, line.offset, line.offset + line.text.length)
+    }
+  }
+
+  for (let index = 0; index < text.length;) {
+    if (text[index] !== '`' || characters[index] !== '`') {
+      index += 1
+      continue
+    }
+    let openerEnd = index
+    while (text[openerEnd] === '`' && characters[openerEnd] === '`') openerEnd += 1
+    const delimiterLength = openerEnd - index
+    let searchFrom = openerEnd
+    let closerEnd = -1
+    while (searchFrom < text.length) {
+      if (text[searchFrom] !== '`' || characters[searchFrom] !== '`') {
+        searchFrom += 1
+        continue
+      }
+      let runEnd = searchFrom
+      while (text[runEnd] === '`' && characters[runEnd] === '`') runEnd += 1
+      if (runEnd - searchFrom === delimiterLength) {
+        closerEnd = runEnd
+        break
+      }
+      searchFrom = runEnd
+    }
+    if (closerEnd === -1) {
+      index = openerEnd
+      continue
+    }
+    maskRange(characters, index, closerEnd)
+    index = closerEnd
+  }
+
+  return characters.join('')
+}
+
+const blockquoteLine = (text) => {
+  const match = text.match(/^( {0,3}(?:>[ \t]?)+)(.*)$/)
+  return match ? { content: match[2], contentStart: match[1].length } : null
+}
+
+const listItemLine = (text) => {
+  const match = text.match(/^( {0,3}(?:[-+*]|\d+[.)])[ \t]+)(.*)$/)
+  return match ? { content: match[2], contentStart: match[1].length } : null
+}
+
+const atxHeading = (text) => /^ {0,3}#{1,6}(?:[ \t]+|$)/.test(text)
+const setextUnderline = (text) => /^ {0,3}(?:=+|-+)[ \t]*$/.test(text)
+
+const tokenizeLogicalBlocks = (lines) => {
+  const blocks = []
+  const lineContexts = new Map()
+  let current = null
+
+  const flush = () => {
+    current = null
+  }
+  const start = (type) => {
+    current = { id: blocks.length, type, lines: [] }
+    blocks.push(current)
+  }
+  const append = (line, contentStart) => {
+    const entry = { ...line, text: line.text.slice(contentStart), contentStart }
+    current.lines.push(entry)
+    lineContexts.set(line.line, { blockId: current.id, type: current.type, contentStart })
+  }
+
+  for (let index = 0; index < lines.length; index += 1) {
+    const line = lines[index]
+    if (!line.text.trim()) {
+      flush()
+      continue
+    }
+
+    const quote = blockquoteLine(line.text)
+    if (quote) {
+      if (!quote.content.trim()) {
+        flush()
+        continue
+      }
+      const nextQuote = lines[index + 1] ? blockquoteLine(lines[index + 1].text) : null
+      if (atxHeading(quote.content) || (nextQuote && setextUnderline(nextQuote.content))) {
+        flush()
+        if (nextQuote && setextUnderline(nextQuote.content)) index += 1
+        continue
+      }
+      if (!current || current.type !== 'quote') {
+        flush()
+        start('quote')
+      }
+      append(line, quote.contentStart)
+      continue
+    }
+
+    if (current?.type === 'quote') flush()
+    const listItem = listItemLine(line.text)
+    if (listItem) {
+      flush()
+      if (atxHeading(listItem.content)) continue
+      start('list')
+      append(line, listItem.contentStart)
+      continue
+    }
+
+    if (current?.type === 'list') {
+      if (atxHeading(line.text)) {
+        flush()
+        continue
+      }
+      append(line, 0)
+      continue
+    }
+
+    const next = lines[index + 1]
+    if (atxHeading(line.text) || (next && !blockquoteLine(next.text) && !listItemLine(next.text) && setextUnderline(next.text))) {
+      flush()
+      if (next && setextUnderline(next.text)) index += 1
+      continue
+    }
+    if (!current || current.type !== 'top') {
+      flush()
+      start('top')
+    }
+    append(line, 0)
+  }
+
+  return { blocks, lineContexts }
+}
+
+const markerOnlyLine = (line, context) => {
+  if (!line || !context) return false
+  const content = line.text.slice(context.contentStart)
+  return /^[ \t]*$/.test(content.replace(exactMarkerOnLine, ''))
+}
+
+const scanMarkers = (text, analysis, lines, lineContexts, file, knownClaimIds, expectedPageIds) => {
   const errors = []
   const claimMarkers = []
   const pageMarkers = []
   let searchFrom = 0
 
-  while (searchFrom < text.length) {
-    const start = text.indexOf('<!--', searchFrom)
+  while (searchFrom < analysis.length) {
+    const start = analysis.indexOf('<!--', searchFrom)
     if (start === -1) break
-    const close = text.indexOf('-->', start + 4)
-    const end = close === -1 ? text.length : close + 3
+    const close = analysis.indexOf('-->', start + 4)
+    const end = close === -1 ? analysis.length : close + 3
     const raw = text.slice(start, end)
-    const body = text.slice(start + 4, close === -1 ? text.length : close).trim()
+    const body = analysis.slice(start + 4, close === -1 ? analysis.length : close).trim()
     const opening = body.match(markerBodyOpening)
 
     if (opening) {
@@ -78,29 +251,41 @@ const scanMarkers = (text, lines, file, knownClaimIds, expectedPageIds) => {
           code: `malformed-${kind}-marker`,
           message: `malformed ${kind} marker: ${display}`,
         })
-      } else if (kind === 'claim') {
-        const id = exact[1]
-        claimMarkers.push({ id, file, line })
-        if (!knownClaimIds.has(id)) {
-          errors.push({
-            file,
-            line,
-            code: 'unknown-claim',
-            claimId: id,
-            message: `unknown claim id: ${id}`,
-          })
-        }
       } else {
-        const id = exact[1]
-        pageMarkers.push({ id, file, line })
-        if (!expectedPageIds.has(id)) {
+        const context = lineContexts.get(line)
+        const standalone = markerOnlyLine(lines[line - 1], context)
+        const allowedContext = kind === 'claim' ? standalone : standalone && context?.type === 'top'
+        if (!allowedContext) {
           errors.push({
             file,
             line,
-            code: 'unknown-page',
-            pageId: id,
-            message: `unknown page id: ${id}`,
+            code: `non-standalone-${kind}-marker`,
+            message: `${kind} marker must be on a standalone ${kind === 'page' ? 'top-level ' : ''}line`,
           })
+        } else if (kind === 'claim') {
+          const id = exact[1]
+          claimMarkers.push({ id, file, line, blockId: context.blockId })
+          if (!knownClaimIds.has(id)) {
+            errors.push({
+              file,
+              line,
+              code: 'unknown-claim',
+              claimId: id,
+              message: `unknown claim id: ${id}`,
+            })
+          }
+        } else {
+          const id = exact[1]
+          pageMarkers.push({ id, file, line })
+          if (!expectedPageIds.has(id)) {
+            errors.push({
+              file,
+              line,
+              code: 'unknown-page',
+              pageId: id,
+              message: `unknown page id: ${id}`,
+            })
+          }
         }
       }
     }
@@ -129,66 +314,30 @@ const scanGlobalTokens = (text, lines, file, pattern, code, description) => {
   return errors
 }
 
-const proseParagraphs = (lines) => {
-  const paragraphs = []
-  let paragraph = []
-  let fence = null
-
-  const flush = () => {
-    if (paragraph.length > 0) paragraphs.push(paragraph)
-    paragraph = []
-  }
-
-  for (let index = 0; index < lines.length; index += 1) {
-    const current = lines[index]
-    if (fence) {
-      const closingFence = current.text.match(/^ {0,3}(`+|~+)[ \t]*$/)
-      if (
-        closingFence
-        && closingFence[1][0] === fence.character
-        && closingFence[1].length >= fence.length
-      ) {
-        fence = null
-      }
-      continue
-    }
-    const openingFence = current.text.match(/^ {0,3}(`{3,}|~{3,})/)
-    if (openingFence) {
-      flush()
-      fence = { character: openingFence[1][0], length: openingFence[1].length }
-      continue
-    }
-    if (!current.text.trim()) {
-      flush()
-      continue
-    }
-    if (/^\s{0,3}#{1,6}(?:\s|$)/.test(current.text)) {
-      flush()
-      continue
-    }
-    const next = lines[index + 1]
-    if (next && /^\s{0,3}(?:=+|-+)\s*$/.test(next.text)) {
-      flush()
-      index += 1
-      continue
-    }
-    paragraph.push(current)
-  }
-  flush()
-  return paragraphs
+const maskMatches = (characters, text, pattern) => {
+  pattern.lastIndex = 0
+  let match
+  while ((match = pattern.exec(text)) !== null) maskRange(characters, match.index, match.index + match[0].length)
+  pattern.lastIndex = 0
 }
 
-const scanYearEvidence = (lines, file, claimMarkers, knownClaimIds) => {
+const sanitizedYearText = (text) => {
+  const characters = text.split('')
+  for (const pattern of [markdownDestination, urlToken, pathToken, measurementToken]) {
+    maskMatches(characters, text, pattern)
+  }
+  return characters.join('')
+}
+
+const scanYearEvidence = (blocks, file, claimMarkers, knownClaimIds) => {
   if (apparatusYearExemption.test(normalizedRelativePath(file))) return []
   const errors = []
-  for (const paragraph of proseParagraphs(lines)) {
-    const firstYearLine = paragraph.find(({ text }) => yearToken.test(text))
+  for (const block of blocks) {
+    const firstYearLine = block.lines.find(({ text }) => yearToken.test(sanitizedYearText(text)))
     if (!firstYearLine) continue
-    const firstYear = firstYearLine.text.match(yearToken)[0]
-    const paragraphStart = paragraph[0].line
-    const paragraphEnd = paragraph.at(-1).line
-    const hasKnownClaim = claimMarkers.some(({ id, line }) => (
-      knownClaimIds.has(id) && line >= paragraphStart && line <= paragraphEnd
+    const firstYear = sanitizedYearText(firstYearLine.text).match(yearToken)[0]
+    const hasKnownClaim = claimMarkers.some(({ id, blockId }) => (
+      knownClaimIds.has(id) && blockId === block.id
     ))
     if (!hasKnownClaim) {
       errors.push({
@@ -213,12 +362,15 @@ export function validateText(text, {
   if (!(expectedPageIds instanceof Set)) throw new TypeError('expectedPageIds must be a Set')
 
   const lines = linesWithOffsets(text)
-  const markerResult = scanMarkers(text, lines, file, knownClaimIds, expectedPageIds)
+  const analysis = sanitizedMarkdownCode(text, lines)
+  const analysisLines = linesWithOffsets(analysis)
+  const { blocks, lineContexts } = tokenizeLogicalBlocks(analysisLines)
+  const markerResult = scanMarkers(text, analysis, lines, lineContexts, file, knownClaimIds, expectedPageIds)
   const errors = [
     ...markerResult.errors,
     ...scanGlobalTokens(text, lines, file, draftToken, 'draft-token', 'draft token'),
     ...scanGlobalTokens(text, lines, file, toolToken, 'tool-token', 'tool token'),
-    ...scanYearEvidence(lines, file, markerResult.claimMarkers, knownClaimIds),
+    ...scanYearEvidence(blocks, file, markerResult.claimMarkers, knownClaimIds),
   ]
 
   return {
@@ -228,8 +380,31 @@ export function validateText(text, {
   }
 }
 
-export function discoverMarkdownFiles(manuscriptRoot) {
+const unsafeManuscriptRoot = () => {
+  const error = new Error('manuscript root must be a real directory inside the book root')
+  error.code = 'UNSAFE_MANUSCRIPT_ROOT'
+  return error
+}
+
+const pathIsWithin = (parent, child) => {
+  const relative = path.relative(parent, child)
+  return relative === '' || (!relative.startsWith(`..${path.sep}`) && relative !== '..' && !path.isAbsolute(relative))
+}
+
+export function discoverMarkdownFiles(manuscriptRoot, { trustedRoot = path.dirname(path.resolve(manuscriptRoot)) } = {}) {
   const files = []
+  const root = path.resolve(manuscriptRoot)
+  let rootStat
+  try {
+    rootStat = fs.lstatSync(root)
+  } catch (error) {
+    if (error.code === 'ENOENT') return files
+    throw error
+  }
+  if (rootStat.isSymbolicLink() || !rootStat.isDirectory()) throw unsafeManuscriptRoot()
+  const resolvedRoot = fs.realpathSync(root)
+  const resolvedTrustedRoot = fs.realpathSync(path.resolve(trustedRoot))
+  if (!pathIsWithin(resolvedTrustedRoot, resolvedRoot)) throw unsafeManuscriptRoot()
 
   const visit = (directory) => {
     let entries
@@ -248,7 +423,7 @@ export function discoverMarkdownFiles(manuscriptRoot) {
     }
   }
 
-  visit(path.resolve(manuscriptRoot))
+  visit(root)
   return files.sort(compareNames)
 }
 
@@ -269,11 +444,33 @@ export function validateManuscript({ root = defaultBookRoot, log = true } = {}) 
   const album = readJson(bookRoot, path.join('flatplan', 'album.json'))
   const guide = readJson(bookRoot, path.join('flatplan', 'guide.json'))
   const publication = readJson(bookRoot, path.join('config', 'publication.json'))
+  if (
+    !Object.prototype.hasOwnProperty.call(publication, 'manuscriptComplete')
+    || typeof publication.manuscriptComplete !== 'boolean'
+  ) {
+    throw new ManuscriptValidationError([{
+      file: 'config/publication.json',
+      line: 1,
+      code: 'invalid-manuscript-complete',
+      message: 'manuscriptComplete must exist and be boolean',
+    }])
+  }
   const knownClaimIds = new Set(claims.map(({ id }) => id))
   const expectedPageIdList = [...album.pages, ...guide.pages].map(({ id }) => id)
   const expectedPageIds = new Set(expectedPageIdList)
   const manuscriptRoot = path.join(bookRoot, 'manuscript')
-  const markdownFiles = discoverMarkdownFiles(manuscriptRoot)
+  let markdownFiles
+  try {
+    markdownFiles = discoverMarkdownFiles(manuscriptRoot, { trustedRoot: bookRoot })
+  } catch (error) {
+    if (error.code !== 'UNSAFE_MANUSCRIPT_ROOT') throw error
+    throw new ManuscriptValidationError([{
+      file: 'manuscript',
+      line: 1,
+      code: 'unsafe-manuscript-root',
+      message: error.message,
+    }])
+  }
   const errors = []
   const pageMarkers = []
 
