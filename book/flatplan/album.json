@@ -10,63 +10,533 @@
       "title": "Вход",
       "pageCount": 20,
       "start": 1,
-      "end": 20
+      "end": 20,
+      "requiredTopics": [
+        {
+          "id": "entry-t01",
+          "title": "Пуэр как встреча с живой горой"
+        },
+        {
+          "id": "entry-t02",
+          "title": "Шэньнун: легенда, а не датировка"
+        },
+        {
+          "id": "entry-t03",
+          "title": "Чжугэ Лян в памяти юго-запада"
+        },
+        {
+          "id": "entry-t04",
+          "title": "Что скрывает имя «пуэр»"
+        },
+        {
+          "id": "entry-t05",
+          "title": "Чай до появления современной категории"
+        },
+        {
+          "id": "entry-t06",
+          "title": "Как читать легенды рядом с документами"
+        },
+        {
+          "id": "entry-t07",
+          "title": "Голос листа, места и времени"
+        },
+        {
+          "id": "entry-t08",
+          "title": "Две траектории: шэн и шоу"
+        },
+        {
+          "id": "entry-t09",
+          "title": "Карта вопросов этой книги"
+        },
+        {
+          "id": "entry-t10",
+          "title": "Медленное чтение материальной культуры"
+        },
+        {
+          "id": "entry-t11",
+          "title": "Порог к живой горе"
+        }
+      ]
     },
     {
       "id": "living-mountain",
       "title": "Живая гора",
       "pageCount": 26,
       "start": 21,
-      "end": 46
+      "end": 46,
+      "requiredTopics": [
+        {
+          "id": "living-mountain-t01",
+          "title": "Гора как главный герой"
+        },
+        {
+          "id": "living-mountain-t02",
+          "title": "Рельеф Юньнани и высотные пояса"
+        },
+        {
+          "id": "living-mountain-t03",
+          "title": "Муссон, туман и сезонность"
+        },
+        {
+          "id": "living-mountain-t04",
+          "title": "Camellia sinensis var. assamica крупным планом"
+        },
+        {
+          "id": "living-mountain-t05",
+          "title": "Лес, сад и плантация: разные системы"
+        },
+        {
+          "id": "living-mountain-t06",
+          "title": "Старые деревья без романтического тумана"
+        },
+        {
+          "id": "living-mountain-t07",
+          "title": "Почва, склон и водный режим"
+        },
+        {
+          "id": "living-mountain-t08",
+          "title": "Высота как набор условий, а не знак качества"
+        },
+        {
+          "id": "living-mountain-t09",
+          "title": "Шесть чайных гор: карта и память"
+        },
+        {
+          "id": "living-mountain-t10",
+          "title": "Цзинмай как культурный ландшафт"
+        },
+        {
+          "id": "living-mountain-t11",
+          "title": "Труд сборщика и ритм урожая"
+        },
+        {
+          "id": "living-mountain-t12",
+          "title": "Биоразнообразие вокруг чайного дерева"
+        },
+        {
+          "id": "living-mountain-t13",
+          "title": "Как читать чайный пейзаж"
+        },
+        {
+          "id": "living-mountain-t14",
+          "title": "С горы — к дорогам обмена"
+        }
+      ]
     },
     {
       "id": "roads-name",
       "title": "Дороги и имя",
       "pageCount": 30,
       "start": 47,
-      "end": 76
+      "end": 76,
+      "requiredTopics": [
+        {
+          "id": "roads-name-t01",
+          "title": "Имя места становится именем чая"
+        },
+        {
+          "id": "roads-name-t02",
+          "title": "Пуэр на административной карте"
+        },
+        {
+          "id": "roads-name-t03",
+          "title": "Податные и дворцовые контексты"
+        },
+        {
+          "id": "roads-name-t04",
+          "title": "Архивный документ без декоративной легенды"
+        },
+        {
+          "id": "roads-name-t05",
+          "title": "Караванные дороги юго-запада"
+        },
+        {
+          "id": "roads-name-t06",
+          "title": "Люди, животные и сезон пути"
+        },
+        {
+          "id": "roads-name-t07",
+          "title": "Торговые узлы между горами и рынками"
+        },
+        {
+          "id": "roads-name-t08",
+          "title": "Шесть гор в исторической памяти"
+        },
+        {
+          "id": "roads-name-t09",
+          "title": "Цинский источник и предел его свидетельства"
+        },
+        {
+          "id": "roads-name-t10",
+          "title": "Маршруты чая за пределами Юньнани"
+        },
+        {
+          "id": "roads-name-t11",
+          "title": "Прессовка как технология перевозки"
+        },
+        {
+          "id": "roads-name-t12",
+          "title": "Обёртка как адрес, марка и обещание"
+        },
+        {
+          "id": "roads-name-t13",
+          "title": "Фабрика и новая география производства"
+        },
+        {
+          "id": "roads-name-t14",
+          "title": "Как менялась категория в XX веке"
+        },
+        {
+          "id": "roads-name-t15",
+          "title": "История названия без единственной даты"
+        },
+        {
+          "id": "roads-name-t16",
+          "title": "От дороги — к ремеслу маоча"
+        }
+      ]
     },
     {
       "id": "maocha",
       "title": "Маоча",
       "pageCount": 24,
       "start": 77,
-      "end": 100
+      "end": 100,
+      "requiredTopics": [
+        {
+          "id": "maocha-t01",
+          "title": "Маоча как основа двух будущих путей"
+        },
+        {
+          "id": "maocha-t02",
+          "title": "Сбор: зрелость листа и работа рук"
+        },
+        {
+          "id": "maocha-t03",
+          "title": "Завяливание и потеря влаги"
+        },
+        {
+          "id": "maocha-t04",
+          "title": "Шацин: остановить ферментативное окисление"
+        },
+        {
+          "id": "maocha-t05",
+          "title": "Ручное и машинное скручивание"
+        },
+        {
+          "id": "maocha-t06",
+          "title": "Солнечная сушка и погодный риск"
+        },
+        {
+          "id": "maocha-t07",
+          "title": "Сортировка без мифа о безупречном листе"
+        },
+        {
+          "id": "maocha-t08",
+          "title": "Последовательность операций целиком"
+        },
+        {
+          "id": "maocha-t09",
+          "title": "Пар, мягкость и подготовка к прессованию"
+        },
+        {
+          "id": "maocha-t10",
+          "title": "Камень, рычаг и гидравлический пресс"
+        },
+        {
+          "id": "maocha-t11",
+          "title": "Сушка прессовки после формы"
+        },
+        {
+          "id": "maocha-t12",
+          "title": "Контроль дефектов до хранения"
+        },
+        {
+          "id": "maocha-t13",
+          "title": "От общей маоча — к развилке шэн и шоу"
+        }
+      ]
     },
     {
       "id": "sheng-shou",
       "title": "Шэн и шоу",
       "pageCount": 30,
       "start": 101,
-      "end": 130
+      "end": 130,
+      "requiredTopics": [
+        {
+          "id": "sheng-shou-t01",
+          "title": "Одна маоча, две технологические траектории"
+        },
+        {
+          "id": "sheng-shou-t02",
+          "title": "Шэн: прессовка без ускоренного wodui"
+        },
+        {
+          "id": "sheng-shou-t03",
+          "title": "Формы прессовок и практический масштаб"
+        },
+        {
+          "id": "sheng-shou-t04",
+          "title": "Обёртки как материальный архив"
+        },
+        {
+          "id": "sheng-shou-t05",
+          "title": "Пар и давление в формовании"
+        },
+        {
+          "id": "sheng-shou-t06",
+          "title": "Сушка и стабилизация новой прессовки"
+        },
+        {
+          "id": "sheng-shou-t07",
+          "title": "Хранение шэна как медленный процесс"
+        },
+        {
+          "id": "sheng-shou-t08",
+          "title": "Климатические режимы хранения"
+        },
+        {
+          "id": "sheng-shou-t09",
+          "title": "Воздух, влажность, температура и время"
+        },
+        {
+          "id": "sheng-shou-t10",
+          "title": "Шоу: зачем понадобилось ускорение"
+        },
+        {
+          "id": "sheng-shou-t11",
+          "title": "Wodui как управляемая влажная куча"
+        },
+        {
+          "id": "sheng-shou-t12",
+          "title": "Тепло внутри кучи"
+        },
+        {
+          "id": "sheng-shou-t13",
+          "title": "Переворачивание и выравнивание"
+        },
+        {
+          "id": "sheng-shou-t14",
+          "title": "Остановка процесса и последующая сушка"
+        },
+        {
+          "id": "sheng-shou-t15",
+          "title": "Сходства и различия в чашке"
+        },
+        {
+          "id": "sheng-shou-t16",
+          "title": "От технологии — к микрокосму"
+        }
+      ]
     },
     {
       "id": "microcosm",
       "title": "Микрокосм",
       "pageCount": 24,
       "start": 131,
-      "end": 154
+      "end": 154,
+      "requiredTopics": [
+        {
+          "id": "microcosm-t01",
+          "title": "Микрокосм без одного «главного микроба»"
+        },
+        {
+          "id": "microcosm-t02",
+          "title": "Температурная кривая wodui"
+        },
+        {
+          "id": "microcosm-t03",
+          "title": "Сообщество микроорганизмов и смена условий"
+        },
+        {
+          "id": "microcosm-t04",
+          "title": "Плесени, дрожжи и бактерии: осторожный словарь"
+        },
+        {
+          "id": "microcosm-t05",
+          "title": "Вода как ограничивающий фактор"
+        },
+        {
+          "id": "microcosm-t06",
+          "title": "Кислород и неоднородность кучи"
+        },
+        {
+          "id": "microcosm-t07",
+          "title": "Методы отбора проб и их ограничения"
+        },
+        {
+          "id": "microcosm-t08",
+          "title": "Корреляция не доказывает технологическую роль"
+        },
+        {
+          "id": "microcosm-t09",
+          "title": "Безопасность исследования и производства"
+        },
+        {
+          "id": "microcosm-t10",
+          "title": "Хранение после wodui"
+        },
+        {
+          "id": "microcosm-t11",
+          "title": "Ароматические изменения без магического объяснения"
+        },
+        {
+          "id": "microcosm-t12",
+          "title": "Что наука пока не знает"
+        },
+        {
+          "id": "microcosm-t13",
+          "title": "От микробного сообщества — к телу человека"
+        }
+      ]
     },
     {
       "id": "body",
       "title": "Тело и свидетельства",
       "pageCount": 22,
       "start": 155,
-      "end": 176
+      "end": 176,
+      "requiredTopics": [
+        {
+          "id": "body-t01",
+          "title": "Чай и тело: отделить опыт от обещания"
+        },
+        {
+          "id": "body-t02",
+          "title": "Шкала силы медицинских свидетельств"
+        },
+        {
+          "id": "body-t03",
+          "title": "Почему небольшое исследование легко переоценить"
+        },
+        {
+          "id": "body-t04",
+          "title": "Наблюдение, ассоциация и причинность"
+        },
+        {
+          "id": "body-t05",
+          "title": "Кофеин и индивидуальная чувствительность"
+        },
+        {
+          "id": "body-t06",
+          "title": "Время употребления и сон"
+        },
+        {
+          "id": "body-t07",
+          "title": "Желудочно-кишечный комфорт без универсальных советов"
+        },
+        {
+          "id": "body-t08",
+          "title": "Лекарственные взаимодействия: граница книги"
+        },
+        {
+          "id": "body-t09",
+          "title": "Беременность и другие особые ситуации"
+        },
+        {
+          "id": "body-t10",
+          "title": "Как читать громкий заголовок о здоровье"
+        },
+        {
+          "id": "body-t11",
+          "title": "Практика осторожного само-наблюдения"
+        },
+        {
+          "id": "body-t12",
+          "title": "От доказательств — к спокойной чайной комнате"
+        }
+      ]
     },
     {
       "id": "tea-room",
       "title": "Чайная комната",
       "pageCount": 16,
       "start": 177,
-      "end": 192
+      "end": 192,
+      "requiredTopics": [
+        {
+          "id": "tea-room-t01",
+          "title": "Чайная комната как место внимания"
+        },
+        {
+          "id": "tea-room-t02",
+          "title": "Посуда: функция раньше статуса"
+        },
+        {
+          "id": "tea-room-t03",
+          "title": "Вода, тепло и движение руки"
+        },
+        {
+          "id": "tea-room-t04",
+          "title": "Цвет настоя и одинаковый свет"
+        },
+        {
+          "id": "tea-room-t05",
+          "title": "Аромат до вкуса и после глотка"
+        },
+        {
+          "id": "tea-room-t06",
+          "title": "Фактура прессовок и следы времени"
+        },
+        {
+          "id": "tea-room-t07",
+          "title": "Обёртки и инструменты на одном столе"
+        },
+        {
+          "id": "tea-room-t08",
+          "title": "Разговор без рейтинга и соревнования"
+        },
+        {
+          "id": "tea-room-t09",
+          "title": "Из чтения — в справочный аппарат"
+        }
+      ]
     },
     {
       "id": "apparatus",
       "title": "Справочный аппарат",
       "pageCount": 16,
       "start": 193,
-      "end": 208
+      "end": 208,
+      "requiredTopics": [
+        {
+          "id": "apparatus-t01",
+          "title": "Как пользоваться справочным аппаратом"
+        },
+        {
+          "id": "apparatus-t02",
+          "title": "Хронология ранних свидетельств"
+        },
+        {
+          "id": "apparatus-t03",
+          "title": "Хронология технологий XX века"
+        },
+        {
+          "id": "apparatus-t04",
+          "title": "От дат — к терминам"
+        },
+        {
+          "id": "apparatus-t05",
+          "title": "Глоссарий производства и хранения"
+        },
+        {
+          "id": "apparatus-t06",
+          "title": "Переход от глоссария к библиографии"
+        },
+        {
+          "id": "apparatus-t07",
+          "title": "Первичные и азиатские источники"
+        },
+        {
+          "id": "apparatus-t08",
+          "title": "Исследования, руководства и доступные копии"
+        },
+        {
+          "id": "apparatus-t09",
+          "title": "Выходные сведения и маршрут дальнейшего чтения"
+        }
+      ]
     }
   ],
   "pages": [
@@ -75,18 +545,29 @@
       "id": "A-P001",
       "spreadId": "A-S001",
       "sectionId": "entry",
-      "role": "Открытие раздела «Вход»",
+      "topicId": "entry-t01",
+      "spreadTitle": "Пуэр как встреча с живой горой",
+      "role": "Титульная композиция формулирует замысел «Пуэр как встреча с живой горой»",
+      "spreadTemplate": "chapter-gate",
       "template": "chapter-gate",
       "assetIds": [],
-      "chapterStart": true
+      "chapterStart": true,
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "illustration",
+        "brief": "Заказать материал для A-S001 «Пуэр как встреча с живой горой»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 2,
       "id": "A-P002",
       "spreadId": "A-S002",
       "sectionId": "entry",
-      "role": "Раздел «Вход»: полоса 2 из 20",
-      "template": "photo-plus-essay",
+      "topicId": "entry-t02",
+      "spreadTitle": "Шэньнун: легенда, а не датировка",
+      "role": "Задаёт контекст и главный вопрос темы «Шэньнун: легенда, а не датировка»",
+      "spreadTemplate": "photo-plus-essay",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -94,7 +575,10 @@
       "id": "A-P003",
       "spreadId": "A-S002",
       "sectionId": "entry",
-      "role": "Раздел «Вход»: полоса 3 из 20",
+      "topicId": "entry-t02",
+      "spreadTitle": "Шэньнун: легенда, а не датировка",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Шэньнун: легенда, а не датировка»",
+      "spreadTemplate": "photo-plus-essay",
       "template": "photo-plus-essay",
       "assetIds": [
         "illustration-shennong-gate"
@@ -105,8 +589,11 @@
       "id": "A-P004",
       "spreadId": "A-S003",
       "sectionId": "entry",
-      "role": "Раздел «Вход»: полоса 4 из 20",
-      "template": "photo-plus-essay",
+      "topicId": "entry-t03",
+      "spreadTitle": "Чжугэ Лян в памяти юго-запада",
+      "role": "Задаёт контекст и главный вопрос темы «Чжугэ Лян в памяти юго-запада»",
+      "spreadTemplate": "photo-plus-essay",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -114,7 +601,10 @@
       "id": "A-P005",
       "spreadId": "A-S003",
       "sectionId": "entry",
-      "role": "Раздел «Вход»: полоса 5 из 20",
+      "topicId": "entry-t03",
+      "spreadTitle": "Чжугэ Лян в памяти юго-запада",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Чжугэ Лян в памяти юго-запада»",
+      "spreadTemplate": "photo-plus-essay",
       "template": "photo-plus-essay",
       "assetIds": [
         "illustration-zhuge-liang-legend"
@@ -125,8 +615,11 @@
       "id": "A-P006",
       "spreadId": "A-S004",
       "sectionId": "entry",
-      "role": "Раздел «Вход»: полоса 6 из 20",
-      "template": "photo-plus-essay",
+      "topicId": "entry-t04",
+      "spreadTitle": "Что скрывает имя «пуэр»",
+      "role": "Задаёт контекст и главный вопрос темы «Что скрывает имя «пуэр»»",
+      "spreadTemplate": "quiet-text",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -134,8 +627,11 @@
       "id": "A-P007",
       "spreadId": "A-S004",
       "sectionId": "entry",
-      "role": "Раздел «Вход»: полоса 7 из 20",
-      "template": "photo-plus-essay",
+      "topicId": "entry-t04",
+      "spreadTitle": "Что скрывает имя «пуэр»",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Что скрывает имя «пуэр»»",
+      "spreadTemplate": "quiet-text",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -143,44 +639,79 @@
       "id": "A-P008",
       "spreadId": "A-S005",
       "sectionId": "entry",
-      "role": "Раздел «Вход»: полоса 8 из 20",
+      "topicId": "entry-t05",
+      "spreadTitle": "Чай до появления современной категории",
+      "role": "Задаёт контекст и главный вопрос темы «Чай до появления современной категории»",
+      "spreadTemplate": "photo-plus-essay",
       "template": "quiet-text",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "photo",
+        "brief": "Заказать материал для A-S005 «Чай до появления современной категории»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 9,
       "id": "A-P009",
       "spreadId": "A-S005",
       "sectionId": "entry",
-      "role": "Раздел «Вход»: полоса 9 из 20",
-      "template": "quiet-text",
-      "assetIds": []
+      "topicId": "entry-t05",
+      "spreadTitle": "Чай до появления современной категории",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Чай до появления современной категории»",
+      "spreadTemplate": "photo-plus-essay",
+      "template": "photo-plus-essay",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "photo",
+        "brief": "Заказать материал для A-S005 «Чай до появления современной категории»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 10,
       "id": "A-P010",
       "spreadId": "A-S006",
       "sectionId": "entry",
-      "role": "Раздел «Вход»: полоса 10 из 20",
-      "template": "source-window",
-      "assetIds": []
+      "topicId": "entry-t06",
+      "spreadTitle": "Как читать легенды рядом с документами",
+      "role": "Задаёт контекст и главный вопрос темы «Как читать легенды рядом с документами»",
+      "spreadTemplate": "source-window",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "archive",
+        "brief": "Заказать материал для A-S006 «Как читать легенды рядом с документами»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 11,
       "id": "A-P011",
       "spreadId": "A-S006",
       "sectionId": "entry",
-      "role": "Раздел «Вход»: полоса 11 из 20",
+      "topicId": "entry-t06",
+      "spreadTitle": "Как читать легенды рядом с документами",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Как читать легенды рядом с документами»",
+      "spreadTemplate": "source-window",
       "template": "source-window",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "archive",
+        "brief": "Заказать материал для A-S006 «Как читать легенды рядом с документами»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 12,
       "id": "A-P012",
       "spreadId": "A-S007",
       "sectionId": "entry",
-      "role": "Раздел «Вход»: полоса 12 из 20",
-      "template": "photo-plus-essay",
+      "topicId": "entry-t07",
+      "spreadTitle": "Голос листа, места и времени",
+      "role": "Задаёт контекст и главный вопрос темы «Голос листа, места и времени»",
+      "spreadTemplate": "quiet-text",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -188,8 +719,11 @@
       "id": "A-P013",
       "spreadId": "A-S007",
       "sectionId": "entry",
-      "role": "Раздел «Вход»: полоса 13 из 20",
-      "template": "photo-plus-essay",
+      "topicId": "entry-t07",
+      "spreadTitle": "Голос листа, места и времени",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Голос листа, места и времени»",
+      "spreadTemplate": "quiet-text",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -197,44 +731,79 @@
       "id": "A-P014",
       "spreadId": "A-S008",
       "sectionId": "entry",
-      "role": "Раздел «Вход»: полоса 14 из 20",
+      "topicId": "entry-t08",
+      "spreadTitle": "Две траектории: шэн и шоу",
+      "role": "Задаёт контекст и главный вопрос темы «Две траектории: шэн и шоу»",
+      "spreadTemplate": "photo-plus-essay",
       "template": "quiet-text",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "photo",
+        "brief": "Заказать материал для A-S008 «Две траектории: шэн и шоу»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 15,
       "id": "A-P015",
       "spreadId": "A-S008",
       "sectionId": "entry",
-      "role": "Раздел «Вход»: полоса 15 из 20",
-      "template": "quiet-text",
-      "assetIds": []
+      "topicId": "entry-t08",
+      "spreadTitle": "Две траектории: шэн и шоу",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Две траектории: шэн и шоу»",
+      "spreadTemplate": "photo-plus-essay",
+      "template": "photo-plus-essay",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "photo",
+        "brief": "Заказать материал для A-S008 «Две траектории: шэн и шоу»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 16,
       "id": "A-P016",
       "spreadId": "A-S009",
       "sectionId": "entry",
-      "role": "Раздел «Вход»: полоса 16 из 20",
-      "template": "source-window",
-      "assetIds": []
+      "topicId": "entry-t09",
+      "spreadTitle": "Карта вопросов этой книги",
+      "role": "Задаёт контекст и главный вопрос темы «Карта вопросов этой книги»",
+      "spreadTemplate": "source-window",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "archive",
+        "brief": "Заказать материал для A-S009 «Карта вопросов этой книги»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 17,
       "id": "A-P017",
       "spreadId": "A-S009",
       "sectionId": "entry",
-      "role": "Раздел «Вход»: полоса 17 из 20",
+      "topicId": "entry-t09",
+      "spreadTitle": "Карта вопросов этой книги",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Карта вопросов этой книги»",
+      "spreadTemplate": "source-window",
       "template": "source-window",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "archive",
+        "brief": "Заказать материал для A-S009 «Карта вопросов этой книги»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 18,
       "id": "A-P018",
       "spreadId": "A-S010",
       "sectionId": "entry",
-      "role": "Раздел «Вход»: полоса 18 из 20",
-      "template": "photo-plus-essay",
+      "topicId": "entry-t10",
+      "spreadTitle": "Медленное чтение материальной культуры",
+      "role": "Задаёт контекст и главный вопрос темы «Медленное чтение материальной культуры»",
+      "spreadTemplate": "quiet-text",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -242,8 +811,11 @@
       "id": "A-P019",
       "spreadId": "A-S010",
       "sectionId": "entry",
-      "role": "Раздел «Вход»: полоса 19 из 20",
-      "template": "photo-plus-essay",
+      "topicId": "entry-t10",
+      "spreadTitle": "Медленное чтение материальной культуры",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Медленное чтение материальной культуры»",
+      "spreadTemplate": "quiet-text",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -251,8 +823,11 @@
       "id": "A-P020",
       "spreadId": "A-S011",
       "sectionId": "entry",
-      "role": "Раздел «Вход»: полоса 20 из 20",
-      "template": "chapter-gate",
+      "topicId": "entry-t11",
+      "spreadTitle": "Порог к живой горе",
+      "role": "Подводит итог раздела «Вход» через тему «Порог к живой горе»",
+      "spreadTemplate": "chapter-gate",
+      "template": "quiet-text",
       "assetIds": [],
       "crossSectionSpread": true
     },
@@ -261,7 +836,10 @@
       "id": "A-P021",
       "spreadId": "A-S011",
       "sectionId": "living-mountain",
-      "role": "Открытие раздела «Живая гора»",
+      "topicId": "living-mountain-t01",
+      "spreadTitle": "Гора как главный герой",
+      "role": "Открывает раздел «Живая гора» темой «Гора как главный герой»",
+      "spreadTemplate": "chapter-gate",
       "template": "chapter-gate",
       "assetIds": [
         "illustration-cover-living-mountain"
@@ -274,8 +852,11 @@
       "id": "A-P022",
       "spreadId": "A-S012",
       "sectionId": "living-mountain",
-      "role": "Раздел «Живая гора»: полоса 2 из 26",
-      "template": "photo-plus-essay",
+      "topicId": "living-mountain-t02",
+      "spreadTitle": "Рельеф Юньнани и высотные пояса",
+      "role": "Задаёт контекст и главный вопрос темы «Рельеф Юньнани и высотные пояса»",
+      "spreadTemplate": "photo-plus-essay",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -283,7 +864,10 @@
       "id": "A-P023",
       "spreadId": "A-S012",
       "sectionId": "living-mountain",
-      "role": "Раздел «Живая гора»: полоса 3 из 26",
+      "topicId": "living-mountain-t02",
+      "spreadTitle": "Рельеф Юньнани и высотные пояса",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Рельеф Юньнани и высотные пояса»",
+      "spreadTemplate": "photo-plus-essay",
       "template": "photo-plus-essay",
       "assetIds": [
         "photo-yunnan-mountain-landscape"
@@ -294,8 +878,11 @@
       "id": "A-P024",
       "spreadId": "A-S013",
       "sectionId": "living-mountain",
-      "role": "Раздел «Живая гора»: полоса 4 из 26",
-      "template": "photo-plus-essay",
+      "topicId": "living-mountain-t03",
+      "spreadTitle": "Муссон, туман и сезонность",
+      "role": "Задаёт контекст и главный вопрос темы «Муссон, туман и сезонность»",
+      "spreadTemplate": "photo-plus-essay",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -303,7 +890,10 @@
       "id": "A-P025",
       "spreadId": "A-S013",
       "sectionId": "living-mountain",
-      "role": "Раздел «Живая гора»: полоса 5 из 26",
+      "topicId": "living-mountain-t03",
+      "spreadTitle": "Муссон, туман и сезонность",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Муссон, туман и сезонность»",
+      "spreadTemplate": "photo-plus-essay",
       "template": "photo-plus-essay",
       "assetIds": [
         "photo-tea-forest-landscape"
@@ -314,8 +904,11 @@
       "id": "A-P026",
       "spreadId": "A-S014",
       "sectionId": "living-mountain",
-      "role": "Раздел «Живая гора»: полоса 6 из 26",
-      "template": "photo-plus-essay",
+      "topicId": "living-mountain-t04",
+      "spreadTitle": "Camellia sinensis var. assamica крупным планом",
+      "role": "Задаёт контекст и главный вопрос темы «Camellia sinensis var. assamica крупным планом»",
+      "spreadTemplate": "photo-plus-essay",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -323,7 +916,10 @@
       "id": "A-P027",
       "spreadId": "A-S014",
       "sectionId": "living-mountain",
-      "role": "Раздел «Живая гора»: полоса 7 из 26",
+      "topicId": "living-mountain-t04",
+      "spreadTitle": "Camellia sinensis var. assamica крупным планом",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Camellia sinensis var. assamica крупным планом»",
+      "spreadTemplate": "photo-plus-essay",
       "template": "photo-plus-essay",
       "assetIds": [
         "photo-tea-garden-documentary"
@@ -334,8 +930,11 @@
       "id": "A-P028",
       "spreadId": "A-S015",
       "sectionId": "living-mountain",
-      "role": "Раздел «Живая гора»: полоса 8 из 26",
-      "template": "photo-plus-essay",
+      "topicId": "living-mountain-t05",
+      "spreadTitle": "Лес, сад и плантация: разные системы",
+      "role": "Задаёт контекст и главный вопрос темы «Лес, сад и плантация: разные системы»",
+      "spreadTemplate": "photo-plus-essay",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -343,7 +942,10 @@
       "id": "A-P029",
       "spreadId": "A-S015",
       "sectionId": "living-mountain",
-      "role": "Раздел «Живая гора»: полоса 9 из 26",
+      "topicId": "living-mountain-t05",
+      "spreadTitle": "Лес, сад и плантация: разные системы",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Лес, сад и плантация: разные системы»",
+      "spreadTemplate": "photo-plus-essay",
       "template": "photo-plus-essay",
       "assetIds": [
         "photo-assamica-botanical-macro"
@@ -354,8 +956,11 @@
       "id": "A-P030",
       "spreadId": "A-S016",
       "sectionId": "living-mountain",
-      "role": "Раздел «Живая гора»: полоса 10 из 26",
-      "template": "photo-plus-essay",
+      "topicId": "living-mountain-t06",
+      "spreadTitle": "Старые деревья без романтического тумана",
+      "role": "Задаёт контекст и главный вопрос темы «Старые деревья без романтического тумана»",
+      "spreadTemplate": "photo-plus-essay",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -363,7 +968,10 @@
       "id": "A-P031",
       "spreadId": "A-S016",
       "sectionId": "living-mountain",
-      "role": "Раздел «Живая гора»: полоса 11 из 26",
+      "topicId": "living-mountain-t06",
+      "spreadTitle": "Старые деревья без романтического тумана",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Старые деревья без романтического тумана»",
+      "spreadTemplate": "photo-plus-essay",
       "template": "photo-plus-essay",
       "assetIds": [
         "photo-old-tea-tree-portraits"
@@ -374,8 +982,11 @@
       "id": "A-P032",
       "spreadId": "A-S017",
       "sectionId": "living-mountain",
-      "role": "Раздел «Живая гора»: полоса 12 из 26",
-      "template": "map",
+      "topicId": "living-mountain-t07",
+      "spreadTitle": "Почва, склон и водный режим",
+      "role": "Задаёт контекст и главный вопрос темы «Почва, склон и водный режим»",
+      "spreadTemplate": "map",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -383,7 +994,10 @@
       "id": "A-P033",
       "spreadId": "A-S017",
       "sectionId": "living-mountain",
-      "role": "Раздел «Живая гора»: полоса 13 из 26",
+      "topicId": "living-mountain-t07",
+      "spreadTitle": "Почва, склон и водный режим",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Почва, склон и водный режим»",
+      "spreadTemplate": "map",
       "template": "map",
       "assetIds": [
         "map-yunnan-relief"
@@ -394,8 +1008,11 @@
       "id": "A-P034",
       "spreadId": "A-S018",
       "sectionId": "living-mountain",
-      "role": "Раздел «Живая гора»: полоса 14 из 26",
-      "template": "map",
+      "topicId": "living-mountain-t08",
+      "spreadTitle": "Высота как набор условий, а не знак качества",
+      "role": "Задаёт контекст и главный вопрос темы «Высота как набор условий, а не знак качества»",
+      "spreadTemplate": "map",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -403,7 +1020,10 @@
       "id": "A-P035",
       "spreadId": "A-S018",
       "sectionId": "living-mountain",
-      "role": "Раздел «Живая гора»: полоса 15 из 26",
+      "topicId": "living-mountain-t08",
+      "spreadTitle": "Высота как набор условий, а не знак качества",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Высота как набор условий, а не знак качества»",
+      "spreadTemplate": "map",
       "template": "map",
       "assetIds": [
         "map-six-mountains"
@@ -414,8 +1034,11 @@
       "id": "A-P036",
       "spreadId": "A-S019",
       "sectionId": "living-mountain",
-      "role": "Раздел «Живая гора»: полоса 16 из 26",
-      "template": "map",
+      "topicId": "living-mountain-t09",
+      "spreadTitle": "Шесть чайных гор: карта и память",
+      "role": "Задаёт контекст и главный вопрос темы «Шесть чайных гор: карта и память»",
+      "spreadTemplate": "map",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -423,7 +1046,10 @@
       "id": "A-P037",
       "spreadId": "A-S019",
       "sectionId": "living-mountain",
-      "role": "Раздел «Живая гора»: полоса 17 из 26",
+      "topicId": "living-mountain-t09",
+      "spreadTitle": "Шесть чайных гор: карта и память",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Шесть чайных гор: карта и память»",
+      "spreadTemplate": "map",
       "template": "map",
       "assetIds": [
         "map-jingmai-landscape"
@@ -434,8 +1060,11 @@
       "id": "A-P038",
       "spreadId": "A-S020",
       "sectionId": "living-mountain",
-      "role": "Раздел «Живая гора»: полоса 18 из 26",
-      "template": "photo-plus-essay",
+      "topicId": "living-mountain-t10",
+      "spreadTitle": "Цзинмай как культурный ландшафт",
+      "role": "Задаёт контекст и главный вопрос темы «Цзинмай как культурный ландшафт»",
+      "spreadTemplate": "photo-plus-essay",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -443,7 +1072,10 @@
       "id": "A-P039",
       "spreadId": "A-S020",
       "sectionId": "living-mountain",
-      "role": "Раздел «Живая гора»: полоса 19 из 26",
+      "topicId": "living-mountain-t10",
+      "spreadTitle": "Цзинмай как культурный ландшафт",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Цзинмай как культурный ландшафт»",
+      "spreadTemplate": "photo-plus-essay",
       "template": "photo-plus-essay",
       "assetIds": [
         "photo-tea-worker-portrait"
@@ -454,8 +1086,11 @@
       "id": "A-P040",
       "spreadId": "A-S021",
       "sectionId": "living-mountain",
-      "role": "Раздел «Живая гора»: полоса 20 из 26",
-      "template": "object-atlas",
+      "topicId": "living-mountain-t11",
+      "spreadTitle": "Труд сборщика и ритм урожая",
+      "role": "Задаёт контекст и главный вопрос темы «Труд сборщика и ритм урожая»",
+      "spreadTemplate": "quiet-text",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -463,8 +1098,11 @@
       "id": "A-P041",
       "spreadId": "A-S021",
       "sectionId": "living-mountain",
-      "role": "Раздел «Живая гора»: полоса 21 из 26",
-      "template": "object-atlas",
+      "topicId": "living-mountain-t11",
+      "spreadTitle": "Труд сборщика и ритм урожая",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Труд сборщика и ритм урожая»",
+      "spreadTemplate": "quiet-text",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -472,65 +1110,116 @@
       "id": "A-P042",
       "spreadId": "A-S022",
       "sectionId": "living-mountain",
-      "role": "Раздел «Живая гора»: полоса 22 из 26",
-      "template": "full-bleed-photo",
-      "assetIds": []
+      "topicId": "living-mountain-t12",
+      "spreadTitle": "Биоразнообразие вокруг чайного дерева",
+      "role": "Задаёт контекст и главный вопрос темы «Биоразнообразие вокруг чайного дерева»",
+      "spreadTemplate": "full-bleed-photo",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "photo",
+        "brief": "Заказать материал для A-S022 «Биоразнообразие вокруг чайного дерева»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 43,
       "id": "A-P043",
       "spreadId": "A-S022",
       "sectionId": "living-mountain",
-      "role": "Раздел «Живая гора»: полоса 23 из 26",
+      "topicId": "living-mountain-t12",
+      "spreadTitle": "Биоразнообразие вокруг чайного дерева",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Биоразнообразие вокруг чайного дерева»",
+      "spreadTemplate": "full-bleed-photo",
       "template": "full-bleed-photo",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "photo",
+        "brief": "Заказать материал для A-S022 «Биоразнообразие вокруг чайного дерева»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 44,
       "id": "A-P044",
       "spreadId": "A-S023",
       "sectionId": "living-mountain",
-      "role": "Раздел «Живая гора»: полоса 24 из 26",
-      "template": "photo-plus-essay",
-      "assetIds": []
+      "topicId": "living-mountain-t13",
+      "spreadTitle": "Как читать чайный пейзаж",
+      "role": "Задаёт контекст и главный вопрос темы «Как читать чайный пейзаж»",
+      "spreadTemplate": "photo-plus-essay",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "photo",
+        "brief": "Заказать материал для A-S023 «Как читать чайный пейзаж»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 45,
       "id": "A-P045",
       "spreadId": "A-S023",
       "sectionId": "living-mountain",
-      "role": "Раздел «Живая гора»: полоса 25 из 26",
+      "topicId": "living-mountain-t13",
+      "spreadTitle": "Как читать чайный пейзаж",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Как читать чайный пейзаж»",
+      "spreadTemplate": "photo-plus-essay",
       "template": "photo-plus-essay",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "photo",
+        "brief": "Заказать материал для A-S023 «Как читать чайный пейзаж»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 46,
       "id": "A-P046",
       "spreadId": "A-S024",
       "sectionId": "living-mountain",
-      "role": "Раздел «Живая гора»: полоса 26 из 26",
-      "template": "chapter-gate",
+      "topicId": "living-mountain-t14",
+      "spreadTitle": "С горы — к дорогам обмена",
+      "role": "Подводит итог раздела «Живая гора» через тему «С горы — к дорогам обмена»",
+      "spreadTemplate": "chapter-gate",
+      "template": "quiet-text",
       "assetIds": [],
-      "crossSectionSpread": true
+      "crossSectionSpread": true,
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "illustration",
+        "brief": "Заказать материал для A-S024 «С горы — к дорогам обмена / Имя места становится именем чая»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 47,
       "id": "A-P047",
       "spreadId": "A-S024",
       "sectionId": "roads-name",
-      "role": "Открытие раздела «Дороги и имя»",
+      "topicId": "roads-name-t01",
+      "spreadTitle": "Имя места становится именем чая",
+      "role": "Открывает раздел «Дороги и имя» темой «Имя места становится именем чая»",
+      "spreadTemplate": "chapter-gate",
       "template": "chapter-gate",
       "assetIds": [],
       "chapterStart": true,
-      "crossSectionSpread": true
+      "crossSectionSpread": true,
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "illustration",
+        "brief": "Заказать материал для A-S024 «С горы — к дорогам обмена / Имя места становится именем чая»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 48,
       "id": "A-P048",
       "spreadId": "A-S025",
       "sectionId": "roads-name",
-      "role": "Раздел «Дороги и имя»: полоса 2 из 30",
-      "template": "source-window",
+      "topicId": "roads-name-t02",
+      "spreadTitle": "Пуэр на административной карте",
+      "role": "Задаёт контекст и главный вопрос темы «Пуэр на административной карте»",
+      "spreadTemplate": "source-window",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -538,7 +1227,10 @@
       "id": "A-P049",
       "spreadId": "A-S025",
       "sectionId": "roads-name",
-      "role": "Раздел «Дороги и имя»: полоса 3 из 30",
+      "topicId": "roads-name-t02",
+      "spreadTitle": "Пуэр на административной карте",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Пуэр на административной карте»",
+      "spreadTemplate": "source-window",
       "template": "source-window",
       "assetIds": [
         "archive-qing-tribute-record"
@@ -549,8 +1241,11 @@
       "id": "A-P050",
       "spreadId": "A-S026",
       "sectionId": "roads-name",
-      "role": "Раздел «Дороги и имя»: полоса 4 из 30",
-      "template": "source-window",
+      "topicId": "roads-name-t03",
+      "spreadTitle": "Податные и дворцовые контексты",
+      "role": "Задаёт контекст и главный вопрос темы «Податные и дворцовые контексты»",
+      "spreadTemplate": "source-window",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -558,7 +1253,10 @@
       "id": "A-P051",
       "spreadId": "A-S026",
       "sectionId": "roads-name",
-      "role": "Раздел «Дороги и имя»: полоса 5 из 30",
+      "topicId": "roads-name-t03",
+      "spreadTitle": "Податные и дворцовые контексты",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Податные и дворцовые контексты»",
+      "spreadTemplate": "source-window",
       "template": "source-window",
       "assetIds": [
         "archive-tea-route-document"
@@ -569,8 +1267,11 @@
       "id": "A-P052",
       "spreadId": "A-S027",
       "sectionId": "roads-name",
-      "role": "Раздел «Дороги и имя»: полоса 6 из 30",
-      "template": "map",
+      "topicId": "roads-name-t04",
+      "spreadTitle": "Архивный документ без декоративной легенды",
+      "role": "Задаёт контекст и главный вопрос темы «Архивный документ без декоративной легенды»",
+      "spreadTemplate": "map",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -578,7 +1279,10 @@
       "id": "A-P053",
       "spreadId": "A-S027",
       "sectionId": "roads-name",
-      "role": "Раздел «Дороги и имя»: полоса 7 из 30",
+      "topicId": "roads-name-t04",
+      "spreadTitle": "Архивный документ без декоративной легенды",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Архивный документ без декоративной легенды»",
+      "spreadTemplate": "map",
       "template": "map",
       "assetIds": [
         "map-tea-routes"
@@ -589,8 +1293,11 @@
       "id": "A-P054",
       "spreadId": "A-S028",
       "sectionId": "roads-name",
-      "role": "Раздел «Дороги и имя»: полоса 8 из 30",
-      "template": "map",
+      "topicId": "roads-name-t05",
+      "spreadTitle": "Караванные дороги юго-запада",
+      "role": "Задаёт контекст и главный вопрос темы «Караванные дороги юго-запада»",
+      "spreadTemplate": "map",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -598,7 +1305,10 @@
       "id": "A-P055",
       "spreadId": "A-S028",
       "sectionId": "roads-name",
-      "role": "Раздел «Дороги и имя»: полоса 9 из 30",
+      "topicId": "roads-name-t05",
+      "spreadTitle": "Караванные дороги юго-запада",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Караванные дороги юго-запада»",
+      "spreadTemplate": "map",
       "template": "map",
       "assetIds": [
         "map-puer-administration-history"
@@ -609,43 +1319,78 @@
       "id": "A-P056",
       "spreadId": "A-S029",
       "sectionId": "roads-name",
-      "role": "Раздел «Дороги и имя»: полоса 10 из 30",
-      "template": "source-window",
-      "assetIds": []
+      "topicId": "roads-name-t06",
+      "spreadTitle": "Люди, животные и сезон пути",
+      "role": "Задаёт контекст и главный вопрос темы «Люди, животные и сезон пути»",
+      "spreadTemplate": "source-window",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "archive",
+        "brief": "Заказать материал для A-S029 «Люди, животные и сезон пути»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 57,
       "id": "A-P057",
       "spreadId": "A-S029",
       "sectionId": "roads-name",
-      "role": "Раздел «Дороги и имя»: полоса 11 из 30",
+      "topicId": "roads-name-t06",
+      "spreadTitle": "Люди, животные и сезон пути",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Люди, животные и сезон пути»",
+      "spreadTemplate": "source-window",
       "template": "source-window",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "archive",
+        "brief": "Заказать материал для A-S029 «Люди, животные и сезон пути»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 58,
       "id": "A-P058",
       "spreadId": "A-S030",
       "sectionId": "roads-name",
-      "role": "Раздел «Дороги и имя»: полоса 12 из 30",
-      "template": "map",
-      "assetIds": []
+      "topicId": "roads-name-t07",
+      "spreadTitle": "Торговые узлы между горами и рынками",
+      "role": "Задаёт контекст и главный вопрос темы «Торговые узлы между горами и рынками»",
+      "spreadTemplate": "map",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "map",
+        "brief": "Заказать материал для A-S030 «Торговые узлы между горами и рынками»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 59,
       "id": "A-P059",
       "spreadId": "A-S030",
       "sectionId": "roads-name",
-      "role": "Раздел «Дороги и имя»: полоса 13 из 30",
+      "topicId": "roads-name-t07",
+      "spreadTitle": "Торговые узлы между горами и рынками",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Торговые узлы между горами и рынками»",
+      "spreadTemplate": "map",
       "template": "map",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "map",
+        "brief": "Заказать материал для A-S030 «Торговые узлы между горами и рынками»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 60,
       "id": "A-P060",
       "spreadId": "A-S031",
       "sectionId": "roads-name",
-      "role": "Раздел «Дороги и имя»: полоса 14 из 30",
+      "topicId": "roads-name-t08",
+      "spreadTitle": "Шесть гор в исторической памяти",
+      "role": "Задаёт контекст и главный вопрос темы «Шесть гор в исторической памяти»",
+      "spreadTemplate": "quiet-text",
       "template": "quiet-text",
       "assetIds": []
     },
@@ -654,7 +1399,10 @@
       "id": "A-P061",
       "spreadId": "A-S031",
       "sectionId": "roads-name",
-      "role": "Раздел «Дороги и имя»: полоса 15 из 30",
+      "topicId": "roads-name-t08",
+      "spreadTitle": "Шесть гор в исторической памяти",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Шесть гор в исторической памяти»",
+      "spreadTemplate": "quiet-text",
       "template": "quiet-text",
       "assetIds": []
     },
@@ -663,43 +1411,78 @@
       "id": "A-P062",
       "spreadId": "A-S032",
       "sectionId": "roads-name",
-      "role": "Раздел «Дороги и имя»: полоса 16 из 30",
-      "template": "source-window",
-      "assetIds": []
+      "topicId": "roads-name-t09",
+      "spreadTitle": "Цинский источник и предел его свидетельства",
+      "role": "Задаёт контекст и главный вопрос темы «Цинский источник и предел его свидетельства»",
+      "spreadTemplate": "source-window",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "archive",
+        "brief": "Заказать материал для A-S032 «Цинский источник и предел его свидетельства»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 63,
       "id": "A-P063",
       "spreadId": "A-S032",
       "sectionId": "roads-name",
-      "role": "Раздел «Дороги и имя»: полоса 17 из 30",
+      "topicId": "roads-name-t09",
+      "spreadTitle": "Цинский источник и предел его свидетельства",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Цинский источник и предел его свидетельства»",
+      "spreadTemplate": "source-window",
       "template": "source-window",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "archive",
+        "brief": "Заказать материал для A-S032 «Цинский источник и предел его свидетельства»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 64,
       "id": "A-P064",
       "spreadId": "A-S033",
       "sectionId": "roads-name",
-      "role": "Раздел «Дороги и имя»: полоса 18 из 30",
-      "template": "map",
-      "assetIds": []
+      "topicId": "roads-name-t10",
+      "spreadTitle": "Маршруты чая за пределами Юньнани",
+      "role": "Задаёт контекст и главный вопрос темы «Маршруты чая за пределами Юньнани»",
+      "spreadTemplate": "map",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "map",
+        "brief": "Заказать материал для A-S033 «Маршруты чая за пределами Юньнани»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 65,
       "id": "A-P065",
       "spreadId": "A-S033",
       "sectionId": "roads-name",
-      "role": "Раздел «Дороги и имя»: полоса 19 из 30",
+      "topicId": "roads-name-t10",
+      "spreadTitle": "Маршруты чая за пределами Юньнани",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Маршруты чая за пределами Юньнани»",
+      "spreadTemplate": "map",
       "template": "map",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "map",
+        "brief": "Заказать материал для A-S033 «Маршруты чая за пределами Юньнани»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 66,
       "id": "A-P066",
       "spreadId": "A-S034",
       "sectionId": "roads-name",
-      "role": "Раздел «Дороги и имя»: полоса 20 из 30",
+      "topicId": "roads-name-t11",
+      "spreadTitle": "Прессовка как технология перевозки",
+      "role": "Задаёт контекст и главный вопрос темы «Прессовка как технология перевозки»",
+      "spreadTemplate": "quiet-text",
       "template": "quiet-text",
       "assetIds": []
     },
@@ -708,7 +1491,10 @@
       "id": "A-P067",
       "spreadId": "A-S034",
       "sectionId": "roads-name",
-      "role": "Раздел «Дороги и имя»: полоса 21 из 30",
+      "topicId": "roads-name-t11",
+      "spreadTitle": "Прессовка как технология перевозки",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Прессовка как технология перевозки»",
+      "spreadTemplate": "quiet-text",
       "template": "quiet-text",
       "assetIds": []
     },
@@ -717,43 +1503,78 @@
       "id": "A-P068",
       "spreadId": "A-S035",
       "sectionId": "roads-name",
-      "role": "Раздел «Дороги и имя»: полоса 22 из 30",
-      "template": "source-window",
-      "assetIds": []
+      "topicId": "roads-name-t12",
+      "spreadTitle": "Обёртка как адрес, марка и обещание",
+      "role": "Задаёт контекст и главный вопрос темы «Обёртка как адрес, марка и обещание»",
+      "spreadTemplate": "source-window",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "archive",
+        "brief": "Заказать материал для A-S035 «Обёртка как адрес, марка и обещание»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 69,
       "id": "A-P069",
       "spreadId": "A-S035",
       "sectionId": "roads-name",
-      "role": "Раздел «Дороги и имя»: полоса 23 из 30",
+      "topicId": "roads-name-t12",
+      "spreadTitle": "Обёртка как адрес, марка и обещание",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Обёртка как адрес, марка и обещание»",
+      "spreadTemplate": "source-window",
       "template": "source-window",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "archive",
+        "brief": "Заказать материал для A-S035 «Обёртка как адрес, марка и обещание»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 70,
       "id": "A-P070",
       "spreadId": "A-S036",
       "sectionId": "roads-name",
-      "role": "Раздел «Дороги и имя»: полоса 24 из 30",
-      "template": "map",
-      "assetIds": []
+      "topicId": "roads-name-t13",
+      "spreadTitle": "Фабрика и новая география производства",
+      "role": "Задаёт контекст и главный вопрос темы «Фабрика и новая география производства»",
+      "spreadTemplate": "map",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "map",
+        "brief": "Заказать материал для A-S036 «Фабрика и новая география производства»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 71,
       "id": "A-P071",
       "spreadId": "A-S036",
       "sectionId": "roads-name",
-      "role": "Раздел «Дороги и имя»: полоса 25 из 30",
+      "topicId": "roads-name-t13",
+      "spreadTitle": "Фабрика и новая география производства",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Фабрика и новая география производства»",
+      "spreadTemplate": "map",
       "template": "map",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "map",
+        "brief": "Заказать материал для A-S036 «Фабрика и новая география производства»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 72,
       "id": "A-P072",
       "spreadId": "A-S037",
       "sectionId": "roads-name",
-      "role": "Раздел «Дороги и имя»: полоса 26 из 30",
+      "topicId": "roads-name-t14",
+      "spreadTitle": "Как менялась категория в XX веке",
+      "role": "Задаёт контекст и главный вопрос темы «Как менялась категория в XX веке»",
+      "spreadTemplate": "quiet-text",
       "template": "quiet-text",
       "assetIds": []
     },
@@ -762,7 +1583,10 @@
       "id": "A-P073",
       "spreadId": "A-S037",
       "sectionId": "roads-name",
-      "role": "Раздел «Дороги и имя»: полоса 27 из 30",
+      "topicId": "roads-name-t14",
+      "spreadTitle": "Как менялась категория в XX веке",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Как менялась категория в XX веке»",
+      "spreadTemplate": "quiet-text",
       "template": "quiet-text",
       "assetIds": []
     },
@@ -771,47 +1595,82 @@
       "id": "A-P074",
       "spreadId": "A-S038",
       "sectionId": "roads-name",
-      "role": "Раздел «Дороги и имя»: полоса 28 из 30",
-      "template": "source-window",
-      "assetIds": []
+      "topicId": "roads-name-t15",
+      "spreadTitle": "История названия без единственной даты",
+      "role": "Задаёт контекст и главный вопрос темы «История названия без единственной даты»",
+      "spreadTemplate": "source-window",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "archive",
+        "brief": "Заказать материал для A-S038 «История названия без единственной даты»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 75,
       "id": "A-P075",
       "spreadId": "A-S038",
       "sectionId": "roads-name",
-      "role": "Раздел «Дороги и имя»: полоса 29 из 30",
+      "topicId": "roads-name-t15",
+      "spreadTitle": "История названия без единственной даты",
+      "role": "Даёт документ, пример и редакционный вывод по теме «История названия без единственной даты»",
+      "spreadTemplate": "source-window",
       "template": "source-window",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "archive",
+        "brief": "Заказать материал для A-S038 «История названия без единственной даты»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 76,
       "id": "A-P076",
       "spreadId": "A-S039",
       "sectionId": "roads-name",
-      "role": "Раздел «Дороги и имя»: полоса 30 из 30",
-      "template": "chapter-gate",
+      "topicId": "roads-name-t16",
+      "spreadTitle": "От дороги — к ремеслу маоча",
+      "role": "Подводит итог раздела «Дороги и имя» через тему «От дороги — к ремеслу маоча»",
+      "spreadTemplate": "chapter-gate",
+      "template": "quiet-text",
       "assetIds": [],
-      "crossSectionSpread": true
+      "crossSectionSpread": true,
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "illustration",
+        "brief": "Заказать материал для A-S039 «От дороги — к ремеслу маоча / Маоча как основа двух будущих путей»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 77,
       "id": "A-P077",
       "spreadId": "A-S039",
       "sectionId": "maocha",
-      "role": "Открытие раздела «Маоча»",
+      "topicId": "maocha-t01",
+      "spreadTitle": "Маоча как основа двух будущих путей",
+      "role": "Открывает раздел «Маоча» темой «Маоча как основа двух будущих путей»",
+      "spreadTemplate": "chapter-gate",
       "template": "chapter-gate",
       "assetIds": [],
       "chapterStart": true,
-      "crossSectionSpread": true
+      "crossSectionSpread": true,
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "illustration",
+        "brief": "Заказать материал для A-S039 «От дороги — к ремеслу маоча / Маоча как основа двух будущих путей»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 78,
       "id": "A-P078",
       "spreadId": "A-S040",
       "sectionId": "maocha",
-      "role": "Раздел «Маоча»: полоса 2 из 24",
-      "template": "process",
+      "topicId": "maocha-t02",
+      "spreadTitle": "Сбор: зрелость листа и работа рук",
+      "role": "Задаёт контекст и главный вопрос темы «Сбор: зрелость листа и работа рук»",
+      "spreadTemplate": "process",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -819,7 +1678,10 @@
       "id": "A-P079",
       "spreadId": "A-S040",
       "sectionId": "maocha",
-      "role": "Раздел «Маоча»: полоса 3 из 24",
+      "topicId": "maocha-t02",
+      "spreadTitle": "Сбор: зрелость листа и работа рук",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Сбор: зрелость листа и работа рук»",
+      "spreadTemplate": "process",
       "template": "process",
       "assetIds": [
         "diagram-maocha-process"
@@ -830,8 +1692,11 @@
       "id": "A-P080",
       "spreadId": "A-S041",
       "sectionId": "maocha",
-      "role": "Раздел «Маоча»: полоса 4 из 24",
-      "template": "process",
+      "topicId": "maocha-t03",
+      "spreadTitle": "Завяливание и потеря влаги",
+      "role": "Задаёт контекст и главный вопрос темы «Завяливание и потеря влаги»",
+      "spreadTemplate": "process",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -839,7 +1704,10 @@
       "id": "A-P081",
       "spreadId": "A-S041",
       "sectionId": "maocha",
-      "role": "Раздел «Маоча»: полоса 5 из 24",
+      "topicId": "maocha-t03",
+      "spreadTitle": "Завяливание и потеря влаги",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Завяливание и потеря влаги»",
+      "spreadTemplate": "process",
       "template": "process",
       "assetIds": [
         "photo-harvest-hands"
@@ -850,8 +1718,11 @@
       "id": "A-P082",
       "spreadId": "A-S042",
       "sectionId": "maocha",
-      "role": "Раздел «Маоча»: полоса 6 из 24",
-      "template": "process",
+      "topicId": "maocha-t04",
+      "spreadTitle": "Шацин: остановить ферментативное окисление",
+      "role": "Задаёт контекст и главный вопрос темы «Шацин: остановить ферментативное окисление»",
+      "spreadTemplate": "process",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -859,7 +1730,10 @@
       "id": "A-P083",
       "spreadId": "A-S042",
       "sectionId": "maocha",
-      "role": "Раздел «Маоча»: полоса 7 из 24",
+      "topicId": "maocha-t04",
+      "spreadTitle": "Шацин: остановить ферментативное окисление",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Шацин: остановить ферментативное окисление»",
+      "spreadTemplate": "process",
       "template": "process",
       "assetIds": [
         "photo-shaqing-worker-tools"
@@ -870,8 +1744,11 @@
       "id": "A-P084",
       "spreadId": "A-S043",
       "sectionId": "maocha",
-      "role": "Раздел «Маоча»: полоса 8 из 24",
-      "template": "process",
+      "topicId": "maocha-t05",
+      "spreadTitle": "Ручное и машинное скручивание",
+      "role": "Задаёт контекст и главный вопрос темы «Ручное и машинное скручивание»",
+      "spreadTemplate": "process",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -879,7 +1756,10 @@
       "id": "A-P085",
       "spreadId": "A-S043",
       "sectionId": "maocha",
-      "role": "Раздел «Маоча»: полоса 9 из 24",
+      "topicId": "maocha-t05",
+      "spreadTitle": "Ручное и машинное скручивание",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Ручное и машинное скручивание»",
+      "spreadTemplate": "process",
       "template": "process",
       "assetIds": [
         "photo-rolling-hands"
@@ -890,8 +1770,11 @@
       "id": "A-P086",
       "spreadId": "A-S044",
       "sectionId": "maocha",
-      "role": "Раздел «Маоча»: полоса 10 из 24",
-      "template": "process",
+      "topicId": "maocha-t06",
+      "spreadTitle": "Солнечная сушка и погодный риск",
+      "role": "Задаёт контекст и главный вопрос темы «Солнечная сушка и погодный риск»",
+      "spreadTemplate": "process",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -899,7 +1782,10 @@
       "id": "A-P087",
       "spreadId": "A-S044",
       "sectionId": "maocha",
-      "role": "Раздел «Маоча»: полоса 11 из 24",
+      "topicId": "maocha-t06",
+      "spreadTitle": "Солнечная сушка и погодный риск",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Солнечная сушка и погодный риск»",
+      "spreadTemplate": "process",
       "template": "process",
       "assetIds": [
         "photo-sun-drying-terraces"
@@ -910,8 +1796,11 @@
       "id": "A-P088",
       "spreadId": "A-S045",
       "sectionId": "maocha",
-      "role": "Раздел «Маоча»: полоса 12 из 24",
-      "template": "process",
+      "topicId": "maocha-t07",
+      "spreadTitle": "Сортировка без мифа о безупречном листе",
+      "role": "Задаёт контекст и главный вопрос темы «Сортировка без мифа о безупречном листе»",
+      "spreadTemplate": "process",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -919,7 +1808,10 @@
       "id": "A-P089",
       "spreadId": "A-S045",
       "sectionId": "maocha",
-      "role": "Раздел «Маоча»: полоса 13 из 24",
+      "topicId": "maocha-t07",
+      "spreadTitle": "Сортировка без мифа о безупречном листе",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Сортировка без мифа о безупречном листе»",
+      "spreadTemplate": "process",
       "template": "process",
       "assetIds": [
         "photo-sorting-workers"
@@ -930,8 +1822,11 @@
       "id": "A-P090",
       "spreadId": "A-S046",
       "sectionId": "maocha",
-      "role": "Раздел «Маоча»: полоса 14 из 24",
-      "template": "process",
+      "topicId": "maocha-t08",
+      "spreadTitle": "Последовательность операций целиком",
+      "role": "Задаёт контекст и главный вопрос темы «Последовательность операций целиком»",
+      "spreadTemplate": "process",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -939,7 +1834,10 @@
       "id": "A-P091",
       "spreadId": "A-S046",
       "sectionId": "maocha",
-      "role": "Раздел «Маоча»: полоса 15 из 24",
+      "topicId": "maocha-t08",
+      "spreadTitle": "Последовательность операций целиком",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Последовательность операций целиком»",
+      "spreadTemplate": "process",
       "template": "process",
       "assetIds": [
         "photo-maocha-production-sequence"
@@ -950,8 +1848,11 @@
       "id": "A-P092",
       "spreadId": "A-S047",
       "sectionId": "maocha",
-      "role": "Раздел «Маоча»: полоса 16 из 24",
-      "template": "process",
+      "topicId": "maocha-t09",
+      "spreadTitle": "Пар, мягкость и подготовка к прессованию",
+      "role": "Задаёт контекст и главный вопрос темы «Пар, мягкость и подготовка к прессованию»",
+      "spreadTemplate": "process",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -959,7 +1860,10 @@
       "id": "A-P093",
       "spreadId": "A-S047",
       "sectionId": "maocha",
-      "role": "Раздел «Маоча»: полоса 17 из 24",
+      "topicId": "maocha-t09",
+      "spreadTitle": "Пар, мягкость и подготовка к прессованию",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Пар, мягкость и подготовка к прессованию»",
+      "spreadTemplate": "process",
       "template": "process",
       "assetIds": [
         "photo-steaming-tools"
@@ -970,8 +1874,11 @@
       "id": "A-P094",
       "spreadId": "A-S048",
       "sectionId": "maocha",
-      "role": "Раздел «Маоча»: полоса 18 из 24",
-      "template": "process",
+      "topicId": "maocha-t10",
+      "spreadTitle": "Камень, рычаг и гидравлический пресс",
+      "role": "Задаёт контекст и главный вопрос темы «Камень, рычаг и гидравлический пресс»",
+      "spreadTemplate": "process",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -979,7 +1886,10 @@
       "id": "A-P095",
       "spreadId": "A-S048",
       "sectionId": "maocha",
-      "role": "Раздел «Маоча»: полоса 19 из 24",
+      "topicId": "maocha-t10",
+      "spreadTitle": "Камень, рычаг и гидравлический пресс",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Камень, рычаг и гидравлический пресс»",
+      "spreadTemplate": "process",
       "template": "process",
       "assetIds": [
         "photo-pressing-workers"
@@ -990,8 +1900,11 @@
       "id": "A-P096",
       "spreadId": "A-S049",
       "sectionId": "maocha",
-      "role": "Раздел «Маоча»: полоса 20 из 24",
-      "template": "process",
+      "topicId": "maocha-t11",
+      "spreadTitle": "Сушка прессовки после формы",
+      "role": "Задаёт контекст и главный вопрос темы «Сушка прессовки после формы»",
+      "spreadTemplate": "process",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -999,7 +1912,10 @@
       "id": "A-P097",
       "spreadId": "A-S049",
       "sectionId": "maocha",
-      "role": "Раздел «Маоча»: полоса 21 из 24",
+      "topicId": "maocha-t11",
+      "spreadTitle": "Сушка прессовки после формы",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Сушка прессовки после формы»",
+      "spreadTemplate": "process",
       "template": "process",
       "assetIds": [
         "photo-drying-racks"
@@ -1010,47 +1926,82 @@
       "id": "A-P098",
       "spreadId": "A-S050",
       "sectionId": "maocha",
-      "role": "Раздел «Маоча»: полоса 22 из 24",
-      "template": "process",
-      "assetIds": []
+      "topicId": "maocha-t12",
+      "spreadTitle": "Контроль дефектов до хранения",
+      "role": "Задаёт контекст и главный вопрос темы «Контроль дефектов до хранения»",
+      "spreadTemplate": "process",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "diagram",
+        "brief": "Заказать материал для A-S050 «Контроль дефектов до хранения»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 99,
       "id": "A-P099",
       "spreadId": "A-S050",
       "sectionId": "maocha",
-      "role": "Раздел «Маоча»: полоса 23 из 24",
+      "topicId": "maocha-t12",
+      "spreadTitle": "Контроль дефектов до хранения",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Контроль дефектов до хранения»",
+      "spreadTemplate": "process",
       "template": "process",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "diagram",
+        "brief": "Заказать материал для A-S050 «Контроль дефектов до хранения»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 100,
       "id": "A-P100",
       "spreadId": "A-S051",
       "sectionId": "maocha",
-      "role": "Раздел «Маоча»: полоса 24 из 24",
-      "template": "chapter-gate",
+      "topicId": "maocha-t13",
+      "spreadTitle": "От общей маоча — к развилке шэн и шоу",
+      "role": "Подводит итог раздела «Маоча» через тему «От общей маоча — к развилке шэн и шоу»",
+      "spreadTemplate": "chapter-gate",
+      "template": "quiet-text",
       "assetIds": [],
-      "crossSectionSpread": true
+      "crossSectionSpread": true,
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "illustration",
+        "brief": "Заказать материал для A-S051 «От общей маоча — к развилке шэн и шоу / Одна маоча, две технологические траектории»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 101,
       "id": "A-P101",
       "spreadId": "A-S051",
       "sectionId": "sheng-shou",
-      "role": "Открытие раздела «Шэн и шоу»",
+      "topicId": "sheng-shou-t01",
+      "spreadTitle": "Одна маоча, две технологические траектории",
+      "role": "Открывает раздел «Шэн и шоу» темой «Одна маоча, две технологические траектории»",
+      "spreadTemplate": "chapter-gate",
       "template": "chapter-gate",
       "assetIds": [],
       "chapterStart": true,
-      "crossSectionSpread": true
+      "crossSectionSpread": true,
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "illustration",
+        "brief": "Заказать материал для A-S051 «От общей маоча — к развилке шэн и шоу / Одна маоча, две технологические траектории»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 102,
       "id": "A-P102",
       "spreadId": "A-S052",
       "sectionId": "sheng-shou",
-      "role": "Раздел «Шэн и шоу»: полоса 2 из 30",
-      "template": "process",
+      "topicId": "sheng-shou-t02",
+      "spreadTitle": "Шэн: прессовка без ускоренного wodui",
+      "role": "Задаёт контекст и главный вопрос темы «Шэн: прессовка без ускоренного wodui»",
+      "spreadTemplate": "process",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -1058,7 +2009,10 @@
       "id": "A-P103",
       "spreadId": "A-S052",
       "sectionId": "sheng-shou",
-      "role": "Раздел «Шэн и шоу»: полоса 3 из 30",
+      "topicId": "sheng-shou-t02",
+      "spreadTitle": "Шэн: прессовка без ускоренного wodui",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Шэн: прессовка без ускоренного wodui»",
+      "spreadTemplate": "process",
       "template": "process",
       "assetIds": [
         "diagram-sheng-shou-fork"
@@ -1069,8 +2023,11 @@
       "id": "A-P104",
       "spreadId": "A-S053",
       "sectionId": "sheng-shou",
-      "role": "Раздел «Шэн и шоу»: полоса 4 из 30",
-      "template": "object-atlas",
+      "topicId": "sheng-shou-t03",
+      "spreadTitle": "Формы прессовок и практический масштаб",
+      "role": "Задаёт контекст и главный вопрос темы «Формы прессовок и практический масштаб»",
+      "spreadTemplate": "object-atlas",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -1078,7 +2035,10 @@
       "id": "A-P105",
       "spreadId": "A-S053",
       "sectionId": "sheng-shou",
-      "role": "Раздел «Шэн и шоу»: полоса 5 из 30",
+      "topicId": "sheng-shou-t03",
+      "spreadTitle": "Формы прессовок и практический масштаб",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Формы прессовок и практический масштаб»",
+      "spreadTemplate": "object-atlas",
       "template": "object-atlas",
       "assetIds": [
         "photo-pressings-object-atlas"
@@ -1089,8 +2049,11 @@
       "id": "A-P106",
       "spreadId": "A-S054",
       "sectionId": "sheng-shou",
-      "role": "Раздел «Шэн и шоу»: полоса 6 из 30",
-      "template": "object-atlas",
+      "topicId": "sheng-shou-t04",
+      "spreadTitle": "Обёртки как материальный архив",
+      "role": "Задаёт контекст и главный вопрос темы «Обёртки как материальный архив»",
+      "spreadTemplate": "object-atlas",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -1098,7 +2061,10 @@
       "id": "A-P107",
       "spreadId": "A-S054",
       "sectionId": "sheng-shou",
-      "role": "Раздел «Шэн и шоу»: полоса 7 из 30",
+      "topicId": "sheng-shou-t04",
+      "spreadTitle": "Обёртки как материальный архив",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Обёртки как материальный архив»",
+      "spreadTemplate": "object-atlas",
       "template": "object-atlas",
       "assetIds": [
         "photo-wrappers-object-atlas"
@@ -1109,8 +2075,11 @@
       "id": "A-P108",
       "spreadId": "A-S055",
       "sectionId": "sheng-shou",
-      "role": "Раздел «Шэн и шоу»: полоса 8 из 30",
-      "template": "map",
+      "topicId": "sheng-shou-t05",
+      "spreadTitle": "Пар и давление в формовании",
+      "role": "Задаёт контекст и главный вопрос темы «Пар и давление в формовании»",
+      "spreadTemplate": "map",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -1118,7 +2087,10 @@
       "id": "A-P109",
       "spreadId": "A-S055",
       "sectionId": "sheng-shou",
-      "role": "Раздел «Шэн и шоу»: полоса 9 из 30",
+      "topicId": "sheng-shou-t05",
+      "spreadTitle": "Пар и давление в формовании",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Пар и давление в формовании»",
+      "spreadTemplate": "map",
       "template": "map",
       "assetIds": [
         "map-storage-climates"
@@ -1129,8 +2101,11 @@
       "id": "A-P110",
       "spreadId": "A-S056",
       "sectionId": "sheng-shou",
-      "role": "Раздел «Шэн и шоу»: полоса 10 из 30",
-      "template": "process",
+      "topicId": "sheng-shou-t06",
+      "spreadTitle": "Сушка и стабилизация новой прессовки",
+      "role": "Задаёт контекст и главный вопрос темы «Сушка и стабилизация новой прессовки»",
+      "spreadTemplate": "process",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -1138,7 +2113,10 @@
       "id": "A-P111",
       "spreadId": "A-S056",
       "sectionId": "sheng-shou",
-      "role": "Раздел «Шэн и шоу»: полоса 11 из 30",
+      "topicId": "sheng-shou-t06",
+      "spreadTitle": "Сушка и стабилизация новой прессовки",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Сушка и стабилизация новой прессовки»",
+      "spreadTemplate": "process",
       "template": "process",
       "assetIds": [
         "diagram-storage-variables"
@@ -1149,26 +2127,45 @@
       "id": "A-P112",
       "spreadId": "A-S057",
       "sectionId": "sheng-shou",
-      "role": "Раздел «Шэн и шоу»: полоса 12 из 30",
-      "template": "object-atlas",
-      "assetIds": []
+      "topicId": "sheng-shou-t07",
+      "spreadTitle": "Хранение шэна как медленный процесс",
+      "role": "Задаёт контекст и главный вопрос темы «Хранение шэна как медленный процесс»",
+      "spreadTemplate": "object-atlas",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "photo",
+        "brief": "Заказать материал для A-S057 «Хранение шэна как медленный процесс»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 113,
       "id": "A-P113",
       "spreadId": "A-S057",
       "sectionId": "sheng-shou",
-      "role": "Раздел «Шэн и шоу»: полоса 13 из 30",
+      "topicId": "sheng-shou-t07",
+      "spreadTitle": "Хранение шэна как медленный процесс",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Хранение шэна как медленный процесс»",
+      "spreadTemplate": "object-atlas",
       "template": "object-atlas",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "photo",
+        "brief": "Заказать материал для A-S057 «Хранение шэна как медленный процесс»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 114,
       "id": "A-P114",
       "spreadId": "A-S058",
       "sectionId": "sheng-shou",
-      "role": "Раздел «Шэн и шоу»: полоса 14 из 30",
-      "template": "photo-plus-essay",
+      "topicId": "sheng-shou-t08",
+      "spreadTitle": "Климатические режимы хранения",
+      "role": "Задаёт контекст и главный вопрос темы «Климатические режимы хранения»",
+      "spreadTemplate": "quiet-text",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -1176,8 +2173,11 @@
       "id": "A-P115",
       "spreadId": "A-S058",
       "sectionId": "sheng-shou",
-      "role": "Раздел «Шэн и шоу»: полоса 15 из 30",
-      "template": "photo-plus-essay",
+      "topicId": "sheng-shou-t08",
+      "spreadTitle": "Климатические режимы хранения",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Климатические режимы хранения»",
+      "spreadTemplate": "quiet-text",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -1185,44 +2185,79 @@
       "id": "A-P116",
       "spreadId": "A-S059",
       "sectionId": "sheng-shou",
-      "role": "Раздел «Шэн и шоу»: полоса 16 из 30",
-      "template": "process",
-      "assetIds": []
+      "topicId": "sheng-shou-t09",
+      "spreadTitle": "Воздух, влажность, температура и время",
+      "role": "Задаёт контекст и главный вопрос темы «Воздух, влажность, температура и время»",
+      "spreadTemplate": "process",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "diagram",
+        "brief": "Заказать материал для A-S059 «Воздух, влажность, температура и время»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 117,
       "id": "A-P117",
       "spreadId": "A-S059",
       "sectionId": "sheng-shou",
-      "role": "Раздел «Шэн и шоу»: полоса 17 из 30",
+      "topicId": "sheng-shou-t09",
+      "spreadTitle": "Воздух, влажность, температура и время",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Воздух, влажность, температура и время»",
+      "spreadTemplate": "process",
       "template": "process",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "diagram",
+        "brief": "Заказать материал для A-S059 «Воздух, влажность, температура и время»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 118,
       "id": "A-P118",
       "spreadId": "A-S060",
       "sectionId": "sheng-shou",
-      "role": "Раздел «Шэн и шоу»: полоса 18 из 30",
-      "template": "object-atlas",
-      "assetIds": []
+      "topicId": "sheng-shou-t10",
+      "spreadTitle": "Шоу: зачем понадобилось ускорение",
+      "role": "Задаёт контекст и главный вопрос темы «Шоу: зачем понадобилось ускорение»",
+      "spreadTemplate": "object-atlas",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "photo",
+        "brief": "Заказать материал для A-S060 «Шоу: зачем понадобилось ускорение»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 119,
       "id": "A-P119",
       "spreadId": "A-S060",
       "sectionId": "sheng-shou",
-      "role": "Раздел «Шэн и шоу»: полоса 19 из 30",
+      "topicId": "sheng-shou-t10",
+      "spreadTitle": "Шоу: зачем понадобилось ускорение",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Шоу: зачем понадобилось ускорение»",
+      "spreadTemplate": "object-atlas",
       "template": "object-atlas",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "photo",
+        "brief": "Заказать материал для A-S060 «Шоу: зачем понадобилось ускорение»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 120,
       "id": "A-P120",
       "spreadId": "A-S061",
       "sectionId": "sheng-shou",
-      "role": "Раздел «Шэн и шоу»: полоса 20 из 30",
-      "template": "photo-plus-essay",
+      "topicId": "sheng-shou-t11",
+      "spreadTitle": "Wodui как управляемая влажная куча",
+      "role": "Задаёт контекст и главный вопрос темы «Wodui как управляемая влажная куча»",
+      "spreadTemplate": "quiet-text",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -1230,8 +2265,11 @@
       "id": "A-P121",
       "spreadId": "A-S061",
       "sectionId": "sheng-shou",
-      "role": "Раздел «Шэн и шоу»: полоса 21 из 30",
-      "template": "photo-plus-essay",
+      "topicId": "sheng-shou-t11",
+      "spreadTitle": "Wodui как управляемая влажная куча",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Wodui как управляемая влажная куча»",
+      "spreadTemplate": "quiet-text",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -1239,44 +2277,79 @@
       "id": "A-P122",
       "spreadId": "A-S062",
       "sectionId": "sheng-shou",
-      "role": "Раздел «Шэн и шоу»: полоса 22 из 30",
-      "template": "process",
-      "assetIds": []
+      "topicId": "sheng-shou-t12",
+      "spreadTitle": "Тепло внутри кучи",
+      "role": "Задаёт контекст и главный вопрос темы «Тепло внутри кучи»",
+      "spreadTemplate": "process",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "diagram",
+        "brief": "Заказать материал для A-S062 «Тепло внутри кучи»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 123,
       "id": "A-P123",
       "spreadId": "A-S062",
       "sectionId": "sheng-shou",
-      "role": "Раздел «Шэн и шоу»: полоса 23 из 30",
+      "topicId": "sheng-shou-t12",
+      "spreadTitle": "Тепло внутри кучи",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Тепло внутри кучи»",
+      "spreadTemplate": "process",
       "template": "process",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "diagram",
+        "brief": "Заказать материал для A-S062 «Тепло внутри кучи»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 124,
       "id": "A-P124",
       "spreadId": "A-S063",
       "sectionId": "sheng-shou",
-      "role": "Раздел «Шэн и шоу»: полоса 24 из 30",
-      "template": "object-atlas",
-      "assetIds": []
+      "topicId": "sheng-shou-t13",
+      "spreadTitle": "Переворачивание и выравнивание",
+      "role": "Задаёт контекст и главный вопрос темы «Переворачивание и выравнивание»",
+      "spreadTemplate": "object-atlas",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "photo",
+        "brief": "Заказать материал для A-S063 «Переворачивание и выравнивание»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 125,
       "id": "A-P125",
       "spreadId": "A-S063",
       "sectionId": "sheng-shou",
-      "role": "Раздел «Шэн и шоу»: полоса 25 из 30",
+      "topicId": "sheng-shou-t13",
+      "spreadTitle": "Переворачивание и выравнивание",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Переворачивание и выравнивание»",
+      "spreadTemplate": "object-atlas",
       "template": "object-atlas",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "photo",
+        "brief": "Заказать материал для A-S063 «Переворачивание и выравнивание»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 126,
       "id": "A-P126",
       "spreadId": "A-S064",
       "sectionId": "sheng-shou",
-      "role": "Раздел «Шэн и шоу»: полоса 26 из 30",
-      "template": "photo-plus-essay",
+      "topicId": "sheng-shou-t14",
+      "spreadTitle": "Остановка процесса и последующая сушка",
+      "role": "Задаёт контекст и главный вопрос темы «Остановка процесса и последующая сушка»",
+      "spreadTemplate": "quiet-text",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -1284,8 +2357,11 @@
       "id": "A-P127",
       "spreadId": "A-S064",
       "sectionId": "sheng-shou",
-      "role": "Раздел «Шэн и шоу»: полоса 27 из 30",
-      "template": "photo-plus-essay",
+      "topicId": "sheng-shou-t14",
+      "spreadTitle": "Остановка процесса и последующая сушка",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Остановка процесса и последующая сушка»",
+      "spreadTemplate": "quiet-text",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -1293,47 +2369,82 @@
       "id": "A-P128",
       "spreadId": "A-S065",
       "sectionId": "sheng-shou",
-      "role": "Раздел «Шэн и шоу»: полоса 28 из 30",
-      "template": "process",
-      "assetIds": []
+      "topicId": "sheng-shou-t15",
+      "spreadTitle": "Сходства и различия в чашке",
+      "role": "Задаёт контекст и главный вопрос темы «Сходства и различия в чашке»",
+      "spreadTemplate": "process",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "diagram",
+        "brief": "Заказать материал для A-S065 «Сходства и различия в чашке»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 129,
       "id": "A-P129",
       "spreadId": "A-S065",
       "sectionId": "sheng-shou",
-      "role": "Раздел «Шэн и шоу»: полоса 29 из 30",
+      "topicId": "sheng-shou-t15",
+      "spreadTitle": "Сходства и различия в чашке",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Сходства и различия в чашке»",
+      "spreadTemplate": "process",
       "template": "process",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "diagram",
+        "brief": "Заказать материал для A-S065 «Сходства и различия в чашке»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 130,
       "id": "A-P130",
       "spreadId": "A-S066",
       "sectionId": "sheng-shou",
-      "role": "Раздел «Шэн и шоу»: полоса 30 из 30",
-      "template": "chapter-gate",
+      "topicId": "sheng-shou-t16",
+      "spreadTitle": "От технологии — к микрокосму",
+      "role": "Подводит итог раздела «Шэн и шоу» через тему «От технологии — к микрокосму»",
+      "spreadTemplate": "chapter-gate",
+      "template": "quiet-text",
       "assetIds": [],
-      "crossSectionSpread": true
+      "crossSectionSpread": true,
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "illustration",
+        "brief": "Заказать материал для A-S066 «От технологии — к микрокосму / Микрокосм без одного «главного микроба»»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 131,
       "id": "A-P131",
       "spreadId": "A-S066",
       "sectionId": "microcosm",
-      "role": "Открытие раздела «Микрокосм»",
+      "topicId": "microcosm-t01",
+      "spreadTitle": "Микрокосм без одного «главного микроба»",
+      "role": "Открывает раздел «Микрокосм» темой «Микрокосм без одного «главного микроба»»",
+      "spreadTemplate": "chapter-gate",
       "template": "chapter-gate",
       "assetIds": [],
       "chapterStart": true,
-      "crossSectionSpread": true
+      "crossSectionSpread": true,
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "illustration",
+        "brief": "Заказать материал для A-S066 «От технологии — к микрокосму / Микрокосм без одного «главного микроба»»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 132,
       "id": "A-P132",
       "spreadId": "A-S067",
       "sectionId": "microcosm",
-      "role": "Раздел «Микрокосм»: полоса 2 из 24",
-      "template": "scientific-plate",
+      "topicId": "microcosm-t02",
+      "spreadTitle": "Температурная кривая wodui",
+      "role": "Задаёт контекст и главный вопрос темы «Температурная кривая wodui»",
+      "spreadTemplate": "scientific-plate",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -1341,7 +2452,10 @@
       "id": "A-P133",
       "spreadId": "A-S067",
       "sectionId": "microcosm",
-      "role": "Раздел «Микрокосм»: полоса 3 из 24",
+      "topicId": "microcosm-t02",
+      "spreadTitle": "Температурная кривая wodui",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Температурная кривая wodui»",
+      "spreadTemplate": "scientific-plate",
       "template": "scientific-plate",
       "assetIds": [
         "diagram-wodui-heat"
@@ -1352,8 +2466,11 @@
       "id": "A-P134",
       "spreadId": "A-S068",
       "sectionId": "microcosm",
-      "role": "Раздел «Микрокосм»: полоса 4 из 24",
-      "template": "scientific-plate",
+      "topicId": "microcosm-t03",
+      "spreadTitle": "Сообщество микроорганизмов и смена условий",
+      "role": "Задаёт контекст и главный вопрос темы «Сообщество микроорганизмов и смена условий»",
+      "spreadTemplate": "scientific-plate",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -1361,7 +2478,10 @@
       "id": "A-P135",
       "spreadId": "A-S068",
       "sectionId": "microcosm",
-      "role": "Раздел «Микрокосм»: полоса 5 из 24",
+      "topicId": "microcosm-t03",
+      "spreadTitle": "Сообщество микроорганизмов и смена условий",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Сообщество микроорганизмов и смена условий»",
+      "spreadTemplate": "scientific-plate",
       "template": "scientific-plate",
       "assetIds": [
         "diagram-microbiology-community"
@@ -1372,8 +2492,11 @@
       "id": "A-P136",
       "spreadId": "A-S069",
       "sectionId": "microcosm",
-      "role": "Раздел «Микрокосм»: полоса 6 из 24",
-      "template": "scientific-plate",
+      "topicId": "microcosm-t04",
+      "spreadTitle": "Плесени, дрожжи и бактерии: осторожный словарь",
+      "role": "Задаёт контекст и главный вопрос темы «Плесени, дрожжи и бактерии: осторожный словарь»",
+      "spreadTemplate": "scientific-plate",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -1381,7 +2504,10 @@
       "id": "A-P137",
       "spreadId": "A-S069",
       "sectionId": "microcosm",
-      "role": "Раздел «Микрокосм»: полоса 7 из 24",
+      "topicId": "microcosm-t04",
+      "spreadTitle": "Плесени, дрожжи и бактерии: осторожный словарь",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Плесени, дрожжи и бактерии: осторожный словарь»",
+      "spreadTemplate": "scientific-plate",
       "template": "scientific-plate",
       "assetIds": [
         "diagram-microbiology-safety-methods"
@@ -1392,7 +2518,10 @@
       "id": "A-P138",
       "spreadId": "A-S070",
       "sectionId": "microcosm",
-      "role": "Раздел «Микрокосм»: полоса 8 из 24",
+      "topicId": "microcosm-t05",
+      "spreadTitle": "Вода как ограничивающий фактор",
+      "role": "Задаёт контекст и главный вопрос темы «Вода как ограничивающий фактор»",
+      "spreadTemplate": "quiet-text",
       "template": "quiet-text",
       "assetIds": []
     },
@@ -1401,7 +2530,10 @@
       "id": "A-P139",
       "spreadId": "A-S070",
       "sectionId": "microcosm",
-      "role": "Раздел «Микрокосм»: полоса 9 из 24",
+      "topicId": "microcosm-t05",
+      "spreadTitle": "Вода как ограничивающий фактор",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Вода как ограничивающий фактор»",
+      "spreadTemplate": "quiet-text",
       "template": "quiet-text",
       "assetIds": []
     },
@@ -1410,43 +2542,78 @@
       "id": "A-P140",
       "spreadId": "A-S071",
       "sectionId": "microcosm",
-      "role": "Раздел «Микрокосм»: полоса 10 из 24",
-      "template": "scientific-plate",
-      "assetIds": []
+      "topicId": "microcosm-t06",
+      "spreadTitle": "Кислород и неоднородность кучи",
+      "role": "Задаёт контекст и главный вопрос темы «Кислород и неоднородность кучи»",
+      "spreadTemplate": "scientific-plate",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "diagram",
+        "brief": "Заказать материал для A-S071 «Кислород и неоднородность кучи»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 141,
       "id": "A-P141",
       "spreadId": "A-S071",
       "sectionId": "microcosm",
-      "role": "Раздел «Микрокосм»: полоса 11 из 24",
+      "topicId": "microcosm-t06",
+      "spreadTitle": "Кислород и неоднородность кучи",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Кислород и неоднородность кучи»",
+      "spreadTemplate": "scientific-plate",
       "template": "scientific-plate",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "diagram",
+        "brief": "Заказать материал для A-S071 «Кислород и неоднородность кучи»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 142,
       "id": "A-P142",
       "spreadId": "A-S072",
       "sectionId": "microcosm",
-      "role": "Раздел «Микрокосм»: полоса 12 из 24",
-      "template": "process",
-      "assetIds": []
+      "topicId": "microcosm-t07",
+      "spreadTitle": "Методы отбора проб и их ограничения",
+      "role": "Задаёт контекст и главный вопрос темы «Методы отбора проб и их ограничения»",
+      "spreadTemplate": "process",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "diagram",
+        "brief": "Заказать материал для A-S072 «Методы отбора проб и их ограничения»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 143,
       "id": "A-P143",
       "spreadId": "A-S072",
       "sectionId": "microcosm",
-      "role": "Раздел «Микрокосм»: полоса 13 из 24",
+      "topicId": "microcosm-t07",
+      "spreadTitle": "Методы отбора проб и их ограничения",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Методы отбора проб и их ограничения»",
+      "spreadTemplate": "process",
       "template": "process",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "diagram",
+        "brief": "Заказать материал для A-S072 «Методы отбора проб и их ограничения»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 144,
       "id": "A-P144",
       "spreadId": "A-S073",
       "sectionId": "microcosm",
-      "role": "Раздел «Микрокосм»: полоса 14 из 24",
+      "topicId": "microcosm-t08",
+      "spreadTitle": "Корреляция не доказывает технологическую роль",
+      "role": "Задаёт контекст и главный вопрос темы «Корреляция не доказывает технологическую роль»",
+      "spreadTemplate": "quiet-text",
       "template": "quiet-text",
       "assetIds": []
     },
@@ -1455,7 +2622,10 @@
       "id": "A-P145",
       "spreadId": "A-S073",
       "sectionId": "microcosm",
-      "role": "Раздел «Микрокосм»: полоса 15 из 24",
+      "topicId": "microcosm-t08",
+      "spreadTitle": "Корреляция не доказывает технологическую роль",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Корреляция не доказывает технологическую роль»",
+      "spreadTemplate": "quiet-text",
       "template": "quiet-text",
       "assetIds": []
     },
@@ -1464,43 +2634,78 @@
       "id": "A-P146",
       "spreadId": "A-S074",
       "sectionId": "microcosm",
-      "role": "Раздел «Микрокосм»: полоса 16 из 24",
-      "template": "scientific-plate",
-      "assetIds": []
+      "topicId": "microcosm-t09",
+      "spreadTitle": "Безопасность исследования и производства",
+      "role": "Задаёт контекст и главный вопрос темы «Безопасность исследования и производства»",
+      "spreadTemplate": "scientific-plate",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "diagram",
+        "brief": "Заказать материал для A-S074 «Безопасность исследования и производства»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 147,
       "id": "A-P147",
       "spreadId": "A-S074",
       "sectionId": "microcosm",
-      "role": "Раздел «Микрокосм»: полоса 17 из 24",
+      "topicId": "microcosm-t09",
+      "spreadTitle": "Безопасность исследования и производства",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Безопасность исследования и производства»",
+      "spreadTemplate": "scientific-plate",
       "template": "scientific-plate",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "diagram",
+        "brief": "Заказать материал для A-S074 «Безопасность исследования и производства»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 148,
       "id": "A-P148",
       "spreadId": "A-S075",
       "sectionId": "microcosm",
-      "role": "Раздел «Микрокосм»: полоса 18 из 24",
-      "template": "process",
-      "assetIds": []
+      "topicId": "microcosm-t10",
+      "spreadTitle": "Хранение после wodui",
+      "role": "Задаёт контекст и главный вопрос темы «Хранение после wodui»",
+      "spreadTemplate": "process",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "diagram",
+        "brief": "Заказать материал для A-S075 «Хранение после wodui»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 149,
       "id": "A-P149",
       "spreadId": "A-S075",
       "sectionId": "microcosm",
-      "role": "Раздел «Микрокосм»: полоса 19 из 24",
+      "topicId": "microcosm-t10",
+      "spreadTitle": "Хранение после wodui",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Хранение после wodui»",
+      "spreadTemplate": "process",
       "template": "process",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "diagram",
+        "brief": "Заказать материал для A-S075 «Хранение после wodui»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 150,
       "id": "A-P150",
       "spreadId": "A-S076",
       "sectionId": "microcosm",
-      "role": "Раздел «Микрокосм»: полоса 20 из 24",
+      "topicId": "microcosm-t11",
+      "spreadTitle": "Ароматические изменения без магического объяснения",
+      "role": "Задаёт контекст и главный вопрос темы «Ароматические изменения без магического объяснения»",
+      "spreadTemplate": "quiet-text",
       "template": "quiet-text",
       "assetIds": []
     },
@@ -1509,7 +2714,10 @@
       "id": "A-P151",
       "spreadId": "A-S076",
       "sectionId": "microcosm",
-      "role": "Раздел «Микрокосм»: полоса 21 из 24",
+      "topicId": "microcosm-t11",
+      "spreadTitle": "Ароматические изменения без магического объяснения",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Ароматические изменения без магического объяснения»",
+      "spreadTemplate": "quiet-text",
       "template": "quiet-text",
       "assetIds": []
     },
@@ -1518,47 +2726,82 @@
       "id": "A-P152",
       "spreadId": "A-S077",
       "sectionId": "microcosm",
-      "role": "Раздел «Микрокосм»: полоса 22 из 24",
-      "template": "scientific-plate",
-      "assetIds": []
+      "topicId": "microcosm-t12",
+      "spreadTitle": "Что наука пока не знает",
+      "role": "Задаёт контекст и главный вопрос темы «Что наука пока не знает»",
+      "spreadTemplate": "scientific-plate",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "diagram",
+        "brief": "Заказать материал для A-S077 «Что наука пока не знает»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 153,
       "id": "A-P153",
       "spreadId": "A-S077",
       "sectionId": "microcosm",
-      "role": "Раздел «Микрокосм»: полоса 23 из 24",
+      "topicId": "microcosm-t12",
+      "spreadTitle": "Что наука пока не знает",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Что наука пока не знает»",
+      "spreadTemplate": "scientific-plate",
       "template": "scientific-plate",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "diagram",
+        "brief": "Заказать материал для A-S077 «Что наука пока не знает»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 154,
       "id": "A-P154",
       "spreadId": "A-S078",
       "sectionId": "microcosm",
-      "role": "Раздел «Микрокосм»: полоса 24 из 24",
-      "template": "chapter-gate",
+      "topicId": "microcosm-t13",
+      "spreadTitle": "От микробного сообщества — к телу человека",
+      "role": "Подводит итог раздела «Микрокосм» через тему «От микробного сообщества — к телу человека»",
+      "spreadTemplate": "chapter-gate",
+      "template": "quiet-text",
       "assetIds": [],
-      "crossSectionSpread": true
+      "crossSectionSpread": true,
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "illustration",
+        "brief": "Заказать материал для A-S078 «От микробного сообщества — к телу человека / Чай и тело: отделить опыт от обещания»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 155,
       "id": "A-P155",
       "spreadId": "A-S078",
       "sectionId": "body",
-      "role": "Открытие раздела «Тело и свидетельства»",
+      "topicId": "body-t01",
+      "spreadTitle": "Чай и тело: отделить опыт от обещания",
+      "role": "Открывает раздел «Тело и свидетельства» темой «Чай и тело: отделить опыт от обещания»",
+      "spreadTemplate": "chapter-gate",
       "template": "chapter-gate",
       "assetIds": [],
       "chapterStart": true,
-      "crossSectionSpread": true
+      "crossSectionSpread": true,
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "illustration",
+        "brief": "Заказать материал для A-S078 «От микробного сообщества — к телу человека / Чай и тело: отделить опыт от обещания»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 156,
       "id": "A-P156",
       "spreadId": "A-S079",
       "sectionId": "body",
-      "role": "Раздел «Тело и свидетельства»: полоса 2 из 22",
-      "template": "scientific-plate",
+      "topicId": "body-t02",
+      "spreadTitle": "Шкала силы медицинских свидетельств",
+      "role": "Задаёт контекст и главный вопрос темы «Шкала силы медицинских свидетельств»",
+      "spreadTemplate": "scientific-plate",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -1566,7 +2809,10 @@
       "id": "A-P157",
       "spreadId": "A-S079",
       "sectionId": "body",
-      "role": "Раздел «Тело и свидетельства»: полоса 3 из 22",
+      "topicId": "body-t02",
+      "spreadTitle": "Шкала силы медицинских свидетельств",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Шкала силы медицинских свидетельств»",
+      "spreadTemplate": "scientific-plate",
       "template": "scientific-plate",
       "assetIds": [
         "diagram-medical-evidence-scale"
@@ -1577,8 +2823,11 @@
       "id": "A-P158",
       "spreadId": "A-S080",
       "sectionId": "body",
-      "role": "Раздел «Тело и свидетельства»: полоса 4 из 22",
-      "template": "scientific-plate",
+      "topicId": "body-t03",
+      "spreadTitle": "Почему небольшое исследование легко переоценить",
+      "role": "Задаёт контекст и главный вопрос темы «Почему небольшое исследование легко переоценить»",
+      "spreadTemplate": "scientific-plate",
+      "template": "quiet-text",
       "assetIds": []
     },
     {
@@ -1586,7 +2835,10 @@
       "id": "A-P159",
       "spreadId": "A-S080",
       "sectionId": "body",
-      "role": "Раздел «Тело и свидетельства»: полоса 5 из 22",
+      "topicId": "body-t03",
+      "spreadTitle": "Почему небольшое исследование легко переоценить",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Почему небольшое исследование легко переоценить»",
+      "spreadTemplate": "scientific-plate",
       "template": "scientific-plate",
       "assetIds": [
         "diagram-medical-study-limitations"
@@ -1597,7 +2849,10 @@
       "id": "A-P160",
       "spreadId": "A-S081",
       "sectionId": "body",
-      "role": "Раздел «Тело и свидетельства»: полоса 6 из 22",
+      "topicId": "body-t04",
+      "spreadTitle": "Наблюдение, ассоциация и причинность",
+      "role": "Задаёт контекст и главный вопрос темы «Наблюдение, ассоциация и причинность»",
+      "spreadTemplate": "quiet-text",
       "template": "quiet-text",
       "assetIds": []
     },
@@ -1606,7 +2861,10 @@
       "id": "A-P161",
       "spreadId": "A-S081",
       "sectionId": "body",
-      "role": "Раздел «Тело и свидетельства»: полоса 7 из 22",
+      "topicId": "body-t04",
+      "spreadTitle": "Наблюдение, ассоциация и причинность",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Наблюдение, ассоциация и причинность»",
+      "spreadTemplate": "quiet-text",
       "template": "quiet-text",
       "assetIds": []
     },
@@ -1615,43 +2873,78 @@
       "id": "A-P162",
       "spreadId": "A-S082",
       "sectionId": "body",
-      "role": "Раздел «Тело и свидетельства»: полоса 8 из 22",
-      "template": "source-window",
-      "assetIds": []
+      "topicId": "body-t05",
+      "spreadTitle": "Кофеин и индивидуальная чувствительность",
+      "role": "Задаёт контекст и главный вопрос темы «Кофеин и индивидуальная чувствительность»",
+      "spreadTemplate": "source-window",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "archive",
+        "brief": "Заказать материал для A-S082 «Кофеин и индивидуальная чувствительность»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 163,
       "id": "A-P163",
       "spreadId": "A-S082",
       "sectionId": "body",
-      "role": "Раздел «Тело и свидетельства»: полоса 9 из 22",
+      "topicId": "body-t05",
+      "spreadTitle": "Кофеин и индивидуальная чувствительность",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Кофеин и индивидуальная чувствительность»",
+      "spreadTemplate": "source-window",
       "template": "source-window",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "archive",
+        "brief": "Заказать материал для A-S082 «Кофеин и индивидуальная чувствительность»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 164,
       "id": "A-P164",
       "spreadId": "A-S083",
       "sectionId": "body",
-      "role": "Раздел «Тело и свидетельства»: полоса 10 из 22",
-      "template": "scientific-plate",
-      "assetIds": []
+      "topicId": "body-t06",
+      "spreadTitle": "Время употребления и сон",
+      "role": "Задаёт контекст и главный вопрос темы «Время употребления и сон»",
+      "spreadTemplate": "scientific-plate",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "diagram",
+        "brief": "Заказать материал для A-S083 «Время употребления и сон»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 165,
       "id": "A-P165",
       "spreadId": "A-S083",
       "sectionId": "body",
-      "role": "Раздел «Тело и свидетельства»: полоса 11 из 22",
+      "topicId": "body-t06",
+      "spreadTitle": "Время употребления и сон",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Время употребления и сон»",
+      "spreadTemplate": "scientific-plate",
       "template": "scientific-plate",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "diagram",
+        "brief": "Заказать материал для A-S083 «Время употребления и сон»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 166,
       "id": "A-P166",
       "spreadId": "A-S084",
       "sectionId": "body",
-      "role": "Раздел «Тело и свидетельства»: полоса 12 из 22",
+      "topicId": "body-t07",
+      "spreadTitle": "Желудочно-кишечный комфорт без универсальных советов",
+      "role": "Задаёт контекст и главный вопрос темы «Желудочно-кишечный комфорт без универсальных советов»",
+      "spreadTemplate": "quiet-text",
       "template": "quiet-text",
       "assetIds": []
     },
@@ -1660,7 +2953,10 @@
       "id": "A-P167",
       "spreadId": "A-S084",
       "sectionId": "body",
-      "role": "Раздел «Тело и свидетельства»: полоса 13 из 22",
+      "topicId": "body-t07",
+      "spreadTitle": "Желудочно-кишечный комфорт без универсальных советов",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Желудочно-кишечный комфорт без универсальных советов»",
+      "spreadTemplate": "quiet-text",
       "template": "quiet-text",
       "assetIds": []
     },
@@ -1669,43 +2965,78 @@
       "id": "A-P168",
       "spreadId": "A-S085",
       "sectionId": "body",
-      "role": "Раздел «Тело и свидетельства»: полоса 14 из 22",
-      "template": "source-window",
-      "assetIds": []
+      "topicId": "body-t08",
+      "spreadTitle": "Лекарственные взаимодействия: граница книги",
+      "role": "Задаёт контекст и главный вопрос темы «Лекарственные взаимодействия: граница книги»",
+      "spreadTemplate": "source-window",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "archive",
+        "brief": "Заказать материал для A-S085 «Лекарственные взаимодействия: граница книги»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 169,
       "id": "A-P169",
       "spreadId": "A-S085",
       "sectionId": "body",
-      "role": "Раздел «Тело и свидетельства»: полоса 15 из 22",
+      "topicId": "body-t08",
+      "spreadTitle": "Лекарственные взаимодействия: граница книги",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Лекарственные взаимодействия: граница книги»",
+      "spreadTemplate": "source-window",
       "template": "source-window",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "archive",
+        "brief": "Заказать материал для A-S085 «Лекарственные взаимодействия: граница книги»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 170,
       "id": "A-P170",
       "spreadId": "A-S086",
       "sectionId": "body",
-      "role": "Раздел «Тело и свидетельства»: полоса 16 из 22",
-      "template": "scientific-plate",
-      "assetIds": []
+      "topicId": "body-t09",
+      "spreadTitle": "Беременность и другие особые ситуации",
+      "role": "Задаёт контекст и главный вопрос темы «Беременность и другие особые ситуации»",
+      "spreadTemplate": "scientific-plate",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "diagram",
+        "brief": "Заказать материал для A-S086 «Беременность и другие особые ситуации»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 171,
       "id": "A-P171",
       "spreadId": "A-S086",
       "sectionId": "body",
-      "role": "Раздел «Тело и свидетельства»: полоса 17 из 22",
+      "topicId": "body-t09",
+      "spreadTitle": "Беременность и другие особые ситуации",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Беременность и другие особые ситуации»",
+      "spreadTemplate": "scientific-plate",
       "template": "scientific-plate",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "diagram",
+        "brief": "Заказать материал для A-S086 «Беременность и другие особые ситуации»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 172,
       "id": "A-P172",
       "spreadId": "A-S087",
       "sectionId": "body",
-      "role": "Раздел «Тело и свидетельства»: полоса 18 из 22",
+      "topicId": "body-t10",
+      "spreadTitle": "Как читать громкий заголовок о здоровье",
+      "role": "Задаёт контекст и главный вопрос темы «Как читать громкий заголовок о здоровье»",
+      "spreadTemplate": "quiet-text",
       "template": "quiet-text",
       "assetIds": []
     },
@@ -1714,7 +3045,10 @@
       "id": "A-P173",
       "spreadId": "A-S087",
       "sectionId": "body",
-      "role": "Раздел «Тело и свидетельства»: полоса 19 из 22",
+      "topicId": "body-t10",
+      "spreadTitle": "Как читать громкий заголовок о здоровье",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Как читать громкий заголовок о здоровье»",
+      "spreadTemplate": "quiet-text",
       "template": "quiet-text",
       "assetIds": []
     },
@@ -1723,64 +3057,115 @@
       "id": "A-P174",
       "spreadId": "A-S088",
       "sectionId": "body",
-      "role": "Раздел «Тело и свидетельства»: полоса 20 из 22",
-      "template": "source-window",
-      "assetIds": []
+      "topicId": "body-t11",
+      "spreadTitle": "Практика осторожного само-наблюдения",
+      "role": "Задаёт контекст и главный вопрос темы «Практика осторожного само-наблюдения»",
+      "spreadTemplate": "source-window",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "archive",
+        "brief": "Заказать материал для A-S088 «Практика осторожного само-наблюдения»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 175,
       "id": "A-P175",
       "spreadId": "A-S088",
       "sectionId": "body",
-      "role": "Раздел «Тело и свидетельства»: полоса 21 из 22",
+      "topicId": "body-t11",
+      "spreadTitle": "Практика осторожного само-наблюдения",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Практика осторожного само-наблюдения»",
+      "spreadTemplate": "source-window",
       "template": "source-window",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "archive",
+        "brief": "Заказать материал для A-S088 «Практика осторожного само-наблюдения»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 176,
       "id": "A-P176",
       "spreadId": "A-S089",
       "sectionId": "body",
-      "role": "Раздел «Тело и свидетельства»: полоса 22 из 22",
-      "template": "chapter-gate",
+      "topicId": "body-t12",
+      "spreadTitle": "От доказательств — к спокойной чайной комнате",
+      "role": "Подводит итог раздела «Тело и свидетельства» через тему «От доказательств — к спокойной чайной комнате»",
+      "spreadTemplate": "chapter-gate",
+      "template": "quiet-text",
       "assetIds": [],
-      "crossSectionSpread": true
+      "crossSectionSpread": true,
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "illustration",
+        "brief": "Заказать материал для A-S089 «От доказательств — к спокойной чайной комнате / Чайная комната как место внимания»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 177,
       "id": "A-P177",
       "spreadId": "A-S089",
       "sectionId": "tea-room",
-      "role": "Открытие раздела «Чайная комната»",
+      "topicId": "tea-room-t01",
+      "spreadTitle": "Чайная комната как место внимания",
+      "role": "Открывает раздел «Чайная комната» темой «Чайная комната как место внимания»",
+      "spreadTemplate": "chapter-gate",
       "template": "chapter-gate",
       "assetIds": [],
       "chapterStart": true,
-      "crossSectionSpread": true
+      "crossSectionSpread": true,
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "illustration",
+        "brief": "Заказать материал для A-S089 «От доказательств — к спокойной чайной комнате / Чайная комната как место внимания»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 178,
       "id": "A-P178",
       "spreadId": "A-S090",
       "sectionId": "tea-room",
-      "role": "Раздел «Чайная комната»: полоса 2 из 16",
-      "template": "photo-plus-essay",
-      "assetIds": []
+      "topicId": "tea-room-t02",
+      "spreadTitle": "Посуда: функция раньше статуса",
+      "role": "Задаёт контекст и главный вопрос темы «Посуда: функция раньше статуса»",
+      "spreadTemplate": "photo-plus-essay",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "photo",
+        "brief": "Заказать материал для A-S090 «Посуда: функция раньше статуса»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 179,
       "id": "A-P179",
       "spreadId": "A-S090",
       "sectionId": "tea-room",
-      "role": "Раздел «Чайная комната»: полоса 3 из 16",
+      "topicId": "tea-room-t02",
+      "spreadTitle": "Посуда: функция раньше статуса",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Посуда: функция раньше статуса»",
+      "spreadTemplate": "photo-plus-essay",
       "template": "photo-plus-essay",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "photo",
+        "brief": "Заказать материал для A-S090 «Посуда: функция раньше статуса»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 180,
       "id": "A-P180",
       "spreadId": "A-S091",
       "sectionId": "tea-room",
-      "role": "Раздел «Чайная комната»: полоса 4 из 16",
+      "topicId": "tea-room-t03",
+      "spreadTitle": "Вода, тепло и движение руки",
+      "role": "Задаёт контекст и главный вопрос темы «Вода, тепло и движение руки»",
+      "spreadTemplate": "quiet-text",
       "template": "quiet-text",
       "assetIds": []
     },
@@ -1789,7 +3174,10 @@
       "id": "A-P181",
       "spreadId": "A-S091",
       "sectionId": "tea-room",
-      "role": "Раздел «Чайная комната»: полоса 5 из 16",
+      "topicId": "tea-room-t03",
+      "spreadTitle": "Вода, тепло и движение руки",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Вода, тепло и движение руки»",
+      "spreadTemplate": "quiet-text",
       "template": "quiet-text",
       "assetIds": []
     },
@@ -1798,43 +3186,78 @@
       "id": "A-P182",
       "spreadId": "A-S092",
       "sectionId": "tea-room",
-      "role": "Раздел «Чайная комната»: полоса 6 из 16",
-      "template": "object-atlas",
-      "assetIds": []
+      "topicId": "tea-room-t04",
+      "spreadTitle": "Цвет настоя и одинаковый свет",
+      "role": "Задаёт контекст и главный вопрос темы «Цвет настоя и одинаковый свет»",
+      "spreadTemplate": "object-atlas",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "photo",
+        "brief": "Заказать материал для A-S092 «Цвет настоя и одинаковый свет»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 183,
       "id": "A-P183",
       "spreadId": "A-S092",
       "sectionId": "tea-room",
-      "role": "Раздел «Чайная комната»: полоса 7 из 16",
+      "topicId": "tea-room-t04",
+      "spreadTitle": "Цвет настоя и одинаковый свет",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Цвет настоя и одинаковый свет»",
+      "spreadTemplate": "object-atlas",
       "template": "object-atlas",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "photo",
+        "brief": "Заказать материал для A-S092 «Цвет настоя и одинаковый свет»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 184,
       "id": "A-P184",
       "spreadId": "A-S093",
       "sectionId": "tea-room",
-      "role": "Раздел «Чайная комната»: полоса 8 из 16",
-      "template": "photo-plus-essay",
-      "assetIds": []
+      "topicId": "tea-room-t05",
+      "spreadTitle": "Аромат до вкуса и после глотка",
+      "role": "Задаёт контекст и главный вопрос темы «Аромат до вкуса и после глотка»",
+      "spreadTemplate": "photo-plus-essay",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "photo",
+        "brief": "Заказать материал для A-S093 «Аромат до вкуса и после глотка»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 185,
       "id": "A-P185",
       "spreadId": "A-S093",
       "sectionId": "tea-room",
-      "role": "Раздел «Чайная комната»: полоса 9 из 16",
+      "topicId": "tea-room-t05",
+      "spreadTitle": "Аромат до вкуса и после глотка",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Аромат до вкуса и после глотка»",
+      "spreadTemplate": "photo-plus-essay",
       "template": "photo-plus-essay",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "photo",
+        "brief": "Заказать материал для A-S093 «Аромат до вкуса и после глотка»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 186,
       "id": "A-P186",
       "spreadId": "A-S094",
       "sectionId": "tea-room",
-      "role": "Раздел «Чайная комната»: полоса 10 из 16",
+      "topicId": "tea-room-t06",
+      "spreadTitle": "Фактура прессовок и следы времени",
+      "role": "Задаёт контекст и главный вопрос темы «Фактура прессовок и следы времени»",
+      "spreadTemplate": "quiet-text",
       "template": "quiet-text",
       "assetIds": []
     },
@@ -1843,7 +3266,10 @@
       "id": "A-P187",
       "spreadId": "A-S094",
       "sectionId": "tea-room",
-      "role": "Раздел «Чайная комната»: полоса 11 из 16",
+      "topicId": "tea-room-t06",
+      "spreadTitle": "Фактура прессовок и следы времени",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Фактура прессовок и следы времени»",
+      "spreadTemplate": "quiet-text",
       "template": "quiet-text",
       "assetIds": []
     },
@@ -1852,57 +3278,105 @@
       "id": "A-P188",
       "spreadId": "A-S095",
       "sectionId": "tea-room",
-      "role": "Раздел «Чайная комната»: полоса 12 из 16",
-      "template": "object-atlas",
-      "assetIds": []
+      "topicId": "tea-room-t07",
+      "spreadTitle": "Обёртки и инструменты на одном столе",
+      "role": "Задаёт контекст и главный вопрос темы «Обёртки и инструменты на одном столе»",
+      "spreadTemplate": "object-atlas",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "photo",
+        "brief": "Заказать материал для A-S095 «Обёртки и инструменты на одном столе»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 189,
       "id": "A-P189",
       "spreadId": "A-S095",
       "sectionId": "tea-room",
-      "role": "Раздел «Чайная комната»: полоса 13 из 16",
+      "topicId": "tea-room-t07",
+      "spreadTitle": "Обёртки и инструменты на одном столе",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Обёртки и инструменты на одном столе»",
+      "spreadTemplate": "object-atlas",
       "template": "object-atlas",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "photo",
+        "brief": "Заказать материал для A-S095 «Обёртки и инструменты на одном столе»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 190,
       "id": "A-P190",
       "spreadId": "A-S096",
       "sectionId": "tea-room",
-      "role": "Раздел «Чайная комната»: полоса 14 из 16",
-      "template": "photo-plus-essay",
-      "assetIds": []
+      "topicId": "tea-room-t08",
+      "spreadTitle": "Разговор без рейтинга и соревнования",
+      "role": "Задаёт контекст и главный вопрос темы «Разговор без рейтинга и соревнования»",
+      "spreadTemplate": "photo-plus-essay",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "photo",
+        "brief": "Заказать материал для A-S096 «Разговор без рейтинга и соревнования»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 191,
       "id": "A-P191",
       "spreadId": "A-S096",
       "sectionId": "tea-room",
-      "role": "Раздел «Чайная комната»: полоса 15 из 16",
+      "topicId": "tea-room-t08",
+      "spreadTitle": "Разговор без рейтинга и соревнования",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Разговор без рейтинга и соревнования»",
+      "spreadTemplate": "photo-plus-essay",
       "template": "photo-plus-essay",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "photo",
+        "brief": "Заказать материал для A-S096 «Разговор без рейтинга и соревнования»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 192,
       "id": "A-P192",
       "spreadId": "A-S097",
       "sectionId": "tea-room",
-      "role": "Раздел «Чайная комната»: полоса 16 из 16",
-      "template": "chapter-gate",
+      "topicId": "tea-room-t09",
+      "spreadTitle": "Из чтения — в справочный аппарат",
+      "role": "Подводит итог раздела «Чайная комната» через тему «Из чтения — в справочный аппарат»",
+      "spreadTemplate": "chapter-gate",
+      "template": "quiet-text",
       "assetIds": [],
-      "crossSectionSpread": true
+      "crossSectionSpread": true,
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "illustration",
+        "brief": "Заказать материал для A-S097 «Из чтения — в справочный аппарат / Как пользоваться справочным аппаратом»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      }
     },
     {
       "number": 193,
       "id": "A-P193",
       "spreadId": "A-S097",
       "sectionId": "apparatus",
-      "role": "Хронология: полоса 193",
+      "topicId": "apparatus-t01",
+      "spreadTitle": "Как пользоваться справочным аппаратом",
+      "role": "Открывает раздел «Справочный аппарат» темой «Как пользоваться справочным аппаратом»",
+      "spreadTemplate": "chapter-gate",
       "template": "chapter-gate",
       "assetIds": [],
       "chapterStart": true,
       "crossSectionSpread": true,
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "illustration",
+        "brief": "Заказать материал для A-S097 «Из чтения — в справочный аппарат / Как пользоваться справочным аппаратом»: показать заявленную тему без декоративных клише и с проверяемыми деталями"
+      },
       "apparatus": "chronology"
     },
     {
@@ -1910,7 +3384,10 @@
       "id": "A-P194",
       "spreadId": "A-S098",
       "sectionId": "apparatus",
-      "role": "Хронология: полоса 194",
+      "topicId": "apparatus-t02",
+      "spreadTitle": "Хронология ранних свидетельств",
+      "role": "Задаёт контекст и главный вопрос темы «Хронология ранних свидетельств»",
+      "spreadTemplate": "quiet-text",
       "template": "quiet-text",
       "assetIds": [],
       "apparatus": "chronology"
@@ -1920,7 +3397,10 @@
       "id": "A-P195",
       "spreadId": "A-S098",
       "sectionId": "apparatus",
-      "role": "Хронология: полоса 195",
+      "topicId": "apparatus-t02",
+      "spreadTitle": "Хронология ранних свидетельств",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Хронология ранних свидетельств»",
+      "spreadTemplate": "quiet-text",
       "template": "quiet-text",
       "assetIds": [],
       "apparatus": "chronology"
@@ -1930,7 +3410,10 @@
       "id": "A-P196",
       "spreadId": "A-S099",
       "sectionId": "apparatus",
-      "role": "Хронология: полоса 196",
+      "topicId": "apparatus-t03",
+      "spreadTitle": "Хронология технологий XX века",
+      "role": "Задаёт контекст и главный вопрос темы «Хронология технологий XX века»",
+      "spreadTemplate": "quiet-text",
       "template": "quiet-text",
       "assetIds": [],
       "apparatus": "chronology"
@@ -1940,7 +3423,10 @@
       "id": "A-P197",
       "spreadId": "A-S099",
       "sectionId": "apparatus",
-      "role": "Хронология: полоса 197",
+      "topicId": "apparatus-t03",
+      "spreadTitle": "Хронология технологий XX века",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Хронология технологий XX века»",
+      "spreadTemplate": "quiet-text",
       "template": "quiet-text",
       "assetIds": [],
       "apparatus": "chronology"
@@ -1950,7 +3436,10 @@
       "id": "A-P198",
       "spreadId": "A-S100",
       "sectionId": "apparatus",
-      "role": "Хронология: полоса 198",
+      "topicId": "apparatus-t04",
+      "spreadTitle": "От дат — к терминам",
+      "role": "Задаёт контекст и главный вопрос темы «От дат — к терминам»",
+      "spreadTemplate": "quiet-text",
       "template": "quiet-text",
       "assetIds": [],
       "apparatus": "chronology"
@@ -1960,7 +3449,10 @@
       "id": "A-P199",
       "spreadId": "A-S100",
       "sectionId": "apparatus",
-      "role": "Глоссарий: полоса 199",
+      "topicId": "apparatus-t04",
+      "spreadTitle": "От дат — к терминам",
+      "role": "Даёт документ, пример и редакционный вывод по теме «От дат — к терминам»",
+      "spreadTemplate": "quiet-text",
       "template": "quiet-text",
       "assetIds": [],
       "apparatus": "glossary"
@@ -1970,7 +3462,10 @@
       "id": "A-P200",
       "spreadId": "A-S101",
       "sectionId": "apparatus",
-      "role": "Глоссарий: полоса 200",
+      "topicId": "apparatus-t05",
+      "spreadTitle": "Глоссарий производства и хранения",
+      "role": "Задаёт контекст и главный вопрос темы «Глоссарий производства и хранения»",
+      "spreadTemplate": "quiet-text",
       "template": "quiet-text",
       "assetIds": [],
       "apparatus": "glossary"
@@ -1980,7 +3475,10 @@
       "id": "A-P201",
       "spreadId": "A-S101",
       "sectionId": "apparatus",
-      "role": "Глоссарий: полоса 201",
+      "topicId": "apparatus-t05",
+      "spreadTitle": "Глоссарий производства и хранения",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Глоссарий производства и хранения»",
+      "spreadTemplate": "quiet-text",
       "template": "quiet-text",
       "assetIds": [],
       "apparatus": "glossary"
@@ -1990,8 +3488,11 @@
       "id": "A-P202",
       "spreadId": "A-S102",
       "sectionId": "apparatus",
-      "role": "Глоссарий: полоса 202",
-      "template": "bibliography",
+      "topicId": "apparatus-t06",
+      "spreadTitle": "Переход от глоссария к библиографии",
+      "role": "Задаёт контекст и главный вопрос темы «Переход от глоссария к библиографии»",
+      "spreadTemplate": "bibliography",
+      "template": "quiet-text",
       "assetIds": [],
       "apparatus": "glossary"
     },
@@ -2000,7 +3501,10 @@
       "id": "A-P203",
       "spreadId": "A-S102",
       "sectionId": "apparatus",
-      "role": "Библиография: полоса 203",
+      "topicId": "apparatus-t06",
+      "spreadTitle": "Переход от глоссария к библиографии",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Переход от глоссария к библиографии»",
+      "spreadTemplate": "bibliography",
       "template": "bibliography",
       "assetIds": [],
       "apparatus": "bibliography"
@@ -2010,7 +3514,10 @@
       "id": "A-P204",
       "spreadId": "A-S103",
       "sectionId": "apparatus",
-      "role": "Библиография: полоса 204",
+      "topicId": "apparatus-t07",
+      "spreadTitle": "Первичные и азиатские источники",
+      "role": "Задаёт контекст и главный вопрос темы «Первичные и азиатские источники»",
+      "spreadTemplate": "bibliography",
       "template": "bibliography",
       "assetIds": [],
       "apparatus": "bibliography"
@@ -2020,7 +3527,10 @@
       "id": "A-P205",
       "spreadId": "A-S103",
       "sectionId": "apparatus",
-      "role": "Библиография: полоса 205",
+      "topicId": "apparatus-t07",
+      "spreadTitle": "Первичные и азиатские источники",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Первичные и азиатские источники»",
+      "spreadTemplate": "bibliography",
       "template": "bibliography",
       "assetIds": [],
       "apparatus": "bibliography"
@@ -2030,7 +3540,10 @@
       "id": "A-P206",
       "spreadId": "A-S104",
       "sectionId": "apparatus",
-      "role": "Библиография: полоса 206",
+      "topicId": "apparatus-t08",
+      "spreadTitle": "Исследования, руководства и доступные копии",
+      "role": "Задаёт контекст и главный вопрос темы «Исследования, руководства и доступные копии»",
+      "spreadTemplate": "bibliography",
       "template": "bibliography",
       "assetIds": [],
       "apparatus": "bibliography"
@@ -2040,7 +3553,10 @@
       "id": "A-P207",
       "spreadId": "A-S104",
       "sectionId": "apparatus",
-      "role": "Библиография: полоса 207",
+      "topicId": "apparatus-t08",
+      "spreadTitle": "Исследования, руководства и доступные копии",
+      "role": "Даёт документ, пример и редакционный вывод по теме «Исследования, руководства и доступные копии»",
+      "spreadTemplate": "bibliography",
       "template": "bibliography",
       "assetIds": [],
       "apparatus": "bibliography"
@@ -2050,7 +3566,10 @@
       "id": "A-P208",
       "spreadId": "A-S105",
       "sectionId": "apparatus",
-      "role": "Библиография: полоса 208",
+      "topicId": "apparatus-t09",
+      "spreadTitle": "Выходные сведения и маршрут дальнейшего чтения",
+      "role": "Финальная навигация завершает тему «Выходные сведения и маршрут дальнейшего чтения»",
+      "spreadTemplate": "bibliography",
       "template": "bibliography",
       "assetIds": [],
       "apparatus": "bibliography"

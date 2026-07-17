@@ -67,6 +67,52 @@ const validateFlatplan = (...args) => {
 const expectedPageId = (prefix, number) => `${prefix}-P${String(number).padStart(3, '0')}`
 const expectedSpreadId = (prefix, number) => `${prefix}-S${String(Math.floor(number / 2) + 1).padStart(3, '0')}`
 const sectionSummary = (sections) => sections.map(({ id, pageCount, start, end }) => [id, pageCount, start, end])
+const recipeKeys = [
+  'adjustmentNote',
+  'firstInfusionRangeSec',
+  'leafMassG',
+  'methodId',
+  'recipeId',
+  'teaStyle',
+  'temperatureRangeC',
+  'title',
+  'vesselVolumeMl',
+]
+const simpleMethodIds = [
+  'mug-sheng',
+  'mug-shou',
+  'large-pot-sheng',
+  'large-pot-shou',
+  'thermos-sheng',
+  'thermos-shou',
+]
+const genericRolePattern = /(?:полоса|шаг)\s+\d+|\b\d+\s+из\s+\d+/iu
+
+const pagesBySpread = (plan) => Map.groupBy(plan.pages, ({ spreadId }) => spreadId)
+
+const assertEditorialTopics = (plan) => {
+  const roles = new Set()
+  for (const section of plan.sections) {
+    assert.ok(Array.isArray(section.requiredTopics) && section.requiredTopics.length > 0)
+    const declared = new Map(section.requiredTopics.map(({ id, title }) => [id, title]))
+    const pages = plan.pages.filter(({ sectionId }) => sectionId === section.id)
+    const used = new Set()
+    for (const page of pages) {
+      assert.ok(!genericRolePattern.test(page.role), `${page.id} has generic role: ${page.role}`)
+      assert.ok(!roles.has(page.role), `${page.id} repeats role: ${page.role}`)
+      roles.add(page.role)
+      assert.equal(declared.get(page.topicId), page.spreadTitle, `${page.id} topic/title is undeclared`)
+      used.add(page.topicId)
+    }
+    assert.deepEqual([...used].sort(), [...declared.keys()].sort(), `${section.id} has unused required topics`)
+  }
+  for (const [spreadId, pages] of pagesBySpread(plan)) {
+    if (new Set(pages.map(({ sectionId }) => sectionId)).size === 1) {
+      assert.equal(new Set(pages.map(({ topicId }) => topicId)).size, 1, `${spreadId} has multiple normal-spread topics`)
+      assert.equal(new Set(pages.map(({ spreadTitle }) => spreadTitle)).size, 1, `${spreadId} has multiple normal-spread titles`)
+    }
+  }
+}
 
 const temporaryRoots = []
 after(() => {
@@ -307,13 +353,26 @@ test('defines exactly the thirteen reusable templates with auditable metadata', 
   const { templates } = flatplanData()
 
   assert.deepEqual(templates.map(({ id }) => id), expectedTemplateIds)
+  const known = new Set(expectedTemplateIds)
   for (const template of templates) {
+    assert.deepEqual(Object.keys(template).sort(), [
+      'compatiblePageTemplates',
+      'constraints',
+      'expectedContent',
+      'id',
+      'label',
+      'purpose',
+      'requiresVisual',
+    ])
     assert.equal(typeof template.label, 'string')
     assert.ok(template.label.trim())
     assert.equal(typeof template.purpose, 'string')
     assert.ok(template.purpose.trim())
     assert.ok(Array.isArray(template.constraints) && template.constraints.length > 0)
     assert.ok(Array.isArray(template.expectedContent) && template.expectedContent.length > 0)
+    assert.equal(typeof template.requiresVisual, 'boolean')
+    assert.ok(Array.isArray(template.compatiblePageTemplates) && template.compatiblePageTemplates.length > 0)
+    assert.ok(template.compatiblePageTemplates.every((id) => known.has(id)))
   }
 })
 
@@ -328,6 +387,15 @@ test('defines and validates the exact 208-page album allocation and reader sprea
   assert.deepEqual(album.pages.map(({ id }) => id), Array.from({ length: 208 }, (_, index) => expectedPageId('A', index + 1)))
   assert.deepEqual(album.pages.map(({ spreadId }, index) => spreadId), Array.from({ length: 208 }, (_, index) => expectedSpreadId('A', index + 1)))
   assert.equal(new Set(album.pages.map(({ spreadId }) => spreadId)).size, 105)
+  assertEditorialTopics(album)
+  assert.deepEqual(album.pages.slice(192, 208).map(({ apparatus }) => apparatus), [
+    ...Array(6).fill('chronology'),
+    ...Array(4).fill('glossary'),
+    ...Array(6).fill('bibliography'),
+  ])
+  assert.equal(album.pages[201].template, 'quiet-text')
+  assert.equal(album.pages[202].template, 'bibliography')
+  assert.equal(album.pages[201].spreadTemplate, album.pages[202].spreadTemplate)
   assert.doesNotThrow(() => validateFlatplan(album, 208, templates, assetIds))
 })
 
@@ -354,7 +422,65 @@ test('defines and validates the exact 48-page guide allocation and reader spread
   assert.equal(guide.pages.filter(({ template }) => template === 'guide-recipe').length, 16)
   assert.equal(guide.pages[45].crossSectionSpread, true)
   assert.equal(guide.pages[46].crossSectionSpread, true)
+  assert.equal(guide.pages[45].template, 'guide-troubleshooting')
+  assert.equal(guide.pages[46].template, 'guide-safety')
+  assert.equal(guide.pages[45].spreadTemplate, guide.pages[46].spreadTemplate)
+  assertEditorialTopics(guide)
   assert.doesNotThrow(() => validateFlatplan(guide, 48, templates, assetIds))
+})
+
+test('fulfils every visual spread with registered assets or one identical commission brief', () => {
+  const { templates, album, guide } = flatplanData()
+  const metadata = new Map(templates.map((template) => [template.id, template]))
+
+  for (const plan of [album, guide]) {
+    const briefs = new Set()
+    for (const [spreadId, pages] of pagesBySpread(plan)) {
+      assert.equal(new Set(pages.map(({ spreadTemplate }) => spreadTemplate)).size, 1)
+      const requiresVisual = metadata.get(pages[0].spreadTemplate)?.requiresVisual
+      const assets = pages.flatMap(({ assetIds }) => assetIds)
+      const placeholders = pages.map(({ visualPlaceholder }) => visualPlaceholder).filter(Boolean)
+      if (requiresVisual) {
+        assert.ok(assets.length > 0 || placeholders.length === pages.length, `${spreadId} lacks visual fulfilment`)
+        if (placeholders.length > 0) {
+          assert.equal(assets.length, 0)
+          assert.ok(placeholders.every((placeholder) => JSON.stringify(placeholder) === JSON.stringify(placeholders[0])))
+          assert.ok(!briefs.has(placeholders[0].brief))
+          briefs.add(placeholders[0].brief)
+        }
+      } else {
+        assert.equal(placeholders.length, 0, `${spreadId} has placeholder on nonvisual spread`)
+      }
+    }
+  }
+})
+
+test('defines sixteen unique bounded recipes in the required section distribution', () => {
+  const { guide } = flatplanData()
+  const recipePages = guide.pages.filter(({ template }) => template === 'guide-recipe')
+  const recipes = recipePages.map(({ recipe }) => recipe)
+  const distribution = Object.fromEntries(
+    ['tools-water', 'sheng', 'shou', 'simple-methods'].map((sectionId) => [
+      sectionId,
+      recipePages.filter((page) => page.sectionId === sectionId).length,
+    ]),
+  )
+
+  assert.equal(recipes.length, 16)
+  assert.deepEqual(distribution, { 'tools-water': 2, sheng: 4, shou: 4, 'simple-methods': 6 })
+  assert.equal(new Set(recipes.map(({ recipeId }) => recipeId)).size, 16)
+  assert.equal(new Set(recipes.map((recipe) => JSON.stringify(recipe))).size, 16)
+  assert.deepEqual(
+    recipePages.filter(({ sectionId }) => sectionId === 'simple-methods').map(({ recipe }) => recipe.methodId).sort(),
+    [...simpleMethodIds].sort(),
+  )
+  for (const recipe of recipes) {
+    assert.deepEqual(Object.keys(recipe).sort(), recipeKeys)
+    assert.ok(recipe.vesselVolumeMl >= 50 && recipe.vesselVolumeMl <= 1000)
+    assert.ok(recipe.leafMassG >= 1 && recipe.leafMassG <= 20)
+    assert.ok(recipe.temperatureRangeC[0] >= 60 && recipe.temperatureRangeC[1] <= 100)
+    assert.ok(recipe.firstInfusionRangeSec[0] >= 1 && recipe.firstInfusionRangeSec[1] <= 1800)
+  }
 })
 
 test('rejects a total that differs from the expected page count', () => {
@@ -418,6 +544,85 @@ test('rejects unknown page templates and asset references', () => {
   assert.throws(() => validateFlatplan(unknownAsset, 208, templates, assetIds), /unknown asset unknown-asset/)
 })
 
+test('rejects generic counter roles and undeclared or unused required topics', () => {
+  const { templates, album, assets } = flatplanData()
+  const assetIds = new Set(assets.map(({ id }) => id))
+  const genericRole = structuredClone(album)
+  genericRole.pages[0].role = 'Вводная полоса 1 из 20'
+  const genericTitle = structuredClone(album)
+  const genericTopicId = genericTitle.sections[0].requiredTopics[0].id
+  genericTitle.sections[0].requiredTopics[0].title = 'Страница 1'
+  for (const page of genericTitle.pages.filter(({ topicId }) => topicId === genericTopicId)) {
+    page.spreadTitle = 'Страница 1'
+  }
+  const unusedTopic = structuredClone(album)
+  unusedTopic.sections[0].requiredTopics ??= []
+  unusedTopic.sections[0].requiredTopics.push({ id: 'entry-unused', title: 'Неиспользованная тема' })
+  const undeclaredTopic = structuredClone(album)
+  undeclaredTopic.pages[0].topicId = 'entry-undeclared'
+  undeclaredTopic.pages[0].spreadTitle = 'Незаявленная тема'
+
+  assert.throws(() => validateFlatplan(genericRole, 208, templates, assetIds), /generic counter role/)
+  assert.throws(() => validateFlatplan(genericTitle, 208, templates, assetIds), /generic counter topic title/)
+  assert.throws(() => validateFlatplan(unusedTopic, 208, templates, assetIds), /required topic entry-unused is not used/)
+  assert.throws(() => validateFlatplan(undeclaredTopic, 208, templates, assetIds), /undeclared topic entry-undeclared/)
+})
+
+test('rejects unknown spread templates and incompatible page templates', () => {
+  const { templates, album, assets } = flatplanData()
+  const assetIds = new Set(assets.map(({ id }) => id))
+  const unknown = structuredClone(album)
+  unknown.pages[0].spreadTemplate = 'unknown-spread-template'
+  const incompatible = structuredClone(album)
+  for (const page of incompatible.pages.filter(({ spreadId }) => spreadId === 'A-S002')) {
+    page.spreadTemplate = 'quiet-text'
+  }
+
+  assert.throws(() => validateFlatplan(unknown, 208, templates, assetIds), /unknown spreadTemplate unknown-spread-template/)
+  assert.throws(() => validateFlatplan(incompatible, 208, templates, assetIds), /is incompatible with spreadTemplate quiet-text/)
+})
+
+test('rejects visual spreads without fulfilment and invalid placeholder use', () => {
+  const { templates, album, guide, assets } = flatplanData()
+  const assetIds = new Set(assets.map(({ id }) => id))
+  const unfulfilled = structuredClone(album)
+  for (const page of unfulfilled.pages.filter(({ spreadId }) => spreadId === 'A-S002')) {
+    page.spreadTemplate = 'photo-plus-essay'
+    page.assetIds = []
+    delete page.visualPlaceholder
+  }
+  const contradictory = structuredClone(album)
+  for (const [index, page] of contradictory.pages.filter(({ spreadId }) => spreadId === 'A-S002').entries()) {
+    page.spreadTemplate = 'photo-plus-essay'
+    page.assetIds = []
+    page.visualPlaceholder = {
+      status: 'commission-brief',
+      kind: 'illustration',
+      brief: `Разные брифы для одного разворота: вариант ${index + 1}`,
+    }
+  }
+  const malformed = structuredClone(album)
+  for (const page of malformed.pages.filter(({ spreadId }) => spreadId === 'A-S002')) {
+    page.spreadTemplate = 'photo-plus-essay'
+    page.assetIds = []
+    page.visualPlaceholder = { status: 'commission-brief', kind: 'illustration', brief: '   ' }
+  }
+  const nonvisual = structuredClone(guide)
+  for (const page of nonvisual.pages.filter(({ spreadId }) => spreadId === 'G-S002')) {
+    page.spreadTemplate = 'quiet-text'
+    page.visualPlaceholder = {
+      status: 'commission-brief',
+      kind: 'illustration',
+      brief: 'Лишний визуальный бриф на текстовом развороте',
+    }
+  }
+
+  assert.throws(() => validateFlatplan(unfulfilled, 208, templates, assetIds), /visual spread A-S002 requires assets or commission brief/)
+  assert.throws(() => validateFlatplan(contradictory, 208, templates, assetIds), /spread A-S002 must use one identical visualPlaceholder/)
+  assert.throws(() => validateFlatplan(malformed, 208, templates, assetIds), /visualPlaceholder brief must be nonblank/)
+  assert.throws(() => validateFlatplan(nonvisual, 48, templates, assetIds), /nonvisual spread G-S002 cannot use visualPlaceholder/)
+})
+
 test('rejects a malformed reader-spread pairing', () => {
   const { templates, album, assets } = flatplanData()
   album.pages[2].spreadId = 'A-S003'
@@ -449,6 +654,24 @@ test('rejects a guide recipe with a missing required field', () => {
   )
 })
 
+test('rejects duplicate recipes, implausible bounds, and recipes on nonrecipe pages', () => {
+  const { templates, guide, assets } = flatplanData()
+  const assetIds = new Set(assets.map(({ id }) => id))
+  const duplicates = structuredClone(guide)
+  const duplicatePages = duplicates.pages.filter(({ template }) => template === 'guide-recipe').slice(0, 2)
+  duplicatePages[1].recipe = structuredClone(duplicatePages[0].recipe)
+  const implausible = structuredClone(guide)
+  implausible.pages.find(({ template }) => template === 'guide-recipe').recipe.vesselVolumeMl = 1_000_000_000
+  const misplaced = structuredClone(guide)
+  misplaced.pages.find(({ template }) => template !== 'guide-recipe').recipe = structuredClone(
+    misplaced.pages.find(({ template }) => template === 'guide-recipe').recipe,
+  )
+
+  assert.throws(() => validateFlatplan(duplicates, 48, templates, assetIds), /duplicate recipe/)
+  assert.throws(() => validateFlatplan(implausible, 48, templates, assetIds), /vesselVolumeMl must be between 50 and 1000/)
+  assert.throws(() => validateFlatplan(misplaced, 48, templates, assetIds), /recipe is only allowed on guide-recipe pages/)
+})
+
 test('rejects a section whose declared count does not match its range', () => {
   const { templates, album, assets } = flatplanData()
   album.sections[2].pageCount += 1
@@ -469,6 +692,53 @@ test('rejects a zero-page section even when later sections still cover the plan'
   )
 })
 
+test('rejects arbitrary extra keys at every flatplan schema level', () => {
+  const { templates, album, guide, assets } = flatplanData()
+  const assetIds = new Set(assets.map(({ id }) => id))
+  const cases = []
+
+  const extraTemplate = structuredClone(templates)
+  extraTemplate[0].extra = true
+  cases.push(() => validateFlatplan(album, 208, extraTemplate, assetIds))
+
+  const extraPlan = structuredClone(album)
+  extraPlan.extra = true
+  cases.push(() => validateFlatplan(extraPlan, 208, templates, assetIds))
+
+  const extraSection = structuredClone(album)
+  extraSection.sections[0].extra = true
+  cases.push(() => validateFlatplan(extraSection, 208, templates, assetIds))
+
+  const extraTopic = structuredClone(album)
+  extraTopic.sections[0].requiredTopics ??= [{ id: 'entry-opening', title: 'Открытие' }]
+  extraTopic.sections[0].requiredTopics[0].extra = true
+  cases.push(() => validateFlatplan(extraTopic, 208, templates, assetIds))
+
+  const extraPage = structuredClone(album)
+  extraPage.pages[0].extra = true
+  cases.push(() => validateFlatplan(extraPage, 208, templates, assetIds))
+
+  const extraRecipe = structuredClone(guide)
+  extraRecipe.pages.find(({ template }) => template === 'guide-recipe').recipe.extra = true
+  cases.push(() => validateFlatplan(extraRecipe, 48, templates, assetIds))
+
+  const extraPlaceholder = structuredClone(album)
+  const placeholderPages = extraPlaceholder.pages.filter(({ spreadId }) => spreadId === 'A-S002')
+  for (const page of placeholderPages) {
+    page.spreadTemplate = 'photo-plus-essay'
+    page.assetIds = []
+    page.visualPlaceholder = {
+      status: 'commission-brief',
+      kind: 'illustration',
+      brief: 'Заказать исторически точную иллюстрацию раннего чайного мифа',
+      extra: true,
+    }
+  }
+  cases.push(() => validateFlatplan(extraPlaceholder, 208, templates, assetIds))
+
+  for (const validate of cases) assert.throws(validate, /unexpected key: extra/)
+})
+
 test('rejects an apparatus page without an allowed marker', () => {
   const { templates, album, assets } = flatplanData()
   delete album.pages.find(({ sectionId }) => sectionId === 'apparatus').apparatus
@@ -477,6 +747,37 @@ test('rejects an apparatus page without an allowed marker', () => {
     () => validateFlatplan(album, 208, templates, new Set(assets.map(({ id }) => id))),
     /flatplan album: apparatus page A-P193 requires chronology, glossary, or bibliography/,
   )
+})
+
+test('rejects apparatus metadata outside the album apparatus section', () => {
+  const { templates, album, assets } = flatplanData()
+  album.pages[0].apparatus = 'chronology'
+
+  assert.throws(
+    () => validateFlatplan(album, 208, templates, new Set(assets.map(({ id }) => id))),
+    /apparatus is only allowed on album apparatus pages/,
+  )
+})
+
+test('rejects collapsed, reordered, or miscounted apparatus markers', () => {
+  const { templates, album, assets } = flatplanData()
+  const assetIds = new Set(assets.map(({ id }) => id))
+  const collapsed = structuredClone(album)
+  for (const page of collapsed.pages.filter(({ sectionId }) => sectionId === 'apparatus')) page.apparatus = 'chronology'
+  const reordered = structuredClone(album)
+  ;[reordered.pages[197].apparatus, reordered.pages[198].apparatus] = [
+    reordered.pages[198].apparatus,
+    reordered.pages[197].apparatus,
+  ]
+  const miscounted = structuredClone(album)
+  miscounted.pages[201].apparatus = 'bibliography'
+
+  for (const plan of [collapsed, reordered, miscounted]) {
+    assert.throws(
+      () => validateFlatplan(plan, 208, templates, assetIds),
+      /album apparatus must be chronology 193-198, glossary 199-202, bibliography 203-208/,
+    )
+  }
 })
 
 test('rejects duplicate or missing required template registrations', () => {

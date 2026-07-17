@@ -315,17 +315,86 @@ export function validateAssetFiles(assets, repoRoot) {
   return ready
 }
 
+const flatplanTemplateKeys = [
+  'id',
+  'label',
+  'purpose',
+  'constraints',
+  'expectedContent',
+  'requiresVisual',
+  'compatiblePageTemplates',
+]
+const flatplanPlanKeys = ['id', 'title', 'pagePrefix', 'signatureSize', 'totalPages', 'sections', 'pages']
+const flatplanSectionKeys = ['id', 'title', 'pageCount', 'start', 'end', 'allowedLeftStart', 'requiredTopics']
+const flatplanTopicKeys = ['id', 'title']
+const flatplanPageKeys = [
+  'number',
+  'id',
+  'spreadId',
+  'sectionId',
+  'topicId',
+  'spreadTitle',
+  'role',
+  'spreadTemplate',
+  'template',
+  'assetIds',
+  'chapterStart',
+  'crossSectionSpread',
+  'visualPlaceholder',
+  'apparatus',
+  'recipe',
+]
+const recipeKeys = [
+  'recipeId',
+  'title',
+  'methodId',
+  'teaStyle',
+  'vesselVolumeMl',
+  'leafMassG',
+  'temperatureRangeC',
+  'firstInfusionRangeSec',
+  'adjustmentNote',
+]
+const visualPlaceholderKeys = ['status', 'kind', 'brief']
+const genericRolePattern = /(?:полоса|шаг|страница)\s+\d+|\b\d+\s+из\s+\d+/iu
+const topicIdPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
+const expectedGuideRecipeCounts = new Map([
+  ['tools-water', 2],
+  ['sheng', 4],
+  ['shou', 4],
+  ['simple-methods', 6],
+])
+const requiredSimpleMethodIds = [
+  'mug-sheng',
+  'mug-shou',
+  'large-pot-sheng',
+  'large-pot-shou',
+  'thermos-sheng',
+  'thermos-shou',
+]
+
+const requireExactKeys = (object, allowedKeys, requiredKeys, label, fail) => {
+  for (const key of Object.keys(object)) {
+    if (!allowedKeys.includes(key)) fail(`${label} unexpected key: ${key}`)
+  }
+  for (const key of requiredKeys) {
+    if (!hasOwn(object, key)) fail(`${label} missing required key: ${key}`)
+  }
+}
+
 const validateFlatplanTemplates = (templates, planId) => {
-  if (!Array.isArray(templates)) throw new Error(`flatplan ${planId}: templates must be an array`)
-  const seen = new Set()
+  const fail = (reason) => {
+    throw new Error(`flatplan ${planId}: ${reason}`)
+  }
+  if (!Array.isArray(templates)) fail('templates must be an array')
+  const byId = new Map()
   for (const template of templates) {
-    if (!template || typeof template !== 'object') throw new Error(`flatplan ${planId}: template must be an object`)
-    if (typeof template.id !== 'string' || !template.id.trim()) {
-      throw new Error(`flatplan ${planId}: template requires nonblank id`)
-    }
-    if (seen.has(template.id)) throw new Error(`duplicate template id: ${template.id}`)
+    if (!template || typeof template !== 'object' || Array.isArray(template)) fail('template must be an object')
+    requireExactKeys(template, flatplanTemplateKeys, flatplanTemplateKeys, `template ${template.id ?? 'unknown'}`, fail)
+    if (typeof template.id !== 'string' || !template.id.trim()) fail('template requires nonblank id')
+    if (byId.has(template.id)) throw new Error(`duplicate template id: ${template.id}`)
     if (!requiredFlatplanTemplateIds.includes(template.id)) throw new Error(`unexpected template id: ${template.id}`)
-    seen.add(template.id)
+    byId.set(template.id, template)
     for (const field of ['label', 'purpose']) {
       if (typeof template[field] !== 'string' || !template[field].trim()) {
         throw new Error(`template ${template.id}: ${field} must be nonblank`)
@@ -340,17 +409,36 @@ const validateFlatplanTemplates = (templates, planId) => {
         throw new Error(`template ${template.id}: ${field} must contain nonblank strings`)
       }
     }
+    if (typeof template.requiresVisual !== 'boolean') {
+      throw new Error(`template ${template.id}: requiresVisual must be boolean`)
+    }
+    if (
+      !Array.isArray(template.compatiblePageTemplates)
+      || template.compatiblePageTemplates.length === 0
+      || template.compatiblePageTemplates.some((id) => typeof id !== 'string' || !id.trim())
+      || new Set(template.compatiblePageTemplates).size !== template.compatiblePageTemplates.length
+    ) {
+      throw new Error(`template ${template.id}: compatiblePageTemplates must contain unique template ids`)
+    }
   }
   for (const templateId of requiredFlatplanTemplateIds) {
-    if (!seen.has(templateId)) throw new Error(`missing required template: ${templateId}`)
+    if (!byId.has(templateId)) throw new Error(`missing required template: ${templateId}`)
   }
-  return seen
+  for (const template of byId.values()) {
+    for (const pageTemplateId of template.compatiblePageTemplates) {
+      if (!byId.has(pageTemplateId)) {
+        throw new Error(`template ${template.id}: unknown compatible page template ${pageTemplateId}`)
+      }
+    }
+  }
+  return byId
 }
 
-const positiveRange = (value, maximum = Number.POSITIVE_INFINITY) => (
+const boundedRange = (value, minimum, maximum) => (
   Array.isArray(value)
   && value.length === 2
-  && value.every(positiveNumber)
+  && value.every(Number.isFinite)
+  && value[0] >= minimum
   && value[0] <= value[1]
   && value[1] <= maximum
 )
@@ -358,17 +446,37 @@ const positiveRange = (value, maximum = Number.POSITIVE_INFINITY) => (
 const validateGuideRecipe = (page, fail) => {
   const recipe = page.recipe
   if (!recipe || typeof recipe !== 'object' || Array.isArray(recipe)) fail('recipe must be an object')
-  for (const field of ['vesselVolumeMl', 'leafMassG']) {
-    if (!positiveNumber(recipe[field])) fail(`${field} must be a positive number`)
+  requireExactKeys(recipe, recipeKeys, [], 'recipe', fail)
+  for (const field of ['recipeId', 'title', 'methodId', 'teaStyle', 'adjustmentNote']) {
+    if (typeof recipe[field] !== 'string' || !recipe[field].trim()) fail(`${field} must be nonblank`)
   }
-  if (!positiveRange(recipe.temperatureRangeC, 100)) {
-    fail('temperatureRangeC must be a positive ascending range at or below 100')
+  if (!['calibration', 'sheng', 'shou'].includes(recipe.teaStyle)) {
+    fail('teaStyle must be calibration, sheng, or shou')
   }
-  if (!positiveRange(recipe.firstInfusionRangeSec)) {
-    fail('firstInfusionRangeSec must be a positive ascending range')
+  if (!Number.isFinite(recipe.vesselVolumeMl) || recipe.vesselVolumeMl < 50 || recipe.vesselVolumeMl > 1000) {
+    fail('vesselVolumeMl must be between 50 and 1000')
   }
-  if (typeof recipe.adjustmentNote !== 'string' || !recipe.adjustmentNote.trim()) {
-    fail('adjustmentNote must be nonblank')
+  if (!Number.isFinite(recipe.leafMassG) || recipe.leafMassG < 1 || recipe.leafMassG > 20) {
+    fail('leafMassG must be between 1 and 20')
+  }
+  if (!boundedRange(recipe.temperatureRangeC, 60, 100)) {
+    fail('temperatureRangeC must be an ordered range between 60 and 100')
+  }
+  if (!boundedRange(recipe.firstInfusionRangeSec, 1, 1800)) {
+    fail('firstInfusionRangeSec must be a positive ascending range between 1 and 1800')
+  }
+  return recipe
+}
+
+const validateVisualPlaceholder = (placeholder, fail) => {
+  if (!placeholder || typeof placeholder !== 'object' || Array.isArray(placeholder)) {
+    fail('visualPlaceholder must be an object')
+  }
+  requireExactKeys(placeholder, visualPlaceholderKeys, visualPlaceholderKeys, 'visualPlaceholder', fail)
+  if (placeholder.status !== 'commission-brief') fail('visualPlaceholder status must be commission-brief')
+  if (!assetKinds.includes(placeholder.kind)) fail(`visualPlaceholder kind is invalid: ${placeholder.kind}`)
+  if (typeof placeholder.brief !== 'string' || placeholder.brief.trim().length < 20) {
+    fail('visualPlaceholder brief must be nonblank and actionable')
   }
 }
 
@@ -378,6 +486,7 @@ export function validateFlatplan(plan, expectedPages, templates, assetIds) {
     throw new Error(`flatplan ${planId ?? 'unknown'}: ${reason}`)
   }
   if (!plan || typeof plan !== 'object' || Array.isArray(plan)) fail('plan must be an object')
+  requireExactKeys(plan, flatplanPlanKeys, flatplanPlanKeys, 'plan', fail)
   if (typeof planId !== 'string' || !planId.trim()) fail('id must be nonblank')
   if (typeof plan.title !== 'string' || !plan.title.trim()) fail('title must be nonblank')
   if (typeof plan.pagePrefix !== 'string' || !/^[A-Z][A-Z0-9]*$/.test(plan.pagePrefix)) {
@@ -389,16 +498,19 @@ export function validateFlatplan(plan, expectedPages, templates, assetIds) {
     fail('totalPages must use complete 16-page signatures')
   }
   if (!(assetIds instanceof Set)) fail('assetIds must be a Set')
-  const templateIds = validateFlatplanTemplates(templates, planId)
+  const templateById = validateFlatplanTemplates(templates, planId)
 
   if (!Array.isArray(plan.sections) || plan.sections.length === 0) fail('sections must be a nonempty array')
   const sectionIds = new Set()
   const sectionByPage = new Map()
+  const topicsBySection = new Map()
+  const topicOwners = new Map()
   let nextSectionStart = 1
   for (const section of plan.sections) {
     if (!section || typeof section !== 'object' || typeof section.id !== 'string' || !section.id.trim()) {
       fail('section requires nonblank id')
     }
+    requireExactKeys(section, flatplanSectionKeys, ['id', 'title', 'pageCount', 'start', 'end'], `section ${section.id}`, fail)
     if (sectionIds.has(section.id)) fail(`duplicate section id: ${section.id}`)
     sectionIds.add(section.id)
     if (typeof section.title !== 'string' || !section.title.trim()) fail(`section ${section.id} title must be nonblank`)
@@ -417,6 +529,21 @@ export function validateFlatplan(plan, expectedPages, templates, assetIds) {
     if (section.start % 2 === 0 && section.allowedLeftStart !== true) {
       fail(`section ${section.id} must start recto/odd or declare allowedLeftStart`)
     }
+    if (!Array.isArray(section.requiredTopics) || section.requiredTopics.length === 0) {
+      fail(`section ${section.id} requiredTopics must be a nonempty array`)
+    }
+    const sectionTopics = new Map()
+    for (const topic of section.requiredTopics) {
+      if (!topic || typeof topic !== 'object' || Array.isArray(topic)) fail(`section ${section.id} topic must be an object`)
+      requireExactKeys(topic, flatplanTopicKeys, flatplanTopicKeys, `section ${section.id} topic`, fail)
+      if (typeof topic.id !== 'string' || !topicIdPattern.test(topic.id)) fail(`section ${section.id} topic id is invalid`)
+      if (typeof topic.title !== 'string' || !topic.title.trim()) fail(`section ${section.id} topic title must be nonblank`)
+      if (genericRolePattern.test(topic.title)) fail(`section ${section.id} generic counter topic title is forbidden`)
+      if (sectionTopics.has(topic.id) || topicOwners.has(topic.id)) fail(`duplicate topic id: ${topic.id}`)
+      sectionTopics.set(topic.id, topic.title)
+      topicOwners.set(topic.id, section.id)
+    }
+    topicsBySection.set(section.id, sectionTopics)
     for (let number = section.start; number <= section.end; number += 1) sectionByPage.set(number, section)
     nextSectionStart = section.end + 1
   }
@@ -427,6 +554,12 @@ export function validateFlatplan(plan, expectedPages, templates, assetIds) {
   }
   const pageIds = new Set()
   const spreadCounts = new Map()
+  const pagesBySpread = new Map()
+  const usedTopics = new Map([...sectionIds].map((sectionId) => [sectionId, new Set()]))
+  const roles = new Set()
+  const recipeIds = new Set()
+  const recipeObjects = new Set()
+  const recipePages = []
   const pad = (number) => String(number).padStart(3, '0')
   for (let index = 0; index < plan.pages.length; index += 1) {
     const page = plan.pages[index]
@@ -434,6 +567,13 @@ export function validateFlatplan(plan, expectedPages, templates, assetIds) {
     if (!page || typeof page !== 'object' || Array.isArray(page)) fail(`page ${number} must be an object`)
     const expectedPageId = `${plan.pagePrefix}-P${pad(number)}`
     const pageFail = (reason) => fail(`page ${page.id ?? expectedPageId}: ${reason}`)
+    requireExactKeys(
+      page,
+      flatplanPageKeys,
+      ['number', 'id', 'spreadId', 'sectionId', 'topicId', 'spreadTitle', 'role', 'spreadTemplate', 'template', 'assetIds'],
+      `page ${page.id ?? expectedPageId}`,
+      fail,
+    )
     if (page.number !== number) fail(`page ${number} must have number ${number}`)
     if (page.id !== expectedPageId) fail(`page ${number} must have id ${expectedPageId}`)
     if (pageIds.has(page.id)) pageFail('duplicate page id')
@@ -442,8 +582,25 @@ export function validateFlatplan(plan, expectedPages, templates, assetIds) {
     const section = sectionByPage.get(number)
     if (!section || page.sectionId !== section.id) pageFail(`must belong to section ${section?.id ?? 'none'}`)
     if (typeof page.role !== 'string' || !page.role.trim()) pageFail('role must be nonblank')
-    if (typeof page.template !== 'string' || !templateIds.has(page.template)) {
+    if (genericRolePattern.test(page.role)) pageFail('generic counter role is forbidden')
+    if (roles.has(page.role)) pageFail('role must be distinct')
+    roles.add(page.role)
+    const sectionTopics = topicsBySection.get(section.id)
+    if (typeof page.topicId !== 'string' || !sectionTopics.has(page.topicId)) {
+      pageFail(`undeclared topic ${page.topicId}`)
+    }
+    if (typeof page.spreadTitle !== 'string' || page.spreadTitle !== sectionTopics.get(page.topicId)) {
+      pageFail(`spreadTitle must match declared topic ${page.topicId}`)
+    }
+    usedTopics.get(section.id).add(page.topicId)
+    if (typeof page.spreadTemplate !== 'string' || !templateById.has(page.spreadTemplate)) {
+      pageFail(`unknown spreadTemplate ${page.spreadTemplate}`)
+    }
+    if (typeof page.template !== 'string' || !templateById.has(page.template)) {
       pageFail(`unknown template ${page.template}`)
+    }
+    if (!templateById.get(page.spreadTemplate).compatiblePageTemplates.includes(page.template)) {
+      pageFail(`template ${page.template} is incompatible with spreadTemplate ${page.spreadTemplate}`)
     }
     if (
       !Array.isArray(page.assetIds)
@@ -466,15 +623,79 @@ export function validateFlatplan(plan, expectedPages, templates, assetIds) {
     if (page.crossSectionSpread !== undefined && typeof page.crossSectionSpread !== 'boolean') {
       pageFail('crossSectionSpread must be boolean')
     }
+    if (hasOwn(page, 'visualPlaceholder')) validateVisualPlaceholder(page.visualPlaceholder, pageFail)
 
     const expectedSpreadId = `${plan.pagePrefix}-S${pad(Math.floor(number / 2) + 1)}`
     if (page.spreadId !== expectedSpreadId) fail(`page ${page.id} must use spread ${expectedSpreadId}`)
     spreadCounts.set(page.spreadId, (spreadCounts.get(page.spreadId) ?? 0) + 1)
+    const spreadPages = pagesBySpread.get(page.spreadId) ?? []
+    spreadPages.push(page)
+    pagesBySpread.set(page.spreadId, spreadPages)
 
-    if (plan.id === 'album' && page.sectionId === 'apparatus' && !apparatusKinds.includes(page.apparatus)) {
+    const isAlbumApparatus = plan.id === 'album' && page.sectionId === 'apparatus'
+    if (isAlbumApparatus && !apparatusKinds.includes(page.apparatus)) {
       fail(`apparatus page ${page.id} requires chronology, glossary, or bibliography`)
     }
-    if (page.template === 'guide-recipe') validateGuideRecipe(page, pageFail)
+    if (!isAlbumApparatus && hasOwn(page, 'apparatus')) {
+      pageFail('apparatus is only allowed on album apparatus pages')
+    }
+    if (page.template === 'guide-recipe') {
+      if (plan.id !== 'guide') pageFail('guide-recipe template is only allowed in the guide')
+      const recipe = validateGuideRecipe(page, pageFail)
+      if (recipeIds.has(recipe.recipeId)) pageFail(`duplicate recipe id: ${recipe.recipeId}`)
+      recipeIds.add(recipe.recipeId)
+      const serialized = JSON.stringify(recipe)
+      if (recipeObjects.has(serialized)) pageFail('duplicate recipe object')
+      recipeObjects.add(serialized)
+      recipePages.push(page)
+    } else if (hasOwn(page, 'recipe')) {
+      pageFail('recipe is only allowed on guide-recipe pages')
+    }
+  }
+
+  for (const section of plan.sections) {
+    for (const topicId of topicsBySection.get(section.id).keys()) {
+      if (!usedTopics.get(section.id).has(topicId)) fail(`section ${section.id} required topic ${topicId} is not used`)
+    }
+  }
+
+  if (plan.id === 'guide') {
+    if (recipePages.length !== 16) fail('guide must contain exactly 16 guide-recipe pages')
+    for (const [sectionId, expectedCount] of expectedGuideRecipeCounts) {
+      const actual = recipePages.filter((page) => page.sectionId === sectionId).length
+      if (actual !== expectedCount) fail(`guide recipe section ${sectionId} must contain ${expectedCount} recipes`)
+    }
+    if (recipePages.some((page) => !expectedGuideRecipeCounts.has(page.sectionId))) {
+      fail('guide recipes occur outside the approved recipe sections')
+    }
+    const simpleMethods = recipePages
+      .filter((page) => page.sectionId === 'simple-methods')
+      .map((page) => page.recipe.methodId)
+      .sort()
+    if (JSON.stringify(simpleMethods) !== JSON.stringify([...requiredSimpleMethodIds].sort())) {
+      fail('simple-methods recipes must cover all six required methodIds')
+    }
+    for (const sectionId of ['sheng', 'shou']) {
+      const methods = recipePages.filter((page) => page.sectionId === sectionId).map((page) => page.recipe.methodId)
+      if (!methods.some((id) => id.startsWith('gaiwan-')) || !methods.some((id) => id.startsWith('teapot-'))) {
+        fail(`${sectionId} recipes must cover gaiwan and teapot methods`)
+      }
+    }
+  }
+
+  if (plan.id === 'album') {
+    const expectedApparatus = [
+      ...Array(6).fill('chronology'),
+      ...Array(4).fill('glossary'),
+      ...Array(6).fill('bibliography'),
+    ]
+    const actualApparatus = plan.pages.slice(192, 208).map((page) => page.apparatus)
+    if (
+      plan.pages.slice(192, 208).some((page) => page.sectionId !== 'apparatus')
+      || JSON.stringify(actualApparatus) !== JSON.stringify(expectedApparatus)
+    ) {
+      fail('album apparatus must be chronology 193-198, glossary 199-202, bibliography 203-208')
+    }
   }
 
   const expectedSpreadCount = plan.totalPages / 2 + 1
@@ -487,14 +708,39 @@ export function validateFlatplan(plan, expectedPages, templates, assetIds) {
   if (firstPage.crossSectionSpread === true || lastPage.crossSectionSpread === true) {
     fail('singleton pages cannot be cross-section spreads')
   }
+  const placeholderBriefs = new Set()
+  for (const [spreadId, spreadPages] of pagesBySpread) {
+    const spreadTemplate = spreadPages[0].spreadTemplate
+    if (spreadPages.some((page) => page.spreadTemplate !== spreadTemplate)) {
+      fail(`spread ${spreadId} must use one spreadTemplate`)
+    }
+    const assets = spreadPages.flatMap((page) => page.assetIds)
+    const placeholders = spreadPages.filter((page) => hasOwn(page, 'visualPlaceholder')).map((page) => page.visualPlaceholder)
+    const requiresVisual = templateById.get(spreadTemplate).requiresVisual
+    if (requiresVisual && assets.length === 0 && placeholders.length === 0) {
+      fail(`visual spread ${spreadId} requires assets or commission brief`)
+    }
+    if (requiresVisual && assets.length > 0 && placeholders.length > 0) {
+      fail(`visual spread ${spreadId} cannot combine assets and visualPlaceholder`)
+    }
+    if (requiresVisual && assets.length === 0 && placeholders.length > 0) {
+      if (
+        placeholders.length !== spreadPages.length
+        || placeholders.some((placeholder) => JSON.stringify(placeholder) !== JSON.stringify(placeholders[0]))
+      ) {
+        fail(`spread ${spreadId} must use one identical visualPlaceholder`)
+      }
+      if (placeholderBriefs.has(placeholders[0].brief)) fail(`duplicate visualPlaceholder brief: ${placeholders[0].brief}`)
+      placeholderBriefs.add(placeholders[0].brief)
+    }
+    if (!requiresVisual && placeholders.length > 0) fail(`nonvisual spread ${spreadId} cannot use visualPlaceholder`)
+  }
+
   for (let index = 1; index < plan.pages.length - 1; index += 2) {
     const left = plan.pages[index]
     const right = plan.pages[index + 1]
     if (left.spreadId !== right.spreadId || spreadCounts.get(left.spreadId) !== 2) {
       fail(`spread ${left.spreadId} must pair adjacent pages ${left.id} and ${right.id}`)
-    }
-    if (left.template !== right.template) {
-      fail(`spread ${left.spreadId} has incompatible templates ${left.template} and ${right.template}`)
     }
     const crossesSection = left.sectionId !== right.sectionId
     if (crossesSection && (left.crossSectionSpread !== true || right.crossSectionSpread !== true)) {
@@ -502,6 +748,9 @@ export function validateFlatplan(plan, expectedPages, templates, assetIds) {
     }
     if (!crossesSection && (left.crossSectionSpread === true || right.crossSectionSpread === true)) {
       fail(`spread ${left.spreadId} marks crossSectionSpread within one section`)
+    }
+    if (!crossesSection && (left.topicId !== right.topicId || left.spreadTitle !== right.spreadTitle)) {
+      fail(`normal spread ${left.spreadId} must use one topicId and spreadTitle`)
     }
   }
   return { pages: pageIds, spreads: new Set(spreadCounts.keys()), sections: sectionIds }

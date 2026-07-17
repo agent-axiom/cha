@@ -12,7 +12,23 @@
       "expectedContent": [
         "Название раздела",
         "Вводный тезис",
-        "Опциональный ключевой визуал"
+        "Ключевой визуал"
+      ],
+      "requiresVisual": true,
+      "compatiblePageTemplates": [
+        "chapter-gate",
+        "quiet-text",
+        "full-bleed-photo",
+        "photo-plus-essay",
+        "source-window",
+        "map",
+        "process",
+        "scientific-plate",
+        "object-atlas",
+        "bibliography",
+        "guide-recipe",
+        "guide-troubleshooting",
+        "guide-safety"
       ]
     },
     {
@@ -28,6 +44,12 @@
         "Печатный мастер изображения",
         "Короткая подпись",
         "Кредит"
+      ],
+      "requiresVisual": true,
+      "compatiblePageTemplates": [
+        "full-bleed-photo",
+        "photo-plus-essay",
+        "quiet-text"
       ]
     },
     {
@@ -43,6 +65,12 @@
         "Фотография",
         "Эссе",
         "Подпись и кредит"
+      ],
+      "requiresVisual": true,
+      "compatiblePageTemplates": [
+        "photo-plus-essay",
+        "full-bleed-photo",
+        "quiet-text"
       ]
     },
     {
@@ -58,6 +86,11 @@
         "Фрагмент источника",
         "Перевод или транскрипция",
         "Библиографическая ссылка"
+      ],
+      "requiresVisual": true,
+      "compatiblePageTemplates": [
+        "source-window",
+        "quiet-text"
       ]
     },
     {
@@ -73,6 +106,11 @@
         "Карта",
         "Легенда",
         "Источник данных"
+      ],
+      "requiresVisual": true,
+      "compatiblePageTemplates": [
+        "map",
+        "quiet-text"
       ]
     },
     {
@@ -88,6 +126,12 @@
         "Последовательность шагов",
         "Параметры",
         "Поясняющие подписи"
+      ],
+      "requiresVisual": true,
+      "compatiblePageTemplates": [
+        "process",
+        "quiet-text",
+        "photo-plus-essay"
       ]
     },
     {
@@ -103,6 +147,11 @@
         "Диаграмма или схема",
         "Методологическая подпись",
         "Источники"
+      ],
+      "requiresVisual": true,
+      "compatiblePageTemplates": [
+        "scientific-plate",
+        "quiet-text"
       ]
     },
     {
@@ -118,6 +167,12 @@
         "Серия объектов",
         "Каталожные подписи",
         "Масштаб или размеры"
+      ],
+      "requiresVisual": true,
+      "compatiblePageTemplates": [
+        "object-atlas",
+        "photo-plus-essay",
+        "quiet-text"
       ]
     },
     {
@@ -133,6 +188,10 @@
         "Основной текст",
         "Подзаголовки",
         "Сноски при необходимости"
+      ],
+      "requiresVisual": false,
+      "compatiblePageTemplates": [
+        "quiet-text"
       ]
     },
     {
@@ -148,6 +207,11 @@
         "Библиографические записи",
         "Рубрики",
         "Служебные сведения"
+      ],
+      "requiresVisual": false,
+      "compatiblePageTemplates": [
+        "bibliography",
+        "quiet-text"
       ]
     },
     {
@@ -165,6 +229,13 @@
         "Температура",
         "Первое настаивание",
         "Совет по корректировке"
+      ],
+      "requiresVisual": false,
+      "compatiblePageTemplates": [
+        "guide-recipe",
+        "guide-troubleshooting",
+        "quiet-text",
+        "chapter-gate"
       ]
     },
     {
@@ -180,6 +251,13 @@
         "Симптом",
         "Вероятная причина",
         "Корректирующее действие"
+      ],
+      "requiresVisual": false,
+      "compatiblePageTemplates": [
+        "guide-troubleshooting",
+        "guide-recipe",
+        "quiet-text",
+        "chapter-gate"
       ]
     },
     {
@@ -195,6 +273,13 @@
         "Предупреждение",
         "Практическое действие",
         "Критерий остановки или обращения к специалисту"
+      ],
+      "requiresVisual": false,
+      "compatiblePageTemplates": [
+        "guide-safety",
+        "guide-troubleshooting",
+        "quiet-text",
+        "chapter-gate"
       ]
     }
   ]
