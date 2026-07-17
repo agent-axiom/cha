@@ -14,7 +14,8 @@ const requireNonblankId = (value, label) => {
 export function validateSources(sources) {
   const seen = new Set()
   for (const source of sources) {
-    if (!source.id || !source.title || !source.href) throw new Error('source requires id, title, and href')
+    requireNonblankId(source.id, 'source')
+    if (!source.title || !source.href) throw new Error('source requires id, title, and href')
     if (seen.has(source.id)) throw new Error(`duplicate source id: ${source.id}`)
     seen.add(source.id)
     oneOf(source.group, ['primary-asian', 'research-asian', 'research-western', 'guidance'], 'invalid source group')

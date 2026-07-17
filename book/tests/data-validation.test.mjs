@@ -11,6 +11,22 @@ test('rejects duplicate source ids', () => {
   assert.throws(() => validateSources([{ id: 'a', title: 'A', href: 'https://a.example', group: 'guidance', status: 'checked', bookUse: 'core', siteVisible: true }, { id: 'a', title: 'B', href: 'https://b.example', group: 'guidance', status: 'checked', bookUse: 'core', siteVisible: true }]), /duplicate source id: a/)
 })
 
+test('rejects missing source ids', () => {
+  assert.throws(() => validateSources([{ title: 'A', href: 'https://a.example', group: 'guidance', status: 'checked', bookUse: 'core', siteVisible: true }]), /source requires nonblank id/)
+})
+
+test('rejects empty source ids', () => {
+  assert.throws(() => validateSources([{ id: '', title: 'A', href: 'https://a.example', group: 'guidance', status: 'checked', bookUse: 'core', siteVisible: true }]), /source requires nonblank id/)
+})
+
+test('rejects whitespace-only source ids', () => {
+  assert.throws(() => validateSources([{ id: '   ', title: 'A', href: 'https://a.example', group: 'guidance', status: 'checked', bookUse: 'core', siteVisible: true }]), /source requires nonblank id/)
+})
+
+test('rejects non-string source ids', () => {
+  assert.throws(() => validateSources([{ id: 1, title: 'A', href: 'https://a.example', group: 'guidance', status: 'checked', bookUse: 'core', siteVisible: true }]), /source requires nonblank id/)
+})
+
 test('rejects invalid source groups', () => {
   assert.throws(() => validateSources([{ id: 'a', title: 'A', href: 'https://a.example', group: 'other', status: 'checked', bookUse: 'core', siteVisible: true }]), /invalid source group: other/)
 })
