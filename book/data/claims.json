@@ -380,7 +380,7 @@
   {
     "id": "medical-enzyme-review-not-clinical",
     "text": "Найдены два pu-erh-specific systematic reviews: Yang et al. суммировал heterogeneous enzyme assays/in vitro/mouse work, а Lin et al. meta-analyzed только две mouse studies (16 records). Ни один не устанавливает снижение glucose, осложнений диабета или иных clinical outcomes у людей.",
-    "evidence": "medical-b",
+    "evidence": "medical-d",
     "status": "checked",
     "sourceIds": ["yang-2019-systematic", "lin-2019-meta"]
   },

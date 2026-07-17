@@ -36,7 +36,7 @@ WHO, EFSA, FDA и SAMR не показали стабильного счётчи
 - `medical-d` — животный, клеточный, химический или microbiome-механизм;
 - `medical-e` — традиционное историческое представление.
 
-В registry после внутреннего аудита: `medical-a` — 6 claims, `medical-b` — 1, `medical-c` — 6, `medical-d` — 4, `medical-e` — 1. Всего 18 medical claims: 17 `checked`, 1 `rejected`, 0 `verified`. Уровень обозначает тип лучшего применимого evidence, а не величину эффекта; abstract language и statistical significance не повышают уровень.
+В registry после внутреннего аудита: `medical-a` — 6 claims, `medical-b` — 0, `medical-c` — 6, `medical-d` — 5, `medical-e` — 1. Всего 18 medical claims: 17 `checked`, 1 `rejected`, 0 `verified`. Прямо применимого human systematic review/meta-analysis не найдено. Уровень обозначает тип лучшего применимого evidence, а не величину эффекта; abstract language, review label и statistical significance не повышают уровень.
 
 ## Человеческие исследования
 
@@ -57,7 +57,7 @@ WHO, EFSA, FDA и SAMR не показали стабильного счётчи
 
 ## Редакционные выводы об эффективности
 
-Найдены два pu-erh-specific systematic reviews, но ни один не является обзором clinical efficacy у людей. Yang et al. включил heterogeneous enzyme assays, in vitro и mouse evidence; Lin et al. meta-analyzed только две mouse studies (16 records). Их уровень `medical-b` обозначает systematic-review design, но неприменимость к human clinical outcomes остаётся абсолютным ограничением (`medical-enzyme-review-not-clinical`).
+Найдены два pu-erh-specific systematic reviews, но ни один не является обзором clinical efficacy у людей. Yang et al. включил heterogeneous enzyme assays, in vitro и mouse evidence; Lin et al. meta-analyzed только две mouse studies (16 records). Они остаются `medical-d`: systematic-review label не повышает underlying nonhuman evidence до `medical-b`, а неприменимость к human clinical outcomes является абсолютным ограничением (`medical-enzyme-review-not-clinical`).
 
 **Вес и body composition.** Fujita, Kubota, Chu и Jensen сообщали изменения отдельных endpoints после экстрактов. Это пять малых/коротких clinical records, если считать многочастное Fujita safety/efficacy paper отдельно от RCT. Наиболее доступный full text, Jensen et al., имел 59 randomized, 48 analyzed, sponsor involvement, около 1 кг среднего снижения внутри PTE group и значимую междугрупповую разницу BMI без опубликованного численного absolute contrast; междугрупповые total/regional fat differences не были значимыми. Этого недостаточно для фразы, что обычный пуэр «вызывает похудение», и устойчивый clinical benefit не установлен (`medical-weight-extract-evidence`).
 
