@@ -1,1 +1,146 @@
-[]
+[
+  {
+    "claimId": "hist-shennong-legend",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-17",
+    "note": "Источники и формулировка проверены редакционно; внешняя рецензия историка ожидается."
+  },
+  {
+    "claimId": "hist-tu-ambiguity",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-17",
+    "note": "Источники и формулировка проверены редакционно; внешняя рецензия историка ожидается."
+  },
+  {
+    "claimId": "hist-early-tea-evidence",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-17",
+    "note": "Источники и формулировка проверены редакционно; внешняя рецензия историка ожидается."
+  },
+  {
+    "claimId": "hist-fan-chuo-yinsheng",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-17",
+    "note": "Источники и формулировка проверены редакционно; внешняя рецензия историка ожидается."
+  },
+  {
+    "claimId": "hist-zhao-six-mountains",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-17",
+    "note": "Источники и формулировка проверены редакционно; внешняя рецензия историка ожидается."
+  },
+  {
+    "claimId": "hist-zhao-hundred-illnesses",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-17",
+    "note": "Источники и формулировка проверены редакционно; внешняя рецензия историка ожидается."
+  },
+  {
+    "claimId": "hist-zhao-author-name",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-17",
+    "note": "Источники и формулировка проверены редакционно; внешняя рецензия историка ожидается."
+  },
+  {
+    "claimId": "hist-ruan-retrospective",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-17",
+    "note": "Источники и формулировка проверены редакционно; внешняя рецензия историка ожидается."
+  },
+  {
+    "claimId": "hist-wuhou-records-east-han",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-17",
+    "note": "Отклонение проверено редакционно; внешний историк должен отдельно подтвердить отрицательный результат поиска."
+  },
+  {
+    "claimId": "hist-puer-1700-years",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-17",
+    "note": "Отклонение проверено редакционно; внешняя рецензия историка ожидается."
+  },
+  {
+    "claimId": "hist-zhuge-liang-local-legend",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-17",
+    "note": "Источники и формулировка проверены редакционно; внешняя рецензия историка ожидается."
+  },
+  {
+    "claimId": "hist-xu-bowuzhi-western-fan",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-17",
+    "note": "Отклонение проверено по доступной цепочке цитирования; необходима внешняя сверка специалистом по текстам Южной Сун."
+  },
+  {
+    "claimId": "hist-qing-puer-administration",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-17",
+    "note": "Источники и формулировка проверены редакционно; внешняя рецензия историка ожидается."
+  },
+  {
+    "claimId": "hist-qing-tribute-tea",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-17",
+    "note": "Лист факсимиле проверен редакционно; внешняя рецензия историка и метрологическая проверка перевода 五斤 ожидаются."
+  },
+  {
+    "claimId": "hist-tea-horse-road-framing",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-17",
+    "note": "Проверена общая историографическая формулировка; постраничная сверка монографии недоступна, внешняя рецензия историка ожидается."
+  },
+  {
+    "claimId": "hist-fantianlu-composite-quote",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-17",
+    "note": "Отклонение относится к составной атрибуции в представленном виде; точное издание «Фань тянь лу» остаётся неразысканным."
+  }
+]
