@@ -17,6 +17,19 @@ const shaPattern = /^[a-f0-9]{64}$/u
 const commitPattern = /^[a-f0-9]{40}$/u
 const publicationClaimStatuses = new Set(['checked', 'verified'])
 
+const isReviewCorpusClaim = ({ claimStatus, occurrences }) => (
+  publicationClaimStatuses.has(claimStatus)
+  || (
+    claimStatus !== 'rejected'
+    && Array.isArray(occurrences)
+    && occurrences.length > 0
+  )
+)
+
+export const reviewCorpusClaimIds = (claimIndex) => claimIndex
+  .filter(isReviewCorpusClaim)
+  .map(({ claimId }) => claimId)
+
 const primaryFocus = {
   historian: [
     'hist-shennong-legend',
@@ -351,14 +364,18 @@ const buildClaimIndex = ({ bookRoot, repoRoot, claims, sources, config }) => {
   const occurrences = claimOccurrences(bookRoot, repoRoot, claimIds, pages)
   const exceptions = config.registryOnlyClaims ?? {}
   const index = claims.map((claim) => {
+    const claimOccurrences = occurrences.get(claim.id)
+    const reviewCorpusMember = isReviewCorpusClaim({
+      claimStatus: claim.status,
+      occurrences: claimOccurrences,
+    })
     const claimSources = (claim.sourceIds ?? []).map((sourceId) => {
       const source = sourceById.get(sourceId)
       if (!source) throw new Error(`review claim ${claim.id} references unknown source ${sourceId}`)
-      if (publicationClaimStatuses.has(claim.status) && source.status !== 'checked') throw new Error(`active review claim ${claim.id} uses unchecked source ${sourceId}`)
+      if (reviewCorpusMember && source.status !== 'checked') throw new Error(`active review claim ${claim.id} uses unchecked source ${sourceId}`)
       return clone(source)
     })
     if (claimSources.length === 0) throw new Error(`review claim has no sources: ${claim.id}`)
-    const claimOccurrences = occurrences.get(claim.id)
     const exception = exceptions[claim.id]
     if (publicationClaimStatuses.has(claim.status) && claimOccurrences.length === 0 && !exception?.reason) {
       throw new Error(`active review claim has no proof page or registry-only reason: ${claim.id}`)
@@ -476,7 +493,7 @@ const renderRequest = (request) => {
     '',
     '> Это пустой пакет запроса. Он не содержит внешнего одобрения. Проверяются точная формулировка, границы вывода, указанные страницы и источники.',
     '',
-    `Все ${request.activeClaims.length} активных тезисов включены из-за действующего правила: статус \`verified\` возможен только после одобрения historian, technologist и medical. \`PRIMARY FOCUS\` обозначает профильную часть; \`not-in-scope\` не считается одобрением.`,
+    `Все ${request.activeClaims.length} тезисов корпуса включены fail-closed: каждый напечатанный и не отклонённый claim marker, а также зарегистрированный тезис со статусом \`checked\` или \`verified\`, получает решение historian, technologist и medical. \`PRIMARY FOCUS\` обозначает профильную часть; \`not-in-scope\` не считается одобрением.`,
     '',
     ...request.activeClaims.map((claim) => renderClaim(claim, focusIds)),
     '',
@@ -580,7 +597,8 @@ export const buildReviewPackage = ({ root = defaultBookRoot, config: suppliedCon
   const reviews = readJson(path.join(bookRoot, 'data', 'reviews.json'))
   const claimIndex = buildClaimIndex({ bookRoot, repoRoot, claims, sources, config })
   const claimById = new Map(claimIndex.map((claim) => [claim.claimId, claim]))
-  const activeClaims = claimIndex.filter(({ claimStatus }) => publicationClaimStatuses.has(claimStatus))
+  const activeClaimIds = new Set(reviewCorpusClaimIds(claimIndex))
+  const activeClaims = claimIndex.filter(({ claimId }) => activeClaimIds.has(claimId))
   const snapshotData = snapshot(bookRoot, repoRoot)
   const proofSetSha256 = sha256(Buffer.from(canonicalJson(
     config.proofs.map(({ id, sha256: hash }) => ({ id, sha256: hash })).sort((left, right) => left.id.localeCompare(right.id, 'en')),
@@ -616,7 +634,7 @@ export const buildReviewPackage = ({ root = defaultBookRoot, config: suppliedCon
       proofSetSha256,
       snapshotSha256: snapshotData.sha256,
       activeClaims: clone(activeClaims),
-      primaryFocus: clone(focus.filter(({ claimStatus }) => claimStatus === 'checked')),
+      primaryFocus: clone(focus.filter(({ claimId }) => activeClaimIds.has(claimId))),
       excludedFocus: clone(focus.filter(({ claimStatus }) => claimStatus === 'rejected')),
     }]
   }))

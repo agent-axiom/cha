@@ -122,6 +122,12 @@ test('uses the corrected maocha chain, flatplan terminology, and shou adjustment
   assert.match(diagram, /data-shape="open-tray"/u)
   assert.doesNotMatch(diagram, /Семь операций|Упаковка · шайцин-маоча/u)
 
+  const page90 = maocha.split('<!-- page:A-P090 -->')[1].split('<!-- page:A-P091 -->')[0]
+  assert.match(page90, /читается сверху вниз/iu)
+  assert.match(page90, /Соединительные линии показывают порядок/iu)
+  assert.match(page90, /общий боковой блок перечисляет наблюдения/iu)
+  assert.doesNotMatch(page90, /слева направо|стрелки|под каждой стадией стоят три вопроса/iu)
+
   assert.equal(albumPage(80).spreadTitle, 'Раскладка (摊青) и предварительная потеря влаги')
   assert.equal(albumPage(81).spreadTitle, 'Раскладка (摊青) и предварительная потеря влаги')
   assert.equal(albumPage(82).spreadTitle, 'Шацин: ограничить активность ферментов листа')
@@ -135,6 +141,45 @@ test('uses the corrected maocha chain, flatplan terminology, and shou adjustment
   assert.equal(guidePage(33).recipe.adjustmentNote, required)
   const guidePage33 = guideText.split('<!-- page:G-P033 -->')[1].split('<!-- page:G-P034 -->')[0]
   assert.equal((guidePage33.match(/межпроливное тепло уменьшайте только/giu) ?? []).length, 1)
+})
+
+test('matches the A-P103 reader directions to the left-right branch diagram', () => {
+  const forkPage = read('book/manuscript/album/04-sheng-and-shou.md')
+    .split('<!-- page:A-P103 -->')[1]
+    .split('<!-- page:A-P104 -->')[0]
+  assert.match(forkPage, /расходится на две линии/iu)
+  assert.match(forkPage, /Левая ветвь/iu)
+  assert.match(forkPage, /Правая\s+[—–-]/iu)
+  assert.doesNotMatch(forkPage, /две стрелки|верхняя ветвь|нижняя\s+[—–-]|стрелки не сходятся/iu)
+})
+
+test('assigns process and storage visuals only to reader-matched pages', () => {
+  const comparisonPages = [albumPage(108), albumPage(109)]
+  assert.ok(comparisonPages.every(({ spreadTemplate }) => spreadTemplate === 'process'))
+  assert.ok(comparisonPages.every(({ assetIds }) => assetIds.length === 0))
+  assert.ok(comparisonPages.every(({ visualPlaceholder }) => visualPlaceholder.status === 'commission-brief'))
+  assert.deepEqual(comparisonPages[0].visualPlaceholder, comparisonPages[1].visualPlaceholder)
+  assert.match(comparisonPages[0].visualPlaceholder.brief, /сравнить одинаковое прессование шэна и шу/iu)
+
+  const freshCakePages = [albumPage(110), albumPage(111)]
+  assert.ok(freshCakePages.every(({ assetIds }) => assetIds.length === 0))
+  assert.ok(freshCakePages.every(({ visualPlaceholder }) => visualPlaceholder.status === 'commission-brief'))
+  assert.deepEqual(freshCakePages[0].visualPlaceholder, freshCakePages[1].visualPlaceholder)
+  assert.match(freshCakePages[0].visualPlaceholder.brief, /карточк[а-яё]* осмотра свежей прессовки/iu)
+
+  assert.deepEqual(albumPage(115).assetIds, ['map-storage-climates'])
+  assert.equal(albumPage(115).template, 'map')
+  assert.deepEqual(guidePage(47).assetIds, [])
+  assert.deepEqual(guidePage(48).assetIds, ['diagram-storage-variables'])
+})
+
+test('matches the A-P133 reader description to the actual staged heat diagram', () => {
+  const page133 = read('book/manuscript/album/05-microcosm.md')
+    .split('<!-- page:A-P133 -->')[1]
+    .split('<!-- page:A-P134 -->')[0]
+  assert.match(page133, /увлажнение\s*→\s*куча\s*→\s*переворот\s*→\s*наблюдение\s*→\s*сушка/iu)
+  assert.match(page133, /значки[^.]*ниже (?:графика|линии|оси)/iu)
+  assert.doesNotMatch(page133, /последовательные осмотры|перевороты|разбор|над линией/iu)
 })
 
 test('aligns medical evidence classes, caffeine scope, and site storage sources', () => {

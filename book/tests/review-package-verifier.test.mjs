@@ -82,16 +82,18 @@ test('package scripts expose a read-only review verification command', () => {
   )
 })
 
-test('treats checked and verified claims as the active publication corpus', async () => {
-  const { publicationClaimIds } = await loadVerifier()
-  assert.equal(typeof publicationClaimIds, 'function')
+test('includes printed drafts but excludes unprinted drafts and rejected markers', async () => {
+  const { reviewCorpusClaimIds } = await loadVerifier()
+  assert.equal(typeof reviewCorpusClaimIds, 'function')
   assert.deepEqual(
-    publicationClaimIds([
-      { id: 'checked-claim', status: 'checked' },
-      { id: 'verified-claim', status: 'verified' },
-      { id: 'rejected-claim', status: 'rejected' },
+    reviewCorpusClaimIds([
+      { claimId: 'checked-claim', claimStatus: 'checked', occurrences: [] },
+      { claimId: 'verified-claim', claimStatus: 'verified', occurrences: [] },
+      { claimId: 'printed-draft', claimStatus: 'draft', occurrences: [{ pageId: 'A-P001' }] },
+      { claimId: 'unprinted-draft', claimStatus: 'draft', occurrences: [] },
+      { claimId: 'rejected-marker', claimStatus: 'rejected', occurrences: [{ pageId: 'A-P002' }] },
     ]),
-    ['checked-claim', 'verified-claim'],
+    ['checked-claim', 'verified-claim', 'printed-draft'],
   )
 })
 
@@ -109,7 +111,7 @@ test('verifies the frozen package on disk without modifying it', async () => {
     cycleId: reviewCycle.cycleId,
     files: 16,
     roles: 3,
-    activeClaims: 69,
+    activeClaims: 70,
     proofs: 2,
     proofStructureVerified: true,
   })

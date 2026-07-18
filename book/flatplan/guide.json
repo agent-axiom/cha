@@ -1175,9 +1175,7 @@
       "role": "Открывает раздел «Безопасность и хранение» границами безопасной практики",
       "spreadTemplate": "guide-safety",
       "template": "guide-safety",
-      "assetIds": [
-        "diagram-storage-variables"
-      ],
+      "assetIds": [],
       "chapterStart": true,
       "crossSectionSpread": true
     },
@@ -1191,7 +1189,9 @@
       "role": "Завершает гид правилами «Хранение без сырости, запахов и ложных обещаний» и кратким контрольным списком",
       "spreadTemplate": "guide-safety",
       "template": "guide-safety",
-      "assetIds": []
+      "assetIds": [
+        "diagram-storage-variables"
+      ]
     }
   ]
 }

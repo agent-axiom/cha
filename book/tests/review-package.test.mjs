@@ -17,11 +17,15 @@ const bookRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'
 test('freezes the same active corpus, proof set, snapshot and deadline for all roles', () => {
   const result = buildReviewPackage({ root: bookRoot, verifyProofs: false })
   const activeIds = result.claimIndex
-    .filter(({ claimStatus }) => claimStatus === 'checked')
+    .filter(({ claimStatus, occurrences }) => (
+      ['checked', 'verified'].includes(claimStatus)
+      || (claimStatus !== 'rejected' && occurrences.length > 0)
+    ))
     .map(({ claimId }) => claimId)
     .sort()
 
-  assert.equal(activeIds.length, 69)
+  assert.equal(activeIds.length, 70)
+  assert.ok(activeIds.includes('hist-ruan-retrospective'))
   assert.equal(result.claimIndex.filter(({ claimStatus }) => claimStatus === 'rejected').length, 11)
   assert.deepEqual(Object.keys(result.requests).sort(), ['historian', 'medical', 'technologist'])
   for (const request of Object.values(result.requests)) {
@@ -43,7 +47,7 @@ test('uses the declared cross-disciplinary focus matrix without changing claim s
       ]),
     ),
     {
-      historian: [24, 4],
+      historian: [25, 4],
       technologist: [41, 6],
       medical: [23, 1],
     },
@@ -52,6 +56,25 @@ test('uses the declared cross-disciplinary focus matrix without changing claim s
   assert.ok(result.requests.medical.primaryFocus.some(({ claimId }) => claimId === 'micro-safety-method-dependent'))
   assert.ok(result.requests.technologist.primaryFocus.some(({ claimId }) => claimId === 'medical-food-storage-safety'))
   assert.equal(result.claimIndex.some(({ claimStatus }) => claimStatus === 'verified'), false)
+})
+
+test('gives every printed non-rejected claim a structured decision in all three roles', () => {
+  const result = buildReviewPackage({ root: bookRoot, verifyProofs: false })
+  const printedIds = result.claimIndex
+    .filter(({ claimStatus, occurrences }) => claimStatus !== 'rejected' && occurrences.length > 0)
+    .map(({ claimId }) => claimId)
+
+  for (const role of ['historian', 'technologist', 'medical']) {
+    const requestIds = result.requests[role].activeClaims.map(({ claimId }) => claimId)
+    const template = JSON.parse(result.files.get(`responses/${role}.template.json`))
+    const decisionIds = template.decisions.map(({ claimId }) => claimId)
+    assert.ok(printedIds.every((claimId) => requestIds.includes(claimId)), role)
+    assert.ok(printedIds.every((claimId) => decisionIds.includes(claimId)), role)
+    assert.deepEqual(
+      template.decisions.find(({ claimId }) => claimId === 'hist-ruan-retrospective').pageIdsToReview,
+      ['A-P053', 'A-P196'],
+    )
+  }
 })
 
 test('maps active claims to proof pages or an explicit registry-only exception', () => {
@@ -187,6 +210,13 @@ test('package scripts expose the frozen review preparation command', () => {
     packageJson.scripts['book:review:prepare'],
     'node book/scripts/build-review-package.mjs',
   )
+})
+
+test('documents the marker-derived fail-closed review corpus without a stale status-only count', () => {
+  const readme = fs.readFileSync(path.join(bookRoot, 'README.md'), 'utf8')
+  assert.match(readme, /70 тезисов/iu)
+  assert.match(readme, /кажд[а-яё]* напечатанн[а-яё]*[^.]*`?claim marker`?[^.]*не отклонён/iu)
+  assert.doesNotMatch(readme, /70 активных утверждений/iu)
 })
 
 test('prepared tracked state is idempotent and cannot overwrite later review work', () => {

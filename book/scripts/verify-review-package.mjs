@@ -4,12 +4,16 @@ import path from 'node:path'
 import { spawnSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
 
-import { buildReviewPackage } from './build-review-package.mjs'
+import {
+  buildReviewPackage,
+  reviewCorpusClaimIds,
+} from './build-review-package.mjs'
+
+export { reviewCorpusClaimIds }
 
 const defaultBookRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const roles = ['historian', 'technologist', 'medical']
 const shaPattern = /^[a-f0-9]{64}$/u
-const publicationClaimStatuses = new Set(['checked', 'verified'])
 
 const sha256 = (value) => crypto.createHash('sha256').update(value).digest('hex')
 const readJson = (filename) => JSON.parse(fs.readFileSync(filename, 'utf8'))
@@ -215,10 +219,6 @@ const ids = (items, label) => {
   return values
 }
 
-export const publicationClaimIds = (claims) => claims
-  .filter(({ status }) => publicationClaimStatuses.has(status))
-  .map(({ id }) => id)
-
 const assertRequestMetadata = (request, manifest, role) => {
   if (request.schemaVersion !== 1 || request.status !== 'blank-review-request' || request.role !== role) {
     throw new Error(`invalid blank review request: ${role}`)
@@ -290,10 +290,31 @@ const assertBlankTemplate = ({ template, manifest, role, activeIds }) => {
 const verifyRoles = ({ packageDir, manifest }) => {
   assertExactKeys('manifest.roles', manifest.roles, roles)
   const frozenClaims = readJson(path.join(packageDir, 'data/claims-frozen.json'))
-  const activeIds = ids(publicationClaimIds(frozenClaims).map((claimId) => ({ claimId })), 'active frozen claims')
+  const claimIndex = readJson(path.join(packageDir, 'data/claim-page-index.json'))
+  if (!Array.isArray(frozenClaims) || !Array.isArray(claimIndex)) {
+    throw new Error('frozen claims and claim page index must be arrays')
+  }
+  const frozenById = new Map(frozenClaims.map((claim) => [claim.id, claim]))
+  if (frozenById.size !== frozenClaims.length || claimIndex.length !== frozenClaims.length) {
+    throw new Error('frozen claims and claim page index differ')
+  }
+  for (const claim of claimIndex) {
+    const frozen = frozenById.get(claim.claimId)
+    if (!frozen || frozen.status !== claim.claimStatus || !Array.isArray(claim.occurrences)) {
+      throw new Error(`claim page index differs from frozen claim: ${claim.claimId}`)
+    }
+  }
+  const activeIds = ids(
+    reviewCorpusClaimIds(claimIndex).map((claimId) => ({ claimId })),
+    'active frozen claims',
+  )
   if (activeIds.length === 0 || frozenClaims.some(({ status }) => !['draft', 'checked', 'verified', 'rejected'].includes(status))) {
     throw new Error('frozen claims contain no active corpus or an invalid status')
   }
+  if (manifest.corpus?.activeClaims !== activeIds.length) {
+    throw new Error('manifest active corpus count differs')
+  }
+  const activeIdSet = new Set(activeIds)
   const baseline = readJson(path.join(packageDir, 'data/reviews-baseline.json'))
   if (!Array.isArray(baseline) || baseline.some(({ status }) => status !== 'pending')) {
     throw new Error('baseline reviews contain an external approval')
@@ -304,7 +325,7 @@ const verifyRoles = ({ packageDir, manifest }) => {
     assertRequestMetadata(request, manifest, role)
     const requestActiveIds = ids(request.activeClaims, `active claims ${role}`)
     if (!sameJson(requestActiveIds, activeIds)) throw new Error(`active claim IDs differ: ${role}`)
-    if (request.activeClaims.some(({ claimStatus }) => !publicationClaimStatuses.has(claimStatus))) throw new Error(`non-active claim in request: ${role}`)
+    if (request.activeClaims.some(({ claimId }) => !activeIdSet.has(claimId))) throw new Error(`non-active claim in request: ${role}`)
     if (manifest.roles[role].activeClaims !== activeIds.length
       || manifest.roles[role].primaryFocus !== request.primaryFocus.length
       || manifest.roles[role].excludedFocus !== request.excludedFocus.length) {

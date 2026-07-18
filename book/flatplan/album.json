@@ -2098,9 +2098,14 @@
       "topicId": "sheng-shou-t05",
       "spreadTitle": "Пар и давление в формовании",
       "role": "Задаёт контекст и главный вопрос темы «Пар и давление в формовании»",
-      "spreadTemplate": "map",
+      "spreadTemplate": "process",
       "template": "quiet-text",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "diagram",
+        "brief": "Заказать сравнительную технологическую схему для A-S055 «Пар и давление в формовании»: сравнить одинаковое прессование шэна и шу после разных предысторий, явно отделив водуй от краткого пропаривания перед формой"
+      }
     },
     {
       "number": 109,
@@ -2110,11 +2115,14 @@
       "topicId": "sheng-shou-t05",
       "spreadTitle": "Пар и давление в формовании",
       "role": "Даёт документ, пример и редакционный вывод по теме «Пар и давление в формовании»",
-      "spreadTemplate": "map",
-      "template": "map",
-      "assetIds": [
-        "map-storage-climates"
-      ]
+      "spreadTemplate": "process",
+      "template": "process",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "diagram",
+        "brief": "Заказать сравнительную технологическую схему для A-S055 «Пар и давление в формовании»: сравнить одинаковое прессование шэна и шу после разных предысторий, явно отделив водуй от краткого пропаривания перед формой"
+      }
     },
     {
       "number": 110,
@@ -2126,7 +2134,12 @@
       "role": "Задаёт контекст и главный вопрос темы «Сушка и стабилизация новой прессовки»",
       "spreadTemplate": "process",
       "template": "quiet-text",
-      "assetIds": []
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "diagram",
+        "brief": "Заказать карточку осмотра свежей прессовки для A-S056 «Сушка и стабилизация новой прессовки»: показать форму, поверхность, среду и время осмотра, сигналы повреждения и журнал наблюдений без обещания вкуса"
+      }
     },
     {
       "number": 111,
@@ -2138,9 +2151,12 @@
       "role": "Даёт документ, пример и редакционный вывод по теме «Сушка и стабилизация новой прессовки»",
       "spreadTemplate": "process",
       "template": "process",
-      "assetIds": [
-        "diagram-storage-variables"
-      ]
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "diagram",
+        "brief": "Заказать карточку осмотра свежей прессовки для A-S056 «Сушка и стабилизация новой прессовки»: показать форму, поверхность, среду и время осмотра, сигналы повреждения и журнал наблюдений без обещания вкуса"
+      }
     },
     {
       "number": 112,
@@ -2184,7 +2200,7 @@
       "topicId": "sheng-shou-t08",
       "spreadTitle": "Климатические режимы хранения",
       "role": "Задаёт контекст и главный вопрос темы «Климатические режимы хранения»",
-      "spreadTemplate": "quiet-text",
+      "spreadTemplate": "map",
       "template": "quiet-text",
       "assetIds": []
     },
@@ -2196,9 +2212,11 @@
       "topicId": "sheng-shou-t08",
       "spreadTitle": "Климатические режимы хранения",
       "role": "Даёт документ, пример и редакционный вывод по теме «Климатические режимы хранения»",
-      "spreadTemplate": "quiet-text",
-      "template": "quiet-text",
-      "assetIds": []
+      "spreadTemplate": "map",
+      "template": "map",
+      "assetIds": [
+        "map-storage-climates"
+      ]
     },
     {
       "number": 116,

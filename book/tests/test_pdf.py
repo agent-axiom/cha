@@ -87,6 +87,26 @@ def test_claim_source_lines_are_readable_deduplicated_and_provenance_labeled() -
         )
 
 
+def test_claim_source_lines_reject_unknown_claim_marker() -> None:
+    with pytest.raises(ValueError, match="unknown claim marker in proof: missing-claim"):
+        BUILD_PROOF.claim_source_lines(
+            "<!-- claim:missing-claim -->",
+            {},
+            known_source_ids=set(),
+            provenance_only_ids=set(),
+        )
+
+
+def test_claim_note_band_rejects_overflow() -> None:
+    BUILD_PROOF.register_fonts()
+    lines = [
+        f"Тезис claim-{index} → источники: source-{index}; another-source-{index}"
+        for index in range(80)
+    ]
+    with pytest.raises(ValueError, match="claim-to-source note band overflow"):
+        BUILD_PROOF.claim_note_paragraph(lines, mm(20), color=BUILD_PROOF.INK)
+
+
 def test_metadata_staging_is_incremental_and_preserves_canvas_bytes(
     tmp_path: Path,
 ) -> None:
