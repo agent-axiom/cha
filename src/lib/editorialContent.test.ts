@@ -98,4 +98,22 @@ describe('editorial attribution boundaries', () => {
     expect(regionText).not.toContain('особо отмеченный Чжао')
     expect(regionText).not.toContain('Чжао Сюэминь перечисляет')
   })
+
+  it('does not locate Youle east of the Lancang from the historical list alone', () => {
+    expect(regionEntry('youle').description).not.toContain(
+      'к востоку от Ланьцанцзяна',
+    )
+  })
+
+  it('does not infer a modern eastern Xishuangbanna group for Mangzhi', () => {
+    expect(regionEntry('mangzhi').description).not.toMatch(
+      /восточн[а-яё]* групп[а-яё]*.*Сишуанбаньн/i,
+    )
+  })
+
+  it('does not connect Mansa to later Yiwu geography without support', () => {
+    expect(regionEntry('mansa').description).not.toMatch(
+      /более поздн[а-яё]*[^.]*Иу/i,
+    )
+  })
 })
