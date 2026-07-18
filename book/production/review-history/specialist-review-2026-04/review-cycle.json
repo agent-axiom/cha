@@ -1,22 +1,22 @@
 {
   "schemaVersion": 1,
-  "cycleId": "specialist-review-2026-05",
+  "cycleId": "specialist-review-2026-04",
   "status": "prepared-not-dispatched",
-  "frozenAt": "2026-07-18T17:47:08+03:00",
-  "deadline": "2026-08-29T18:00:00+03:00",
+  "frozenAt": "2026-07-18T17:12:43+03:00",
+  "deadline": "2026-08-22T18:00:00+03:00",
   "deadlineStatus": "proposed",
-  "gitCommit": "a8a1740eeb228539d07ea6d2510e396bbd31593d",
+  "gitCommit": "b6e87365f1e1f892659a137c7f566aa8ac4e8422",
   "proofs": [
     {
       "id": "album",
       "path": "book/output/pdf/puer-album-proof.pdf",
-      "sha256": "82fecb7c20a4cd39260a97a3b4e0f6644fa91f24fd664c121347ed3c55b5dbb3",
+      "sha256": "182b4ffb8c32ea448122bdfd317372832910dbc564e6bde23a0f536ade4b18f9",
       "pages": 208
     },
     {
       "id": "guide",
       "path": "book/output/pdf/puer-guide-proof.pdf",
-      "sha256": "9062da0cda44ebe21eb9a6a8756c97db13e28ffce66ba55c16cc6cedc22b75b5",
+      "sha256": "baea5bcce8886b27412789d663a0e3288ff4141442f3010a77b07f18a0ae1cc5",
       "pages": 48
     }
   ],
