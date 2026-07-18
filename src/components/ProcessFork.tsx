@@ -11,7 +11,18 @@ const pathMeta: Record<TeaPath, { name: string; chinese: string; tempo: string }
   shou: { name: 'Шу', chinese: '熟茶', tempo: 'влажное кучевание — водуй' },
 }
 
+function stepsForPath(path: TeaPath) {
+  return processSteps
+    .filter((step) => step.path === path)
+    .sort((first, second) => first.order - second.order)
+}
+
 export function ProcessFork({ selectedPath }: ProcessForkProps) {
+  const visibleSteps = stepsForPath(selectedPath)
+  const visibleSourceIds = [
+    ...new Set(visibleSteps.flatMap((step) => step.sourceIds)),
+  ]
+
   return (
     <section className="story-section process-section" id="craft" aria-labelledby="process-title">
       <header className="section-heading section-heading--split">
@@ -41,7 +52,7 @@ export function ProcessFork({ selectedPath }: ProcessForkProps) {
       <div className="process-fork">
         {(['sheng', 'shou'] as const).map((path) => {
           const meta = pathMeta[path]
-          const steps = processSteps.filter((step) => step.path === path)
+          const steps = path === selectedPath ? visibleSteps : stepsForPath(path)
 
           return (
             <article
@@ -59,7 +70,7 @@ export function ProcessFork({ selectedPath }: ProcessForkProps) {
 
               <ol aria-label={`Этапы ${meta.name}`}>
                 {steps.map((step) => (
-                  <li key={step.id} aria-current={selectedPath === path ? 'step' : undefined}>
+                  <li key={step.id}>
                     <span className="process-step__number" aria-hidden="true">
                       {String(step.order).padStart(2, '0')}
                     </span>
@@ -80,8 +91,11 @@ export function ProcessFork({ selectedPath }: ProcessForkProps) {
         })}
       </div>
 
-      <div className="source-links source-links--center" aria-label="Источники технологии">
-        {['gbt-22111', 'lv-2013'].map((sourceId) => {
+      <div
+        className="source-links source-links--center"
+        aria-label={`Источники технологии ${pathMeta[selectedPath].name}`}
+      >
+        {visibleSourceIds.map((sourceId) => {
           const source = sourceById.get(sourceId)
           if (!source) return null
           return (

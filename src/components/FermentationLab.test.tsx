@@ -26,4 +26,31 @@ describe('FermentationLab', () => {
     expect(chemistry).toHaveAttribute('aria-pressed', 'true')
     expect(screen.getByRole('heading', { name: /совместные изменения состава/i })).toBeInTheDocument()
   })
+
+  it('generates unique local ids for each SVG model instance', () => {
+    const { container } = render(
+      <>
+        <FermentationLab />
+        <FermentationLab />
+      </>,
+    )
+
+    const models = [...container.querySelectorAll('svg[aria-labelledby]')]
+    const labelIds = models.flatMap((model) =>
+      (model.getAttribute('aria-labelledby') ?? '').split(' ').filter(Boolean),
+    )
+    const gradientIds = [...container.querySelectorAll('radialGradient')].map(
+      (gradient) => gradient.id,
+    )
+
+    expect(models).toHaveLength(2)
+    expect(new Set(labelIds).size).toBe(4)
+    expect(new Set(gradientIds).size).toBe(2)
+    models.forEach((model) => {
+      const localLabelIds = (model.getAttribute('aria-labelledby') ?? '').split(' ')
+      localLabelIds.forEach((id) => {
+        expect(model.querySelector(`[id="${id}"]`)).not.toBeNull()
+      })
+    })
+  })
 })

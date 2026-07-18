@@ -1,8 +1,14 @@
-import { useState } from 'react'
+import { useId, useState } from 'react'
 import { fermentationLayers } from '../content/process'
 import { sourceById } from '../content/sources'
 
+const MODEL_DISCLAIMER = 'Это не микрофотография и не модель всего пуэра.'
+
 export function FermentationLab() {
+  const svgId = useId()
+  const titleId = `${svgId}-micro-title`
+  const descriptionId = `${svgId}-micro-desc`
+  const gradientId = `${svgId}-cell-glow`
   const [activeId, setActiveId] = useState(fermentationLayers[0]?.id ?? 'microbes')
   const active = fermentationLayers.find((layer) => layer.id === activeId) ?? fermentationLayers[0]
 
@@ -28,13 +34,13 @@ export function FermentationLab() {
             loading="lazy"
             decoding="async"
           />
-          <svg viewBox="0 0 640 540" role="img" aria-labelledby="micro-title micro-desc">
-            <title id="micro-title">Схематическая модель влажного кучевания шу — водуй</title>
-            <desc id="micro-desc">
-              Иллюстративная схема взаимодействия сырья, условий и микробного сообщества во время водуй; это не микрофотография и не модель всего пуэра.
+          <svg viewBox="0 0 640 540" role="img" aria-labelledby={`${titleId} ${descriptionId}`}>
+            <title id={titleId}>Схематическая модель влажного кучевания шу — водуй</title>
+            <desc id={descriptionId}>
+              Иллюстративная схема взаимодействия сырья, условий и микробного сообщества во время водуй. {MODEL_DISCLAIMER}
             </desc>
             <defs>
-              <radialGradient id="cell-glow">
+              <radialGradient id={gradientId}>
                 <stop offset="0" stopColor="currentColor" stopOpacity="0.9" />
                 <stop offset="1" stopColor="currentColor" stopOpacity="0" />
               </radialGradient>
@@ -64,7 +70,9 @@ export function FermentationLab() {
               <path d="M124 378 C282 475 452 441 523 321" />
             </g>
           </svg>
-          <p className="fermentation-lab__caption">Схема объясняет влажное кучевание шу; это не микрофотография и не изображение всего производства пуэра.</p>
+          <p className="fermentation-lab__caption">
+            Схема объясняет влажное кучевание шу. {MODEL_DISCLAIMER}
+          </p>
         </div>
 
         <div className="fermentation-lab__controls">
