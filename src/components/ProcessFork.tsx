@@ -7,8 +7,8 @@ interface ProcessForkProps {
 }
 
 const pathMeta: Record<TeaPath, { name: string; chinese: string; tempo: string }> = {
-  sheng: { name: 'Шэн', chinese: '生茶', tempo: 'медленное изменение' },
-  shou: { name: 'Шу', chinese: '熟茶', tempo: 'управляемая ферментация' },
+  sheng: { name: 'Шэн', chinese: '生茶', tempo: 'контролируемое хранение' },
+  shou: { name: 'Шу', chinese: '熟茶', tempo: 'влажное кучевание — водуй' },
 }
 
 export function ProcessFork({ selectedPath }: ProcessForkProps) {
@@ -20,8 +20,8 @@ export function ProcessFork({ selectedPath }: ProcessForkProps) {
           <h2 id="process-title">Один лист. Два пути.</h2>
         </div>
         <p>
-          Первые пять шагов родственны. Затем шэн отправляется в долгое открытое
-          время, а шу — во влажную тёплую кучу.
+          Первые семь шагов общие. После изготовления шэн поступает в контролируемое
+          хранение без обязательного срока, а шу проходит влажное кучевание — водуй.
         </p>
       </header>
 

@@ -11,11 +11,11 @@ export function FermentationLab() {
   return (
     <section className="story-section lab-section" id="science" aria-labelledby="lab-title">
       <header className="section-heading">
-        <p className="eyebrow">04 · Невидимые мастера</p>
-        <h2 id="lab-title">Внутри тёплой чайной кучи</h2>
+        <p className="eyebrow">04 · Взаимодействующая система</p>
+        <h2 id="lab-title">Влажное кучевание шу — водуй</h2>
         <p>
-          Шу меняют не «волшебные бактерии», а динамичная система листа, воды,
-          тепла, кислорода и множества микроорганизмов.
+          Этот раздел относится только к водуй: в нём взаимодействуют лист, вода,
+          тепло, кислород, микробное сообщество и действия производителя.
         </p>
       </header>
 
@@ -29,9 +29,9 @@ export function FermentationLab() {
             decoding="async"
           />
           <svg viewBox="0 0 640 540" role="img" aria-labelledby="micro-title micro-desc">
-            <title id="micro-title">Художественная модель ферментации пуэра</title>
+            <title id="micro-title">Схематическая модель влажного кучевания шу — водуй</title>
             <desc id="micro-desc">
-              Слои чайного листа, тепла и микробных сообществ меняют вид в зависимости от выбранного объяснения.
+              Иллюстративная схема взаимодействия сырья, условий и микробного сообщества во время водуй; это не микрофотография и не модель всего пуэра.
             </desc>
             <defs>
               <radialGradient id="cell-glow">
@@ -64,11 +64,11 @@ export function FermentationLab() {
               <path d="M124 378 C282 475 452 441 523 321" />
             </g>
           </svg>
-          <p className="fermentation-lab__caption">Модель объясняет процесс, а не воспроизводит микрофотографию.</p>
+          <p className="fermentation-lab__caption">Схема объясняет влажное кучевание шу; это не микрофотография и не изображение всего производства пуэра.</p>
         </div>
 
         <div className="fermentation-lab__controls">
-          <div className="lab-tabs" role="group" aria-label="Слои ферментации">
+          <div className="lab-tabs" role="group" aria-label="Слои модели влажного кучевания шу">
             {fermentationLayers.map((layer, index) => (
               <button
                 key={layer.id}
