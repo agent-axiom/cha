@@ -1,22 +1,22 @@
 {
   "schemaVersion": 1,
-  "cycleId": "specialist-review-2026-03",
+  "cycleId": "specialist-review-2026-02",
   "status": "prepared-not-dispatched",
-  "frozenAt": "2026-07-18T15:53:08+03:00",
-  "deadline": "2026-08-15T18:00:00+03:00",
+  "frozenAt": "2026-07-18T11:40:03+03:00",
+  "deadline": "2026-08-08T18:00:00+03:00",
   "deadlineStatus": "proposed",
-  "gitCommit": "9abbe4d212d035ef8ca9b5c50c0693d41587fbef",
+  "gitCommit": "7a05d6b5ef8ef1e543b4f04eb02a52ac4c96e981",
   "proofs": [
     {
       "id": "album",
       "path": "book/output/pdf/puer-album-proof.pdf",
-      "sha256": "3f5ad831d72572e71ac1703fc9c538130c01d1ee44d1ff979a7ea65c129f75c5",
+      "sha256": "c7c69ef79c72c701e0cccb1c98a68875cc3c3ca2db2c5bb47cc91a90dd19c36d",
       "pages": 208
     },
     {
       "id": "guide",
       "path": "book/output/pdf/puer-guide-proof.pdf",
-      "sha256": "552f0cdf7eecaf5a3746836350570fc51f104845c8a6c372a8999ef78fb1d96f",
+      "sha256": "8c74ccf74e24fdddfbb7df1afe5a303a629ebddd7287f495ee264c2667eaf74a",
       "pages": 48
     }
   ],
@@ -24,7 +24,7 @@
   "registryOnlyClaims": {
     "storage-gbt30375-current": {
       "reason": "Статус карточки стандарта проверен в evidence registry, но точная формулировка не набрана в frozen proof; тезис остаётся checked и не считается одобренным.",
-      "contextPageIds": ["A-P148", "G-P048"]
+      "contextPageIds": ["A-P148", "A-P208"]
     }
   }
 }
