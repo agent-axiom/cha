@@ -1,5 +1,6 @@
 import test, { after } from 'node:test'
 import assert from 'node:assert/strict'
+import { createHash } from 'node:crypto'
 import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
@@ -12,6 +13,53 @@ const {
   validateReviews,
   validateAssets,
 } = dataValidator
+
+const reviewCycle = {
+  cycleId: 'specialist-review-2026-01',
+  proofSetSha256: 'a'.repeat(64),
+  snapshotSha256: 'b'.repeat(64),
+  frozenAt: '2026-07-18T08:38:08+03:00',
+  status: 'dispatched',
+  deadline: '2026-08-01T18:00:00+03:00',
+  deadlineStatus: 'confirmed',
+}
+
+const responseBytes = (role) => Buffer.from(`immutable external response: ${role}\n`, 'utf8')
+const responseSha256 = (role) => createHash('sha256').update(responseBytes(role)).digest('hex')
+const approvalEvidence = (overrides = {}) => ({
+  claimStatusById: new Map([['c1', 'checked']]),
+  allowedPageIdsByClaim: new Map([['c1', new Set(['A-P001', 'A-P002'])]]),
+  excludedClaimIds: new Set(),
+  responseSha256ByRole: new Map([
+    ['historian', responseSha256('historian')],
+    ['technologist', responseSha256('technologist')],
+    ['medical', responseSha256('medical')],
+  ]),
+  ...overrides,
+})
+
+const externalApproval = (role, overrides = {}) => ({
+  claimId: 'c1',
+  role,
+  status: 'approved',
+  decision: 'approve-wording',
+  cycleId: reviewCycle.cycleId,
+  proofSetSha256: reviewCycle.proofSetSha256,
+  snapshotSha256: reviewCycle.snapshotSha256,
+  reviewedAt: '2026-07-18T09:30:00+03:00',
+  submittedAt: '2026-07-18T10:00:00+03:00',
+  responseSha256: responseSha256(role),
+  pageIdsReviewed: ['A-P001'],
+  reviewer: {
+    name: 'Dr Li Ming',
+    affiliation: 'Yunnan Agricultural University',
+    qualification: 'Associate professor of tea science',
+    credentialEvidence: 'https://www.ynau.edu.cn/faculty/li-ming',
+    conflictOfInterest: 'No relevant conflict of interest declared.',
+    funding: 'No external funding declared.',
+  },
+  ...overrides,
+})
 
 const bookRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const readBookJson = (relativePath) => JSON.parse(fs.readFileSync(path.join(bookRoot, relativePath), 'utf8'))
@@ -242,20 +290,226 @@ test('rejects missing, empty, and whitespace-only claim ids', () => {
 })
 
 test('requires three review roles for verified claims', () => {
-  assert.throws(() => validateReviews([{ claimId: 'c1', role: 'historian', status: 'approved' }], new Set(['c1']), new Set(['c1'])), /missing required review/)
+  assert.throws(
+    () => validateReviews([externalApproval('historian')], new Set(['c1']), new Set(['c1']), reviewCycle, approvalEvidence()),
+    /missing required review/,
+  )
 })
 
-test('rejects duplicate review approvals for the same claim and role', () => {
+test('rejects a minimal approved review without external reviewer evidence', () => {
+  assert.throws(
+    () => validateReviews([{ claimId: 'c1', role: 'historian', status: 'approved' }], new Set(['c1']), new Set(), reviewCycle),
+    /approved review requires decision: c1\/historian/,
+  )
+})
+
+test('requires approved reviews to match the exact frozen review cycle and proof hashes', () => {
+  for (const [field, value] of [
+    ['cycleId', 'another-cycle'],
+    ['proofSetSha256', 'd'.repeat(64)],
+    ['snapshotSha256', 'e'.repeat(64)],
+  ]) {
+    assert.throws(
+      () => validateReviews([externalApproval('historian', { [field]: value })], new Set(['c1']), new Set(), reviewCycle, approvalEvidence()),
+      new RegExp(`approved review ${field} does not match frozen cycle: c1/historian`),
+    )
+  }
+})
+
+test('requires substantive identity, credentials, and conflict-of-interest metadata for approvals', () => {
+  for (const reviewer of [
+    { ...externalApproval('historian').reviewer, name: 'x' },
+    { ...externalApproval('historian').reviewer, affiliation: 'x' },
+    { ...externalApproval('historian').reviewer, qualification: 'x' },
+    { ...externalApproval('historian').reviewer, credentialEvidence: 'profile' },
+    { ...externalApproval('historian').reviewer, conflictOfInterest: 'none' },
+    { ...externalApproval('historian').reviewer, funding: 'none' },
+  ]) {
+    assert.throws(
+      () => validateReviews([externalApproval('historian', { reviewer })], new Set(['c1']), new Set(), reviewCycle, approvalEvidence()),
+      /approved review requires valid reviewer metadata: c1\/historian/,
+    )
+  }
+})
+
+test('accepts concise Chinese reviewer identity and qualification metadata', () => {
+  const reviewer = {
+    name: '李明',
+    affiliation: '云南大学',
+    qualification: '教授',
+    credentialEvidence: 'https://www.ynu.edu.cn/szdw/li-ming',
+    conflictOfInterest: '无利益冲突',
+    funding: '无外部资助',
+  }
+
+  assert.doesNotThrow(
+    () => validateReviews([externalApproval('historian', { reviewer })], new Set(['c1']), new Set(), reviewCycle, approvalEvidence()),
+  )
+})
+
+test('requires full reviewed and submitted timestamps plus a response digest for approvals', () => {
+  for (const override of [
+    { reviewedAt: '2026-07-18' },
+    { reviewedAt: '2026-02-31T09:30:00+03:00' },
+    { reviewedAt: '2026-07-18T24:00:00+03:00' },
+    { submittedAt: '2026-07-18' },
+    { reviewedAt: '2026-07-18T11:00:00+03:00', submittedAt: '2026-07-18T10:00:00+03:00' },
+    { responseSha256: 'not-a-sha256' },
+  ]) {
+    assert.throws(
+      () => validateReviews([externalApproval('historian', override)], new Set(['c1']), new Set(), reviewCycle, approvalEvidence()),
+      /approved review requires valid (timestamps|responseSha256): c1\/historian/,
+    )
+  }
+})
+
+test('requires explicit reviewed proof pages for every approved claim', () => {
+  for (const pageIdsReviewed of [undefined, [], ['not-a-page'], ['A-P001', 'A-P001']]) {
+    assert.throws(
+      () => validateReviews([externalApproval('historian', { pageIdsReviewed })], new Set(['c1']), new Set(), reviewCycle, approvalEvidence()),
+      /approved review requires valid pageIdsReviewed: c1\/historian/,
+    )
+  }
+})
+
+test('requires approval evidence context for every approved review', () => {
+  assert.throws(
+    () => validateReviews([externalApproval('historian')], new Set(['c1']), new Set(), reviewCycle),
+    /approved review requires approval evidence context: c1\/historian/,
+  )
+})
+
+test('rejects a review that began before the frozen cycle snapshot', () => {
+  assert.throws(
+    () => validateReviews([
+      externalApproval('historian', { reviewedAt: '2026-07-18T08:30:00+03:00' }),
+    ], new Set(['c1']), new Set(), reviewCycle, approvalEvidence()),
+    /approved review predates frozen cycle: c1\/historian/,
+  )
+})
+
+test('requires active claim pages to be a nonempty subset of the frozen claim evidence', () => {
+  assert.throws(
+    () => validateReviews([
+      externalApproval('historian', { pageIdsReviewed: ['A-P003'] }),
+    ], new Set(['c1']), new Set(), reviewCycle, approvalEvidence()),
+    /approved review references pages outside frozen claim evidence: c1\/historian/,
+  )
+  assert.doesNotThrow(
+    () => validateReviews([
+      externalApproval('historian', { pageIdsReviewed: ['A-P002'] }),
+    ], new Set(['c1']), new Set(), reviewCycle, approvalEvidence()),
+  )
+})
+
+test('requires responseSha256 to equal the digest computed from stored response evidence', () => {
+  const responseSha256ByRole = new Map(approvalEvidence().responseSha256ByRole)
+  responseSha256ByRole.set('historian', 'd'.repeat(64))
+  assert.throws(
+    () => validateReviews([
+      externalApproval('historian'),
+    ], new Set(['c1']), new Set(), reviewCycle, approvalEvidence({ responseSha256ByRole })),
+    /approved review responseSha256 does not match stored response: c1\/historian/,
+  )
+})
+
+test('requires exclusion decisions and empty pages for claims in the frozen excluded ledger', () => {
+  const excludedEvidence = approvalEvidence({
+    claimStatusById: new Map([['c1', 'rejected']]),
+    allowedPageIdsByClaim: new Map([['c1', new Set()]]),
+    excludedClaimIds: new Set(['c1']),
+  })
+  const exclusion = externalApproval('historian', {
+    decision: 'confirm-exclusion',
+    pageIdsReviewed: [],
+  })
+  assert.doesNotThrow(
+    () => validateReviews([exclusion], new Set(['c1']), new Set(), reviewCycle, excludedEvidence),
+  )
+  assert.throws(
+    () => validateReviews([
+      { ...exclusion, pageIdsReviewed: ['A-P001'] },
+    ], new Set(['c1']), new Set(), reviewCycle, excludedEvidence),
+    /excluded claim review must not invent proof pages: c1\/historian/,
+  )
+  assert.throws(
+    () => validateReviews([exclusion], new Set(['c1']), new Set(), reviewCycle, {
+      ...excludedEvidence,
+      excludedClaimIds: new Set(),
+    }),
+    /excluded claim is absent from frozen exclusion ledger: c1\/historian/,
+  )
+})
+
+test('requires approve-wording for checked or verified claims and confirm-exclusion for rejected claims', () => {
+  assert.throws(
+    () => validateReviews([
+      externalApproval('historian', { decision: 'confirm-exclusion', pageIdsReviewed: [] }),
+    ], new Set(['c1']), new Set(), reviewCycle, approvalEvidence()),
+    /approved review decision does not match claim status: c1\/historian/,
+  )
+  const rejectedEvidence = approvalEvidence({
+    claimStatusById: new Map([['c1', 'rejected']]),
+    allowedPageIdsByClaim: new Map([['c1', new Set()]]),
+    excludedClaimIds: new Set(['c1']),
+  })
+  assert.throws(
+    () => validateReviews([
+      externalApproval('historian'),
+    ], new Set(['c1']), new Set(), reviewCycle, rejectedEvidence),
+    /approved review decision does not match claim status: c1\/historian/,
+  )
+})
+
+test('requires a dispatched confirmed cycle and an explicit waiver for a late response', () => {
+  assert.throws(
+    () => validateReviews([externalApproval('historian')], new Set(['c1']), new Set(), {
+      ...reviewCycle,
+      status: 'prepared-not-dispatched',
+      deadlineStatus: 'proposed',
+    }),
+    /approved review requires a dispatched cycle with confirmed deadline/,
+  )
+  const late = externalApproval('historian', {
+    reviewedAt: '2026-08-02T09:00:00+03:00',
+    submittedAt: '2026-08-02T10:00:00+03:00',
+  })
+  assert.throws(
+    () => validateReviews([late], new Set(['c1']), new Set(), reviewCycle, approvalEvidence()),
+    /late approved review requires an explicit waiver/,
+  )
+  assert.doesNotThrow(() => validateReviews([{
+    ...late,
+    lateWaiver: {
+      reason: 'Reviewer travel delayed delivery; frozen files did not change.',
+      authorizedBy: 'Managing editor',
+    },
+  }], new Set(['c1']), new Set(), reviewCycle, approvalEvidence()))
+})
+
+test('does not require external approval metadata for pending editorial audits', () => {
+  assert.doesNotThrow(() => validateReviews([
+    {
+      claimId: 'c1',
+      role: 'historian',
+      status: 'pending',
+      reviewer: 'Codex editorial research audit',
+      reviewedAt: '2026-07-17',
+    },
+  ], new Set(['c1']), new Set(), reviewCycle))
+})
+
+test('rejects duplicate reviews for the same claim and role', () => {
   const reviews = [
-    { claimId: 'c1', role: 'historian', status: 'approved' },
-    { claimId: 'c1', role: 'historian', status: 'approved' },
+    { claimId: 'c1', role: 'historian', status: 'pending' },
+    { claimId: 'c1', role: 'historian', status: 'pending' },
   ]
   assert.throws(() => validateReviews(reviews, new Set(['c1']), new Set()), /duplicate review: c1\/historian/)
 })
 
 test('rejects conflicting review states for the same claim and role', () => {
   const reviews = [
-    { claimId: 'c1', role: 'historian', status: 'approved' },
+    { claimId: 'c1', role: 'historian', status: 'pending' },
     { claimId: 'c1', role: 'historian', status: 'changes-requested' },
   ]
   assert.throws(() => validateReviews(reviews, new Set(['c1']), new Set()), /duplicate review: c1\/historian/)
@@ -276,12 +530,12 @@ test('accepts a complete valid evidence and rights registry', () => {
   const claims = [{ id: 'c1', text: 'Claim', evidence: 'source', sourceIds: ['s1'], status: 'verified' }]
   const claimIds = validateClaims(claims, sourceIds)
   const reviews = [
-    { claimId: 'c1', role: 'historian', status: 'approved' },
-    { claimId: 'c1', role: 'technologist', status: 'approved' },
-    { claimId: 'c1', role: 'medical', status: 'approved' },
+    externalApproval('historian'),
+    externalApproval('technologist'),
+    externalApproval('medical'),
   ]
 
-  assert.doesNotThrow(() => validateReviews(reviews, claimIds, new Set(['c1'])))
+  assert.doesNotThrow(() => validateReviews(reviews, claimIds, new Set(['c1']), reviewCycle, approvalEvidence()))
   assert.deepEqual(validateAssets([printReadyAsset()]), new Set(['img-1']))
 })
 

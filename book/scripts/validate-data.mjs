@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url'
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const read = (name) => JSON.parse(fs.readFileSync(path.join(root, 'data', name), 'utf8'))
 const readFlatplan = (name) => JSON.parse(fs.readFileSync(path.join(root, 'flatplan', name), 'utf8'))
+const readProduction = (name) => JSON.parse(fs.readFileSync(path.join(root, 'production', name), 'utf8'))
 const oneOf = (value, values, label) => {
   if (!values.includes(value)) throw new Error(`${label}: ${value}`)
 }
@@ -42,7 +43,158 @@ export function validateClaims(claims, sourceIds) {
   return seen
 }
 
-export function validateReviews(reviews, claimIds, verifiedClaimIds) {
+const sha256Pattern = /^[a-f0-9]{64}$/u
+const fullTimestampPattern = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.\d{1,3})?(?:Z|[+-](\d{2}):(\d{2}))$/u
+const substantiveString = (value, minimumLength) => typeof value === 'string' && [...value.trim()].length >= minimumLength
+const placeholderPattern = /^(?:x+|n\/?a|none|unknown|pending|tbd|null|undefined)$/iu
+const meaningfulString = (value, minimumLength = 2) => (
+  substantiveString(value, minimumLength) && !placeholderPattern.test(value.trim())
+)
+const validTimestamp = (value) => {
+  const match = String(value ?? '').match(fullTimestampPattern)
+  if (!match || !Number.isFinite(Date.parse(value))) return false
+  const [, yearText, monthText, dayText, hourText, minuteText, secondText, offsetHourText = '0', offsetMinuteText = '0'] = match
+  const [year, month, day, hour, minute, second, offsetHour, offsetMinute] = [
+    yearText, monthText, dayText, hourText, minuteText, secondText, offsetHourText, offsetMinuteText,
+  ].map(Number)
+  const calendarDate = new Date(Date.UTC(year, month - 1, day))
+  return (
+    calendarDate.getUTCFullYear() === year
+    && calendarDate.getUTCMonth() === month - 1
+    && calendarDate.getUTCDate() === day
+    && hour <= 23
+    && minute <= 59
+    && second <= 59
+    && offsetHour <= 23
+    && offsetMinute <= 59
+  )
+}
+const validCredentialEvidence = (value) => {
+  if (!substantiveString(value, 12)) return false
+  try {
+    const url = new URL(value)
+    return url.protocol === 'https:' && url.hostname.includes('.') && !['example.com', 'example.org', 'example.net'].includes(url.hostname)
+  } catch {
+    return false
+  }
+}
+
+const evidenceValue = (collection, key) => (
+  collection instanceof Map ? collection.get(key) : collection?.[key]
+)
+const evidenceContains = (collection, key) => (
+  collection instanceof Set
+    ? collection.has(key)
+    : Array.isArray(collection)
+      ? collection.includes(key)
+      : collection?.[key] === true
+)
+
+const validateExternalApproval = (review, frozenCycle, approvalEvidence) => {
+  const label = `${review.claimId}/${review.role}`
+  if (!['approve-wording', 'confirm-exclusion'].includes(review.decision)) {
+    throw new Error(`approved review requires decision: ${label}`)
+  }
+  if (!frozenCycle || !substantiveString(frozenCycle.cycleId, 1)) {
+    throw new Error(`approved review requires frozen external cycle: ${label}`)
+  }
+  if (
+    !['dispatched', 'responses-received', 'closed'].includes(frozenCycle.status)
+    || frozenCycle.deadlineStatus !== 'confirmed'
+    || !validTimestamp(frozenCycle.deadline)
+    || !validTimestamp(frozenCycle.frozenAt)
+  ) {
+    throw new Error(`approved review requires a dispatched cycle with confirmed deadline: ${label}`)
+  }
+  for (const field of ['cycleId', 'proofSetSha256', 'snapshotSha256']) {
+    if (review[field] !== frozenCycle[field]) {
+      throw new Error(`approved review ${field} does not match frozen cycle: ${label}`)
+    }
+  }
+  if (!sha256Pattern.test(frozenCycle.proofSetSha256 ?? '') || !sha256Pattern.test(frozenCycle.snapshotSha256 ?? '')) {
+    throw new Error(`frozen review cycle requires valid proof hashes: ${label}`)
+  }
+  const reviewer = review.reviewer
+  if (
+    !reviewer
+    || typeof reviewer !== 'object'
+    || Array.isArray(reviewer)
+    || !meaningfulString(reviewer.name)
+    || !meaningfulString(reviewer.affiliation)
+    || !meaningfulString(reviewer.qualification)
+    || !validCredentialEvidence(reviewer.credentialEvidence)
+    || !meaningfulString(reviewer.conflictOfInterest)
+    || !meaningfulString(reviewer.funding)
+  ) {
+    throw new Error(`approved review requires valid reviewer metadata: ${label}`)
+  }
+  if (
+    !validTimestamp(review.reviewedAt)
+    || !validTimestamp(review.submittedAt)
+    || Date.parse(review.submittedAt) < Date.parse(review.reviewedAt)
+  ) {
+    throw new Error(`approved review requires valid timestamps: ${label}`)
+  }
+  if (!sha256Pattern.test(review.responseSha256 ?? '')) {
+    throw new Error(`approved review requires valid responseSha256: ${label}`)
+  }
+  if (!approvalEvidence || typeof approvalEvidence !== 'object' || Array.isArray(approvalEvidence)) {
+    throw new Error(`approved review requires approval evidence context: ${label}`)
+  }
+  if (Date.parse(review.reviewedAt) < Date.parse(frozenCycle.frozenAt)) {
+    throw new Error(`approved review predates frozen cycle: ${label}`)
+  }
+  const claimStatus = evidenceValue(approvalEvidence.claimStatusById, review.claimId)
+  const expectedDecision = ['checked', 'verified'].includes(claimStatus)
+    ? 'approve-wording'
+    : claimStatus === 'rejected'
+      ? 'confirm-exclusion'
+      : null
+  if (review.decision !== expectedDecision) {
+    throw new Error(`approved review decision does not match claim status: ${label}`)
+  }
+  const storedResponseSha256 = evidenceValue(approvalEvidence.responseSha256ByRole, review.role)
+  if (!sha256Pattern.test(storedResponseSha256 ?? '') || review.responseSha256 !== storedResponseSha256) {
+    throw new Error(`approved review responseSha256 does not match stored response: ${label}`)
+  }
+  const pageIds = review.pageIdsReviewed
+  if (claimStatus === 'rejected') {
+    if (!Array.isArray(pageIds) || pageIds.length !== 0) {
+      throw new Error(`excluded claim review must not invent proof pages: ${label}`)
+    }
+    if (!evidenceContains(approvalEvidence.excludedClaimIds, review.claimId)) {
+      throw new Error(`excluded claim is absent from frozen exclusion ledger: ${label}`)
+    }
+  } else {
+    if (
+      !Array.isArray(pageIds)
+      || pageIds.length === 0
+      || new Set(pageIds).size !== pageIds.length
+      || pageIds.some((pageId) => !/^[AG]-P\d{3}$/u.test(pageId))
+    ) {
+      throw new Error(`approved review requires valid pageIdsReviewed: ${label}`)
+    }
+    const allowedPageIds = evidenceValue(approvalEvidence.allowedPageIdsByClaim, review.claimId)
+    const allowed = allowedPageIds instanceof Set ? allowedPageIds : new Set(allowedPageIds ?? [])
+    if (allowed.size === 0 || pageIds.some((pageId) => !allowed.has(pageId))) {
+      throw new Error(`approved review references pages outside frozen claim evidence: ${label}`)
+    }
+  }
+  if (Date.parse(review.submittedAt) > Date.parse(frozenCycle.deadline)) {
+    const waiver = review.lateWaiver
+    if (
+      !waiver
+      || typeof waiver !== 'object'
+      || Array.isArray(waiver)
+      || !meaningfulString(waiver.reason)
+      || !meaningfulString(waiver.authorizedBy)
+    ) {
+      throw new Error(`late approved review requires an explicit waiver: ${label}`)
+    }
+  }
+}
+
+export function validateReviews(reviews, claimIds, verifiedClaimIds, frozenCycle = null, approvalEvidence = null) {
   const required = ['historian', 'technologist', 'medical']
   const seen = new Set()
   for (const review of reviews) {
@@ -52,6 +204,7 @@ export function validateReviews(reviews, claimIds, verifiedClaimIds) {
     const key = JSON.stringify([review.claimId, review.role])
     if (seen.has(key)) throw new Error(`duplicate review: ${review.claimId}/${review.role}`)
     seen.add(key)
+    if (review.status === 'approved') validateExternalApproval(review, frozenCycle, approvalEvidence)
   }
   for (const claimId of verifiedClaimIds) {
     for (const role of required) {
@@ -804,10 +957,11 @@ export function validateAll() {
   const templates = readFlatplan('templates.json').templates
   const album = readFlatplan('album.json')
   const guide = readFlatplan('guide.json')
+  const reviewCycle = readProduction('review-dispatch.json')
   const sourceIds = validateSources(sources)
   const claimIds = validateClaims(claims, sourceIds)
   const verified = new Set(claims.filter((claim) => claim.status === 'verified').map((claim) => claim.id))
-  validateReviews(reviews, claimIds, verified)
+  validateReviews(reviews, claimIds, verified, reviewCycle)
   const assetIds = validateAssets(assets)
   validateAssetFiles(assets, path.resolve(root, '..'))
   validateFlatplan(album, 208, templates, assetIds)

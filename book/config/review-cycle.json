@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "cycleId": "specialist-review-2026-01",
+  "status": "prepared-not-dispatched",
+  "frozenAt": "2026-07-18T08:38:08+03:00",
+  "deadline": "2026-08-01T18:00:00+03:00",
+  "deadlineStatus": "proposed",
+  "gitCommit": "457e56f72f36cb9153cf9f9df38753ebdc0af9e4",
+  "proofs": [
+    {
+      "id": "album",
+      "path": "book/output/pdf/puer-album-proof.pdf",
+      "sha256": "ee6878c97780092fc0dfe210883e213b7b38b8f706e593ce43380668b22c4ea3",
+      "pages": 208
+    },
+    {
+      "id": "guide",
+      "path": "book/output/pdf/puer-guide-proof.pdf",
+      "sha256": "a92979d6d2d57de38f54025aa85bad251b1a6df080a392570d6675fe48d3a9bb",
+      "pages": 48
+    }
+  ],
+  "bibliographyPath": "book/manuscript/album/92-bibliography.md",
+  "registryOnlyClaims": {
+    "storage-gbt30375-current": {
+      "reason": "Статус карточки стандарта проверен в evidence registry, но точная формулировка не набрана в frozen proof; тезис остаётся checked и не считается одобренным.",
+      "contextPageIds": ["A-P148", "A-P208"]
+    },
+    "medical-mycotoxin-evidence-limited": {
+      "reason": "Точная registry-формулировка не имеет собственного claim-маркера в frozen proof; её границы представлены соседними микотоксинными тезисами и требуют отдельного решения рецензента.",
+      "contextPageIds": ["A-P146", "A-P147"]
+    }
+  }
+}
