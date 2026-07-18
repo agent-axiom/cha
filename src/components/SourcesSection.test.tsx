@@ -1,35 +1,47 @@
 import { render, screen } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
-import { fermentationLayers, processSteps } from '../content/process'
-import { history } from '../content/history'
-import { medicineClaims } from '../content/medicine'
-import { myths } from '../content/mythology'
-import { regions } from '../content/regions'
 import { sources } from '../content/sources'
 import {
   citedSources,
   furtherReadingSources,
   siteCitedSourceIds,
+  siteContentEntries,
 } from '../content/citations'
+import { formatSourceCount } from '../lib/formatSourceCount'
 import { SourcesSection } from './SourcesSection'
 
 describe('source bibliography', () => {
   it('derives cited IDs from every sourced site-content module', () => {
     const expectedIds = new Set(
-      [
-        ...history,
-        ...myths,
-        ...regions,
-        ...processSteps,
-        ...fermentationLayers,
-        ...medicineClaims,
-      ].flatMap((entry) => entry.sourceIds),
+      siteContentEntries.flatMap((entry) => entry.sourceIds),
+    )
+
+    expect(siteContentEntries.map((entry) => entry.id)).toEqual(
+      expect.arrayContaining([
+        'shennong-myth',
+        'myth-wuhou',
+        'puer-city',
+        'sheng-fresh-leaf',
+        'microbes',
+        'caffeine-safety',
+      ]),
     )
 
     expect([...siteCitedSourceIds].sort()).toEqual([...expectedIds].sort())
     expect(citedSources.map((source) => source.id).sort()).toEqual(
       [...expectedIds].sort(),
     )
+  })
+
+  it('declines source counts in Russian', () => {
+    expect(formatSourceCount(1)).toBe('1 источник')
+    expect(formatSourceCount(2)).toBe('2 источника')
+    expect(formatSourceCount(4)).toBe('4 источника')
+    expect(formatSourceCount(5)).toBe('5 источников')
+    expect(formatSourceCount(11)).toBe('11 источников')
+    expect(formatSourceCount(21)).toBe('21 источник')
+    expect(formatSourceCount(22)).toBe('22 источника')
+    expect(formatSourceCount(25)).toBe('25 источников')
   })
 
   it('partitions every visible source exactly once', () => {
@@ -48,6 +60,9 @@ describe('source bibliography', () => {
     const { container } = render(<SourcesSection />)
 
     expect(
+      screen.getByRole('heading', { level: 2, name: 'Проверяйте нас по источникам' }),
+    ).toBeInTheDocument()
+    expect(
       screen.getByRole('heading', { level: 3, name: 'Цитируются на этой странице' }),
     ).toBeInTheDocument()
     expect(
@@ -57,6 +72,13 @@ describe('source bibliography', () => {
       screen.getByRole('heading', { level: 3, name: 'Как мы работаем с источниками' }),
     ).toBeInTheDocument()
     expect(screen.getByText(/18 июля 2026/i)).toBeInTheDocument()
+    expect(screen.getByText(/доступность материалов меняется/i)).toBeInTheDocument()
+    expect(
+      screen.getByText(/ссылки на источники открываются в новой вкладке/i),
+    ).toBeInTheDocument()
+    expect(
+      screen.getAllByRole('link', { name: /открывается в новой вкладке/i }),
+    ).toHaveLength(sources.length)
 
     const renderedIds = Array.from(
       container.querySelectorAll<HTMLElement>('[data-source-id]'),
@@ -66,9 +88,9 @@ describe('source bibliography', () => {
       sources.map((source) => source.id).sort(),
     )
 
-    expect(screen.getByText(`${citedSources.length} источников`)).toBeInTheDocument()
+    expect(screen.getByText(formatSourceCount(citedSources.length))).toBeInTheDocument()
     expect(
-      screen.getByText(`${furtherReadingSources.length} источников`),
+      screen.getByText(formatSourceCount(furtherReadingSources.length)),
     ).toBeInTheDocument()
     expect(
       screen.getAllByRole('heading', { level: 4, name: /китайские первоисточники/i }),

@@ -2,7 +2,9 @@ import {
   citedSources,
   furtherReadingSources,
 } from '../content/citations'
+import { siteEditorialReviewDate } from '../content/editorial'
 import type { Source, SourceGroup } from '../content/types'
+import { formatSourceCount } from '../lib/formatSourceCount'
 
 const groups: Array<{ id: SourceGroup; title: string; subtitle: string }> = [
   {
@@ -39,7 +41,7 @@ function SourceStratum({ id, title, description, entries }: SourceStratumProps) 
     <section className="source-stratum" aria-labelledby={`sources-${id}-title`}>
       <header className="source-stratum__header">
         <div>
-          <p className="source-stratum__count">{entries.length} источников</p>
+          <p className="source-stratum__count">{formatSourceCount(entries.length)}</p>
           <h3 id={`sources-${id}-title`}>{title}</h3>
         </div>
         <p>{description}</p>
@@ -55,7 +57,9 @@ function SourceStratum({ id, title, description, entries }: SourceStratumProps) 
             <section className="source-group" key={group.id} aria-labelledby={headingId}>
               <header>
                 <div>
-                  <p className="source-group__count">{groupSources.length} источников</p>
+                  <p className="source-group__count">
+                    {formatSourceCount(groupSources.length)}
+                  </p>
                   <h4 id={headingId} aria-label={`${group.title} — ${title}`}>
                     {group.title}
                   </h4>
@@ -73,6 +77,7 @@ function SourceStratum({ id, title, description, entries }: SourceStratumProps) 
                         <em>{source.note}</em>
                       </span>
                       <span aria-hidden="true">↗</span>
+                      <span className="visually-hidden"> (открывается в новой вкладке)</span>
                     </a>
                   </li>
                 ))}
@@ -90,7 +95,7 @@ export function SourcesSection() {
     <section className="story-section sources-section" id="sources" aria-labelledby="sources-title">
       <header className="section-heading">
         <p className="eyebrow">07 · Библиография</p>
-        <h2 id="sources-title">Проверяйте нас по первоисточникам</h2>
+        <h2 id="sources-title">Проверяйте нас по источникам</h2>
         <p>
           История пуэра особенно подвержена красивым повторениям. Поэтому мы отделяем
           опоры конкретных утверждений от литературы для самостоятельного продолжения.
@@ -98,12 +103,15 @@ export function SourcesSection() {
       </header>
 
       <aside className="editorial-method" aria-labelledby="editorial-method-title">
-        <p className="eyebrow">Редакционная проверка · 18 июля 2026</p>
+        <p className="eyebrow">
+          Редакционная проверка · {siteEditorialReviewDate.display}
+        </p>
         <h3 id="editorial-method-title">Как мы работаем с источниками</h3>
         <p>
-          В библиографию входят проверенные и доступные читателю материалы. Мы сверяем,
-          что источник поддерживает именно сформулированное утверждение, отмечаем
-          ограничения и не превращаем статус автора или учреждения в гарантию вывода.
+          Мы сверяем, что источник поддерживает именно сформулированное утверждение,
+          отмечаем ограничения и не превращаем статус автора или учреждения в гарантию
+          вывода. Ссылки могут вести на полный текст, доступную копию, аннотацию, запись
+          каталога или страницу издателя; доступность материалов меняется.
         </p>
         <dl>
           <div>
@@ -133,6 +141,10 @@ export function SourcesSection() {
           </div>
         </dl>
       </aside>
+
+      <p className="source-link-note">
+        Ссылки на источники открываются в новой вкладке.
+      </p>
 
       <div className="source-strata">
         <SourceStratum

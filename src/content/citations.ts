@@ -6,7 +6,7 @@ import { regions } from './regions'
 import { sources } from './sources'
 import type { SourcedEntry } from './types'
 
-const siteContentEntries: readonly SourcedEntry[] = [
+export const siteContentEntries: readonly SourcedEntry[] = [
   ...history,
   ...myths,
   ...regions,

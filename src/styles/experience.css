@@ -1126,7 +1126,7 @@
 
 .editorial-method {
   position: relative;
-  margin-bottom: clamp(4rem, 8vw, 7rem);
+  margin-bottom: 1rem;
   padding: clamp(1.6rem, 4vw, 2.8rem);
   border: 1px solid var(--line-strong);
   border-radius: 1.4rem;
@@ -1150,6 +1150,7 @@
 .editorial-method > p:not(.eyebrow) {
   max-width: 800px;
   color: var(--ink-muted);
+  font-size: 0.94rem;
   line-height: 1.75;
 }
 
@@ -1180,8 +1181,15 @@
 
 .editorial-method dd {
   color: var(--ink-muted);
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   line-height: 1.7;
+}
+
+.source-link-note {
+  margin: 0 0 clamp(4rem, 8vw, 7rem);
+  color: var(--ink-muted);
+  font-size: 0.875rem;
+  line-height: 1.6;
 }
 
 .source-strata {
@@ -1204,7 +1212,7 @@
 .source-stratum__header > p {
   margin: 0;
   color: var(--ink-muted);
-  font-size: 0.86rem;
+  font-size: 0.9rem;
   line-height: 1.7;
 }
 
@@ -1254,7 +1262,7 @@
 .source-group > header > p {
   margin: 0;
   color: var(--ink-muted);
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   line-height: 1.65;
 }
 
@@ -1306,14 +1314,14 @@
 
 .source-group li small {
   color: var(--ink-dim);
-  font-size: 0.68rem;
+  font-size: 0.875rem;
   line-height: 1.55;
 }
 
 .source-group li em {
   margin-top: 0.55rem;
   color: var(--ink-muted);
-  font-size: 0.73rem;
+  font-size: 0.875rem;
   font-style: normal;
   line-height: 1.6;
 }
