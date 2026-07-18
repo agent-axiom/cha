@@ -23,7 +23,7 @@ BOOK = Path(__file__).resolve().parents[1]
 REPO = BOOK.parent
 MM = 72 / 25.4
 PAGE_RE = re.compile(r"<!--\s*page:([AG]-P\d{3})\s*-->")
-CLAIM_RE = re.compile(r"<!--\s*claim:[a-z0-9-]+\s*-->")
+CLAIM_RE = re.compile(r"<!--\s*claim:([a-z0-9-]+)\s*-->")
 COMMENT_RE = re.compile(r"<!--.*?-->", re.S)
 HAN_RE = re.compile(r"([\u3400-\u9fff]+)")
 LINK_RE = re.compile(r"\[([^]]+)]\([^)]*\)")
@@ -49,6 +49,9 @@ ALLOWED_PROOF_PREVIEW_IDS = {
     "illustration-shennong-gate",
     "illustration-zhuge-liang-legend",
 }
+CLAIM_NOTE_FONT_SIZE = 7.2
+CLAIM_NOTE_LEADING = 9.0
+CLAIM_NOTE_MAX_HEIGHT_MM = 48
 
 
 def load_json(relative: str) -> Any:
@@ -107,6 +110,68 @@ def paragraph_markup(markdown: str) -> str:
     escaped = html.escape(text.strip())
     escaped = HAN_RE.sub(r'<font name="NotoSerifSC">\1</font>', escaped)
     return re.sub(r"\n{2,}", "<br/><br/>", escaped).replace("\n", "<br/>")
+
+
+def claim_source_lines(
+    body: str,
+    claims_by_id: dict[str, dict[str, Any]],
+    *,
+    known_source_ids: set[str],
+    provenance_only_ids: set[str],
+) -> list[str]:
+    """Resolve unique page-level claim markers to reader-visible source keys."""
+    lines: list[str] = []
+    seen: set[str] = set()
+    for claim_id in CLAIM_RE.findall(body):
+        if claim_id in seen:
+            continue
+        seen.add(claim_id)
+        claim = claims_by_id.get(claim_id)
+        if claim is None:
+            raise ValueError(f"unknown claim marker in proof: {claim_id}")
+        source_ids = claim.get("sourceIds")
+        if not isinstance(source_ids, list) or not source_ids:
+            raise ValueError(f"claim has no source keys for proof: {claim_id}")
+        unknown_source_ids = [
+            source_id for source_id in source_ids if source_id not in known_source_ids
+        ]
+        if unknown_source_ids:
+            raise ValueError(
+                f"unknown source key for proof: {unknown_source_ids[0]}"
+            )
+        rendered_sources = [
+            f"{source_id} [редакционный реестр]"
+            if source_id in provenance_only_ids
+            else source_id
+            for source_id in source_ids
+        ]
+        lines.append(f"Тезис {claim_id} → источники: {'; '.join(rendered_sources)}")
+    return lines
+
+
+def claim_note_paragraph(
+    lines: list[str],
+    width: float,
+    *,
+    color,
+) -> tuple[Paragraph | None, float]:
+    if not lines:
+        return None, 0.0
+    markup = "<br/>".join(html.escape(line) for line in lines)
+    style = ParagraphStyle(
+        "claim-source-notes",
+        fontName="Manrope",
+        fontSize=CLAIM_NOTE_FONT_SIZE,
+        leading=CLAIM_NOTE_LEADING,
+        textColor=color,
+        allowWidows=1,
+        allowOrphans=1,
+    )
+    paragraph = Paragraph(markup, style)
+    _, height = paragraph.wrap(width, CLAIM_NOTE_MAX_HEIGHT_MM * MM)
+    if height > CLAIM_NOTE_MAX_HEIGHT_MM * MM:
+        raise ValueError("claim-to-source note band overflow")
+    return paragraph, height
 
 
 def preview_path(asset: dict[str, Any]) -> Path | None:
@@ -354,6 +419,9 @@ def draw_page(
     page: dict[str, Any],
     body: str,
     assets: dict[str, dict[str, Any]],
+    claims_by_id: dict[str, dict[str, Any]],
+    known_source_ids: set[str],
+    provenance_only_ids: set[str],
     size: tuple[float, float],
     bleed: float,
     *,
@@ -405,7 +473,22 @@ def draw_page(
     footer_y = bleed + 5 * MM
     content_bottom = footer_y + 8 * MM
     content_top = role_y - 5 * MM
-    content_height = content_top - content_bottom
+    claim_lines = claim_source_lines(
+        body,
+        claims_by_id,
+        known_source_ids=known_source_ids,
+        provenance_only_ids=provenance_only_ids,
+    )
+    claim_paragraph, claim_note_height = claim_note_paragraph(
+        claim_lines,
+        safe_width,
+        color=body_color,
+    )
+    claim_gap = 3 * MM if claim_paragraph is not None else 0
+    body_bottom = content_bottom + claim_note_height + claim_gap
+    content_height = content_top - body_bottom
+    if content_height <= 0:
+        raise ValueError(f"claim-to-source note band leaves no body area on {page['id']}")
     has_visual = bool(page.get("assetIds") or page.get("visualPlaceholder"))
 
     if has_visual:
@@ -422,7 +505,7 @@ def draw_page(
             dark=chapter_gate,
         )
         body_top = visual_y - 5 * MM
-        body_h = body_top - content_bottom
+        body_h = body_top - body_bottom
     else:
         body_top = content_top
         body_h = content_height
@@ -433,12 +516,21 @@ def draw_page(
         page["id"],
         body,
         inset,
-        content_bottom,
+        body_bottom,
         safe_width,
         body_h,
         columns=columns,
         color=body_color,
     )
+
+    if claim_paragraph is not None:
+        canvas.saveState()
+        canvas.setStrokeColor(COPPER)
+        canvas.setLineWidth(0.45)
+        rule_y = content_bottom + claim_note_height + 1.5 * MM
+        canvas.line(inset, rule_y, width - inset, rule_y)
+        claim_paragraph.drawOn(canvas, inset, content_bottom)
+        canvas.restoreState()
 
     canvas.setFillColor(COPPER if chapter_gate else CLAY)
     canvas.setFont("Manrope", 6.8)
@@ -510,6 +602,19 @@ def build(
     flatplan = load_json(f"flatplan/{flatplan_name}")
     pages = manuscript_pages(manuscript_folder)
     assets = {asset["id"]: asset for asset in load_json("data/assets.json")}
+    claims = load_json("data/claims.json")
+    claims_by_id = {claim["id"]: claim for claim in claims}
+    if len(claims_by_id) != len(claims):
+        raise ValueError("duplicate claim id in proof registry")
+    sources = load_json("data/sources.json")
+    known_source_ids = {source["id"] for source in sources}
+    if len(known_source_ids) != len(sources):
+        raise ValueError("duplicate source id in proof registry")
+    provenance_only_ids = {
+        source["id"]
+        for source in sources
+        if source.get("publicationClass") == "provenance-only"
+    }
     expected_count = publication["pages"]
     if len(flatplan["pages"]) != expected_count:
         raise ValueError(
@@ -558,6 +663,9 @@ def build(
             page,
             pages[page["id"]],
             assets,
+            claims_by_id,
+            known_source_ids,
+            provenance_only_ids,
             size,
             bleed_mm * MM,
             kind=kind,

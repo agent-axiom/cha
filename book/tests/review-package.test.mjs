@@ -21,7 +21,7 @@ test('freezes the same active corpus, proof set, snapshot and deadline for all r
     .map(({ claimId }) => claimId)
     .sort()
 
-  assert.equal(activeIds.length, 70)
+  assert.equal(activeIds.length, 69)
   assert.equal(result.claimIndex.filter(({ claimStatus }) => claimStatus === 'rejected').length, 11)
   assert.deepEqual(Object.keys(result.requests).sort(), ['historian', 'medical', 'technologist'])
   for (const request of Object.values(result.requests)) {
@@ -43,7 +43,7 @@ test('uses the declared cross-disciplinary focus matrix without changing claim s
       ]),
     ),
     {
-      historian: [25, 4],
+      historian: [24, 4],
       technologist: [41, 6],
       medical: [23, 1],
     },

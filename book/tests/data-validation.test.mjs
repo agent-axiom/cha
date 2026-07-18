@@ -82,10 +82,13 @@ const publicationClasses = [
   'primary-text',
   'facsimile',
   'critical-edition',
+  'print-edition-catalog',
+  'manuscript-catalog',
   'access-copy',
   'retrospective',
   'research',
   'standard-guidance',
+  'trial-registration',
   'provenance-only',
 ]
 const expectedAlbumSections = [

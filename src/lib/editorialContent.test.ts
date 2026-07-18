@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest'
+import rawClaims from '../../book/data/claims.json'
 import { history } from '../content/history'
+import { medicineClaims } from '../content/medicine'
 import { myths } from '../content/mythology'
 import { regions } from '../content/regions'
 
@@ -20,7 +22,8 @@ describe('editorial history boundaries', () => {
     const archaeological = historyEntry('warring-states-tea-remains')
     expect(
       `${archaeological.date} ${archaeological.summary} ${archaeological.detail}`,
-    ).toMatch(/453.*410.*до н\.\s?э\./i)
+    ).toMatch(/ранн.*Воюющих царств.*2400/i)
+    expect(`${archaeological.date} ${archaeological.detail}`).not.toMatch(/453.*410/i)
     expect(archaeological.detail).toMatch(/не.*пуэр/i)
     expect(archaeological.sourceIds).toContain('jiang-2021-warring-tea')
 
@@ -40,7 +43,10 @@ describe('editorial history boundaries', () => {
     expect(text).toContain('雲南志')
     expect(text).toContain('南詔備考')
     expect(text).toContain('按')
-    expect(text).toMatch(/пуэрск.*управ/i)
+    expect(text).toMatch(/出雲南普洱府/i)
+    expect(text).toMatch(/север.*Чэли/i)
+    expect(text).toMatch(/шест.*гор/i)
+    expect(text).not.toMatch(/雲南志[^.]*Пуэрск.*управ/i)
     expect(text).toMatch(/пятицзинев/i)
     expect(text).toMatch(/чай.*паст/i)
     expect(zhao.sourceIds).toEqual(
@@ -50,7 +56,10 @@ describe('editorial history boundaries', () => {
   })
 
   it('marks later historical syntheses as retrospective', () => {
-    expect(historyEntry('ruan-puer-record').kind).toBe('retrospective')
+    const ruan = historyEntry('ruan-puer-record')
+    expect(ruan.kind).toBe('retrospective')
+    expect(`${ruan.summary} ${ruan.detail}`).toMatch(/электронн.*копи.*приписываем/i)
+    expect(ruan.detail).toMatch(/каталог.*не.*построч/i)
     expect(historyEntry('caravan-commodity').kind).toBe('retrospective')
   })
 
@@ -115,5 +124,21 @@ describe('editorial attribution boundaries', () => {
     expect(regionEntry('mansa').description).not.toMatch(
       /более поздн[а-яё]*[^.]*Иу/i,
     )
+  })
+})
+
+describe('medical source parity', () => {
+  it('uses the exact canonical caffeine and storage source sets', () => {
+    const claimSources = (id: string) => rawClaims.find((claim) => claim.id === id)?.sourceIds ?? []
+    expect(medicineClaims.find(({ id }) => id === 'caffeine-safety')?.sourceIds).toEqual(
+      claimSources('medical-caffeine-alertness-sleep'),
+    )
+    const storageUnion = [
+      ...new Set([
+        ...claimSources('medical-food-storage-safety'),
+        ...claimSources('medical-mycotoxin-evidence-limited'),
+      ]),
+    ]
+    expect(medicineClaims.find(({ id }) => id === 'storage-safety')?.sourceIds).toEqual(storageUnion)
   })
 })

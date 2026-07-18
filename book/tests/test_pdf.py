@@ -56,6 +56,37 @@ def test_paragraph_markup_drops_standalone_markdown_rules() -> None:
     assert "Второй абзац" in markup
 
 
+def test_claim_source_lines_are_readable_deduplicated_and_provenance_labeled() -> None:
+    assert BUILD_PROOF.CLAIM_NOTE_FONT_SIZE >= 7.0
+    body = """
+<!-- claim:claim-a -->
+Текст.
+<!-- claim:claim-a -->
+<!-- claim:claim-b -->
+"""
+    claims = {
+        "claim-a": {"sourceIds": ["source-a", "registry-source"]},
+        "claim-b": {"sourceIds": ["source-b"]},
+    }
+    lines = BUILD_PROOF.claim_source_lines(
+        body,
+        claims,
+        known_source_ids={"source-a", "source-b", "registry-source"},
+        provenance_only_ids={"registry-source"},
+    )
+    assert lines == [
+        "Тезис claim-a → источники: source-a; registry-source [редакционный реестр]",
+        "Тезис claim-b → источники: source-b",
+    ]
+    with pytest.raises(ValueError, match="unknown source key for proof: missing-source"):
+        BUILD_PROOF.claim_source_lines(
+            "<!-- claim:claim-c -->",
+            {"claim-c": {"sourceIds": ["missing-source"]}},
+            known_source_ids={"source-a"},
+            provenance_only_ids=set(),
+        )
+
+
 def test_metadata_staging_is_incremental_and_preserves_canvas_bytes(
     tmp_path: Path,
 ) -> None:
@@ -329,6 +360,67 @@ def test_page_ids_are_exact_and_editorial_markers_are_hidden(
         assert "-->" not in text
         assert "claim:" not in text.lower()
         assert "page:" not in text.lower()
+
+
+def test_key_claim_source_mappings_are_visible_in_extracted_proof_text() -> None:
+    claim_records = {
+        item["id"]: item
+        for item in json.loads((BOOK / "data/claims.json").read_text(encoding="utf-8"))
+    }
+    required_claims = [
+        "hist-early-tea-evidence",
+        "hist-warring-states-remains",
+        "hist-qing-puer-administration",
+        "hist-zhao-six-mountains",
+        "prod-shou-chronology-disagreement",
+        "medical-human-efficacy-is-extract-evidence",
+        "medical-mycotoxin-evidence-limited",
+    ]
+    texts = []
+    for filename in ("puer-album-proof.pdf", "puer-guide-proof.pdf"):
+        texts.extend((page.extract_text() or "") for page in PdfReader(OUTPUT / filename).pages)
+
+    for claim_id in required_claims:
+        pages = [text for text in texts if f"Тезис {claim_id}" in text]
+        assert pages, f"claim mapping is not visible: {claim_id}"
+        joined = "\n".join(pages)
+        for source_id in claim_records[claim_id]["sourceIds"]:
+            assert source_id in joined, f"source mapping is not visible: {claim_id}/{source_id}"
+
+
+@pytest.mark.parametrize(
+    ("filename", "folder"),
+    [
+        ("puer-album-proof.pdf", "album"),
+        ("puer-guide-proof.pdf", "guide"),
+    ],
+)
+def test_every_manuscript_claim_has_one_same_page_source_mapping(
+    filename: str,
+    folder: str,
+) -> None:
+    claim_records = {
+        item["id"]: item
+        for item in json.loads((BOOK / "data/claims.json").read_text(encoding="utf-8"))
+    }
+    manuscript = BUILD_PROOF.manuscript_pages(folder)
+    reader = PdfReader(OUTPUT / filename)
+    for page in reader.pages:
+        text = page.extract_text() or ""
+        page_ids = VISIBLE_PAGE_ID_RE.findall(text)
+        assert len(page_ids) == 1
+        page_id = page_ids[0]
+        body = manuscript[page_id]
+        claim_ids = list(dict.fromkeys(BUILD_PROOF.CLAIM_RE.findall(body)))
+        for claim_id in claim_ids:
+            assert text.count(f"Тезис {claim_id} →") == 1, f"{page_id}/{claim_id}"
+            for source_id in claim_records[claim_id]["sourceIds"]:
+                assert source_id in text, f"{page_id}/{claim_id}/{source_id}"
+
+
+def test_album_page_146_has_no_standalone_diagnostics_orphan() -> None:
+    text = PdfReader(OUTPUT / "puer-album-proof.pdf").pages[145].extract_text() or ""
+    assert not re.search(r"(?m)^\s*диагностики\.\s*$", text, flags=re.IGNORECASE)
 
 
 @pytest.mark.parametrize(

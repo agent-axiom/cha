@@ -51,6 +51,7 @@ export function EvidenceSection() {
       <div className="evidence-review-note" role="note" aria-label="Граница медицинского раздела">
         <p><strong>Граница:</strong> это обзор данных, не индивидуальная рекомендация.</p>
         <p><strong>Поиск и редакционная проверка:</strong> 17 июля 2026.</p>
+        <p><strong>Внешняя медицинская рецензия:</strong> не получена; внешних одобрений: 0.</p>
       </div>
 
       <div className="evidence-filters" role="group" aria-label="Фильтр медицинских данных">

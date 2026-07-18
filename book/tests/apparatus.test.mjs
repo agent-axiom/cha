@@ -119,24 +119,37 @@ test('cites the deduplicated non-rejected claim union in fixed groups and stable
   )
   const cited = sources.filter(({ id, publicationClass }) => citedIds.has(id) && publicationClass !== 'provenance-only')
   const groups = [
-    ['primary-asian', 'Китайские первоисточники', 9],
-    ['research-asian', 'Азиатские исследования', 21],
-    ['research-western', 'Западные исследования', 5],
-    ['guidance', 'Стандарты и рекомендации', 13],
+    ['Китайские исторические тексты, издания и копии', 8, (source) => source.group === 'primary-asian' && !['retrospective', 'trial-registration'].includes(source.publicationClass)],
+    ['Институциональные ретроспективы', 4, (source) => source.publicationClass === 'retrospective'],
+    ['Азиатские исследования', 19, (source) => source.group === 'research-asian' && !['retrospective', 'trial-registration'].includes(source.publicationClass)],
+    ['Западные исследования', 5, (source) => source.group === 'research-western' && !['retrospective', 'trial-registration'].includes(source.publicationClass)],
+    ['Реестры исследований', 1, (source) => source.publicationClass === 'trial-registration'],
+    ['Стандарты и рекомендации', 11, (source) => source.group === 'guidance' && !['retrospective', 'trial-registration'].includes(source.publicationClass)],
   ]
-  const expectedIds = groups.flatMap(([group]) => cited.filter((source) => source.group === group).sort(compareSources).map(({ id }) => id))
+  const expectedIds = groups.flatMap(([, , matches]) => cited.filter(matches).sort(compareSources).map(({ id }) => id))
 
   assert.equal(cited.length, 48)
   assert.equal(citedIds.has('xu-2022'), true)
   assert.deepEqual(sourceIds(bibliographyText), expectedIds)
   assert.equal(new Set(sourceIds(bibliographyText)).size, 48)
   assert.equal(sourceIds(bibliographyText).includes('vinogrodsky-user-excerpt'), false)
-  for (const [group, title, count] of groups) {
-    assert.equal(cited.filter((source) => source.group === group).length, count)
+  for (const [title, count, matches] of groups) {
+    assert.equal(cited.filter(matches).length, count)
     assert.equal((bibliographyText.match(new RegExp(`^## ${title}$`, 'gm')) ?? []).length, 1)
   }
-  const headingOffsets = groups.map(([, title]) => bibliographyText.indexOf(`## ${title}`))
+  const headingOffsets = groups.map(([title]) => bibliographyText.indexOf(`## ${title}`))
   assert.deepEqual([...headingOffsets].sort((a, b) => a - b), headingOffsets)
+})
+
+test('prints stable source keys and keeps trial registration out of guidance', () => {
+  const bibliographyText = fs.readFileSync(bibliographyPath, 'utf8')
+  assert.match(bibliographyText, /\*\*Ключ источника:\*\* `zhao-facsimile-pku`/u)
+  assert.match(bibliographyText, /^## Реестры исследований$/mu)
+  assert.match(bibliographyText, /`nct06401161`\. \*\*Класс:\*\* Регистрация исследования; результатов нет/u)
+  const registrySection = bibliographyText.split('## Реестры исследований')[1].split('## Стандарты и рекомендации')[0]
+  assert.match(registrySection, /nct06401161/u)
+  const guidanceSection = bibliographyText.split('## Стандарты и рекомендации')[1]
+  assert.doesNotMatch(guidanceSection, /nct06401161/u)
 })
 
 test('normalizes author punctuation and formats page, article, e-locator, facsimile, and journal locators', () => {

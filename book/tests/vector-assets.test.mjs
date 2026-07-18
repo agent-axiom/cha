@@ -63,8 +63,8 @@ const assetSpecs = [
       /скручиван/iu,
       /разбиван[^.]{0,30}комк/iu,
       /солнечн[^.]{0,30}сушк/iu,
-      /упаковк/iu,
     ],
+    forbiddenTerms: [/упаковк/iu],
   },
   {
     id: 'diagram-sheng-shou-fork',
@@ -88,10 +88,10 @@ const assetSpecs = [
     id: 'diagram-medical-evidence-scale',
     kind: 'diagram',
     path: 'book/assets/diagrams/evidence-scale.svg',
-    layers: ['evidence-levels', 'applicability', 'limitations', 'labels', 'legend', 'sources'],
+    layers: ['evidence-types', 'applicability', 'limitations', 'labels', 'legend', 'sources'],
     minimumSemanticGroups: 5,
     terms: [
-      /A\s*[—-][^.]{0,80}официальн[^.]{0,30}рекомендац/iu,
+      /A\s*[—-][^.]{0,80}официальн[^.]{0,30}рекомендац[^.]{0,80}оценк[^.]{0,50}безопасност/iu,
       /B\s*[—-][^.]{0,100}систематическ[^.]{0,40}обзор/iu,
       /C\s*[—-][^.]{0,80}исследован[^.]{0,20}людей/iu,
       /D\s*[—-][^.]{0,100}(?:животн|клеточн|лабораторн|химическ|микробиологическ)/iu,

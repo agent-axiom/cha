@@ -7,6 +7,19 @@ const sourceGroups = [
   'research-western',
   'guidance',
 ] as const
+const sourcePublicationClasses = [
+  'primary-text',
+  'facsimile',
+  'critical-edition',
+  'print-edition-catalog',
+  'manuscript-catalog',
+  'access-copy',
+  'retrospective',
+  'research',
+  'standard-guidance',
+  'trial-registration',
+  'provenance-only',
+] as const
 const sourceStatuses = ['candidate', 'checked', 'rejected'] as const
 const sourceBookUses = [
   'core',
@@ -92,6 +105,12 @@ export function parseBookSources(input: unknown): BookSource[] {
       year: readNonBlankString(source, index, 'year'),
       href: readNonBlankString(source, index, 'href'),
       group: readOneOf(source, index, 'group', sourceGroups),
+      publicationClass: readOneOf(
+        source,
+        index,
+        'publicationClass',
+        sourcePublicationClasses,
+      ),
       origin: readNonBlankString(source, index, 'origin'),
       note: readNonBlankString(source, index, 'note'),
       status: readOneOf(source, index, 'status', sourceStatuses),
@@ -109,13 +128,14 @@ export function selectSiteSources(input: unknown): Source[] {
         source.status === 'checked' &&
         source.bookUse !== 'rejected',
     )
-    .map(({ id, title, author, year, href, group, origin, note }) => ({
+    .map(({ id, title, author, year, href, group, publicationClass, origin, note }) => ({
       id,
       title,
       author,
       year,
       href,
       group,
+      publicationClass,
       origin,
       note,
     }))

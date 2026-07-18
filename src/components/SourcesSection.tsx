@@ -3,31 +3,66 @@ import {
   furtherReadingSources,
 } from '../content/citations'
 import { siteEditorialReviewDate } from '../content/editorial'
-import type { Source, SourceGroup } from '../content/types'
+import type { Source, SourcePublicationClass } from '../content/types'
 import { formatSourceCount } from '../lib/formatSourceCount'
 
-const groups: Array<{ id: SourceGroup; title: string; subtitle: string }> = [
+const groups: Array<{
+  id: string
+  title: string
+  subtitle: string
+  matches: (source: Source) => boolean
+}> = [
   {
     id: 'primary-asian',
-    title: 'Китайские первоисточники',
-    subtitle: 'Тексты эпох Тан и Цин читаются в контексте своего времени.',
+    title: 'Китайские исторические тексты, издания и копии',
+    subtitle: 'Факсимиле, копии доступа и каталоги выполняют разные доказательные функции.',
+    matches: (source) => source.group === 'primary-asian' && source.publicationClass !== 'retrospective',
+  },
+  {
+    id: 'institutional-retrospectives',
+    title: 'Институциональные ретроспективы',
+    subtitle: 'Поздние музейные, ведомственные и корпоративные версии событий, а не синхронные документы.',
+    matches: (source) => source.publicationClass === 'retrospective',
   },
   {
     id: 'research-asian',
     title: 'Азиатские исследователи',
     subtitle: 'История, химия, производство и безопасность из университетов региона.',
+    matches: (source) => source.group === 'research-asian' && source.publicationClass === 'research',
   },
   {
     id: 'research-western',
     title: 'Западные исследования',
     subtitle: 'Историография Китая, клинические и токсикологические работы.',
+    matches: (source) => source.group === 'research-western' && source.publicationClass === 'research',
+  },
+  {
+    id: 'trial-registrations',
+    title: 'Реестры исследований',
+    subtitle: 'Регистрационные записи описывают план исследования, но не заменяют опубликованные результаты.',
+    matches: (source) => source.publicationClass === 'trial-registration',
   },
   {
     id: 'guidance',
     title: 'Стандарты и рекомендации',
     subtitle: 'Официальные определения, географическое указание и безопасность кофеина.',
+    matches: (source) => source.group === 'guidance' && source.publicationClass === 'standard-guidance',
   },
 ]
+
+const publicationClassLabels: Record<SourcePublicationClass, string> = {
+  'primary-text': 'Первичный текст',
+  facsimile: 'Факсимиле',
+  'critical-edition': 'Критическое издание',
+  'print-edition-catalog': 'Печатное издание: каталогическая запись',
+  'manuscript-catalog': 'Каталог рукописи; без факсимиле листа',
+  'access-copy': 'Копия доступа',
+  retrospective: 'Ретроспектива',
+  research: 'Исследование',
+  'standard-guidance': 'Стандарт или руководство',
+  'trial-registration': 'Регистрация исследования; результатов нет',
+  'provenance-only': 'Только редакционное происхождение',
+}
 
 interface SourceStratumProps {
   id: 'cited' | 'further-reading'
@@ -49,7 +84,7 @@ function SourceStratum({ id, title, description, entries }: SourceStratumProps) 
 
       <div className="source-groups">
         {groups.map((group) => {
-          const groupSources = entries.filter((source) => source.group === group.id)
+          const groupSources = entries.filter(group.matches)
           if (groupSources.length === 0) return null
 
           const headingId = `sources-${id}-${group.id}`
@@ -74,6 +109,9 @@ function SourceStratum({ id, title, description, entries }: SourceStratumProps) 
                       <span>
                         <strong>{source.title}</strong>
                         <small>{source.author} · {source.origin}</small>
+                        <span className="source-entry__class">
+                          {publicationClassLabels[source.publicationClass]}
+                        </span>
                         <em>{source.note}</em>
                       </span>
                       <span aria-hidden="true">↗</span>

@@ -4,20 +4,50 @@ import { fileURLToPath } from 'node:url'
 
 const defaultBookRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const generatedHeader = '<!-- generated: book/scripts/generate-apparatus.mjs -->'
+const sourceGroups = new Set(['primary-asian', 'research-asian', 'research-western', 'guidance'])
 const groupDefinitions = [
-  ['primary-asian', 'Китайские первоисточники'],
-  ['research-asian', 'Азиатские исследования'],
-  ['research-western', 'Западные исследования'],
-  ['guidance', 'Стандарты и рекомендации'],
+  {
+    id: 'primary-asian',
+    title: 'Китайские исторические тексты, издания и копии',
+    matches: (source) => source.group === 'primary-asian' && !['retrospective', 'trial-registration'].includes(source.publicationClass),
+  },
+  {
+    id: 'institutional-retrospectives',
+    title: 'Институциональные ретроспективы',
+    matches: (source) => source.publicationClass === 'retrospective',
+  },
+  {
+    id: 'research-asian',
+    title: 'Азиатские исследования',
+    matches: (source) => source.group === 'research-asian' && !['retrospective', 'trial-registration'].includes(source.publicationClass),
+  },
+  {
+    id: 'research-western',
+    title: 'Западные исследования',
+    matches: (source) => source.group === 'research-western' && !['retrospective', 'trial-registration'].includes(source.publicationClass),
+  },
+  {
+    id: 'trial-registrations',
+    title: 'Реестры исследований',
+    matches: (source) => source.publicationClass === 'trial-registration',
+  },
+  {
+    id: 'guidance',
+    title: 'Стандарты и рекомендации',
+    matches: (source) => source.group === 'guidance' && !['retrospective', 'trial-registration'].includes(source.publicationClass),
+  },
 ]
 const publicationClassLabels = new Map([
   ['primary-text', 'Первичный текст'],
   ['facsimile', 'Факсимиле'],
   ['critical-edition', 'Критическое издание'],
+  ['print-edition-catalog', 'Печатное издание: каталогическая запись'],
+  ['manuscript-catalog', 'Каталог рукописи; без факсимиле листа'],
   ['access-copy', 'Копия доступа'],
   ['retrospective', 'Ретроспектива'],
   ['research', 'Исследование'],
   ['standard-guidance', 'Стандарт или руководство'],
+  ['trial-registration', 'Регистрация исследования; результатов нет'],
 ])
 
 const clean = (value = '') => String(value ?? '').trim()
@@ -199,7 +229,7 @@ const renderSource = (root, source, groupTitle, startsGroup) => {
     formatLocator(source.pages),
     links,
   ].filter(Boolean).join(' ')
-  const classifiedCitation = `**Класс:** ${publicationClassLabels.get(source.publicationClass)}. ${citation}`
+  const classifiedCitation = `**Ключ источника:** \`${clean(source.id)}\`. **Класс:** ${publicationClassLabels.get(source.publicationClass)}. ${citation}`
   return [
     ...(startsGroup ? [`## ${groupTitle}`] : []),
     `<!-- source:${clean(source.id)} -->`,
@@ -267,18 +297,21 @@ export const buildApparatus = ({ root = defaultBookRoot } = {}) => {
   const flatplan = readJson(root, 'flatplan/album.json')
   const cited = selectCitedSources(claims, sources)
   validateGlossary(glossary, sources, cited)
-  const recognizedGroups = new Set(groupDefinitions.map(([group]) => group))
-  const invalidSource = cited.find(({ group }) => !recognizedGroups.has(group))
+  const invalidSource = cited.find(({ group }) => !sourceGroups.has(group))
   if (invalidSource) throw new Error(`cited source has unsupported group: ${invalidSource.id}`)
   const invalidPublicationClass = cited.find(({ publicationClass }) => !publicationClassLabels.has(publicationClass))
   if (invalidPublicationClass) throw new Error(`cited source has unsupported publication class: ${invalidPublicationClass.id}`)
 
-  const bibliographyItems = groupDefinitions.flatMap(([group, title]) => (
+  const bibliographyItems = groupDefinitions.flatMap(({ title, matches }) => (
     cited
-      .filter((source) => source.group === group)
+      .filter(matches)
       .sort(compareSources)
       .map((source, index) => renderSource(root, source, title, index === 0))
   ))
+  const groupedIds = bibliographyItems.flatMap((item) => [...item.matchAll(/<!-- source:([^ ]+) -->/gu)].map(([, id]) => id))
+  if (groupedIds.length !== cited.length || new Set(groupedIds).size !== cited.length) {
+    throw new Error('every cited publication source must match exactly one bibliography group')
+  }
   const glossaryItems = [...glossary].sort(compareGlossary).map(renderGlossaryItem)
   const apparatusPages = (kind) => flatplan.pages.filter((page) => page.apparatus === kind)
   const glossaryText = renderPages('Словарь', glossaryItems, apparatusPages('glossary'))

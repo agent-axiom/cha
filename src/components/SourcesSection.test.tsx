@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 import { sources } from '../content/sources'
 import {
@@ -88,12 +88,29 @@ describe('source bibliography', () => {
       sources.map((source) => source.id).sort(),
     )
 
-    expect(screen.getByText(formatSourceCount(citedSources.length))).toBeInTheDocument()
+    const citedStratum = screen
+      .getByRole('heading', { level: 3, name: 'Цитируются на этой странице' })
+      .closest('section')
+    const furtherReadingStratum = screen
+      .getByRole('heading', { level: 3, name: 'Дальнейшее чтение' })
+      .closest('section')
+    expect(within(citedStratum as HTMLElement).getByText(formatSourceCount(citedSources.length))).toBeInTheDocument()
+    expect(within(furtherReadingStratum as HTMLElement).getByText(formatSourceCount(furtherReadingSources.length))).toBeInTheDocument()
     expect(
-      screen.getByText(formatSourceCount(furtherReadingSources.length)),
-    ).toBeInTheDocument()
-    expect(
-      screen.getAllByRole('heading', { level: 4, name: /китайские первоисточники/i }),
+      screen.getAllByRole('heading', { level: 4, name: /китайские исторические тексты, издания и копии/i }),
     ).not.toHaveLength(0)
+
+    for (const id of ['dayi-history-1973', 'puer-wuhou', 'yunnan-agri-2018-shou']) {
+      const entry = container.querySelector<HTMLElement>(`[data-source-id="${id}"]`)
+      expect(entry).toHaveTextContent(/ретроспектива/i)
+      expect(
+        within(entry?.closest('section') as HTMLElement).getByRole('heading', {
+          level: 4,
+          name: /институциональные ретроспективы/i,
+        }),
+      ).toBeInTheDocument()
+    }
+    expect(container.querySelector('[data-source-id="zhao-facsimile-pku"]')).toHaveTextContent(/факсимиле/i)
+    expect(container.querySelector('[data-source-id="ruan-dianbi-catalog"]')).toHaveTextContent(/каталог рукописи/i)
   })
 })

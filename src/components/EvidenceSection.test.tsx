@@ -77,7 +77,8 @@ describe('EvidenceSection', () => {
       firstCard.compareDocumentPosition(finalCaveat) &
         Node.DOCUMENT_POSITION_FOLLOWING,
     ).toBeTruthy()
-    expect(document.body).not.toHaveTextContent(/внешн\S*\s+рецензи/i)
+    expect(document.body).toHaveTextContent(/внешняя медицинская рецензия:\s*не получена/i)
+    expect(document.body).toHaveTextContent(/внешних одобрений:\s*0/i)
   })
 
   it('filters cards by named evidence types', async () => {

@@ -6,7 +6,7 @@
 - Production status: preview / предварительный производственный макет
 - Master: `book/assets/diagrams/evidence-scale.svg`
 - Source basis: EFSA caffeine guidance, https://www.efsa.europa.eu/en/topics/topic/caffeine, and the checked medical-evidence corpus in the project source register.
-- Credit: Редакция «Пуэр. Живая гора» — шкала применимости свидетельств.
+- Credit: Редакция «Пуэр. Живая гора» — карта применимости свидетельств.
 
 The A–E visual system, shapes, labels and composition were drawn for this publication. It is an editorial applicability guide, not a borrowed evidence pyramid and not an assertion that a lower rung proves treatment efficacy.
 

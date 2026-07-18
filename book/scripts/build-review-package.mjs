@@ -532,7 +532,7 @@ const packageReadme = (manifest) => [
   `Status: \`${manifest.status}\``,
   `Deadline: \`${manifest.deadline}\` (${manifest.deadlineStatus})`,
   '',
-  'Attach both proof PDFs named in `manifest.json`. Verify their SHA-256 before review. Every role receives the same 70 active claims and full bibliography; role-specific primary focus is marked in its request.',
+  `Attach both proof PDFs named in \`manifest.json\`. Verify their SHA-256 before review. Every role receives the same ${manifest.corpus.activeClaims} active claims and full bibliography; role-specific primary focus is marked in its request.`,
   '',
   'A blank response template is not approval. Do not edit `claims.json` or `reviews.json` until a real named reviewer returns a response tied to this exact proof and snapshot hash.',
   '',

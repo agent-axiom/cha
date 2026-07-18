@@ -592,7 +592,7 @@
       "projectionStatus": "planned",
       "datasetVersions": [
         "NGCC 1:1 000 000 public base, product 2021, overall currency 2019",
-        "Qing textual list: zhao-facsimile-pku; ruan-puer-cha-ji-access; ruan-dianbi-catalog",
+        "Qing textual list: zhao-facsimile-pku",
         "Mengla public heritage note, 2019"
       ],
       "boundaryReference": "Yunnan standard maps, 2024; final 审图号 pending",
@@ -851,14 +851,14 @@
   {
     "id": "diagram-medical-evidence-scale",
     "kind": "diagram",
-    "title": "Medical evidence scale diagram",
+    "title": "Medical evidence applicability map",
     "creator": "Редакция «Пуэр. Живая гора»",
     "createdAt": "2026-07-17",
     "location": "Digital editorial studio",
     "sourceUrl": "https://www.efsa.europa.eu/en/topics/topic/caffeine",
     "rights": "owned",
     "licenseFile": "book/assets/rights/diagram-medical-evidence-scale.md",
-    "creditLine": "Редакция «Пуэр. Живая гора» — шкала применимости свидетельств.",
+    "creditLine": "Редакция «Пуэр. Живая гора» — карта применимости свидетельств.",
     "path": "book/assets/diagrams/evidence-scale.svg",
     "pixelWidth": null,
     "pixelHeight": null,

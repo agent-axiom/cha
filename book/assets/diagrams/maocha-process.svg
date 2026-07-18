@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" data-asset-id="diagram-maocha-process" data-asset-class="diagram" data-visual-mode="explanatory-diagram" data-min-placement-width-mm="150" data-min-placement-height-mm="187.5" data-min-font-size-pt="7.5" data-min-stroke-width-mm="0.2" role="img" aria-labelledby="maocha-title maocha-desc">
   <title id="maocha-title">Рождение маоча: путь свежего листа</title>
-  <desc id="maocha-desc">Редакционная технологическая схема семи опорных операций от свежего листа до упаковки шайцин-маоча, с условиями наблюдения и границами применимости.</desc>
+  <desc id="maocha-desc">Редакционная технологическая схема: входной свежий лист, пять опорных операций и выход шайцин-маоча, с условиями наблюдения и границами применимости.</desc>
   <rect x="0" y="0" width="1200" height="1500" fill="#E9DECA"/>
   <rect x="0" y="0" width="34" height="1500" fill="#91432D"/>
   <rect x="58" y="74" width="1084" height="2" fill="#B88A58"/>
@@ -46,10 +46,12 @@
       <text x="282" y="1018" font-family="Literata" font-size="32" data-font-size-pt="11.34" fill="#211A16">Солнечная сушка</text>
       <text x="282" y="1053" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#91432D">Без универсального числа влажности</text>
     </g>
-    <g data-encoding="shape+label" data-meaning="упаковка готовой маоча" data-shape="sealed-sack">
-      <path d="M139 1195 L216 1195 L242 1235 L230 1322 L125 1322 L114 1235 Z" fill="#253C32" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
-      <line x1="139" y1="1218" x2="216" y2="1218" stroke="#E9DECA" stroke-width="3" data-stroke-width-mm="0.38"/>
-      <text x="282" y="1236" font-family="Literata" font-size="32" data-font-size-pt="11.34" fill="#211A16">Упаковка · шайцин-маоча</text>
+    <g data-encoding="shape+label" data-meaning="выход россыпь готовой шайцин-маоча" data-shape="open-tray">
+      <path d="M105 1280 L251 1280 L228 1322 H128 Z" fill="none" stroke="#253C32" stroke-width="4" data-stroke-width-mm="0.50"/>
+      <path d="M126 1254 Q145 1218 164 1254 Q145 1270 126 1254 Z" fill="#253C32" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+      <path d="M162 1262 Q183 1221 203 1260 Q183 1278 162 1262 Z" fill="#91432D" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+      <path d="M198 1250 Q219 1215 237 1254 Q218 1269 198 1250 Z" fill="#B88A58" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+      <text x="282" y="1236" font-family="Literata" font-size="32" data-font-size-pt="11.34" fill="#211A16">Выход · шайцин-маоча</text>
       <text x="282" y="1271" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#91432D">Сухая основа будущих маршрутов шэна и шу</text>
     </g>
     <polyline points="181,324 181,362 181,362" fill="none" stroke="#B88A58" stroke-width="4" data-stroke-width-mm="0.50"/>
@@ -81,7 +83,7 @@
 
   <g id="labels">
     <text x="74" y="140" font-family="Cormorant" font-size="56" data-font-size-pt="19.84" fill="#211A16">Рождение маоча</text>
-    <text x="76" y="184" font-family="Literata" font-size="28" data-font-size-pt="9.92" fill="#91432D">Один лист · семь опорных операций · множество решений</text>
+    <text x="76" y="184" font-family="Literata" font-size="28" data-font-size-pt="9.92" fill="#91432D">Вход · Пять операций · выход</text>
     <text x="790" y="1010" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#211A16">Порядок читается сверху вниз.</text>
   </g>
 

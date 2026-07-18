@@ -116,8 +116,8 @@ test('provides reader navigation, publication notes, and an editorial style shee
 test('publication bibliography excludes provenance-only records while the review corpus retains them', () => {
   const sources = json('data/sources.json')
   const allowed = new Set([
-    'primary-text', 'facsimile', 'critical-edition', 'access-copy',
-    'retrospective', 'research', 'standard-guidance', 'provenance-only',
+    'primary-text', 'facsimile', 'critical-edition', 'print-edition-catalog', 'manuscript-catalog', 'access-copy',
+    'retrospective', 'research', 'standard-guidance', 'trial-registration', 'provenance-only',
   ])
   assert.equal(sources.length, 49)
   assert.ok(sources.every(({ publicationClass }) => allowed.has(publicationClass)))
@@ -127,7 +127,7 @@ test('publication bibliography excludes provenance-only records while the review
   const publishedIds = [...bibliography.matchAll(/<!-- source:([^ ]+) -->/gu)].map(([, id]) => id)
   assert.equal(publishedIds.length, 48)
   assert.equal(publishedIds.includes('vinogrodsky-user-excerpt'), false)
-  for (const label of ['Факсимиле', 'Критическое издание', 'Копия доступа', 'Ретроспектива', 'Исследование', 'Стандарт или руководство']) {
+  for (const label of ['Факсимиле', 'Печатное издание: каталогическая запись', 'Копия доступа', 'Ретроспектива', 'Исследование', 'Стандарт или руководство', 'Регистрация исследования; результатов нет']) {
     assert.match(bibliography, new RegExp(`\\*\\*Класс:\\*\\* ${label}`, 'u'), label)
   }
 

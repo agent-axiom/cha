@@ -1298,6 +1298,7 @@
 
 .source-group li strong,
 .source-group li small,
+.source-group li .source-entry__class,
 .source-group li em {
   display: block;
 }
@@ -1316,6 +1317,18 @@
   color: var(--ink-dim);
   font-size: 0.875rem;
   line-height: 1.55;
+}
+
+.source-entry__class {
+  width: fit-content;
+  margin-top: 0.55rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.18rem 0.55rem;
+  color: var(--accent);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  line-height: 1.35;
 }
 
 .source-group li em {

@@ -21,6 +21,7 @@ function makeBookSource(overrides: Partial<BookSource> = {}): BookSource {
     year: '2026',
     href: 'https://example.com/visible-checked',
     group: 'guidance',
+    publicationClass: 'standard-guidance',
     origin: 'Test registry',
     note: 'Included by the site policy.',
     status: 'checked',
@@ -47,6 +48,7 @@ describe('content integrity', () => {
         year: '2026',
         href: 'https://example.com/visible-checked',
         group: 'guidance',
+        publicationClass: 'standard-guidance',
         origin: 'Test registry',
         note: 'Included by the site policy.',
       },
@@ -77,6 +79,11 @@ describe('content integrity', () => {
       parseBookSources([{ ...makeBookSource(), group: 'other' }]),
     ).toThrow(
       'source registry entry 0 field "group" must be one of: primary-asian, research-asian, research-western, guidance',
+    )
+    expect(() =>
+      parseBookSources([{ ...makeBookSource(), publicationClass: 'misc' }]),
+    ).toThrow(
+      'source registry entry 0 field "publicationClass" must be one of:',
     )
   })
 

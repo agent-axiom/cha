@@ -27,10 +27,13 @@ export function validateSources(sources) {
       'primary-text',
       'facsimile',
       'critical-edition',
+      'print-edition-catalog',
+      'manuscript-catalog',
       'access-copy',
       'retrospective',
       'research',
       'standard-guidance',
+      'trial-registration',
       'provenance-only',
     ], 'invalid source publication class')
     if (typeof source.siteVisible !== 'boolean') throw new Error(`source siteVisible must be boolean: ${source.id}`)

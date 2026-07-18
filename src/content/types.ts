@@ -4,6 +4,19 @@ export type SourceGroup =
   | 'research-western'
   | 'guidance'
 
+export type SourcePublicationClass =
+  | 'primary-text'
+  | 'facsimile'
+  | 'critical-edition'
+  | 'print-edition-catalog'
+  | 'manuscript-catalog'
+  | 'access-copy'
+  | 'retrospective'
+  | 'research'
+  | 'standard-guidance'
+  | 'trial-registration'
+  | 'provenance-only'
+
 export interface Source {
   id: string
   title: string
@@ -11,6 +24,7 @@ export interface Source {
   year: string
   href: string
   group: SourceGroup
+  publicationClass: SourcePublicationClass
   origin: string
   note: string
 }
