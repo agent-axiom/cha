@@ -6,5 +6,5 @@
   "guide": { "widthMm": 150, "heightMm": 220, "pages": 48, "bleedMm": 3 },
   "edition": 300,
   "citationCutoffDaysBeforePress": 90,
-  "manuscriptComplete": false
+  "manuscriptComplete": true
 }
