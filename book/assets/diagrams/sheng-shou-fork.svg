@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" data-asset-id="diagram-sheng-shou-fork" data-asset-class="diagram" data-visual-mode="explanatory-diagram" data-min-placement-width-mm="150" data-min-placement-height-mm="187.5" data-min-font-size-pt="7.5" data-min-stroke-width-mm="0.2" role="img" aria-labelledby="fork-title fork-desc">
+  <title id="fork-title">Шэн и шу: технологическая развилка</title>
+  <desc id="fork-desc">Схема показывает общий исходный шайцин-маоча и два самостоятельных производственных пути: шэн без влажного кучевания и шу через управляемую влажную кучу.</desc>
+  <rect x="0" y="0" width="1200" height="1500" fill="#E9DECA"/>
+  <rect x="0" y="0" width="34" height="1500" fill="#253C32"/>
+  <rect x="58" y="74" width="1084" height="2" fill="#B88A58"/>
+
+  <g id="shared-input">
+    <g data-encoding="shape+label" data-meaning="общее сырьё обоих путей" data-shape="rounded-rectangle">
+      <rect x="345" y="224" width="510" height="132" rx="66" fill="#B88A58" stroke="#211A16" stroke-width="3" data-stroke-width-mm="0.38"/>
+      <text x="600" y="282" text-anchor="middle" font-family="Cormorant" font-size="42" data-font-size-pt="14.88" fill="#211A16">Шайцин-маоча</text>
+      <text x="600" y="322" text-anchor="middle" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#211A16">общее исходное сырьё</text>
+    </g>
+    <path d="M600 356 V418 M600 418 H307 V466 M600 418 H893 V466" fill="none" stroke="#211A16" stroke-width="6" data-stroke-width-mm="0.75"/>
+    <circle cx="600" cy="418" r="12" fill="#91432D" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+  </g>
+
+  <g id="sheng-path">
+    <rect x="74" y="466" width="466" height="702" rx="30" fill="none" stroke="#253C32" stroke-width="6" data-stroke-width-mm="0.75"/>
+    <text x="276" y="530" text-anchor="middle" font-family="Cormorant" font-size="52" data-font-size-pt="18.43" fill="#253C32">ШЭН ·</text>
+    <text x="362" y="530" text-anchor="middle" font-family="Noto Serif CJK SC" font-size="52" data-font-size-pt="18.43" fill="#253C32">生</text>
+    <text x="307" y="572" text-anchor="middle" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#253C32">самостоятельный путь без влажной кучи</text>
+    <g data-encoding="shape+label" data-meaning="подготовка сырья для шэна" data-shape="open-basket">
+      <path d="M132 650 H482 L450 754 H164 Z" fill="#E9DECA" stroke="#253C32" stroke-width="4" data-stroke-width-mm="0.50"/>
+      <line x1="172" y1="690" x2="442" y2="690" stroke="#B88A58" stroke-width="3" data-stroke-width-mm="0.38"/>
+      <text x="307" y="724" text-anchor="middle" font-family="Literata" font-size="28" data-font-size-pt="9.92" fill="#211A16">очистка · отмеривание</text>
+    </g>
+    <line x1="307" y1="768" x2="307" y2="804" stroke="#B88A58" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <g data-encoding="shape+label" data-meaning="пропаривание и прессование шэна" data-shape="press">
+      <rect x="156" y="818" width="302" height="132" rx="18" fill="#253C32" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+      <line x1="208" y1="872" x2="406" y2="872" stroke="#E9DECA" stroke-width="4" data-stroke-width-mm="0.50"/>
+      <text x="307" y="923" text-anchor="middle" font-family="Literata" font-size="28" data-font-size-pt="9.92" fill="#E9DECA">пар · форма · сушка</text>
+    </g>
+    <line x1="307" y1="964" x2="307" y2="1000" stroke="#B88A58" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <g data-encoding="shape+label" data-meaning="последующее хранение шэна" data-shape="archive-box">
+      <rect x="132" y="1014" width="350" height="112" rx="18" fill="#E9DECA" stroke="#253C32" stroke-width="4" data-stroke-width-mm="0.50"/>
+      <line x1="174" y1="1044" x2="440" y2="1044" stroke="#91432D" stroke-width="3" data-stroke-width-mm="0.38"/>
+      <text x="307" y="1091" text-anchor="middle" font-family="Literata" font-size="28" data-font-size-pt="9.92" fill="#211A16">хранение готового чая</text>
+    </g>
+  </g>
+
+  <g id="shou-path">
+    <rect x="660" y="466" width="466" height="702" rx="30" fill="none" stroke="#91432D" stroke-width="6" data-stroke-width-mm="0.75"/>
+    <text x="866" y="530" text-anchor="middle" font-family="Cormorant" font-size="52" data-font-size-pt="18.43" fill="#91432D">ШУ ·</text>
+    <text x="946" y="530" text-anchor="middle" font-family="Noto Serif CJK SC" font-size="52" data-font-size-pt="18.43" fill="#91432D">熟</text>
+    <text x="893" y="572" text-anchor="middle" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#91432D">отдельная ветвь влажного кучевания</text>
+    <g data-encoding="shape+label" data-meaning="увлажнение и влажное кучевание шу" data-shape="mounded-pile">
+      <path d="M716 744 Q760 620 893 620 Q1026 620 1070 744 Z" fill="#91432D" stroke="#211A16" stroke-width="3" data-stroke-width-mm="0.38"/>
+      <path d="M793 680 C824 648 854 648 885 680 M905 680 C936 648 966 648 997 680" fill="none" stroke="#B88A58" stroke-width="3" data-stroke-width-mm="0.38"/>
+      <text x="893" y="720" text-anchor="middle" font-family="Literata" font-size="28" data-font-size-pt="9.92" fill="#E9DECA">увлажнение · куча</text>
+    </g>
+    <line x1="893" y1="758" x2="893" y2="794" stroke="#B88A58" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <g data-encoding="shape+label" data-meaning="ведение и переворот кучи шу" data-shape="opposed-arrows">
+      <rect x="716" y="808" width="354" height="126" rx="18" fill="#E9DECA" stroke="#91432D" stroke-width="4" data-stroke-width-mm="0.50"/>
+      <path d="M764 854 H1016 L980 828 M1016 854 L980 880" fill="none" stroke="#253C32" stroke-width="4" data-stroke-width-mm="0.50"/>
+      <text x="893" y="910" text-anchor="middle" font-family="Literata" font-size="28" data-font-size-pt="9.92" fill="#211A16">переворот · разбивание</text>
+    </g>
+    <line x1="893" y1="948" x2="893" y2="984" stroke="#B88A58" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <g data-encoding="shape+label" data-meaning="сушка завершает влажное кучевание шу" data-shape="split-output-box">
+      <rect x="716" y="998" width="354" height="130" rx="18" fill="#253C32" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+      <text x="893" y="1048" text-anchor="middle" font-family="Literata" font-size="28" data-font-size-pt="9.92" fill="#E9DECA">сушка → рассыпной шу</text>
+      <text x="893" y="1090" text-anchor="middle" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#B88A58">затем возможно прессование</text>
+    </g>
+  </g>
+
+  <g id="labels">
+    <text x="74" y="140" font-family="Cormorant" font-size="56" data-font-size-pt="19.84" fill="#211A16">Шэн и шу: развилка</text>
+    <text x="76" y="184" font-family="Literata" font-size="28" data-font-size-pt="9.92" fill="#91432D">Общее сырьё не означает одну траекторию</text>
+    <text x="600" y="1228" text-anchor="middle" font-family="Cormorant" font-size="42" data-font-size-pt="14.88" fill="#211A16">Шэн не становится шу просто от времени.</text>
+    <text x="600" y="1268" text-anchor="middle" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#91432D">Категорию определяет производственный путь, а не цвет настоя.</text>
+  </g>
+
+  <g id="legend">
+    <rect x="184" y="1320" width="28" height="28" rx="6" fill="#253C32"/>
+    <text x="228" y="1344" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#211A16">механика / хранение</text>
+    <path d="M503 1348 Q517 1316 531 1348 Z" fill="#91432D" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+    <text x="548" y="1344" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#211A16">тепло + влага кучи</text>
+    <circle cx="873" cy="1334" r="14" fill="#B88A58" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+    <text x="902" y="1344" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#211A16">переход</text>
+  </g>
+
+  <g id="sources">
+    <line x1="74" y1="1384" x2="1142" y2="1384" stroke="#B88A58" stroke-width="2" data-stroke-width-mm="0.25"/>
+    <text x="74" y="1424" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#211A16">Источники: GB/T 22111; DB5308/T 58—2020. Схема процесса, не шкала возраста или качества.</text>
+  </g>
+</svg>

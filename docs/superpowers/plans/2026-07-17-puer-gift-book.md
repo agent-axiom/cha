@@ -1057,7 +1057,7 @@ All diagrams remain legible at their registered physical placement and use shape
 
 - [ ] **Step 4: Produce or license raster art**
 
-Generate/commission mythological gates and cover art as explicitly illustrative work. License documentary photography separately. For full-page use require 2906 × 3614 pixels; for spread use require 5811 × 3614 pixels. Store print originals locally under `book/assets/private/` and commit only rights records plus low-resolution previews.
+Generate/commission mythological gates and cover art as explicitly illustrative work. License documentary photography separately. At 300 DPI, for full-page use require the strict ceiling 2906 × 3615 pixels; for spread use require 5812 × 3615 pixels. Store print originals locally under `book/assets/private/` and commit only rights records plus low-resolution previews. Interpolating a smaller source to those dimensions does not by itself make it print-ready.
 
 - [ ] **Step 5: Review every caption and right, then commit**
 

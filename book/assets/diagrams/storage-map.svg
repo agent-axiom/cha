@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" data-asset-id="diagram-storage-variables" data-asset-class="diagram" data-visual-mode="explanatory-diagram" data-min-placement-width-mm="150" data-min-placement-height-mm="187.5" data-min-font-size-pt="7.5" data-min-stroke-width-mm="0.2" role="img" aria-labelledby="storage-title storage-desc">
+  <title id="storage-title">Хранение пуэра: карта переменных и тревожных признаков</title>
+  <desc id="storage-desc">Практическая карта чистого сухого хранения шэна и шу, отделяющая наблюдаемые переменные и безопасные действия от признаков повреждения, при которых чай не пробуют.</desc>
+  <rect x="0" y="0" width="1200" height="1500" fill="#E9DECA"/>
+  <rect x="0" y="0" width="34" height="1500" fill="#253C32"/>
+  <rect x="58" y="74" width="1084" height="2" fill="#B88A58"/>
+
+  <g id="variables">
+    <g data-encoding="shape+label" data-meaning="сухое место без намокания" data-shape="diamond">
+      <polygon points="188,298 250,360 188,422 126,360" fill="#253C32" stroke="#211A16" stroke-width="3" data-stroke-width-mm="0.38"/>
+      <path d="M188 324 C166 352 166 372 188 382 C210 372 210 352 188 324 Z" fill="#E9DECA" stroke="#B88A58" stroke-width="2" data-stroke-width-mm="0.25"/>
+      <text x="188" y="464" text-anchor="middle" font-family="Literata" font-size="28" data-font-size-pt="9.92" fill="#211A16">СУХО</text>
+      <text x="188" y="498" text-anchor="middle" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#91432D">без протечек</text>
+    </g>
+    <g data-encoding="shape+label" data-meaning="чистое место и целая упаковка" data-shape="square">
+      <rect x="446" y="298" width="124" height="124" rx="18" fill="#B88A58" stroke="#211A16" stroke-width="3" data-stroke-width-mm="0.38"/>
+      <path d="M476 360 L498 382 L540 336" fill="none" stroke="#253C32" stroke-width="8" data-stroke-width-mm="1.00"/>
+      <text x="508" y="464" text-anchor="middle" font-family="Literata" font-size="28" data-font-size-pt="9.92" fill="#211A16">ЧИСТО</text>
+      <text x="508" y="270" text-anchor="middle" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#91432D">упаковка цела</text>
+    </g>
+    <g data-encoding="shape+label" data-meaning="защита от сильных посторонних запахов" data-shape="hexagon">
+      <polygon points="768,298 822,330 822,394 768,426 714,394 714,330" fill="#91432D" stroke="#211A16" stroke-width="3" data-stroke-width-mm="0.38"/>
+      <path d="M734 350 C748 334 760 366 774 350 C788 334 800 366 814 350" fill="none" stroke="#E9DECA" stroke-width="4" data-stroke-width-mm="0.50"/>
+      <text x="768" y="464" text-anchor="middle" font-family="Literata" font-size="28" data-font-size-pt="9.92" fill="#211A16">СВОЙ ЗАПАХ</text>
+      <text x="768" y="494" text-anchor="middle" font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#91432D">без посторонних</text>
+      <text x="768" y="522" text-anchor="middle" font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#91432D">запахов</text>
+    </g>
+    <g data-encoding="shape+label" data-meaning="защита от света и резких перемен" data-shape="arch">
+      <path d="M973 426 V352 Q973 296 1029 296 Q1085 296 1085 352 V426 Z" fill="#253C32" stroke="#211A16" stroke-width="3" data-stroke-width-mm="0.38"/>
+      <circle cx="1029" cy="356" r="26" fill="#B88A58" stroke="#E9DECA" stroke-width="2" data-stroke-width-mm="0.25"/>
+      <text x="1029" y="464" text-anchor="middle" font-family="Literata" font-size="28" data-font-size-pt="9.92" fill="#211A16">СТАБИЛЬНО</text>
+      <text x="1029" y="498" text-anchor="middle" font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#91432D">вдали от света</text>
+    </g>
+
+    <line x1="250" y1="390" x2="436" y2="550" stroke="#B88A58" stroke-width="3" data-stroke-width-mm="0.38" stroke-dasharray="12 10"/>
+    <line x1="508" y1="422" x2="544" y2="528" stroke="#B88A58" stroke-width="3" data-stroke-width-mm="0.38" stroke-dasharray="12 10"/>
+    <line x1="768" y1="426" x2="690" y2="540" stroke="#B88A58" stroke-width="3" data-stroke-width-mm="0.38" stroke-dasharray="12 10"/>
+    <line x1="990" y1="420" x2="754" y2="590" stroke="#B88A58" stroke-width="3" data-stroke-width-mm="0.38" stroke-dasharray="12 10"/>
+  </g>
+
+  <g id="safe-practice">
+    <g data-encoding="shape+label" data-meaning="центр карты чистая сухая упаковка чая" data-shape="concentric-package">
+      <circle cx="600" cy="680" r="200" fill="#253C32" stroke="#211A16" stroke-width="4" data-stroke-width-mm="0.50"/>
+      <circle cx="600" cy="680" r="142" fill="#E9DECA" stroke="#B88A58" stroke-width="6" data-stroke-width-mm="0.75"/>
+      <path d="M520 624 H680 L700 680 L680 736 H520 L500 680 Z" fill="#B88A58" stroke="#211A16" stroke-width="3" data-stroke-width-mm="0.38"/>
+      <text x="600" y="676" text-anchor="middle" font-family="Cormorant" font-size="42" data-font-size-pt="14.88" fill="#211A16">ШЭН + ШУ</text>
+      <text x="600" y="716" text-anchor="middle" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#211A16">осмотр до заваривания</text>
+    </g>
+    <g data-encoding="shape+label" data-meaning="регулярная документированная проверка" data-shape="checklist">
+      <rect x="104" y="838" width="440" height="184" rx="22" fill="none" stroke="#253C32" stroke-width="4" data-stroke-width-mm="0.50"/>
+      <rect x="136" y="878" width="28" height="28" fill="#B88A58" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+      <rect x="136" y="934" width="28" height="28" fill="#B88A58" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+      <text x="188" y="902" font-family="Literata" font-size="26" data-font-size-pt="9.21" fill="#211A16">запишите дату и запах</text>
+      <text x="188" y="948" font-family="Literata" font-size="24" data-font-size-pt="8.50" fill="#211A16"><tspan x="188" y="948">проверьте следы намокания</tspan><tspan x="188" y="976">и вредителей</tspan></text>
+      <text x="324" y="1000" text-anchor="middle" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#91432D">наблюдать · записывать · разделять</text>
+    </g>
+    <g data-encoding="shape+label" data-meaning="изоляция сомнительного образца" data-shape="separated-boxes">
+      <rect x="654" y="838" width="442" height="184" rx="22" fill="#E9DECA" stroke="#91432D" stroke-width="4" data-stroke-width-mm="0.50"/>
+      <rect x="698" y="878" width="122" height="78" fill="#253C32" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+      <rect x="930" y="878" width="122" height="78" fill="#91432D" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+      <line x1="850" y1="866" x2="850" y2="974" stroke="#B88A58" stroke-width="4" data-stroke-width-mm="0.50"/>
+      <text x="875" y="1000" text-anchor="middle" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#91432D">сомнительное хранить отдельно</text>
+    </g>
+  </g>
+
+  <g id="warning-signs">
+    <rect x="74" y="1080" width="1068" height="214" rx="28" fill="#91432D"/>
+    <text x="108" y="1130" font-family="Cormorant" font-size="42" data-font-size-pt="14.88" fill="#E9DECA">СТОП: признаки повреждения</text>
+    <g data-encoding="shape+label" data-meaning="видимая плесень является повреждением" data-shape="spore-cluster">
+      <circle cx="150" cy="1192" r="24" fill="#B88A58" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+      <circle cx="182" cy="1176" r="16" fill="#E9DECA" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+      <circle cx="190" cy="1210" r="12" fill="#253C32" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+      <text x="222" y="1202" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#E9DECA">видимая плесень</text>
+    </g>
+    <g data-encoding="shape+label" data-meaning="следы воды и чужой запах являются повреждением" data-shape="drop-and-wave">
+      <path d="M474 1168 C446 1206 448 1232 474 1240 C500 1232 502 1206 474 1168 Z" fill="#253C32" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+      <text x="516" y="1202" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#E9DECA">вода · чужой запах</text>
+    </g>
+    <g data-encoding="shape+label" data-meaning="вредители являются повреждением" data-shape="six-legged-oval">
+      <ellipse cx="820" cy="1200" rx="28" ry="36" fill="#B88A58" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+      <line x1="798" y1="1184" x2="774" y2="1166" stroke="#211A16" stroke-width="3" data-stroke-width-mm="0.38"/>
+      <line x1="798" y1="1200" x2="770" y2="1200" stroke="#211A16" stroke-width="3" data-stroke-width-mm="0.38"/>
+      <line x1="798" y1="1216" x2="774" y2="1234" stroke="#211A16" stroke-width="3" data-stroke-width-mm="0.38"/>
+      <line x1="842" y1="1184" x2="866" y2="1166" stroke="#211A16" stroke-width="3" data-stroke-width-mm="0.38"/>
+      <line x1="842" y1="1200" x2="870" y2="1200" stroke="#211A16" stroke-width="3" data-stroke-width-mm="0.38"/>
+      <line x1="842" y1="1216" x2="866" y2="1234" stroke="#211A16" stroke-width="3" data-stroke-width-mm="0.38"/>
+      <text x="886" y="1208" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#E9DECA">вредители</text>
+    </g>
+    <text x="108" y="1270" font-family="Literata" font-size="28" data-font-size-pt="9.92" fill="#E9DECA">Изолировать · НЕ ПРОБОВАТЬ · ополаскивание не исправляет повреждение</text>
+  </g>
+
+  <g id="labels">
+    <text x="74" y="140" font-family="Cormorant" font-size="56" data-font-size-pt="19.84" fill="#211A16">Хранение: карта переменных</text>
+    <text x="76" y="184" font-family="Literata" font-size="28" data-font-size-pt="9.92" fill="#91432D">Чистота и стабильность прежде обещаний «ускорить возраст»</text>
+    <text x="74" y="1342" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#91432D">Нет универсального срока, режима или влажности, гарантирующих улучшение.</text>
+  </g>
+
+  <g id="legend">
+    <circle cx="896" cy="226" r="13" fill="#253C32" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+    <text x="922" y="234" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#211A16">условие</text>
+    <circle cx="1034" cy="226" r="13" fill="#91432D" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+    <text x="1060" y="234" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#211A16">стоп</text>
+  </g>
+
+  <g id="sources">
+    <line x1="74" y1="1384" x2="1142" y2="1384" stroke="#B88A58" stroke-width="2" data-stroke-width-mm="0.25"/>
+    <text x="74" y="1424" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#211A16">Опоры: DB5308/T 53—2020; GB/T 22111. Домашняя карта безопасности, не режим старения.</text>
+  </g>
+</svg>

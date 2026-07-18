@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" data-asset-id="map-yunnan-relief" data-asset-class="map" data-min-placement-width-mm="150" data-min-placement-height-mm="187.5" data-min-font-size-pt="7.5" data-min-stroke-width-mm="0.2" data-projection="+proj=aea +lat_1=21 +lat_2=29 +lat_0=25 +lon_0=101.5 +ellps=GRS80 +units=m +no_defs" data-projection-status="planned" data-dataset-versions="NGCC 1:1 000 000 public base, product 2021, overall currency 2019 | Copernicus DEM GLO-30 DGED 2024_1 | HydroBASINS v1c" data-boundary-reference="Yunnan standard maps, 2024; final 审图号 pending" data-interpretive-layer="Generalized editorial relief and watershed rendering; not an official surveyed hydrographic map." data-uncertainty="DEM is a surface model; generalized watershed boundaries and labels require final Chinese cartographic review." data-review-status="blocked-pending-chinese-review" role="img" aria-labelledby="yunnan-title yunnan-desc">
+  <title id="yunnan-title">Юньнань: рельеф и шесть водосборных систем</title>
+  <desc id="yunnan-desc">Предварительная редакционная карта Юньнани: обобщённый рельеф, шесть крупных водосборных систем и три чайных региона без заявления точной гидрографической или административной геометрии.</desc>
+  <metadata id="cartographic-compliance">projectionStatus: planned; projection: +proj=aea +lat_1=21 +lat_2=29 +lat_0=25 +lon_0=101.5 +ellps=GRS80 +units=m +no_defs; datasetVersions: NGCC 1:1 000 000 public base, product 2021, overall currency 2019 | Copernicus DEM GLO-30 DGED 2024_1 | HydroBASINS v1c; boundaryReference: Yunnan standard maps, 2024; final 审图号 pending; interpretiveLayer: Generalized editorial relief and watershed rendering; not an official surveyed hydrographic map.; uncertaintyNote: DEM is a surface model; generalized watershed boundaries and labels require final Chinese cartographic review.; reviewStatus: standardMapChecked=false, reviewNumber=null, labelAnchorsVerified=false, protectedGeometryVerified=false; sourceUrls: https://www.webmap.cn/commres.do?method=result25W | https://dnr.yn.gov.cn/html/2024/tongzhigonggao_0905/4047492.html | https://dataspace.copernicus.eu/explore-data/data-collections/copernicus-contributing-missions/collections-description/COP-DEM | https://www.hydrosheds.org/products/hydrobasins | https://wcb.yn.gov.cn/html/2021/shuiligaikuang_1021/52794.html</metadata>
+  <rect x="0" y="0" width="1200" height="1500" fill="#E9DECA"/>
+  <rect x="0" y="0" width="34" height="1500" fill="#91432D"/>
+  <rect x="58" y="74" width="1084" height="2" fill="#B88A58"/>
+
+  <g id="terrain">
+    <path d="M164 318 L242 256 L350 280 L430 238 L538 270 L626 252 L714 314 L770 410 L748 518 L792 616 L756 736 L680 792 L620 882 L510 928 L404 904 L322 938 L248 868 L176 844 L134 748 L154 650 L118 552 L150 454 Z" fill="#B88A58"/>
+    <path d="M164 318 L242 256 L350 280 L430 238 L470 350 L420 430 L350 492 L270 522 L184 488 L150 454 Z" fill="#253C32"/>
+    <path d="M470 350 L538 270 L626 252 L714 314 L770 410 L710 470 L632 458 L566 500 L510 452 Z" fill="#91432D"/>
+    <path d="M184 488 L270 522 L350 492 L420 430 L510 452 L566 500 L540 604 L446 650 L356 630 L260 680 L154 650 L118 552 Z" fill="#E9DECA"/>
+    <path d="M154 650 L260 680 L356 630 L446 650 L540 604 L632 458 L710 470 L748 518 L792 616 L756 736 L680 792 L620 882 L510 928 L404 904 L322 938 L248 868 L176 844 L134 748 Z" fill="#B88A58"/>
+    <path d="M216 402 C316 350 402 344 490 392 M188 574 C318 530 458 550 590 510 M220 742 C354 696 522 736 690 654 M314 862 C444 810 570 838 680 752" fill="none" stroke="#E9DECA" stroke-width="2" data-stroke-width-mm="0.25"/>
+  </g>
+
+  <g id="rivers">
+    <path d="M288 300 C326 382 314 474 350 550 C382 620 360 736 390 884" fill="none" stroke="#211A16" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <path d="M430 270 C458 360 446 450 486 536 C520 620 506 748 534 892" fill="none" stroke="#253C32" stroke-width="6" data-stroke-width-mm="0.75"/>
+    <path d="M560 278 C574 382 610 460 596 570 C582 680 610 776 650 852" fill="none" stroke="#211A16" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <path d="M694 326 C660 402 684 474 704 540 C728 620 718 702 680 792" fill="none" stroke="#91432D" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <path d="M642 408 C690 440 732 470 756 518" fill="none" stroke="#B88A58" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <path d="M190 526 C232 580 244 650 224 734 C206 792 226 838 266 872" fill="none" stroke="#91432D" stroke-width="4" data-stroke-width-mm="0.50"/>
+  </g>
+
+  <g id="boundaries">
+    <path d="M164 318 L242 256 L350 280 L430 238 L538 270 L626 252 L714 314 L770 410 L748 518 L792 616 L756 736 L680 792 L620 882 L510 928 L404 904 L322 938 L248 868 L176 844 L134 748 L154 650 L118 552 L150 454 Z" fill="none" stroke="#211A16" stroke-width="6" data-stroke-width-mm="0.75"/>
+    <path d="M374 286 C410 384 404 482 426 582 M590 270 C622 378 634 492 626 608 M242 690 C370 646 512 676 736 604" fill="none" stroke="#E9DECA" stroke-width="2" data-stroke-width-mm="0.25" stroke-dasharray="12 10"/>
+  </g>
+
+  <g id="tea-regions">
+    <ellipse cx="492" cy="792" rx="90" ry="54" fill="#253C32" data-geometry-status="generalized-editorial"/>
+    <ellipse cx="616" cy="824" rx="78" ry="48" fill="#91432D" data-geometry-status="generalized-editorial"/>
+    <ellipse cx="372" cy="702" rx="70" ry="44" fill="#91432D" data-geometry-status="generalized-editorial"/>
+  </g>
+
+  <g id="labels">
+    <text x="74" y="140" font-family="Cormorant" font-size="56" data-font-size-pt="19.84" fill="#211A16">Юньнань · вода формирует склон</text>
+    <text x="76" y="184" font-family="Literata" font-size="28" data-font-size-pt="9.92" fill="#91432D">Шесть крупных систем · обобщённый рельеф · чайные области</text>
+    <text x="184" y="348" font-family="Noto Serif CJK SC" font-size="24" data-font-size-pt="8.50" fill="#E9DECA">бассейн Иравади · 独龙江</text>
+    <text x="304" y="492" font-family="Noto Serif CJK SC" font-size="24" data-font-size-pt="8.50" fill="#211A16">Салуин · 怒江</text>
+    <text x="438" y="556" font-family="Noto Serif CJK SC" font-size="24" data-font-size-pt="8.50" fill="#253C32">Меконг · 澜沧江</text>
+    <text x="540" y="360" font-family="Noto Serif CJK SC" font-size="24" data-font-size-pt="8.50" fill="#E9DECA">бассейн Янцзы · 金沙江</text>
+    <text x="642" y="596" font-family="Noto Serif CJK SC" font-size="24" data-font-size-pt="8.50" fill="#211A16">Красная · 元江</text>
+    <text font-family="Noto Serif CJK SC" font-size="24" data-font-size-pt="8.50" fill="#211A16"><tspan x="540" y="424">бассейн Жемчужной ·</tspan><tspan x="650" y="452"> 南盘江</tspan></text>
+    <text x="430" y="802" font-family="Noto Serif CJK SC" font-size="26" data-font-size-pt="9.21" fill="#E9DECA">Пуэр · 普洱</text>
+    <text x="570" y="834" font-family="Literata" font-size="24" data-font-size-pt="8.50" fill="#E9DECA">Сишуанбаньна</text>
+    <text x="330" y="712" font-family="Literata" font-size="24" data-font-size-pt="8.50" fill="#E9DECA">Линьцан</text>
+  </g>
+
+  <g id="legend">
+    <rect x="830" y="282" width="312" height="530" rx="26" fill="#253C32"/>
+    <text x="862" y="334" font-family="Cormorant" font-size="42" data-font-size-pt="14.88" fill="#E9DECA">Как читать</text>
+    <path d="M862 382 H944" fill="none" stroke="#E9DECA" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <text x="966" y="391" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#E9DECA">водосборная</text>
+    <text x="966" y="425" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#E9DECA">система</text>
+    <ellipse cx="902" cy="482" rx="40" ry="22" fill="#91432D" data-geometry-status="generalized-editorial"/>
+    <text x="966" y="491" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#E9DECA">чайная область</text>
+    <path d="M862 556 H944" fill="none" stroke="#E9DECA" stroke-width="3" data-stroke-width-mm="0.38" stroke-dasharray="12 10"/>
+    <text x="966" y="565" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#E9DECA">обобщённая</text>
+    <text x="966" y="599" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#E9DECA">граница</text>
+    <text x="862" y="662" font-family="Literata" font-size="24" data-font-size-pt="8.50" fill="#B88A58">Это не точная DEM-</text>
+    <text x="862" y="696" font-family="Literata" font-size="24" data-font-size-pt="8.50" fill="#B88A58">визуализация и не карта</text>
+    <text x="862" y="730" font-family="Literata" font-size="24" data-font-size-pt="8.50" fill="#B88A58">водного режима участка.</text>
+    <text x="862" y="776" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#E9DECA">Геометрия редакционная.</text>
+  </g>
+
+  <g id="scale">
+    <line x1="838" y1="876" x2="1048" y2="876" stroke="#211A16" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <line x1="838" y1="860" x2="838" y2="892" stroke="#211A16" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <line x1="966" y1="860" x2="966" y2="892" stroke="#211A16" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <line x1="1048" y1="860" x2="1048" y2="892" stroke="#211A16" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <text x="838" y="928" font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#211A16">Схематическая шкала</text>
+    <text x="838" y="958" font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#211A16">не для измерений</text>
+  </g>
+
+  <g id="north-arrow">
+    <path d="M1074 996 L1110 912 L1146 996 Z" fill="#91432D"/>
+    <line x1="1110" y1="986" x2="1110" y2="1050" stroke="#211A16" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <text x="1098" y="1086" font-family="Manrope" font-size="28" data-font-size-pt="9.92" fill="#211A16">N</text>
+  </g>
+
+  <g id="sources">
+    <line x1="74" y1="1112" x2="1142" y2="1112" stroke="#B88A58" stroke-width="2" data-stroke-width-mm="0.25"/>
+    <text font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#211A16"><tspan x="74" y="1138">Проекция (план): +proj=aea +lat_1=21</tspan><tspan x="74" y="1164"> +lat_2=29 +lat_0=25 +lon_0=101.5</tspan><tspan x="74" y="1190"> +ellps=GRS80 +units=m +no_defs</tspan></text>
+    <text font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#211A16"><tspan x="74" y="1222">NGCC 1:1 000 000 public base, product 2021,</tspan><tspan x="74" y="1248"> overall currency 2019</tspan></text>
+    <text x="74" y="1280" font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#211A16">Copernicus DEM GLO-30 DGED 2024_1</text>
+    <text x="74" y="1306" font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#211A16">HydroBASINS v1c</text>
+    <text font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#211A16"><tspan x="74" y="1338">Официальная основа: www.webmap.cn</tspan><tspan x="74" y="1364">dnr.yn.gov.cn · dataspace.copernicus.eu</tspan><tspan x="74" y="1390">www.hydrosheds.org · wcb.yn.gov.cn</tspan></text>
+    <text font-family="Noto Serif CJK SC" font-size="22" data-font-size-pt="7.80" fill="#211A16"><tspan x="74" y="1422">Границы: Yunnan standard maps, 2024;</tspan><tspan x="74" y="1448"> final 审图号 pending</tspan></text>
+    <text x="74" y="1474" font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#211A16">Предпросмотр · 17 июля 2026.</text>
+    <text font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#91432D"><tspan x="640" y="1138">Редакционное обобщение: Generalized editorial</tspan><tspan x="640" y="1164"> relief and watershed rendering; not an official</tspan><tspan x="640" y="1190"> surveyed hydrographic map.</tspan></text>
+    <text font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#91432D"><tspan x="640" y="1222">Непроверенная геометрия: DEM is a surface model;</tspan><tspan x="640" y="1248"> generalized watershed boundaries and labels require</tspan><tspan x="640" y="1274"> final Chinese cartographic review.</tspan></text>
+    <text font-family="Literata" font-size="22" data-font-size-pt="7.80" fill="#91432D"><tspan x="640" y="1306">СТОП-ГЕЙТ · не допущено к печати.</tspan><tspan x="640" y="1332">Требуется китайская картографическая проверка.</tspan></text>
+    <text font-family="Noto Serif CJK SC" font-size="22" data-font-size-pt="7.80" fill="#211A16"><tspan x="640" y="1364">审图号 не получен · опорные точки</tspan><tspan x="640" y="1390">не проверены.</tspan></text>
+    <text font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#211A16"><tspan x="640" y="1422">PROJ-строка предложена;</tspan><tspan x="640" y="1448">преобразование не выполнялось.</tspan></text>
+    <text x="640" y="1474" font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#91432D">Права на источники: проверка ожидается.</text>
+  </g>
+</svg>
