@@ -109,7 +109,7 @@ test('verifies the frozen package on disk without modifying it', async () => {
     cycleId: reviewCycle.cycleId,
     files: 16,
     roles: 3,
-    activeClaims: 70,
+    activeClaims: 69,
     proofs: 2,
     proofStructureVerified: true,
   })
