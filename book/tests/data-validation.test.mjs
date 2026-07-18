@@ -78,6 +78,16 @@ const expectedTemplateIds = [
   'guide-troubleshooting',
   'guide-safety',
 ]
+const publicationClasses = [
+  'primary-text',
+  'facsimile',
+  'critical-edition',
+  'access-copy',
+  'retrospective',
+  'research',
+  'standard-guidance',
+  'provenance-only',
+]
 const expectedAlbumSections = [
   ['entry', 20, 1, 20],
   ['living-mountain', 26, 21, 46],
@@ -248,7 +258,7 @@ const validateAssetFiles = (...args) => {
 }
 
 test('rejects duplicate source ids', () => {
-  assert.throws(() => validateSources([{ id: 'a', title: 'A', href: 'https://a.example', group: 'guidance', status: 'checked', bookUse: 'core', siteVisible: true }, { id: 'a', title: 'B', href: 'https://b.example', group: 'guidance', status: 'checked', bookUse: 'core', siteVisible: true }]), /duplicate source id: a/)
+  assert.throws(() => validateSources([{ id: 'a', title: 'A', href: 'https://a.example', group: 'guidance', status: 'checked', bookUse: 'core', siteVisible: true, publicationClass: 'standard-guidance' }, { id: 'a', title: 'B', href: 'https://b.example', group: 'guidance', status: 'checked', bookUse: 'core', siteVisible: true, publicationClass: 'standard-guidance' }]), /duplicate source id: a/)
 })
 
 test('rejects missing source ids', () => {
@@ -275,8 +285,17 @@ test('rejects invalid source book use', () => {
   assert.throws(() => validateSources([{ id: 'a', title: 'A', href: 'https://a.example', group: 'guidance', status: 'checked', bookUse: 'other', siteVisible: true }]), /invalid source book use: other/)
 })
 
+test('requires a deliberate publication classification for every source', () => {
+  const valid = { id: 'a', title: 'A', href: 'https://a.example', group: 'guidance', status: 'checked', bookUse: 'core', siteVisible: true }
+  assert.throws(() => validateSources([valid]), /invalid source publication class: undefined/)
+  assert.throws(() => validateSources([{ ...valid, publicationClass: 'misc' }]), /invalid source publication class: misc/)
+  for (const publicationClass of publicationClasses) {
+    assert.doesNotThrow(() => validateSources([{ ...valid, publicationClass }]))
+  }
+})
+
 test('rejects non-boolean source visibility', () => {
-  assert.throws(() => validateSources([{ id: 'a', title: 'A', href: 'https://a.example', group: 'guidance', status: 'checked', bookUse: 'core', siteVisible: 'true' }]), /source siteVisible must be boolean: a/)
+  assert.throws(() => validateSources([{ id: 'a', title: 'A', href: 'https://a.example', group: 'guidance', status: 'checked', bookUse: 'core', siteVisible: 'true', publicationClass: 'standard-guidance' }]), /source siteVisible must be boolean: a/)
 })
 
 test('rejects claims with missing sources', () => {
@@ -526,7 +545,7 @@ test('rejects missing, empty, and whitespace-only asset ids', () => {
 })
 
 test('accepts a complete valid evidence and rights registry', () => {
-  const sourceIds = validateSources([{ id: 's1', title: 'Source', href: 'https://source.example', group: 'guidance', status: 'checked', bookUse: 'core', siteVisible: true }])
+  const sourceIds = validateSources([{ id: 's1', title: 'Source', href: 'https://source.example', group: 'guidance', status: 'checked', bookUse: 'core', siteVisible: true, publicationClass: 'standard-guidance' }])
   const claims = [{ id: 'c1', text: 'Claim', evidence: 'source', sourceIds: ['s1'], status: 'verified' }]
   const claimIds = validateClaims(claims, sourceIds)
   const reviews = [
@@ -672,7 +691,8 @@ test('defines and validates the exact 208-page album allocation and reader sprea
   assert.deepEqual(album.pages.slice(192, 208).map(({ apparatus }) => apparatus), [
     ...Array(6).fill('chronology'),
     ...Array(4).fill('glossary'),
-    ...Array(6).fill('bibliography'),
+    ...Array(5).fill('bibliography'),
+    'publication-notes',
   ])
   assert.equal(album.pages[201].template, 'quiet-text')
   assert.equal(album.pages[202].template, 'bibliography')
@@ -790,7 +810,7 @@ test('allows distinct mapped recipe topics on one guide spread and rejects ordin
     assert.equal(new Set(pages.map(({ spreadTitle }) => spreadTitle)).size, 1, `${spreadId} must carry one combined title`)
   }
   const expectedBookends = new Map([
-    ['G-S019', 'От коротких проливов шоу — к шэну в кружке'],
+    ['G-S019', 'От коротких проливов шу — к шэну в кружке'],
     ['G-S022', 'Шу в кружке — к внимательной дегустации'],
   ])
   for (const [spreadId, expectedTitle] of expectedBookends) {
@@ -1087,7 +1107,7 @@ test('rejects an apparatus page without an allowed marker', () => {
 
   assert.throws(
     () => validateFlatplan(album, 208, templates, new Set(assets.map(({ id }) => id))),
-    /flatplan album: apparatus page A-P193 requires chronology, glossary, or bibliography/,
+    /flatplan album: apparatus page A-P193 requires chronology, glossary, bibliography, or publication-notes/,
   )
 })
 
@@ -1117,7 +1137,7 @@ test('rejects collapsed, reordered, or miscounted apparatus markers', () => {
   for (const plan of [collapsed, reordered, miscounted]) {
     assert.throws(
       () => validateFlatplan(plan, 208, templates, assetIds),
-      /album apparatus must be chronology 193-198, glossary 199-202, bibliography 203-208/,
+      /album apparatus must be chronology 193-198, glossary 199-202, bibliography 203-207, publication-notes 208/,
     )
   }
 })

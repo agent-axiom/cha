@@ -10,6 +10,15 @@ const groupDefinitions = [
   ['research-western', 'Западные исследования'],
   ['guidance', 'Стандарты и рекомендации'],
 ]
+const publicationClassLabels = new Map([
+  ['primary-text', 'Первичный текст'],
+  ['facsimile', 'Факсимиле'],
+  ['critical-edition', 'Критическое издание'],
+  ['access-copy', 'Копия доступа'],
+  ['retrospective', 'Ретроспектива'],
+  ['research', 'Исследование'],
+  ['standard-guidance', 'Стандарт или руководство'],
+])
 
 const clean = (value = '') => String(value ?? '').trim()
 const readJson = (root, relativePath) => JSON.parse(
@@ -190,10 +199,11 @@ const renderSource = (root, source, groupTitle, startsGroup) => {
     formatLocator(source.pages),
     links,
   ].filter(Boolean).join(' ')
+  const classifiedCitation = `**Класс:** ${publicationClassLabels.get(source.publicationClass)}. ${citation}`
   return [
     ...(startsGroup ? [`## ${groupTitle}`] : []),
     `<!-- source:${clean(source.id)} -->`,
-    citation,
+    classifiedCitation,
   ].join('\n\n')
 }
 
@@ -221,7 +231,7 @@ const selectCitedSources = (claims, sources) => {
   for (const source of cited) {
     if (source.status !== 'checked') throw new Error(`cited source is not checked: ${source.id}`)
   }
-  return cited
+  return cited.filter(({ publicationClass }) => publicationClass !== 'provenance-only')
 }
 
 const validateGlossary = (glossary, sources, cited) => {
@@ -260,6 +270,8 @@ export const buildApparatus = ({ root = defaultBookRoot } = {}) => {
   const recognizedGroups = new Set(groupDefinitions.map(([group]) => group))
   const invalidSource = cited.find(({ group }) => !recognizedGroups.has(group))
   if (invalidSource) throw new Error(`cited source has unsupported group: ${invalidSource.id}`)
+  const invalidPublicationClass = cited.find(({ publicationClass }) => !publicationClassLabels.has(publicationClass))
+  if (invalidPublicationClass) throw new Error(`cited source has unsupported publication class: ${invalidPublicationClass.id}`)
 
   const bibliographyItems = groupDefinitions.flatMap(([group, title]) => (
     cited

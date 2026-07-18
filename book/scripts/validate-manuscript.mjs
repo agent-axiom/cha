@@ -32,7 +32,7 @@ const measurementToken = new RegExp(
   String.raw`(?<![\p{L}\p{N}_])(?:1\d{3}|20\d{2})(?:[ \t]*(?:-|–|—)[ \t]*(?:1\d{3}|20\d{2}))?[ \t]*(?:${measurementUnit})(?![\p{L}\p{N}_])`,
   'giu',
 )
-const apparatusYearExemption = /^album\/(?:91|92)-[^/]*\.md$/i
+const apparatusYearExemption = /^album\/(?:89-publication-notes|91-[^/]*|92-[^/]*)\.md$/i
 
 const compareNames = (left, right) => {
   if (left < right) return -1

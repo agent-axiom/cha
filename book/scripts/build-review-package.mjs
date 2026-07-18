@@ -422,7 +422,7 @@ const completeBibliography = (manuscriptBibliography, sources) => {
   const supplement = [
     '# Дополнение к замороженному реестру источников',
     '',
-    'Ниже перечислены проверенные источники реестра, не вошедшие в библиографические полосы frozen proof. Они передаются рецензентам для полноты корпуса и не считаются процитированными на полосе.',
+    'Ниже перечислены проверенные источники реестра, не вошедшие в публикационную библиографию frozen proof. Provenance-only запись исключена из читательских библиографических полос, но передаётся рецензентам для полноты исследовательского корпуса и проверки происхождения отклонённых тезисов.',
     '',
     ...missing.flatMap((source) => [
       `<!-- source:${source.id} -->`,
@@ -646,7 +646,7 @@ export const buildReviewPackage = ({ root = defaultBookRoot, config: suppliedCon
     bibliography: {
       sourcePath: config.bibliographyPath,
       packagePath: 'bibliography.md',
-      coverage: 'all-frozen-sources-with-registry-supplement',
+      coverage: '48-publication-sources-plus-1-provenance-only-registry-supplement',
       sha256: sha256(Buffer.from(bibliography)),
     },
     snapshotFiles: snapshotData.files,

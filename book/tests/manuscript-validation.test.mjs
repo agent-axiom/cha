@@ -699,16 +699,18 @@ test('still rejects draft and tool tokens inside fenced code', () => {
   ])
 })
 
-test('exempts album 91 and 92 apparatus files only from year evidence', () => {
+test('exempts generated apparatus and publication notes only from year evidence', () => {
   const bibliography = validateText('Bibliography entry from 1999.', textOptions({ file: 'album/91-bibliography.md' }))
   const glossary = validateText(
     'Glossary note from 2000. TODO turn0fetch0',
     textOptions({ file: 'album/92-glossary.md' }),
   )
   const ordinary = validateText('Ordinary prose from 2001.', textOptions({ file: 'album/90-notes.md' }))
+  const publicationNotes = validateText('Editorial verification: 2026.', textOptions({ file: 'album/89-publication-notes.md' }))
 
   assert.deepEqual(bibliography.errors, [])
   assert.deepEqual(glossary.errors.map(({ code }) => code), ['draft-token', 'tool-token'])
+  assert.deepEqual(publicationNotes.errors, [])
   assert.deepEqual(ordinary.errors.map(({ code }) => code), ['missing-year-claim'])
 })
 

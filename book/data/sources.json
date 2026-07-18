@@ -1,6 +1,7 @@
 [
   {
     "id": "benn-2015",
+    "publicationClass": "research",
     "title": "Tea in China: A Religious and Cultural History",
     "author": "James A. Benn",
     "year": "2015",
@@ -18,6 +19,7 @@
   },
   {
     "id": "zhang-2013",
+    "publicationClass": "research",
     "title": "Puer Tea: Ancient Caravans and Urban Chic",
     "author": "Jinghong Zhang",
     "year": "2013",
@@ -35,6 +37,7 @@
   },
   {
     "id": "fan-chuo-863",
+    "publicationClass": "access-copy",
     "title": "Мань шу, книга 7: продукты области",
     "author": "Фань Чо",
     "year": "ок. 863",
@@ -52,6 +55,7 @@
   },
   {
     "id": "zhao-1765",
+    "publicationClass": "access-copy",
     "title": "Бэньцао ганму шии: Пуэрский чай",
     "author": "Чжао Сюэминь",
     "year": "1765; позднее дополнено",
@@ -69,6 +73,7 @@
   },
   {
     "id": "ruan-puer-cha-ji-access",
+    "publicationClass": "access-copy",
     "title": "Записка о пуэрском чае",
     "author": "Жуань Фу",
     "year": "эпоха Цин; обычно датируется ок. 1825–1826, точная дата не подтверждена",
@@ -86,6 +91,7 @@
   },
   {
     "id": "vinogrodsky-user-excerpt",
+    "publicationClass": "provenance-only",
     "title": "Путь чая — фрагмент, предоставленный пользователем",
     "author": "Бронислав Виногродский",
     "year": "не предоставлен",
@@ -103,6 +109,7 @@
   },
   {
     "id": "puer-wuhou",
+    "publicationClass": "retrospective",
     "title": "方志里的普洱：普洱茶",
     "author": "Историко-партийный отдел города Пуэр",
     "year": "2024",
@@ -120,6 +127,7 @@
   },
   {
     "id": "fan-chuo-zhao-1985",
+    "publicationClass": "critical-edition",
     "title": "云南志校释 (комментированное издание «Юньнань чжи» / «Мань шу»)",
     "author": "樊绰 (Фань Чо); 校释: 赵吕甫 (Чжао Люйфу)",
     "year": "1985",
@@ -137,6 +145,7 @@
   },
   {
     "id": "zhao-facsimile-pku",
+    "publicationClass": "facsimile",
     "title": "本草綱目拾遺（六）: 普洱茶",
     "author": "趙學敏 (Чжао Сюэминь)",
     "year": "эпоха Цин; точная дата данного списка не указана",
@@ -154,6 +163,7 @@
   },
   {
     "id": "zhao-renmin-1957",
+    "publicationClass": "critical-edition",
     "title": "本草纲目拾遗",
     "author": "赵学敏 (Чжао Сюэминь)",
     "year": "1957",
@@ -171,6 +181,7 @@
   },
   {
     "id": "fantianlu-vol18-scan",
+    "publicationClass": "facsimile",
     "title": "梵天廬叢錄（全十八冊）, 冊十八",
     "author": "柴萼 (Чай Э)",
     "year": "1926; скан 4-го издания 1936 года",
@@ -188,6 +199,7 @@
   },
   {
     "id": "ruan-dianbi-catalog",
+    "publicationClass": "access-copy",
     "title": "滇筆不分卷",
     "author": "阮福 (Жуань Фу)",
     "year": "эпоха Цин; обычно датируется ок. 1825–1826, точная дата списка не подтверждена",
@@ -205,6 +217,7 @@
   },
   {
     "id": "lu-2016-earliest-tea",
+    "publicationClass": "research",
     "title": "Earliest tea as evidence for one branch of the Silk Road across the Tibetan Plateau",
     "author": "Houyuan Lu et al.",
     "year": "2016",
@@ -222,6 +235,7 @@
   },
   {
     "id": "jiang-2021-warring-tea",
+    "publicationClass": "research",
     "title": "The analysis and identification of charred suspected tea remains unearthed from Warring State Period Tomb",
     "author": "Jianrong Jiang, Guoquan Lu, Qing Wang, Shuya Wei",
     "year": "2021",
@@ -239,6 +253,7 @@
   },
   {
     "id": "gbt-22111",
+    "publicationClass": "standard-guidance",
     "title": "GB/T 22111-2008 — географическое указание «Пуэрский чай»",
     "author": "Государственное управление по регулированию рынка КНР",
     "year": "2008",
@@ -256,6 +271,7 @@
   },
   {
     "id": "yunnan-2023",
+    "publicationClass": "standard-guidance",
     "title": "Разъяснение определения пуэрского чая по GB/T 22111-2008",
     "author": "Департамент сельского хозяйства провинции Юньнань",
     "year": "2023",
@@ -273,6 +289,7 @@
   },
   {
     "id": "lv-2013",
+    "publicationClass": "research",
     "title": "Processing and chemical constituents of Pu-erh tea: A review",
     "author": "Hai-peng Lv, Ying-jun Zhang, Zhi Lin, Yue-rong Liang",
     "year": "2013",
@@ -290,8 +307,9 @@
   },
   {
     "id": "fan-2022",
+    "publicationClass": "research",
     "title": "Chemical constituents and biological properties of Pu-erh tea",
-    "author": "Fan et al.",
+    "author": "Sunan Wang, Yi Qiu, Ren-You Gan, Fan Zhu",
     "year": "2022",
     "href": "https://pubmed.ncbi.nlm.nih.gov/35337597/",
     "group": "research-asian",
@@ -307,6 +325,7 @@
   },
   {
     "id": "xu-2022",
+    "publicationClass": "research",
     "title": "Regulation of fungal community and the quality formation and safety control of Pu-erh tea",
     "author": "Jia Xu, Yang Wei, Fanglan Li, Xinchu Weng, Xinlin Wei",
     "year": "2022",
@@ -324,6 +343,7 @@
   },
   {
     "id": "jensen-2016",
+    "publicationClass": "research",
     "title": "Reduction of body fat and improved lipid profile associated with daily consumption of a Puer tea extract in a hyperlipidemic population: a randomized placebo-controlled trial",
     "author": "Gitte S. Jensen, Joni L. Beaman, Yi He, Zhixin Guo, Henry Sun",
     "year": "2016",
@@ -341,6 +361,7 @@
   },
   {
     "id": "nct06401161",
+    "publicationClass": "standard-guidance",
     "title": "Study on the Effect of 3T Pu'er Tea in Regulating Glucose and Lipid Metabolism",
     "author": "Longgang District People's Hospital of Shenzhen",
     "year": "2024",
@@ -358,6 +379,7 @@
   },
   {
     "id": "yang-2014-weight",
+    "publicationClass": "research",
     "title": "Weight reduction effect of Puerh tea in male patients with metabolic syndrome",
     "author": "Tsung-Yuan Yang, Janet I. Chou, Kwo-Chang Ueng, Ming-Yung Chou, Jaw-Ji Yang, Shoei-Yn Lin-Shiau, Ming-E Hu, Jen-Kun Lin",
     "year": "2014",
@@ -375,6 +397,7 @@
   },
   {
     "id": "zielinska-przyjemska-2005",
+    "publicationClass": "research",
     "title": "[Effect of tea polyphenols on oxidative metabolism of polymorphonuclear neutrophils in healthy and obese people]",
     "author": "Małgorzata Zielińska-Przyjemska, Agnieszka Dobrowolska-Zachwieja",
     "year": "2005",
@@ -392,6 +415,7 @@
   },
   {
     "id": "chu-2011",
+    "publicationClass": "research",
     "title": "A randomized double-blind placebo-controlled study of Pu'er tea extract on the regulation of metabolic syndrome",
     "author": "Song-Ling Chu, Hong Fu, Jin-Xia Yang, Geng-Xin Liu, Pan Dou, Liang Zhang, Peng-Fei Tu, Xue-Mei Wang",
     "year": "2011",
@@ -409,6 +433,7 @@
   },
   {
     "id": "sedova-2018",
+    "publicationClass": "research",
     "title": "Mycotoxins in Tea: Occurrence, Methods of Determination and Risk Evaluation",
     "author": "I. Sedova, V. Kiseleva, V. Tutelyan",
     "year": "2018",
@@ -426,6 +451,7 @@
   },
   {
     "id": "efsa-caffeine",
+    "publicationClass": "standard-guidance",
     "title": "Caffeine: safe intakes",
     "author": "European Food Safety Authority",
     "year": "2015",
@@ -443,6 +469,7 @@
   },
   {
     "id": "who-pregnancy",
+    "publicationClass": "standard-guidance",
     "title": "Restricting caffeine intake during pregnancy",
     "author": "World Health Organization",
     "year": "2023",
@@ -460,6 +487,7 @@
   },
   {
     "id": "unesco-jingmai",
+    "publicationClass": "standard-guidance",
     "title": "Cultural Landscape of Old Tea Forests of the Jingmai Mountain in Pu’er",
     "author": "UNESCO World Heritage Centre",
     "year": "2023",
@@ -477,6 +505,7 @@
   },
   {
     "id": "db5308-processing-2020",
+    "publicationClass": "standard-guidance",
     "title": "DB5308/T 58—2020 — 普洱茶加工技术规程 (Технический регламент переработки пуэра)",
     "author": "普洱市市场监督管理局; 普洱市茶叶科学研究所",
     "year": "2020",
@@ -494,6 +523,7 @@
   },
   {
     "id": "db5308-storage-2020",
+    "publicationClass": "standard-guidance",
     "title": "DB5308/T 53—2020 — 普洱茶贮存技术规范 (Технический регламент хранения пуэра)",
     "author": "普洱市市场监督管理局; 国家普洱茶产品质量监督检验中心 и соавторы",
     "year": "2020",
@@ -511,6 +541,7 @@
   },
   {
     "id": "gbt-30375-2013",
+    "publicationClass": "standard-guidance",
     "title": "GB/T 30375-2013 — 茶叶贮存 (Tea storage)",
     "author": "国家标准化管理委员会; 全国茶叶标准化技术委员会 (TC339)",
     "year": "2013",
@@ -528,6 +559,7 @@
   },
   {
     "id": "dayi-history-1973",
+    "publicationClass": "retrospective",
     "title": "大益历史 / TAETEA History",
     "author": "云南大益茶业集团 / Menghai Tea Factory",
     "year": "без даты",
@@ -545,6 +577,7 @@
   },
   {
     "id": "yunnan-agri-2018-shou",
+    "publicationClass": "standard-guidance",
     "title": "对云南省十三届人大第一次会议第0270号建议的答复",
     "author": "云南省农业厅",
     "year": "2018",
@@ -562,6 +595,7 @@
   },
   {
     "id": "guangzhou-db4401-258-2024",
+    "publicationClass": "standard-guidance",
     "title": "DB4401/T 258—2024 茶文化服务规范",
     "author": "广州市市场监督管理局",
     "year": "2024",
@@ -579,6 +613,7 @@
   },
   {
     "id": "yunnan-net-shou-2021",
+    "publicationClass": "retrospective",
     "title": "云南现代熟茶的诞生",
     "author": "茶叶复兴; перепечатано 云南网",
     "year": "2021",
@@ -596,6 +631,7 @@
   },
   {
     "id": "fda-water-activity",
+    "publicationClass": "standard-guidance",
     "title": "Water Activity (aw) in Foods",
     "author": "U.S. Food and Drug Administration",
     "year": "1984",
@@ -613,6 +649,7 @@
   },
   {
     "id": "abe-2008",
+    "publicationClass": "research",
     "title": "Characteristic fungi observed in the fermentation process for Puer tea",
     "author": "Michiharu Abe, Naohiro Takaoka, Yoshito Idemoto, Chihiro Takagi, Takuji Imai, Kiyohiko Nakasaki",
     "year": "2008",
@@ -630,6 +667,7 @@
   },
   {
     "id": "ma-2017",
+    "publicationClass": "research",
     "title": "Microbial Succession and the Dynamics of Chemical Compounds during the Solid-State Fermentation of Pu-erh Tea",
     "author": "Yan Ma, Shuangmei Duan, Donglian Zhang, Xiaoqin Su, Dongying Zhang, Caiyou Lv, Ming Zhao",
     "year": "2017",
@@ -647,6 +685,7 @@
   },
   {
     "id": "zhang-microbiome-2016",
+    "publicationClass": "research",
     "title": "The Microbiome and Metabolites in Fermented Pu-erh Tea as Revealed by High-Throughput Sequencing and Quantitative Multiplex Metabolite Analysis",
     "author": "Yongjie Zhang, Ida Skaar, Michael Sulyok, Xingzhong Liu, Mingyong Rao, John W. Taylor",
     "year": "2016",
@@ -664,6 +703,7 @@
   },
   {
     "id": "zhao-metaomics-2019",
+    "publicationClass": "research",
     "title": "Integrated Meta-omics Approaches To Understand the Microbiome of Spontaneous Fermentation of Traditional Chinese Pu-erh Tea",
     "author": "Ming Zhao et al.",
     "year": "2019",
@@ -681,6 +721,7 @@
   },
   {
     "id": "haas-2013",
+    "publicationClass": "research",
     "title": "Identification and quantification of fungi and mycotoxins from Pu-erh tea",
     "author": "Doris Haas, Bettina Pfeifer, Christoph Reiterich, Regina Partenheimer, Bernhard Reck, Walter Buzina",
     "year": "2013",
@@ -698,6 +739,7 @@
   },
   {
     "id": "chau-2023",
+    "publicationClass": "research",
     "title": "Simultaneous Determination of Pesticide Residues and Mycotoxins in Storage Pu-erh Tea Using Ultra-High-Performance Liquid Chromatography Coupled with Tandem Mass Spectrometry",
     "author": "Siu Leung Chau, Aihua Zhao, Wei Jia, Lu Wang",
     "year": "2023",
@@ -715,6 +757,7 @@
   },
   {
     "id": "fujita-2008-safety",
+    "publicationClass": "research",
     "title": "Efficacy and safety of Chinese black tea (Pu-Ehr) extract in healthy and hypercholesterolemic subjects",
     "author": "Hiroyuki Fujita, Tomohide Yamagami",
     "year": "2008",
@@ -732,6 +775,7 @@
   },
   {
     "id": "fujita-2008-trial",
+    "publicationClass": "research",
     "title": "Antihypercholesterolemic effect of Chinese black tea extract in human subjects with borderline hypercholesterolemia",
     "author": "Hiroyuki Fujita, Tomohide Yamagami",
     "year": "2008",
@@ -749,6 +793,7 @@
   },
   {
     "id": "kubota-2011",
+    "publicationClass": "research",
     "title": "Improvements of mean body mass index and body weight in preobese and overweight Japanese adults with black Chinese tea (Pu-Erh) water extract",
     "author": "Kazumitsu Kubota et al.",
     "year": "2011",
@@ -766,6 +811,7 @@
   },
   {
     "id": "xie-2012",
+    "publicationClass": "research",
     "title": "Metabolic fate of tea polyphenols in humans",
     "author": "Guoxiang Xie et al.",
     "year": "2012",
@@ -783,6 +829,7 @@
   },
   {
     "id": "yang-2019-systematic",
+    "publicationClass": "research",
     "title": "Inhibitory effects of pu-erh tea on alpha glucosidase and alpha amylase: a systemic review",
     "author": "Chiung-Ying Yang, Yea-Yin Yen, Kuang-Chen Hung, Shang-Wei Hsu, Shou-Jen Lan, Hsin-Cheng Lin",
     "year": "2019",
@@ -800,6 +847,7 @@
   },
   {
     "id": "fda-caffeine-2024",
+    "publicationClass": "standard-guidance",
     "title": "Spilling the Beans: How Much Caffeine is Too Much?",
     "author": "U.S. Food and Drug Administration",
     "year": "2024",
@@ -817,6 +865,7 @@
   },
   {
     "id": "lin-2019-meta",
+    "publicationClass": "research",
     "title": "Systematic review and meta-analysis of anti-hyperglycaemic effects of Pu-erh tea",
     "author": "Hsin-Cheng Lin, Chien-Tai Lee, Yea-Yin Yen, Chiao-Lee Chu, Yen-Ping Hsieh, Chi-Sheng Yang, Shou-Jen Lan",
     "year": "2019",

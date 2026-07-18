@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" data-asset-id="diagram-wodui-heat" data-asset-class="diagram" data-visual-mode="explanatory-diagram" data-min-placement-width-mm="150" data-min-placement-height-mm="187.5" data-min-font-size-pt="7.5" data-min-stroke-width-mm="0.2" role="img" aria-labelledby="wodui-title wodui-desc">
-  <title id="wodui-title">Wodui: тепло, действия и неопределённость</title>
+  <title id="wodui-title">Водуй: тепло, действия и неопределённость</title>
   <desc id="wodui-desc">Условная стадийная температурная траектория влажной кучи и гипотетическая схема пространственного отбора, ясно отделённая от измеренной универсальной карты процесса.</desc>
   <rect x="0" y="0" width="1200" height="1500" fill="#E9DECA"/>
   <rect x="0" y="0" width="34" height="1500" fill="#91432D"/>
@@ -100,7 +100,7 @@
   </g>
 
   <g id="labels">
-    <text x="74" y="140" font-family="Cormorant" font-size="56" data-font-size-pt="19.84" fill="#211A16">Wodui: тепло как событие</text>
+    <text x="74" y="140" font-family="Cormorant" font-size="56" data-font-size-pt="19.84" fill="#211A16">Водуй: тепло как событие</text>
     <text x="76" y="184" font-family="Literata" font-size="28" data-font-size-pt="9.92" fill="#91432D">Кривая включает среду, материал и работу людей</text>
     <text x="74" y="1090" font-family="Cormorant" font-size="42" data-font-size-pt="14.88" fill="#211A16">Что линия не сообщает</text>
     <text x="74" y="1134" font-family="Literata" font-size="26" data-font-size-pt="9.21" fill="#211A16">Она не назначает единственную причину тепла, точный срок</text>

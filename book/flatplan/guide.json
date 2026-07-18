@@ -139,13 +139,13 @@
         },
         {
           "id": "sheng-t07",
-          "title": "От прозрачной динамики шэна — к плотности шоу"
+          "title": "От прозрачной динамики шэна — к плотности шу"
         }
       ]
     },
     {
       "id": "shou",
-      "title": "Заваривание шоу",
+      "title": "Заваривание шу",
       "pageCount": 8,
       "start": 29,
       "end": 36,
@@ -156,28 +156,28 @@
         },
         {
           "id": "shou-t02",
-          "title": "Рассыпной шоу в гайвани",
+          "title": "Рассыпной шу в гайвани",
           "expectedMethodIds": [
             "gaiwan-shou-loose"
           ]
         },
         {
           "id": "shou-t03",
-          "title": "Прессованный шоу в гайвани",
+          "title": "Прессованный шу в гайвани",
           "expectedMethodIds": [
             "gaiwan-shou-compressed"
           ]
         },
         {
           "id": "shou-t04",
-          "title": "Рассыпной шоу в чайнике",
+          "title": "Рассыпной шу в чайнике",
           "expectedMethodIds": [
             "teapot-shou-loose"
           ]
         },
         {
           "id": "shou-t05",
-          "title": "Прессованный шоу в чайнике",
+          "title": "Прессованный шу в чайнике",
           "expectedMethodIds": [
             "teapot-shou-compressed"
           ]
@@ -188,7 +188,7 @@
         },
         {
           "id": "shou-t07",
-          "title": "От коротких проливов шоу — к шэну в кружке"
+          "title": "От коротких проливов шу — к шэну в кружке"
         }
       ]
     },
@@ -761,8 +761,8 @@
       "spreadId": "G-S015",
       "sectionId": "sheng",
       "topicId": "sheng-t07",
-      "spreadTitle": "От прозрачной динамики шэна — к плотности шоу",
-      "role": "Подводит итог раздела «Заваривание шэна» через тему «От прозрачной динамики шэна — к плотности шоу»",
+      "spreadTitle": "От прозрачной динамики шэна — к плотности шу",
+      "role": "Подводит итог раздела «Заваривание шэна» через тему «От прозрачной динамики шэна — к плотности шу»",
       "spreadTemplate": "guide-troubleshooting",
       "template": "guide-troubleshooting",
       "assetIds": [],
@@ -775,7 +775,7 @@
       "sectionId": "shou",
       "topicId": "shou-t01",
       "spreadTitle": "Шу: чистота аромата и управляемая плотность",
-      "role": "Открывает раздел «Заваривание шоу» темой «Чистота аромата и управляемая плотность»",
+      "role": "Открывает раздел «Заваривание шу» темой «Чистота аромата и управляемая плотность»",
       "spreadTemplate": "guide-troubleshooting",
       "template": "chapter-gate",
       "assetIds": [],
@@ -788,14 +788,14 @@
       "spreadId": "G-S016",
       "sectionId": "shou",
       "topicId": "shou-t02",
-      "spreadTitle": "Рассыпной и прессованный шоу в гайвани",
-      "role": "Фиксирует воспроизводимый метод «Рассыпной шоу в гайвани» и одну понятную корректировку",
+      "spreadTitle": "Рассыпной и прессованный шу в гайвани",
+      "role": "Фиксирует воспроизводимый метод «Рассыпной шу в гайвани» и одну понятную корректировку",
       "spreadTemplate": "guide-recipe",
       "template": "guide-recipe",
       "assetIds": [],
       "recipe": {
         "recipeId": "gaiwan-loose-shou",
-        "title": "Рассыпной шоу в гайвани",
+        "title": "Рассыпной шу в гайвани",
         "methodId": "gaiwan-shou-loose",
         "teaStyle": "shou",
         "vesselVolumeMl": 100,
@@ -817,14 +817,14 @@
       "spreadId": "G-S016",
       "sectionId": "shou",
       "topicId": "shou-t03",
-      "spreadTitle": "Рассыпной и прессованный шоу в гайвани",
-      "role": "Фиксирует воспроизводимый метод «Прессованный шоу в гайвани» и одну понятную корректировку",
+      "spreadTitle": "Рассыпной и прессованный шу в гайвани",
+      "role": "Фиксирует воспроизводимый метод «Прессованный шу в гайвани» и одну понятную корректировку",
       "spreadTemplate": "guide-recipe",
       "template": "guide-recipe",
       "assetIds": [],
       "recipe": {
         "recipeId": "gaiwan-compressed-shou",
-        "title": "Прессованный шоу в гайвани",
+        "title": "Прессованный шу в гайвани",
         "methodId": "gaiwan-shou-compressed",
         "teaStyle": "shou",
         "vesselVolumeMl": 100,
@@ -846,14 +846,14 @@
       "spreadId": "G-S017",
       "sectionId": "shou",
       "topicId": "shou-t04",
-      "spreadTitle": "Рассыпной и прессованный шоу в чайнике",
-      "role": "Фиксирует воспроизводимый метод «Рассыпной шоу в чайнике» и одну понятную корректировку",
+      "spreadTitle": "Рассыпной и прессованный шу в чайнике",
+      "role": "Фиксирует воспроизводимый метод «Рассыпной шу в чайнике» и одну понятную корректировку",
       "spreadTemplate": "guide-recipe",
       "template": "guide-recipe",
       "assetIds": [],
       "recipe": {
         "recipeId": "teapot-loose-shou",
-        "title": "Рассыпной шоу в чайнике",
+        "title": "Рассыпной шу в чайнике",
         "methodId": "teapot-shou-loose",
         "teaStyle": "shou",
         "vesselVolumeMl": 140,
@@ -875,14 +875,14 @@
       "spreadId": "G-S017",
       "sectionId": "shou",
       "topicId": "shou-t05",
-      "spreadTitle": "Рассыпной и прессованный шоу в чайнике",
-      "role": "Фиксирует воспроизводимый метод «Прессованный шоу в чайнике» и одну понятную корректировку",
+      "spreadTitle": "Рассыпной и прессованный шу в чайнике",
+      "role": "Фиксирует воспроизводимый метод «Прессованный шу в чайнике» и одну понятную корректировку",
       "spreadTemplate": "guide-recipe",
       "template": "guide-recipe",
       "assetIds": [],
       "recipe": {
         "recipeId": "teapot-compressed-shou",
-        "title": "Прессованный шоу в чайнике",
+        "title": "Прессованный шу в чайнике",
         "methodId": "teapot-shou-compressed",
         "teaStyle": "shou",
         "vesselVolumeMl": 140,
@@ -928,8 +928,8 @@
       "spreadId": "G-S019",
       "sectionId": "shou",
       "topicId": "shou-t07",
-      "spreadTitle": "От коротких проливов шоу — к шэну в кружке",
-      "role": "Подводит итог коротким проливам шоу и передаёт читателя к шэну в кружке",
+      "spreadTitle": "От коротких проливов шу — к шэну в кружке",
+      "role": "Подводит итог коротким проливам шу и передаёт читателя к шэну в кружке",
       "spreadTemplate": "guide-recipe",
       "template": "guide-troubleshooting",
       "assetIds": [],
@@ -941,7 +941,7 @@
       "spreadId": "G-S019",
       "sectionId": "simple-methods",
       "topicId": "simple-methods-t01",
-      "spreadTitle": "От коротких проливов шоу — к шэну в кружке",
+      "spreadTitle": "От коротких проливов шу — к шэну в кружке",
       "role": "Открывает раздел «Простые методы» практической карточкой «Шэн в кружке»",
       "spreadTemplate": "guide-recipe",
       "template": "guide-recipe",
@@ -972,7 +972,7 @@
       "spreadId": "G-S020",
       "sectionId": "simple-methods",
       "topicId": "simple-methods-t02",
-      "spreadTitle": "Большой чайник: шэн и шоу для компании",
+      "spreadTitle": "Большой чайник: шэн и шу для компании",
       "role": "Фиксирует воспроизводимый метод «Шэн в большом чайнике» и одну понятную корректировку",
       "spreadTemplate": "guide-recipe",
       "template": "guide-recipe",
@@ -1001,7 +1001,7 @@
       "spreadId": "G-S020",
       "sectionId": "simple-methods",
       "topicId": "simple-methods-t03",
-      "spreadTitle": "Большой чайник: шэн и шоу для компании",
+      "spreadTitle": "Большой чайник: шэн и шу для компании",
       "role": "Фиксирует воспроизводимый метод «Шу в большом чайнике» и одну понятную корректировку",
       "spreadTemplate": "guide-recipe",
       "template": "guide-recipe",
@@ -1030,7 +1030,7 @@
       "spreadId": "G-S021",
       "sectionId": "simple-methods",
       "topicId": "simple-methods-t04",
-      "spreadTitle": "Термос: длинная экстракция шэна и шоу",
+      "spreadTitle": "Термос: длинная экстракция шэна и шу",
       "role": "Фиксирует воспроизводимый метод «Шэн в термосе» и одну понятную корректировку",
       "spreadTemplate": "guide-recipe",
       "template": "guide-recipe",
@@ -1059,7 +1059,7 @@
       "spreadId": "G-S021",
       "sectionId": "simple-methods",
       "topicId": "simple-methods-t05",
-      "spreadTitle": "Термос: длинная экстракция шэна и шоу",
+      "spreadTitle": "Термос: длинная экстракция шэна и шу",
       "role": "Фиксирует воспроизводимый метод «Шу в термосе» и одну понятную корректировку",
       "spreadTemplate": "guide-recipe",
       "template": "guide-recipe",
@@ -1119,7 +1119,7 @@
       "sectionId": "tasting",
       "topicId": "tasting-t01",
       "spreadTitle": "Шу в кружке — к внимательной дегустации",
-      "role": "Открывает раздел «Дегустация» переходом от шоу в кружке к наблюдению цвета, аромата, вкуса и послевкусия",
+      "role": "Открывает раздел «Дегустация» переходом от шу в кружке к наблюдению цвета, аромата, вкуса и послевкусия",
       "spreadTemplate": "chapter-gate",
       "template": "chapter-gate",
       "assetIds": [

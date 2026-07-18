@@ -81,7 +81,8 @@ const assetSpecs = [
     path: 'book/assets/diagrams/wodui-heat.svg',
     layers: ['axes', 'measurements', 'process-stages', 'uncertainty', 'labels', 'legend', 'sources'],
     minimumSemanticGroups: 3,
-    terms: [/wodui/iu, /увлажнен/iu, /температур/iu, /переворот/iu, /сушк/iu, /°C/u, /условн|не универсаль/iu],
+    terms: [/водуй/iu, /увлажнен/iu, /температур/iu, /переворот/iu, /сушк/iu, /°C/u, /условн|не универсаль/iu],
+    forbiddenTerms: [/\bwodui\b/iu],
   },
   {
     id: 'diagram-medical-evidence-scale',

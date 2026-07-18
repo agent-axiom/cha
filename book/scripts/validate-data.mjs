@@ -23,6 +23,16 @@ export function validateSources(sources) {
     oneOf(source.group, ['primary-asian', 'research-asian', 'research-western', 'guidance'], 'invalid source group')
     oneOf(source.status, ['candidate', 'checked', 'rejected'], 'invalid source status')
     oneOf(source.bookUse, ['core', 'supporting', 'access-copy', 'rejected'], 'invalid source book use')
+    oneOf(source.publicationClass, [
+      'primary-text',
+      'facsimile',
+      'critical-edition',
+      'access-copy',
+      'retrospective',
+      'research',
+      'standard-guidance',
+      'provenance-only',
+    ], 'invalid source publication class')
     if (typeof source.siteVisible !== 'boolean') throw new Error(`source siteVisible must be boolean: ${source.id}`)
   }
   return seen
@@ -275,7 +285,7 @@ const requiredFlatplanTemplateIds = [
   'guide-troubleshooting',
   'guide-safety',
 ]
-const apparatusKinds = ['chronology', 'glossary', 'bibliography']
+const apparatusKinds = ['chronology', 'glossary', 'bibliography', 'publication-notes']
 
 export const effectiveDpi = (pixels, millimetres) => pixels / (millimetres / 25.4)
 
@@ -804,7 +814,7 @@ export function validateFlatplan(plan, expectedPages, templates, assetIds) {
 
     const isAlbumApparatus = plan.id === 'album' && page.sectionId === 'apparatus'
     if (isAlbumApparatus && !apparatusKinds.includes(page.apparatus)) {
-      fail(`apparatus page ${page.id} requires chronology, glossary, or bibliography`)
+      fail(`apparatus page ${page.id} requires chronology, glossary, bibliography, or publication-notes`)
     }
     if (!isAlbumApparatus && hasOwn(page, 'apparatus')) {
       pageFail('apparatus is only allowed on album apparatus pages')
@@ -873,14 +883,15 @@ export function validateFlatplan(plan, expectedPages, templates, assetIds) {
     const expectedApparatus = [
       ...Array(6).fill('chronology'),
       ...Array(4).fill('glossary'),
-      ...Array(6).fill('bibliography'),
+      ...Array(5).fill('bibliography'),
+      'publication-notes',
     ]
     const actualApparatus = plan.pages.slice(192, 208).map((page) => page.apparatus)
     if (
       plan.pages.slice(192, 208).some((page) => page.sectionId !== 'apparatus')
       || JSON.stringify(actualApparatus) !== JSON.stringify(expectedApparatus)
     ) {
-      fail('album apparatus must be chronology 193-198, glossary 199-202, bibliography 203-208')
+      fail('album apparatus must be chronology 193-198, glossary 199-202, bibliography 203-207, publication-notes 208')
     }
   }
 

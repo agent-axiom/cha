@@ -28,6 +28,7 @@ const sourceRecord = (overrides = {}) => ({
   year: '2026',
   group: 'guidance',
   status: 'checked',
+  publicationClass: 'standard-guidance',
   href: 'https://example.test/source',
   ...overrides,
 })
@@ -106,7 +107,7 @@ test('generates the exact marker-first glossary and bibliography page ranges', (
   const bibliographyText = fs.readFileSync(bibliographyPath, 'utf8')
 
   assertMarkerFirstPages(glossaryText, ['A-P199', 'A-P200', 'A-P201', 'A-P202'])
-  assertMarkerFirstPages(bibliographyText, ['A-P203', 'A-P204', 'A-P205', 'A-P206', 'A-P207', 'A-P208'])
+  assertMarkerFirstPages(bibliographyText, ['A-P203', 'A-P204', 'A-P205', 'A-P206', 'A-P207'])
 })
 
 test('cites the deduplicated non-rejected claim union in fixed groups and stable order', () => {
@@ -116,19 +117,20 @@ test('cites the deduplicated non-rejected claim union in fixed groups and stable
   const citedIds = new Set(
     claims.filter(({ status }) => status !== 'rejected').flatMap(({ sourceIds: ids = [] }) => ids),
   )
-  const cited = sources.filter(({ id }) => citedIds.has(id))
+  const cited = sources.filter(({ id, publicationClass }) => citedIds.has(id) && publicationClass !== 'provenance-only')
   const groups = [
     ['primary-asian', 'Китайские первоисточники', 9],
     ['research-asian', 'Азиатские исследования', 21],
-    ['research-western', 'Западные исследования', 6],
+    ['research-western', 'Западные исследования', 5],
     ['guidance', 'Стандарты и рекомендации', 13],
   ]
   const expectedIds = groups.flatMap(([group]) => cited.filter((source) => source.group === group).sort(compareSources).map(({ id }) => id))
 
-  assert.equal(cited.length, 49)
+  assert.equal(cited.length, 48)
   assert.equal(citedIds.has('xu-2022'), true)
   assert.deepEqual(sourceIds(bibliographyText), expectedIds)
-  assert.equal(new Set(sourceIds(bibliographyText)).size, 49)
+  assert.equal(new Set(sourceIds(bibliographyText)).size, 48)
+  assert.equal(sourceIds(bibliographyText).includes('vinogrodsky-user-excerpt'), false)
   for (const [group, title, count] of groups) {
     assert.equal(cited.filter((source) => source.group === group).length, count)
     assert.equal((bibliographyText.match(new RegExp(`^## ${title}$`, 'gm')) ?? []).length, 1)
@@ -141,14 +143,13 @@ test('normalizes author punctuation and formats page, article, e-locator, facsim
   const bibliographyText = fs.readFileSync(bibliographyPath, 'utf8')
 
   assert.doesNotMatch(bibliographyText, /\bet al\.\./u)
-  assert.ok(bibliographyText.includes('Fan et al. *Chemical constituents and biological properties of Pu-erh tea*.'))
+  assert.ok(bibliographyText.includes('Sunan Wang, Yi Qiu, Ren-You Gan, Fan Zhu. *Chemical constituents and biological properties of Pu-erh tea*.'))
   assert.doesNotMatch(bibliographyText, /С\. (?:article|листы|e\d|EFSA Journal|не предоставлены)/iu)
   assert.ok(bibliographyText.includes('С. 21–31, 200.'))
   assert.ok(bibliographyText.includes('Статья 166.'))
   assert.ok(bibliographyText.includes('Электронный локатор e0157847.'))
   assert.ok(bibliographyText.includes('Листы скана 121–123.'))
   assert.ok(bibliographyText.includes('EFSA Journal 13(5):4102, 1–120.'))
-  assert.ok(bibliographyText.includes('Страницы не предоставлены.'))
 })
 
 test('renders canonical DOI and source href values only as validator-safe Markdown links', () => {
@@ -158,9 +159,7 @@ test('renders canonical DOI and source href values only as validator-safe Markdo
 
   assert.doesNotMatch(withoutMarkdownDestinations, /https?:\/\/|www\./iu)
   for (const source of sources.filter(({ id }) => sourceIds(bibliographyText).includes(id))) {
-    const emittedHref = source.id === 'vinogrodsky-user-excerpt'
-      ? '../../research/history.md#vinogrodsky-user-excerpt'
-      : source.href
+    const emittedHref = source.href
     assert.ok(bibliographyText.includes(`[Источник](${emittedHref})`) || bibliographyText.includes(`[DOI](${emittedHref})`), source.id)
     if (source.doi) {
       const normalizedDoi = source.doi.replace(/^https?:\/\/doi\.org\//iu, '')
@@ -174,7 +173,7 @@ test('rebases local data hrefs for the album and every emitted local target is a
   const destinations = [...bibliographyText.matchAll(/\[[^\]]+\]\(([^)\r\n]+)\)/g)].map((match) => match[1])
   const localDestinations = destinations.filter((destination) => !/^https?:\/\//iu.test(destination))
 
-  assert.deepEqual(localDestinations, ['../../research/history.md#vinogrodsky-user-excerpt'])
+  assert.deepEqual(localDestinations, [])
   for (const destination of localDestinations) {
     const pathname = decodeURIComponent(destination.split(/[?#]/u, 1)[0])
     const resolved = path.resolve(albumRoot, pathname)

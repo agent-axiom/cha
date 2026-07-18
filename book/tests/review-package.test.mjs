@@ -86,6 +86,10 @@ test('includes the exact generated bibliography and blank response templates', (
   assert.equal(bibliographyIds.length, 49)
   assert.deepEqual(bibliographyIds, sourceIds)
   assert.match(bibliography, /<!-- source:xu-2022 -->/u)
+  assert.match(bibliography, /# Дополнение к замороженному реестру источников/u)
+  assert.match(bibliography, /<!-- source:vinogrodsky-user-excerpt -->/u)
+  assert.match(bibliography, /Provenance-only запись исключена из читательских библиографических полос/u)
+  assert.equal(result.manifest.bibliography.coverage, '48-publication-sources-plus-1-provenance-only-registry-supplement')
   assert.equal(result.manifest.bibliography.sha256, sha256(Buffer.from(bibliography)))
   for (const role of ['historian', 'technologist', 'medical']) {
     const template = JSON.parse(result.files.get(`responses/${role}.template.json`))
@@ -99,7 +103,7 @@ test('includes the exact generated bibliography and blank response templates', (
   const medical = JSON.parse(result.files.get('responses/medical.template.json'))
   assert.deepEqual(
     medical.decisions.find(({ claimId }) => claimId === 'medical-mycotoxin-evidence-limited').pageIdsToReview,
-    ['A-P146'],
+    ['A-P146', 'G-P048'],
   )
 })
 
