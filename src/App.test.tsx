@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import axe from 'axe-core'
 import { describe, expect, it } from 'vitest'
 import { App } from './App'
@@ -30,6 +30,55 @@ describe('application shell', () => {
       '#content',
     )
     expect(screen.getByRole('main')).toHaveAttribute('id', 'content')
+  })
+
+  it('orders the story and navigation as a learning path', () => {
+    render(<App />)
+
+    const mainSectionIds = Array.from(screen.getByRole('main').children).map(
+      (section) => section.id,
+    )
+    expect(mainSectionIds).toEqual([
+      'top',
+      'history',
+      'myths',
+      'geography',
+      'craft',
+      'science',
+      'medicine',
+      'sources',
+    ])
+    expect(
+      Array.from(screen.getByRole('main').children)
+        .slice(1)
+        .map((section) => section.querySelector('.eyebrow')?.textContent),
+    ).toEqual([
+      '01 · Корни',
+      '02 · Мифология',
+      '03 · Терруар',
+      '04 · Ремесло',
+      '05 · Взаимодействующая система',
+      '06 · Медицина',
+      '07 · Библиография',
+    ])
+
+    const navigationLinks = within(
+      screen.getByRole('navigation', { name: /разделы/i }),
+    ).getAllByRole('link')
+    expect(
+      navigationLinks.map((link) => ({
+        label: link.textContent,
+        href: link.getAttribute('href'),
+      })),
+    ).toEqual([
+      { label: 'Время', href: '#history' },
+      { label: 'Мифология', href: '#myths' },
+      { label: 'Горы', href: '#geography' },
+      { label: 'Два пути', href: '#craft' },
+      { label: 'Водуй', href: '#science' },
+      { label: 'Медицина', href: '#medicine' },
+      { label: 'Источники', href: '#sources' },
+    ])
   })
 
   it('has no automatically detectable accessibility violations', async () => {

@@ -38,7 +38,7 @@ export function EvidenceSection() {
     <section className="story-section evidence-section" id="medicine" aria-labelledby="evidence-title">
       <header className="section-heading section-heading--split">
         <div>
-          <p className="eyebrow">05 · Медицина</p>
+          <p className="eyebrow">06 · Медицина</p>
           <h2 id="evidence-title">Что изучают — и чего ещё не знают</h2>
         </div>
         <p>

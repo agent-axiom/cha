@@ -27,7 +27,7 @@ export function ProcessFork({ selectedPath }: ProcessForkProps) {
     <section className="story-section process-section" id="craft" aria-labelledby="process-title">
       <header className="section-heading section-heading--split">
         <div>
-          <p className="eyebrow">03 · Ремесло</p>
+          <p className="eyebrow">04 · Ремесло</p>
           <h2 id="process-title">Один лист. Два пути.</h2>
         </div>
         <p>

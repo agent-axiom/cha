@@ -12,7 +12,7 @@ export function TeaMountainsMap() {
     <section className="story-section map-section" id="geography" aria-labelledby="map-title">
       <header className="section-heading section-heading--split">
         <div>
-          <p className="eyebrow">02 · Терруар</p>
+          <p className="eyebrow">03 · Терруар</p>
           <h2 id="map-title">Горы, которые стали именами</h2>
         </div>
         <p>

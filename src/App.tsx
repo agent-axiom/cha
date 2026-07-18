@@ -22,11 +22,11 @@ export function App() {
       <main id="content">
         <Hero teaPath={teaPath} onTeaPathChange={setTeaPath} />
         <HistoryTimeline />
+        <MythologyCabinet />
         <TeaMountainsMap />
         <ProcessFork selectedPath={teaPath} />
         <FermentationLab />
         <EvidenceSection />
-        <MythologyCabinet />
         <SourcesSection />
       </main>
     </div>

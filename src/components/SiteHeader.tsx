@@ -1,10 +1,10 @@
 const sections = [
   ['history', 'Время'],
+  ['myths', 'Мифология'],
   ['geography', 'Горы'],
   ['craft', 'Два пути'],
-  ['science', 'Ферментация'],
+  ['science', 'Водуй'],
   ['medicine', 'Медицина'],
-  ['myths', 'Мифология'],
   ['sources', 'Источники'],
 ]
 

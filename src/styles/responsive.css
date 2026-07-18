@@ -311,6 +311,15 @@
     grid-template-columns: 1fr;
   }
 
+  .editorial-method dl,
+  .source-stratum__header {
+    grid-template-columns: 1fr;
+  }
+
+  .source-stratum__header {
+    gap: 0.75rem;
+  }
+
   .source-group > header {
     grid-template-columns: 1fr;
     gap: 0.5rem;

@@ -18,7 +18,7 @@ export function FermentationLab() {
   return (
     <section className="story-section lab-section" id="science" aria-labelledby="lab-title">
       <header className="section-heading">
-        <p className="eyebrow">04 · Взаимодействующая система</p>
+        <p className="eyebrow">05 · Взаимодействующая система</p>
         <h2 id="lab-title">Влажное кучевание шу — водуй</h2>
         <p>
           Этот раздел относится только к водуй: в нём взаимодействуют лист, вода,

@@ -5,7 +5,7 @@ export function MythologyCabinet() {
   return (
     <section className="story-section myths-section" id="myths" aria-labelledby="myths-title">
       <header className="section-heading">
-        <p className="eyebrow">06 · Мифология</p>
+        <p className="eyebrow">02 · Мифология</p>
         <h2 id="myths-title">Предания не обязаны быть фактами, чтобы быть важными</h2>
         <p>
           Эти сюжеты рассказывают, как люди объясняли происхождение знания,
