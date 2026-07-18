@@ -1,4 +1,4 @@
-import { useId, useState } from 'react'
+import { useId, useState, type CSSProperties } from 'react'
 import { fermentationLayers } from '../content/process'
 import { sourceById } from '../content/sources'
 
@@ -9,6 +9,7 @@ export function FermentationLab() {
   const titleId = `${svgId}-micro-title`
   const descriptionId = `${svgId}-micro-desc`
   const gradientId = `${svgId}-cell-glow`
+  const svgStyle = { '--cell-glow': `url(#${gradientId})` } as CSSProperties
   const [activeId, setActiveId] = useState(fermentationLayers[0]?.id ?? 'microbes')
   const active = fermentationLayers.find((layer) => layer.id === activeId) ?? fermentationLayers[0]
 
@@ -34,7 +35,12 @@ export function FermentationLab() {
             loading="lazy"
             decoding="async"
           />
-          <svg viewBox="0 0 640 540" role="img" aria-labelledby={`${titleId} ${descriptionId}`}>
+          <svg
+            viewBox="0 0 640 540"
+            role="img"
+            aria-labelledby={`${titleId} ${descriptionId}`}
+            style={svgStyle}
+          >
             <title id={titleId}>Схематическая модель влажного кучевания шу — водуй</title>
             <desc id={descriptionId}>
               Иллюстративная схема взаимодействия сырья, условий и микробного сообщества во время водуй. {MODEL_DISCLAIMER}

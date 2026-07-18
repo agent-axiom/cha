@@ -19,8 +19,8 @@ function stepsForPath(path: TeaPath) {
 
 export function ProcessFork({ selectedPath }: ProcessForkProps) {
   const visibleSteps = stepsForPath(selectedPath)
-  const visibleSourceIds = [
-    ...new Set(visibleSteps.flatMap((step) => step.sourceIds)),
+  const displayedSourceIds = [
+    ...new Set(processSteps.flatMap((step) => step.sourceIds)),
   ]
 
   return (
@@ -93,9 +93,9 @@ export function ProcessFork({ selectedPath }: ProcessForkProps) {
 
       <div
         className="source-links source-links--center"
-        aria-label={`Источники технологии ${pathMeta[selectedPath].name}`}
+        aria-label="Источники всех отображаемых технологических ветвей"
       >
-        {visibleSourceIds.map((sourceId) => {
+        {displayedSourceIds.map((sourceId) => {
           const source = sourceById.get(sourceId)
           if (!source) return null
           return (

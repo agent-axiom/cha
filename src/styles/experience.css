@@ -823,7 +823,7 @@
 }
 
 .lab-layer circle {
-  fill: url(#cell-glow);
+  fill: var(--cell-glow);
 }
 
 .lab-layer.is-active {

@@ -38,19 +38,16 @@ describe('ProcessFork', () => {
     expect(wording).toMatch(/ведут[\s\S]*переворачивают[\s\S]*разбивают комки/i)
   })
 
-  it.each(['sheng', 'shou'] as const)('exposes every source used by the selected %s path', (path) => {
+  it.each(['sheng', 'shou'] as const)('exposes every source used by both visible paths when %s is selected', (path) => {
     render(<ProcessFork selectedPath={path} />)
 
-    const sourceLinks = screen.getByLabelText(/источники технологии/i)
+    const sourceLinks = screen.getByLabelText('Источники всех отображаемых технологических ветвей')
     const expectedSourceIds = [
-      ...new Set(
-        processSteps
-          .filter((step) => step.path === path)
-          .flatMap((step) => step.sourceIds),
-      ),
+      ...new Set(processSteps.flatMap((step) => step.sourceIds)),
     ]
 
     expect(within(sourceLinks).getAllByRole('link')).toHaveLength(expectedSourceIds.length)
+    expect(sourceLinks).toHaveAccessibleName('Источники всех отображаемых технологических ветвей')
 
     expectedSourceIds.forEach((sourceId) => {
       const source = sourceById.get(sourceId)

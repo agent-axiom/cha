@@ -53,4 +53,30 @@ describe('FermentationLab', () => {
       })
     })
   })
+
+  it('resolves every SVG paint URL to an element in the same local defs', () => {
+    const { container } = render(
+      <>
+        <FermentationLab />
+        <FermentationLab />
+      </>,
+    )
+
+    const models = [...container.querySelectorAll('svg')]
+
+    models.forEach((model) => {
+      const referenceIds = [model, ...model.querySelectorAll('*')].flatMap((element) =>
+        [...element.attributes].flatMap((attribute) =>
+          [...attribute.value.matchAll(/url\(["']?#([^)"']+)["']?\)/g)].map(
+            (match) => match[1],
+          ),
+        ),
+      )
+
+      expect(referenceIds.length).toBeGreaterThan(0)
+      referenceIds.forEach((referenceId) => {
+        expect(model.querySelector(`defs [id="${referenceId}"]`)).not.toBeNull()
+      })
+    })
+  })
 })
