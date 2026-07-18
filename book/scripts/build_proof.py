@@ -8,8 +8,7 @@ import re
 from pathlib import Path
 from typing import Any
 
-from pypdf import PdfReader, PdfWriter
-from pypdf.generic import RectangleObject
+from pypdf import PdfWriter
 from reportlab.lib.colors import HexColor, white
 from reportlab.lib.enums import TA_LEFT
 from reportlab.lib.styles import ParagraphStyle
@@ -97,6 +96,7 @@ def manuscript_pages(folder: str) -> dict[str, str]:
 def paragraph_markup(markdown: str) -> str:
     text = CLAIM_RE.sub("", markdown)
     text = COMMENT_RE.sub("", text)
+    text = re.sub(r"^\s*(?:-{3,}|\*{3,}|_{3,})\s*$", "", text, flags=re.M)
     text = LINK_RE.sub(r"\1", text)
     text = re.sub(r"^#{1,6}\s+", "", text, flags=re.M)
     text = re.sub(r"^[-*]\s+", "• ", text, flags=re.M)
@@ -450,22 +450,23 @@ def draw_page(
     canvas.showPage()
 
 
-def set_page_boxes(source: Path, target: Path, trim_width_mm: int, trim_height_mm: int, bleed_mm: int) -> None:
-    reader = PdfReader(source)
-    writer = PdfWriter()
-    bleed = bleed_mm * MM
-    trim = RectangleObject(
-        [bleed, bleed, bleed + trim_width_mm * MM, bleed + trim_height_mm * MM]
-    )
-    for page in reader.pages:
-        page.trimbox = trim
-        page.bleedbox = page.mediabox
-        writer.add_page(page)
+def stage_editorial_metadata(source: Path, target: Path) -> None:
+    """Add proof metadata without rewriting ReportLab page/resource objects.
+
+    A full pypdf clone can produce a structurally readable file that still
+    drops text and vectors in Poppler. Incremental mode preserves the canvas
+    PDF byte-for-byte and appends only the metadata update.
+    """
+    writer = PdfWriter(source, incremental=True)
     writer.add_metadata(PROOF_METADATA)
-    staged = target.with_name(f".{target.name}.staged")
-    with staged.open("wb") as stream:
-        writer.write(stream)
-    os.replace(staged, target)
+    staged = target.with_name(f".{target.name}.incremental-stage")
+    try:
+        with staged.open("wb") as stream:
+            writer.write(stream)
+        os.replace(staged, target)
+    except Exception:
+        staged.unlink(missing_ok=True)
+        raise
 
 
 def publish_pair(*pairs: tuple[Path, Path]) -> None:
@@ -537,6 +538,16 @@ def build(
         initialFontSize=7.2,
         initialLeading=10,
     )
+    bleed = bleed_mm * MM
+    canvas.setTrimBox(
+        (
+            bleed,
+            bleed,
+            bleed + publication["widthMm"] * MM,
+            bleed + publication["heightMm"] * MM,
+        )
+    )
+    canvas.setBleedBox((0, 0, size[0], size[1]))
     canvas.setTitle(PROOF_METADATA["/Title"])
     canvas.setAuthor(PROOF_METADATA["/Author"])
     canvas.setSubject(PROOF_SUBJECT)
@@ -553,13 +564,7 @@ def build(
             reviewer_marks=reviewer_marks,
         )
     canvas.save()
-    set_page_boxes(
-        temporary,
-        staged_output,
-        publication["widthMm"],
-        publication["heightMm"],
-        bleed_mm,
-    )
+    stage_editorial_metadata(temporary, staged_output)
     temporary.unlink()
     return staged_output
 

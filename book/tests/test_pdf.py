@@ -10,6 +10,7 @@ from pathlib import Path
 import pytest
 from pypdf import PdfReader
 from pypdf.generic import ContentStream, DictionaryObject
+from reportlab.pdfgen.canvas import Canvas
 
 
 BOOK = Path(__file__).resolve().parents[1]
@@ -46,6 +47,34 @@ BUILD_PROOF = load_build_proof_module()
 
 def mm(value: float) -> float:
     return value * 72 / 25.4
+
+
+def test_paragraph_markup_drops_standalone_markdown_rules() -> None:
+    markup = BUILD_PROOF.paragraph_markup("Первый абзац\n\n---\n\nВторой абзац")
+    assert "---" not in markup
+    assert "Первый абзац" in markup
+    assert "Второй абзац" in markup
+
+
+def test_metadata_staging_is_incremental_and_preserves_canvas_bytes(
+    tmp_path: Path,
+) -> None:
+    source = tmp_path / "source.pdf"
+    target = tmp_path / "target.pdf"
+    canvas = Canvas(str(source), pagesize=(100, 100), invariant=1)
+    canvas.drawString(10, 50, "render-resource-regression")
+    canvas.save()
+    source_bytes = source.read_bytes()
+
+    BUILD_PROOF.stage_editorial_metadata(source, target)
+
+    # A full pypdf rewrite changed valid ReportLab resource graphs enough for
+    # Poppler to drop text and vector fragments. Incremental metadata staging
+    # must leave the complete canvas PDF byte-for-byte intact as its prefix.
+    assert target.read_bytes().startswith(source_bytes)
+    metadata = PdfReader(target).metadata or {}
+    for key, value in PROOF_METADATA.items():
+        assert metadata.get(key) == value
 
 
 def assert_close(actual: float, expected: float, *, label: str) -> None:
