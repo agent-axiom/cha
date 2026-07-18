@@ -1,0 +1,1197 @@
+{
+  "id": "guide",
+  "title": "Пуэр без лишнего: практический гид",
+  "pagePrefix": "G",
+  "signatureSize": 16,
+  "totalPages": 48,
+  "sections": [
+    {
+      "id": "quick-start",
+      "title": "Быстрый старт",
+      "pageCount": 6,
+      "start": 1,
+      "end": 6,
+      "requiredTopics": [
+        {
+          "id": "quick-start-t01",
+          "title": "Одна безопасная чашка без лишнего ритуала"
+        },
+        {
+          "id": "quick-start-t02",
+          "title": "Пять переменных, которыми управляет заваривание"
+        },
+        {
+          "id": "quick-start-t03",
+          "title": "Если вкус ушёл не туда"
+        },
+        {
+          "id": "quick-start-t04",
+          "title": "От первого настоя — к осознанному выбору чая"
+        }
+      ]
+    },
+    {
+      "id": "choosing-tea",
+      "title": "Как выбрать чай",
+      "pageCount": 6,
+      "start": 7,
+      "end": 12,
+      "requiredTopics": [
+        {
+          "id": "choosing-tea-t01",
+          "title": "Выбор начинается с задачи, а не с цены"
+        },
+        {
+          "id": "choosing-tea-t02",
+          "title": "Как читать внешний вид сухого листа"
+        },
+        {
+          "id": "choosing-tea-t03",
+          "title": "Запах, чистота и условия продавца"
+        },
+        {
+          "id": "choosing-tea-t04",
+          "title": "От покупки — к посуде и воде"
+        }
+      ]
+    },
+    {
+      "id": "tools-water",
+      "title": "Посуда и вода",
+      "pageCount": 8,
+      "start": 13,
+      "end": 20,
+      "requiredTopics": [
+        {
+          "id": "tools-water-t01",
+          "title": "Минимальный набор посуды без коллекционирования"
+        },
+        {
+          "id": "tools-water-t02",
+          "title": "Вода и чайник как единая система"
+        },
+        {
+          "id": "tools-water-t03",
+          "title": "Температура, теплоёмкость и прогрев"
+        },
+        {
+          "id": "tools-water-t04",
+          "title": "Калибровка температуры воды",
+          "expectedMethodIds": [
+            "water-temperature-calibration"
+          ]
+        },
+        {
+          "id": "tools-water-t05",
+          "title": "Калибровка отношения листа к воде",
+          "expectedMethodIds": [
+            "leaf-ratio-calibration"
+          ]
+        },
+        {
+          "id": "tools-water-t06",
+          "title": "От настроенной воды — к практике шэна"
+        }
+      ]
+    },
+    {
+      "id": "sheng",
+      "title": "Заваривание шэна",
+      "pageCount": 8,
+      "start": 21,
+      "end": 28,
+      "requiredTopics": [
+        {
+          "id": "sheng-t01",
+          "title": "Шэн: начать мягко и оставить запас для коррекции"
+        },
+        {
+          "id": "sheng-t02",
+          "title": "Молодой шэн в гайвани",
+          "expectedMethodIds": [
+            "gaiwan-sheng-young"
+          ]
+        },
+        {
+          "id": "sheng-t03",
+          "title": "Выдержанный шэн в гайвани",
+          "expectedMethodIds": [
+            "gaiwan-sheng-aged"
+          ]
+        },
+        {
+          "id": "sheng-t04",
+          "title": "Молодой шэн в небольшом чайнике",
+          "expectedMethodIds": [
+            "teapot-sheng-young"
+          ]
+        },
+        {
+          "id": "sheng-t05",
+          "title": "Выдержанный шэн в небольшом чайнике",
+          "expectedMethodIds": [
+            "teapot-sheng-aged"
+          ]
+        },
+        {
+          "id": "sheng-t06",
+          "title": "Диагностика резкости, пустоты и терпкости"
+        },
+        {
+          "id": "sheng-t07",
+          "title": "От прозрачной динамики шэна — к плотности шоу"
+        }
+      ]
+    },
+    {
+      "id": "shou",
+      "title": "Заваривание шоу",
+      "pageCount": 8,
+      "start": 29,
+      "end": 36,
+      "requiredTopics": [
+        {
+          "id": "shou-t01",
+          "title": "Шу: чистота аромата и управляемая плотность"
+        },
+        {
+          "id": "shou-t02",
+          "title": "Рассыпной шоу в гайвани",
+          "expectedMethodIds": [
+            "gaiwan-shou-loose"
+          ]
+        },
+        {
+          "id": "shou-t03",
+          "title": "Прессованный шоу в гайвани",
+          "expectedMethodIds": [
+            "gaiwan-shou-compressed"
+          ]
+        },
+        {
+          "id": "shou-t04",
+          "title": "Рассыпной шоу в чайнике",
+          "expectedMethodIds": [
+            "teapot-shou-loose"
+          ]
+        },
+        {
+          "id": "shou-t05",
+          "title": "Прессованный шоу в чайнике",
+          "expectedMethodIds": [
+            "teapot-shou-compressed"
+          ]
+        },
+        {
+          "id": "shou-t06",
+          "title": "Диагностика землистости, водянистости и тяжести"
+        },
+        {
+          "id": "shou-t07",
+          "title": "От коротких проливов шоу — к шэну в кружке"
+        }
+      ]
+    },
+    {
+      "id": "simple-methods",
+      "title": "Простые методы",
+      "pageCount": 6,
+      "start": 37,
+      "end": 42,
+      "requiredTopics": [
+        {
+          "id": "simple-methods-t01",
+          "title": "Шэн в кружке",
+          "expectedMethodIds": [
+            "mug-sheng"
+          ]
+        },
+        {
+          "id": "simple-methods-t02",
+          "title": "Шэн в большом чайнике",
+          "expectedMethodIds": [
+            "large-pot-sheng"
+          ]
+        },
+        {
+          "id": "simple-methods-t03",
+          "title": "Шу в большом чайнике",
+          "expectedMethodIds": [
+            "large-pot-shou"
+          ]
+        },
+        {
+          "id": "simple-methods-t04",
+          "title": "Шэн в термосе",
+          "expectedMethodIds": [
+            "thermos-sheng"
+          ]
+        },
+        {
+          "id": "simple-methods-t05",
+          "title": "Шу в термосе",
+          "expectedMethodIds": [
+            "thermos-shou"
+          ]
+        },
+        {
+          "id": "simple-methods-t06",
+          "title": "Шу в кружке",
+          "expectedMethodIds": [
+            "mug-shou"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tasting",
+      "title": "Дегустация",
+      "pageCount": 4,
+      "start": 43,
+      "end": 46,
+      "requiredTopics": [
+        {
+          "id": "tasting-t01",
+          "title": "Шу в кружке — к внимательной дегустации"
+        },
+        {
+          "id": "tasting-t02",
+          "title": "Сравнивать настои при одинаковом свете и температуре"
+        },
+        {
+          "id": "tasting-t03",
+          "title": "Когда остановить дегустацию и перейти к безопасности"
+        }
+      ]
+    },
+    {
+      "id": "safety",
+      "title": "Безопасность и хранение",
+      "pageCount": 2,
+      "start": 47,
+      "end": 48,
+      "requiredTopics": [
+        {
+          "id": "safety-t01",
+          "title": "Безопасность воды, температуры и индивидуальной реакции"
+        },
+        {
+          "id": "safety-t02",
+          "title": "Хранение без сырости, запахов и ложных обещаний"
+        }
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "number": 1,
+      "id": "G-P001",
+      "spreadId": "G-S001",
+      "sectionId": "quick-start",
+      "topicId": "quick-start-t01",
+      "spreadTitle": "Одна безопасная чашка без лишнего ритуала",
+      "role": "Титульная схема превращает тему «Одна безопасная чашка без лишнего ритуала» в первое действие читателя",
+      "spreadTemplate": "chapter-gate",
+      "template": "chapter-gate",
+      "assetIds": [
+        "illustration-guide-spots"
+      ],
+      "chapterStart": true
+    },
+    {
+      "number": 2,
+      "id": "G-P002",
+      "spreadId": "G-S002",
+      "sectionId": "quick-start",
+      "topicId": "quick-start-t02",
+      "spreadTitle": "Пять переменных, которыми управляет заваривание",
+      "role": "Задаёт практическую ситуацию и ориентир темы «Пять переменных, которыми управляет заваривание»",
+      "spreadTemplate": "quiet-text",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 3,
+      "id": "G-P003",
+      "spreadId": "G-S002",
+      "sectionId": "quick-start",
+      "topicId": "quick-start-t02",
+      "spreadTitle": "Пять переменных, которыми управляет заваривание",
+      "role": "Даёт проверяемое действие и критерий коррекции для темы «Пять переменных, которыми управляет заваривание»",
+      "spreadTemplate": "quiet-text",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 4,
+      "id": "G-P004",
+      "spreadId": "G-S003",
+      "sectionId": "quick-start",
+      "topicId": "quick-start-t03",
+      "spreadTitle": "Если вкус ушёл не туда",
+      "role": "Задаёт практическую ситуацию и ориентир темы «Если вкус ушёл не туда»",
+      "spreadTemplate": "guide-troubleshooting",
+      "template": "guide-troubleshooting",
+      "assetIds": []
+    },
+    {
+      "number": 5,
+      "id": "G-P005",
+      "spreadId": "G-S003",
+      "sectionId": "quick-start",
+      "topicId": "quick-start-t03",
+      "spreadTitle": "Если вкус ушёл не туда",
+      "role": "Даёт проверяемое действие и критерий коррекции для темы «Если вкус ушёл не туда»",
+      "spreadTemplate": "guide-troubleshooting",
+      "template": "guide-troubleshooting",
+      "assetIds": []
+    },
+    {
+      "number": 6,
+      "id": "G-P006",
+      "spreadId": "G-S004",
+      "sectionId": "quick-start",
+      "topicId": "quick-start-t04",
+      "spreadTitle": "От первого настоя — к осознанному выбору чая",
+      "role": "Подводит итог раздела «Быстрый старт» через тему «От первого настоя — к осознанному выбору чая»",
+      "spreadTemplate": "chapter-gate",
+      "template": "quiet-text",
+      "assetIds": [],
+      "crossSectionSpread": true,
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "illustration",
+        "brief": "Заказать материал для G-S004 «От первого настоя — к осознанному выбору чая / Выбор начинается с задачи, а не с цены»: показать конкретное практическое действие, масштаб посуды и безопасную последовательность"
+      }
+    },
+    {
+      "number": 7,
+      "id": "G-P007",
+      "spreadId": "G-S004",
+      "sectionId": "choosing-tea",
+      "topicId": "choosing-tea-t01",
+      "spreadTitle": "Выбор начинается с задачи, а не с цены",
+      "role": "Открывает раздел «Как выбрать чай» темой «Выбор начинается с задачи, а не с цены»",
+      "spreadTemplate": "chapter-gate",
+      "template": "chapter-gate",
+      "assetIds": [],
+      "chapterStart": true,
+      "crossSectionSpread": true,
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "illustration",
+        "brief": "Заказать материал для G-S004 «От первого настоя — к осознанному выбору чая / Выбор начинается с задачи, а не с цены»: показать конкретное практическое действие, масштаб посуды и безопасную последовательность"
+      }
+    },
+    {
+      "number": 8,
+      "id": "G-P008",
+      "spreadId": "G-S005",
+      "sectionId": "choosing-tea",
+      "topicId": "choosing-tea-t02",
+      "spreadTitle": "Как читать внешний вид сухого листа",
+      "role": "Задаёт практическую ситуацию и ориентир темы «Как читать внешний вид сухого листа»",
+      "spreadTemplate": "photo-plus-essay",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "photo",
+        "brief": "Заказать материал для G-S005 «Как читать внешний вид сухого листа»: показать конкретное практическое действие, масштаб посуды и безопасную последовательность"
+      }
+    },
+    {
+      "number": 9,
+      "id": "G-P009",
+      "spreadId": "G-S005",
+      "sectionId": "choosing-tea",
+      "topicId": "choosing-tea-t02",
+      "spreadTitle": "Как читать внешний вид сухого листа",
+      "role": "Даёт проверяемое действие и критерий коррекции для темы «Как читать внешний вид сухого листа»",
+      "spreadTemplate": "photo-plus-essay",
+      "template": "quiet-text",
+      "assetIds": [],
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "photo",
+        "brief": "Заказать материал для G-S005 «Как читать внешний вид сухого листа»: показать конкретное практическое действие, масштаб посуды и безопасную последовательность"
+      }
+    },
+    {
+      "number": 10,
+      "id": "G-P010",
+      "spreadId": "G-S006",
+      "sectionId": "choosing-tea",
+      "topicId": "choosing-tea-t03",
+      "spreadTitle": "Запах, чистота и условия продавца",
+      "role": "Задаёт практическую ситуацию и ориентир темы «Запах, чистота и условия продавца»",
+      "spreadTemplate": "quiet-text",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 11,
+      "id": "G-P011",
+      "spreadId": "G-S006",
+      "sectionId": "choosing-tea",
+      "topicId": "choosing-tea-t03",
+      "spreadTitle": "Запах, чистота и условия продавца",
+      "role": "Даёт проверяемое действие и критерий коррекции для темы «Запах, чистота и условия продавца»",
+      "spreadTemplate": "quiet-text",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 12,
+      "id": "G-P012",
+      "spreadId": "G-S007",
+      "sectionId": "choosing-tea",
+      "topicId": "choosing-tea-t04",
+      "spreadTitle": "От покупки — к посуде и воде",
+      "role": "Подводит итог раздела «Как выбрать чай» через тему «От покупки — к посуде и воде»",
+      "spreadTemplate": "chapter-gate",
+      "template": "quiet-text",
+      "assetIds": [],
+      "crossSectionSpread": true
+    },
+    {
+      "number": 13,
+      "id": "G-P013",
+      "spreadId": "G-S007",
+      "sectionId": "tools-water",
+      "topicId": "tools-water-t01",
+      "spreadTitle": "Минимальный набор посуды без коллекционирования",
+      "role": "Открывает раздел «Посуда и вода» темой «Минимальный набор посуды без коллекционирования»",
+      "spreadTemplate": "chapter-gate",
+      "template": "chapter-gate",
+      "assetIds": [
+        "photo-tea-tools-still-life"
+      ],
+      "chapterStart": true,
+      "crossSectionSpread": true
+    },
+    {
+      "number": 14,
+      "id": "G-P014",
+      "spreadId": "G-S008",
+      "sectionId": "tools-water",
+      "topicId": "tools-water-t02",
+      "spreadTitle": "Вода и чайник как единая система",
+      "role": "Задаёт практическую ситуацию и ориентир темы «Вода и чайник как единая система»",
+      "spreadTemplate": "object-atlas",
+      "template": "quiet-text",
+      "assetIds": []
+    },
+    {
+      "number": 15,
+      "id": "G-P015",
+      "spreadId": "G-S008",
+      "sectionId": "tools-water",
+      "topicId": "tools-water-t02",
+      "spreadTitle": "Вода и чайник как единая система",
+      "role": "Даёт проверяемое действие и критерий коррекции для темы «Вода и чайник как единая система»",
+      "spreadTemplate": "object-atlas",
+      "template": "object-atlas",
+      "assetIds": [
+        "photo-water-brewing-detail"
+      ]
+    },
+    {
+      "number": 16,
+      "id": "G-P016",
+      "spreadId": "G-S009",
+      "sectionId": "tools-water",
+      "topicId": "tools-water-t03",
+      "spreadTitle": "Температура, теплоёмкость и прогрев",
+      "role": "Задаёт практическую ситуацию и ориентир темы «Температура, теплоёмкость и прогрев»",
+      "spreadTemplate": "guide-troubleshooting",
+      "template": "guide-troubleshooting",
+      "assetIds": []
+    },
+    {
+      "number": 17,
+      "id": "G-P017",
+      "spreadId": "G-S009",
+      "sectionId": "tools-water",
+      "topicId": "tools-water-t03",
+      "spreadTitle": "Температура, теплоёмкость и прогрев",
+      "role": "Даёт проверяемое действие и критерий коррекции для темы «Температура, теплоёмкость и прогрев»",
+      "spreadTemplate": "guide-troubleshooting",
+      "template": "guide-troubleshooting",
+      "assetIds": []
+    },
+    {
+      "number": 18,
+      "id": "G-P018",
+      "spreadId": "G-S010",
+      "sectionId": "tools-water",
+      "topicId": "tools-water-t04",
+      "spreadTitle": "Калибровки: температура воды и отношение листа",
+      "role": "Фиксирует воспроизводимый метод «Калибровка температуры воды» и одну понятную корректировку",
+      "spreadTemplate": "guide-recipe",
+      "template": "guide-recipe",
+      "assetIds": [],
+      "recipe": {
+        "recipeId": "calibrate-water-temperature",
+        "title": "Калибровка температуры воды",
+        "methodId": "water-temperature-calibration",
+        "teaStyle": "calibration",
+        "vesselVolumeMl": 100,
+        "leafMassG": 5,
+        "temperatureRangeC": [
+          85,
+          95
+        ],
+        "firstInfusionRangeSec": [
+          8,
+          15
+        ],
+        "adjustmentNote": "Сравните два соседних температурных режима и оставьте тот, где аромат ясен, а терпкость не перекрывает вкус."
+      }
+    },
+    {
+      "number": 19,
+      "id": "G-P019",
+      "spreadId": "G-S010",
+      "sectionId": "tools-water",
+      "topicId": "tools-water-t05",
+      "spreadTitle": "Калибровки: температура воды и отношение листа",
+      "role": "Фиксирует воспроизводимый метод «Калибровка отношения листа к воде» и одну понятную корректировку",
+      "spreadTemplate": "guide-recipe",
+      "template": "guide-recipe",
+      "assetIds": [],
+      "recipe": {
+        "recipeId": "calibrate-leaf-ratio",
+        "title": "Калибровка отношения листа к воде",
+        "methodId": "leaf-ratio-calibration",
+        "teaStyle": "calibration",
+        "vesselVolumeMl": 150,
+        "leafMassG": 7,
+        "temperatureRangeC": [
+          90,
+          98
+        ],
+        "firstInfusionRangeSec": [
+          10,
+          20
+        ],
+        "adjustmentNote": "Если настой пустой, добавьте один грамм листа; если перегруженный — сначала сократите время, не меняя всё сразу."
+      }
+    },
+    {
+      "number": 20,
+      "id": "G-P020",
+      "spreadId": "G-S011",
+      "sectionId": "tools-water",
+      "topicId": "tools-water-t06",
+      "spreadTitle": "От настроенной воды — к практике шэна",
+      "role": "Подводит итог раздела «Посуда и вода» через тему «От настроенной воды — к практике шэна»",
+      "spreadTemplate": "chapter-gate",
+      "template": "quiet-text",
+      "assetIds": [],
+      "crossSectionSpread": true,
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "illustration",
+        "brief": "Заказать материал для G-S011 «От настроенной воды — к практике шэна / Шэн: начать мягко и оставить запас для коррекции»: показать конкретное практическое действие, масштаб посуды и безопасную последовательность"
+      }
+    },
+    {
+      "number": 21,
+      "id": "G-P021",
+      "spreadId": "G-S011",
+      "sectionId": "sheng",
+      "topicId": "sheng-t01",
+      "spreadTitle": "Шэн: начать мягко и оставить запас для коррекции",
+      "role": "Открывает раздел «Заваривание шэна» темой «Шэн: начать мягко и оставить запас для коррекции»",
+      "spreadTemplate": "chapter-gate",
+      "template": "chapter-gate",
+      "assetIds": [],
+      "chapterStart": true,
+      "crossSectionSpread": true,
+      "visualPlaceholder": {
+        "status": "commission-brief",
+        "kind": "illustration",
+        "brief": "Заказать материал для G-S011 «От настроенной воды — к практике шэна / Шэн: начать мягко и оставить запас для коррекции»: показать конкретное практическое действие, масштаб посуды и безопасную последовательность"
+      }
+    },
+    {
+      "number": 22,
+      "id": "G-P022",
+      "spreadId": "G-S012",
+      "sectionId": "sheng",
+      "topicId": "sheng-t02",
+      "spreadTitle": "Молодой и выдержанный шэн в гайвани",
+      "role": "Фиксирует воспроизводимый метод «Молодой шэн в гайвани» и одну понятную корректировку",
+      "spreadTemplate": "guide-recipe",
+      "template": "guide-recipe",
+      "assetIds": [],
+      "recipe": {
+        "recipeId": "gaiwan-young-sheng",
+        "title": "Молодой шэн в гайвани",
+        "methodId": "gaiwan-sheng-young",
+        "teaStyle": "sheng",
+        "vesselVolumeMl": 100,
+        "leafMassG": 5,
+        "temperatureRangeC": [
+          82,
+          88
+        ],
+        "firstInfusionRangeSec": [
+          5,
+          8
+        ],
+        "adjustmentNote": "При резкой терпкости снизьте температуру на несколько градусов и сократите контакт воды с листом."
+      }
+    },
+    {
+      "number": 23,
+      "id": "G-P023",
+      "spreadId": "G-S012",
+      "sectionId": "sheng",
+      "topicId": "sheng-t03",
+      "spreadTitle": "Молодой и выдержанный шэн в гайвани",
+      "role": "Фиксирует воспроизводимый метод «Выдержанный шэн в гайвани» и одну понятную корректировку",
+      "spreadTemplate": "guide-recipe",
+      "template": "guide-recipe",
+      "assetIds": [],
+      "recipe": {
+        "recipeId": "gaiwan-aged-sheng",
+        "title": "Выдержанный шэн в гайвани",
+        "methodId": "gaiwan-sheng-aged",
+        "teaStyle": "sheng",
+        "vesselVolumeMl": 100,
+        "leafMassG": 6,
+        "temperatureRangeC": [
+          90,
+          96
+        ],
+        "firstInfusionRangeSec": [
+          8,
+          12
+        ],
+        "adjustmentNote": "Если аромат остаётся закрытым, немного повысьте температуру, сохранив короткое настаивание."
+      }
+    },
+    {
+      "number": 24,
+      "id": "G-P024",
+      "spreadId": "G-S013",
+      "sectionId": "sheng",
+      "topicId": "sheng-t04",
+      "spreadTitle": "Молодой и выдержанный шэн в чайнике",
+      "role": "Фиксирует воспроизводимый метод «Молодой шэн в небольшом чайнике» и одну понятную корректировку",
+      "spreadTemplate": "guide-recipe",
+      "template": "guide-recipe",
+      "assetIds": [],
+      "recipe": {
+        "recipeId": "teapot-young-sheng",
+        "title": "Молодой шэн в небольшом чайнике",
+        "methodId": "teapot-sheng-young",
+        "teaStyle": "sheng",
+        "vesselVolumeMl": 120,
+        "leafMassG": 6,
+        "temperatureRangeC": [
+          85,
+          90
+        ],
+        "firstInfusionRangeSec": [
+          6,
+          10
+        ],
+        "adjustmentNote": "Учитывайте удержание тепла чайником: при сухой терпкости сначала ускорьте слив."
+      }
+    },
+    {
+      "number": 25,
+      "id": "G-P025",
+      "spreadId": "G-S013",
+      "sectionId": "sheng",
+      "topicId": "sheng-t05",
+      "spreadTitle": "Молодой и выдержанный шэн в чайнике",
+      "role": "Фиксирует воспроизводимый метод «Выдержанный шэн в небольшом чайнике» и одну понятную корректировку",
+      "spreadTemplate": "guide-recipe",
+      "template": "guide-recipe",
+      "assetIds": [],
+      "recipe": {
+        "recipeId": "teapot-aged-sheng",
+        "title": "Выдержанный шэн в небольшом чайнике",
+        "methodId": "teapot-sheng-aged",
+        "teaStyle": "sheng",
+        "vesselVolumeMl": 120,
+        "leafMassG": 7,
+        "temperatureRangeC": [
+          92,
+          98
+        ],
+        "firstInfusionRangeSec": [
+          10,
+          15
+        ],
+        "adjustmentNote": "Если настой тяжёлый, уменьшите массу листа на один грамм и повторите с тем же временем."
+      }
+    },
+    {
+      "number": 26,
+      "id": "G-P026",
+      "spreadId": "G-S014",
+      "sectionId": "sheng",
+      "topicId": "sheng-t06",
+      "spreadTitle": "Диагностика резкости, пустоты и терпкости",
+      "role": "Задаёт практическую ситуацию и ориентир темы «Диагностика резкости, пустоты и терпкости»",
+      "spreadTemplate": "guide-troubleshooting",
+      "template": "guide-troubleshooting",
+      "assetIds": []
+    },
+    {
+      "number": 27,
+      "id": "G-P027",
+      "spreadId": "G-S014",
+      "sectionId": "sheng",
+      "topicId": "sheng-t06",
+      "spreadTitle": "Диагностика резкости, пустоты и терпкости",
+      "role": "Даёт проверяемое действие и критерий коррекции для темы «Диагностика резкости, пустоты и терпкости»",
+      "spreadTemplate": "guide-troubleshooting",
+      "template": "guide-troubleshooting",
+      "assetIds": []
+    },
+    {
+      "number": 28,
+      "id": "G-P028",
+      "spreadId": "G-S015",
+      "sectionId": "sheng",
+      "topicId": "sheng-t07",
+      "spreadTitle": "От прозрачной динамики шэна — к плотности шоу",
+      "role": "Подводит итог раздела «Заваривание шэна» через тему «От прозрачной динамики шэна — к плотности шоу»",
+      "spreadTemplate": "guide-troubleshooting",
+      "template": "guide-troubleshooting",
+      "assetIds": [],
+      "crossSectionSpread": true
+    },
+    {
+      "number": 29,
+      "id": "G-P029",
+      "spreadId": "G-S015",
+      "sectionId": "shou",
+      "topicId": "shou-t01",
+      "spreadTitle": "Шу: чистота аромата и управляемая плотность",
+      "role": "Открывает раздел «Заваривание шоу» темой «Чистота аромата и управляемая плотность»",
+      "spreadTemplate": "guide-troubleshooting",
+      "template": "chapter-gate",
+      "assetIds": [],
+      "chapterStart": true,
+      "crossSectionSpread": true
+    },
+    {
+      "number": 30,
+      "id": "G-P030",
+      "spreadId": "G-S016",
+      "sectionId": "shou",
+      "topicId": "shou-t02",
+      "spreadTitle": "Рассыпной и прессованный шоу в гайвани",
+      "role": "Фиксирует воспроизводимый метод «Рассыпной шоу в гайвани» и одну понятную корректировку",
+      "spreadTemplate": "guide-recipe",
+      "template": "guide-recipe",
+      "assetIds": [],
+      "recipe": {
+        "recipeId": "gaiwan-loose-shou",
+        "title": "Рассыпной шоу в гайвани",
+        "methodId": "gaiwan-shou-loose",
+        "teaStyle": "shou",
+        "vesselVolumeMl": 100,
+        "leafMassG": 7,
+        "temperatureRangeC": [
+          95,
+          100
+        ],
+        "firstInfusionRangeSec": [
+          8,
+          12
+        ],
+        "adjustmentNote": "При избыточной плотности сократите первое настаивание, оставив температуру неизменной."
+      }
+    },
+    {
+      "number": 31,
+      "id": "G-P031",
+      "spreadId": "G-S016",
+      "sectionId": "shou",
+      "topicId": "shou-t03",
+      "spreadTitle": "Рассыпной и прессованный шоу в гайвани",
+      "role": "Фиксирует воспроизводимый метод «Прессованный шоу в гайвани» и одну понятную корректировку",
+      "spreadTemplate": "guide-recipe",
+      "template": "guide-recipe",
+      "assetIds": [],
+      "recipe": {
+        "recipeId": "gaiwan-compressed-shou",
+        "title": "Прессованный шоу в гайвани",
+        "methodId": "gaiwan-shou-compressed",
+        "teaStyle": "shou",
+        "vesselVolumeMl": 100,
+        "leafMassG": 8,
+        "temperatureRangeC": [
+          96,
+          100
+        ],
+        "firstInfusionRangeSec": [
+          12,
+          18
+        ],
+        "adjustmentNote": "Если фрагмент раскрывается медленно, добавьте короткое ополаскивание вместо резкого увеличения времени."
+      }
+    },
+    {
+      "number": 32,
+      "id": "G-P032",
+      "spreadId": "G-S017",
+      "sectionId": "shou",
+      "topicId": "shou-t04",
+      "spreadTitle": "Рассыпной и прессованный шоу в чайнике",
+      "role": "Фиксирует воспроизводимый метод «Рассыпной шоу в чайнике» и одну понятную корректировку",
+      "spreadTemplate": "guide-recipe",
+      "template": "guide-recipe",
+      "assetIds": [],
+      "recipe": {
+        "recipeId": "teapot-loose-shou",
+        "title": "Рассыпной шоу в чайнике",
+        "methodId": "teapot-shou-loose",
+        "teaStyle": "shou",
+        "vesselVolumeMl": 140,
+        "leafMassG": 8,
+        "temperatureRangeC": [
+          95,
+          100
+        ],
+        "firstInfusionRangeSec": [
+          10,
+          16
+        ],
+        "adjustmentNote": "Если настой водянистый, увеличьте массу листа на один грамм, не удлиняя первый пролив."
+      }
+    },
+    {
+      "number": 33,
+      "id": "G-P033",
+      "spreadId": "G-S017",
+      "sectionId": "shou",
+      "topicId": "shou-t05",
+      "spreadTitle": "Рассыпной и прессованный шоу в чайнике",
+      "role": "Фиксирует воспроизводимый метод «Прессованный шоу в чайнике» и одну понятную корректировку",
+      "spreadTemplate": "guide-recipe",
+      "template": "guide-recipe",
+      "assetIds": [],
+      "recipe": {
+        "recipeId": "teapot-compressed-shou",
+        "title": "Прессованный шоу в чайнике",
+        "methodId": "teapot-shou-compressed",
+        "teaStyle": "shou",
+        "vesselVolumeMl": 140,
+        "leafMassG": 9,
+        "temperatureRangeC": [
+          98,
+          100
+        ],
+        "firstInfusionRangeSec": [
+          15,
+          22
+        ],
+        "adjustmentNote": "При тяжёлом послевкусии ускорьте слив и дайте листу меньше остаточного тепла между проливами."
+      }
+    },
+    {
+      "number": 34,
+      "id": "G-P034",
+      "spreadId": "G-S018",
+      "sectionId": "shou",
+      "topicId": "shou-t06",
+      "spreadTitle": "Диагностика землистости, водянистости и тяжести",
+      "role": "Задаёт практическую ситуацию и ориентир темы «Диагностика землистости, водянистости и тяжести»",
+      "spreadTemplate": "guide-troubleshooting",
+      "template": "guide-troubleshooting",
+      "assetIds": []
+    },
+    {
+      "number": 35,
+      "id": "G-P035",
+      "spreadId": "G-S018",
+      "sectionId": "shou",
+      "topicId": "shou-t06",
+      "spreadTitle": "Диагностика землистости, водянистости и тяжести",
+      "role": "Даёт проверяемое действие и критерий коррекции для темы «Диагностика землистости, водянистости и тяжести»",
+      "spreadTemplate": "guide-troubleshooting",
+      "template": "guide-troubleshooting",
+      "assetIds": []
+    },
+    {
+      "number": 36,
+      "id": "G-P036",
+      "spreadId": "G-S019",
+      "sectionId": "shou",
+      "topicId": "shou-t07",
+      "spreadTitle": "От коротких проливов шоу — к шэну в кружке",
+      "role": "Подводит итог коротким проливам шоу и передаёт читателя к шэну в кружке",
+      "spreadTemplate": "guide-recipe",
+      "template": "guide-troubleshooting",
+      "assetIds": [],
+      "crossSectionSpread": true
+    },
+    {
+      "number": 37,
+      "id": "G-P037",
+      "spreadId": "G-S019",
+      "sectionId": "simple-methods",
+      "topicId": "simple-methods-t01",
+      "spreadTitle": "От коротких проливов шоу — к шэну в кружке",
+      "role": "Открывает раздел «Простые методы» практической карточкой «Шэн в кружке»",
+      "spreadTemplate": "guide-recipe",
+      "template": "guide-recipe",
+      "assetIds": [],
+      "chapterStart": true,
+      "crossSectionSpread": true,
+      "recipe": {
+        "recipeId": "mug-sheng",
+        "title": "Шэн в кружке",
+        "methodId": "mug-sheng",
+        "teaStyle": "sheng",
+        "vesselVolumeMl": 300,
+        "leafMassG": 4,
+        "temperatureRangeC": [
+          80,
+          88
+        ],
+        "firstInfusionRangeSec": [
+          180,
+          300
+        ],
+        "adjustmentNote": "Пейте после частичного остывания; при терпкости долейте горячей воды вместо нового долгого настаивания."
+      }
+    },
+    {
+      "number": 38,
+      "id": "G-P038",
+      "spreadId": "G-S020",
+      "sectionId": "simple-methods",
+      "topicId": "simple-methods-t02",
+      "spreadTitle": "Большой чайник: шэн и шоу для компании",
+      "role": "Фиксирует воспроизводимый метод «Шэн в большом чайнике» и одну понятную корректировку",
+      "spreadTemplate": "guide-recipe",
+      "template": "guide-recipe",
+      "assetIds": [],
+      "recipe": {
+        "recipeId": "large-pot-sheng",
+        "title": "Шэн в большом чайнике",
+        "methodId": "large-pot-sheng",
+        "teaStyle": "sheng",
+        "vesselVolumeMl": 700,
+        "leafMassG": 8,
+        "temperatureRangeC": [
+          82,
+          90
+        ],
+        "firstInfusionRangeSec": [
+          300,
+          600
+        ],
+        "adjustmentNote": "Для более мягкой чашки используйте нижнюю границу температуры и разливайте весь объём сразу."
+      }
+    },
+    {
+      "number": 39,
+      "id": "G-P039",
+      "spreadId": "G-S020",
+      "sectionId": "simple-methods",
+      "topicId": "simple-methods-t03",
+      "spreadTitle": "Большой чайник: шэн и шоу для компании",
+      "role": "Фиксирует воспроизводимый метод «Шу в большом чайнике» и одну понятную корректировку",
+      "spreadTemplate": "guide-recipe",
+      "template": "guide-recipe",
+      "assetIds": [],
+      "recipe": {
+        "recipeId": "large-pot-shou",
+        "title": "Шу в большом чайнике",
+        "methodId": "large-pot-shou",
+        "teaStyle": "shou",
+        "vesselVolumeMl": 700,
+        "leafMassG": 10,
+        "temperatureRangeC": [
+          95,
+          100
+        ],
+        "firstInfusionRangeSec": [
+          300,
+          600
+        ],
+        "adjustmentNote": "Если последняя чашка заметно крепче первой, перемешайте настой в общем сосуде перед подачей."
+      }
+    },
+    {
+      "number": 40,
+      "id": "G-P040",
+      "spreadId": "G-S021",
+      "sectionId": "simple-methods",
+      "topicId": "simple-methods-t04",
+      "spreadTitle": "Термос: длинная экстракция шэна и шоу",
+      "role": "Фиксирует воспроизводимый метод «Шэн в термосе» и одну понятную корректировку",
+      "spreadTemplate": "guide-recipe",
+      "template": "guide-recipe",
+      "assetIds": [],
+      "recipe": {
+        "recipeId": "thermos-sheng",
+        "title": "Шэн в термосе",
+        "methodId": "thermos-sheng",
+        "teaStyle": "sheng",
+        "vesselVolumeMl": 500,
+        "leafMassG": 5,
+        "temperatureRangeC": [
+          75,
+          85
+        ],
+        "firstInfusionRangeSec": [
+          600,
+          1200
+        ],
+        "adjustmentNote": "Для долгого контакта берите прохладнее воду; при горечи уменьшайте массу листа, а не только время."
+      }
+    },
+    {
+      "number": 41,
+      "id": "G-P041",
+      "spreadId": "G-S021",
+      "sectionId": "simple-methods",
+      "topicId": "simple-methods-t05",
+      "spreadTitle": "Термос: длинная экстракция шэна и шоу",
+      "role": "Фиксирует воспроизводимый метод «Шу в термосе» и одну понятную корректировку",
+      "spreadTemplate": "guide-recipe",
+      "template": "guide-recipe",
+      "assetIds": [],
+      "recipe": {
+        "recipeId": "thermos-shou",
+        "title": "Шу в термосе",
+        "methodId": "thermos-shou",
+        "teaStyle": "shou",
+        "vesselVolumeMl": 500,
+        "leafMassG": 7,
+        "temperatureRangeC": [
+          90,
+          98
+        ],
+        "firstInfusionRangeSec": [
+          600,
+          1500
+        ],
+        "adjustmentNote": "Не оставляйте слишком крепкий настой на весь день: уменьшите лист и оценивайте вкус после первого интервала."
+      }
+    },
+    {
+      "number": 42,
+      "id": "G-P042",
+      "spreadId": "G-S022",
+      "sectionId": "simple-methods",
+      "topicId": "simple-methods-t06",
+      "spreadTitle": "Шу в кружке — к внимательной дегустации",
+      "role": "Фиксирует воспроизводимый метод «Шу в кружке» и передаёт читателя к внимательной дегустации",
+      "spreadTemplate": "chapter-gate",
+      "template": "guide-recipe",
+      "assetIds": [],
+      "crossSectionSpread": true,
+      "recipe": {
+        "recipeId": "mug-shou",
+        "title": "Шу в кружке",
+        "methodId": "mug-shou",
+        "teaStyle": "shou",
+        "vesselVolumeMl": 300,
+        "leafMassG": 5,
+        "temperatureRangeC": [
+          92,
+          100
+        ],
+        "firstInfusionRangeSec": [
+          180,
+          360
+        ],
+        "adjustmentNote": "Если настой стал слишком плотным, выньте лист или разбавьте водой, не оставляя его на дне."
+      }
+    },
+    {
+      "number": 43,
+      "id": "G-P043",
+      "spreadId": "G-S022",
+      "sectionId": "tasting",
+      "topicId": "tasting-t01",
+      "spreadTitle": "Шу в кружке — к внимательной дегустации",
+      "role": "Открывает раздел «Дегустация» переходом от шоу в кружке к наблюдению цвета, аромата, вкуса и послевкусия",
+      "spreadTemplate": "chapter-gate",
+      "template": "chapter-gate",
+      "assetIds": [
+        "photo-tea-liquor-cups"
+      ],
+      "chapterStart": true,
+      "crossSectionSpread": true
+    },
+    {
+      "number": 44,
+      "id": "G-P044",
+      "spreadId": "G-S023",
+      "sectionId": "tasting",
+      "topicId": "tasting-t02",
+      "spreadTitle": "Сравнивать настои при одинаковом свете и температуре",
+      "role": "Задаёт практическую ситуацию и ориентир темы «Сравнивать настои при одинаковом свете и температуре»",
+      "spreadTemplate": "guide-troubleshooting",
+      "template": "guide-troubleshooting",
+      "assetIds": []
+    },
+    {
+      "number": 45,
+      "id": "G-P045",
+      "spreadId": "G-S023",
+      "sectionId": "tasting",
+      "topicId": "tasting-t02",
+      "spreadTitle": "Сравнивать настои при одинаковом свете и температуре",
+      "role": "Даёт проверяемое действие и критерий коррекции для темы «Сравнивать настои при одинаковом свете и температуре»",
+      "spreadTemplate": "guide-troubleshooting",
+      "template": "guide-troubleshooting",
+      "assetIds": []
+    },
+    {
+      "number": 46,
+      "id": "G-P046",
+      "spreadId": "G-S024",
+      "sectionId": "tasting",
+      "topicId": "tasting-t03",
+      "spreadTitle": "Когда остановить дегустацию и перейти к безопасности",
+      "role": "Помогает распознать усталость рецепторов и вовремя закончить сравнение настоев",
+      "spreadTemplate": "guide-safety",
+      "template": "guide-troubleshooting",
+      "assetIds": [],
+      "crossSectionSpread": true
+    },
+    {
+      "number": 47,
+      "id": "G-P047",
+      "spreadId": "G-S024",
+      "sectionId": "safety",
+      "topicId": "safety-t01",
+      "spreadTitle": "Безопасность воды, температуры и индивидуальной реакции",
+      "role": "Открывает раздел «Безопасность и хранение» границами безопасной практики",
+      "spreadTemplate": "guide-safety",
+      "template": "guide-safety",
+      "assetIds": [
+        "diagram-storage-variables"
+      ],
+      "chapterStart": true,
+      "crossSectionSpread": true
+    },
+    {
+      "number": 48,
+      "id": "G-P048",
+      "spreadId": "G-S025",
+      "sectionId": "safety",
+      "topicId": "safety-t02",
+      "spreadTitle": "Хранение без сырости, запахов и ложных обещаний",
+      "role": "Завершает гид правилами «Хранение без сырости, запахов и ложных обещаний» и кратким контрольным списком",
+      "spreadTemplate": "guide-safety",
+      "template": "guide-safety",
+      "assetIds": []
+    }
+  ]
+}

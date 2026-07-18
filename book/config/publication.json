@@ -1,0 +1,10 @@
+{
+  "title": "Пуэр. Живая гора",
+  "subtitle": "Путь листа от древнего мифа до современной чашки",
+  "language": "ru",
+  "album": { "widthMm": 240, "heightMm": 300, "pages": 208, "bleedMm": 3 },
+  "guide": { "widthMm": 150, "heightMm": 220, "pages": 48, "bleedMm": 3 },
+  "edition": 300,
+  "citationCutoffDaysBeforePress": 90,
+  "manuscriptComplete": true
+}

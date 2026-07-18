@@ -54,12 +54,12 @@ export const history: HistoryEntry[] = [
   {
     id: 'ruan-puer-record',
     sortYear: 1825,
-    date: '1825 год',
+    date: 'Около 1825–1826 годов',
     title: 'Пуэр как историческая география',
     summary: 'Жуань Фу связывает старую область Иньшэн, название Пуэра и западную торговлю эпохи Тан.',
     detail: 'Это учёная реконструкция XIX века, а не прямое сообщение танского автора о продукте с современным названием.',
     kind: 'source',
-    sourceIds: ['ruan-1825', 'fan-chuo-863'],
+    sourceIds: ['ruan-puer-cha-ji-access', 'fan-chuo-863'],
   },
   {
     id: 'caravan-commodity',

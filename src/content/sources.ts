@@ -1,176 +1,126 @@
+import rawSources from '../../book/data/sources.json'
 import type { Source } from './types'
 
-export const sources: Source[] = [
-  {
-    id: 'benn-2015',
-    title: 'Tea in China: A Religious and Cultural History',
-    author: 'James A. Benn',
-    year: '2015',
-    href: 'https://academic.oup.com/hawaii-scholarship-online/book/29980/chapter-abstract/255043105',
-    group: 'research-western',
-    origin: 'University of Hawai‘i Press / Oxford Academic',
-    note: 'Исторический разбор ранних свидетельств и мифа о Шэнь-нуне.',
-  },
-  {
-    id: 'zhang-2013',
-    title: 'Puer Tea: Ancient Caravans and Urban Chic',
-    author: 'Jinghong Zhang',
-    year: '2013',
-    href: 'https://uwapress.uw.edu/book/9780295993232/puer-tea/',
-    group: 'research-asian',
-    origin: 'University of Washington Press',
-    note: 'Антропология производства, торговли, подлинности и современного рынка пуэра.',
-  },
-  {
-    id: 'fan-chuo-863',
-    title: 'Мань шу, книга 7: продукты области',
-    author: 'Фань Чо',
-    year: 'ок. 863',
-    href: 'https://zh.wikisource.org/wiki/%E8%A0%BB%E6%9B%B8',
-    group: 'primary-asian',
-    origin: 'Китайский исторический текст',
-    note: 'Раннее свидетельство о чае на горах в пределах Иньшэна.',
-  },
-  {
-    id: 'zhao-1765',
-    title: 'Бэньцао ганму шии: Пуэрский чай',
-    author: 'Чжао Сюэминь',
-    year: '1765; позднее дополнено',
-    href: 'https://www.zhonghuashu.com/wiki/%E6%9C%AC%E8%8D%89%E7%B6%B1%E7%9B%AE%E6%8B%BE%E9%81%BA',
-    group: 'primary-asian',
-    origin: 'Китайский фармакологический текст эпохи Цин',
-    note: 'Пуэрская управа, шесть чайных гор, податный чай и исторические лечебные представления.',
-  },
-  {
-    id: 'ruan-1825',
-    title: 'Записка о пуэрском чае',
-    author: 'Жуань Фу',
-    year: '1825',
-    href: 'https://www.newton.com.tw/wiki/%E6%99%AE%E6%B4%B1%E8%8C%B6%E8%A8%98/19266168',
-    group: 'primary-asian',
-    origin: 'Китайский историко-географический текст эпохи Цин',
-    note: 'Ретроспективная связь Пуэра с Иньшэном и танской торговлей.',
-  },
-  {
-    id: 'puer-wuhou',
-    title: '方志里的普洱：普洱茶',
-    author: 'Историко-партийный отдел города Пуэр',
-    year: '2024',
-    href: 'https://www.peds.gov.cn/tp_nr.asp?id=6849',
-    group: 'research-asian',
-    origin: 'Официальный сайт города Пуэр',
-    note: 'Сопоставляет местные предания о Чжугэ Ляне с его вероятным маршрутом.',
-  },
-  {
-    id: 'gbt-22111',
-    title: 'GB/T 22111-2008 — географическое указание «Пуэрский чай»',
-    author: 'Государственное управление по регулированию рынка КНР',
-    year: '2008',
-    href: 'https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=CAF792AAE4A96101F217C44250C8C8E4',
-    group: 'guidance',
-    origin: 'Национальный стандарт КНР',
-    note: 'Действующее официальное географическое определение пуэра.',
-  },
-  {
-    id: 'yunnan-2023',
-    title: 'Разъяснение определения пуэрского чая по GB/T 22111-2008',
-    author: 'Департамент сельского хозяйства провинции Юньнань',
-    year: '2023',
-    href: 'https://nync.yn.gov.cn/html/2023/hudongjiaoliu-xinwenfabu_0927/400980.html?cid=3035',
-    group: 'guidance',
-    origin: 'Правительство провинции Юньнань',
-    note: 'Сырьё и обработка привязаны к защищённой территории Юньнани.',
-  },
-  {
-    id: 'lv-2013',
-    title: 'Processing and chemical constituents of Pu-erh tea: A review',
-    author: 'Hai-peng Lv, Ying-jun Zhang, Zhi Lin, Yue-rong Liang',
-    year: '2013',
-    href: 'https://doi.org/10.1016/j.foodres.2013.02.043',
-    group: 'research-asian',
-    origin: 'Food Research International',
-    note: 'Обзор сырья, производства, микробной ферментации и химических изменений.',
-  },
-  {
-    id: 'fan-2022',
-    title: 'Chemical constituents and biological properties of Pu-erh tea',
-    author: 'Fan et al.',
-    year: '2022',
-    href: 'https://pubmed.ncbi.nlm.nih.gov/35337597/',
-    group: 'research-asian',
-    origin: 'Food Research International / PubMed',
-    note: 'Обзор состава и биологических данных; подчёркивает недостаточность испытаний на людях.',
-  },
-  {
-    id: 'xu-2022',
-    title: 'Regulation of fungal community and the quality formation and safety control of Pu-erh tea',
-    author: 'Jia Xu, Yang Wei, Fanglan Li, Xinchu Weng, Xinlin Wei',
-    year: '2022',
-    href: 'https://pubmed.ncbi.nlm.nih.gov/36201379/',
-    group: 'research-asian',
-    origin: 'Comprehensive Reviews in Food Science and Food Safety',
-    note: 'Роль грибов в качестве пуэра и потенциальные риски безопасности.',
-  },
-  {
-    id: 'jensen-2016',
-    title: 'Reduction of body fat and improved lipid profile associated with daily consumption of a Puer tea extract',
-    author: 'G. S. Jensen et al.',
-    year: '2016',
-    href: 'https://pubmed.ncbi.nlm.nih.gov/27069360/',
-    group: 'research-western',
-    origin: 'Clinical Interventions in Aging / PubMed',
-    note: 'Небольшое двойное слепое плацебо-контролируемое исследование экстракта, 59 участников.',
-  },
-  {
-    id: 'chu-2011',
-    title: 'A randomized double-blind placebo-controlled study of Pu’er tea extract on metabolic syndrome',
-    author: 'S. L. Chu et al.',
-    year: '2011',
-    href: 'https://pubmed.ncbi.nlm.nih.gov/21725873/',
-    group: 'research-asian',
-    origin: 'Chinese Journal of Integrative Medicine / PubMed',
-    note: 'Предварительное исследование концентрированного экстракта при метаболическом синдроме.',
-  },
-  {
-    id: 'sedova-2018',
-    title: 'Mycotoxins in Tea: Occurrence, Methods of Determination and Risk Evaluation',
-    author: 'I. Sedova, V. Kiseleva, V. Tutelyan',
-    year: '2018',
-    href: 'https://pubmed.ncbi.nlm.nih.gov/30380767/',
-    group: 'research-western',
-    origin: 'Toxins / Федеральный исследовательский центр питания',
-    note: 'Обзор загрязнения чая микотоксинами и оценки риска.',
-  },
-  {
-    id: 'efsa-caffeine',
-    title: 'Caffeine: safe intakes',
-    author: 'European Food Safety Authority',
-    year: 'актуальная редакция',
-    href: 'https://www.efsa.europa.eu/en/topics/topic/caffeine',
-    group: 'guidance',
-    origin: 'EFSA',
-    note: 'Безопасность кофеина из всех пищевых источников для здоровых взрослых.',
-  },
-  {
-    id: 'who-pregnancy',
-    title: 'Restricting caffeine intake during pregnancy',
-    author: 'World Health Organization',
-    year: '2023',
-    href: 'https://www.who.int/tools/elena/interventions/caffeine-pregnancy',
-    group: 'guidance',
-    origin: 'WHO',
-    note: 'Рекомендация снижать высокое потребление кофеина во время беременности.',
-  },
-  {
-    id: 'unesco-jingmai',
-    title: 'Cultural Landscape of Old Tea Forests of the Jingmai Mountain in Pu’er',
-    author: 'UNESCO World Heritage Centre',
-    year: '2023',
-    href: 'https://whc.unesco.org/en/list/1665/',
-    group: 'guidance',
-    origin: 'UNESCO',
-    note: 'Культурный ландшафт старых чайных лесов Цзинмай включён в список Всемирного наследия.',
-  },
-]
+const sourceGroups = [
+  'primary-asian',
+  'research-asian',
+  'research-western',
+  'guidance',
+] as const
+const sourceStatuses = ['candidate', 'checked', 'rejected'] as const
+const sourceBookUses = [
+  'core',
+  'supporting',
+  'access-copy',
+  'rejected',
+] as const
+
+export type BookSource = Source & {
+  status: 'candidate' | 'checked' | 'rejected'
+  siteVisible: boolean
+  bookUse: 'core' | 'supporting' | 'access-copy' | 'rejected'
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value)
+}
+
+function readNonBlankString(
+  source: Record<string, unknown>,
+  index: number,
+  field: keyof Source,
+): string {
+  const value = source[field]
+  if (typeof value !== 'string' || value.trim() === '') {
+    throw new Error(
+      `source registry entry ${index} field "${field}" must be a non-empty string`,
+    )
+  }
+  return value
+}
+
+function isOneOf<Value extends string>(
+  value: string,
+  allowed: readonly Value[],
+): value is Value {
+  return allowed.some((allowedValue) => allowedValue === value)
+}
+
+function readOneOf<Value extends string>(
+  source: Record<string, unknown>,
+  index: number,
+  field: string,
+  allowed: readonly Value[],
+): Value {
+  const value = source[field]
+  if (typeof value !== 'string' || !isOneOf(value, allowed)) {
+    throw new Error(
+      `source registry entry ${index} field "${field}" must be one of: ${allowed.join(', ')}`,
+    )
+  }
+  return value
+}
+
+function readBoolean(
+  source: Record<string, unknown>,
+  index: number,
+  field: string,
+): boolean {
+  const value = source[field]
+  if (typeof value !== 'boolean') {
+    throw new Error(
+      `source registry entry ${index} field "${field}" must be a boolean`,
+    )
+  }
+  return value
+}
+
+export function parseBookSources(input: unknown): BookSource[] {
+  if (!Array.isArray(input)) {
+    throw new Error('source registry must be an array')
+  }
+
+  return input.map((source, index) => {
+    if (!isRecord(source)) {
+      throw new Error(`source registry entry ${index} must be an object`)
+    }
+
+    return {
+      id: readNonBlankString(source, index, 'id'),
+      title: readNonBlankString(source, index, 'title'),
+      author: readNonBlankString(source, index, 'author'),
+      year: readNonBlankString(source, index, 'year'),
+      href: readNonBlankString(source, index, 'href'),
+      group: readOneOf(source, index, 'group', sourceGroups),
+      origin: readNonBlankString(source, index, 'origin'),
+      note: readNonBlankString(source, index, 'note'),
+      status: readOneOf(source, index, 'status', sourceStatuses),
+      siteVisible: readBoolean(source, index, 'siteVisible'),
+      bookUse: readOneOf(source, index, 'bookUse', sourceBookUses),
+    }
+  })
+}
+
+export function selectSiteSources(input: unknown): Source[] {
+  return parseBookSources(input)
+    .filter(
+      (source) =>
+        source.siteVisible &&
+        source.status === 'checked' &&
+        source.bookUse !== 'rejected',
+    )
+    .map(({ id, title, author, year, href, group, origin, note }) => ({
+      id,
+      title,
+      author,
+      year,
+      href,
+      group,
+      origin,
+      note,
+    }))
+}
+
+export const sources: Source[] = selectSiteSources(rawSources)
 
 export const sourceById = new Map(sources.map((source) => [source.id, source]))

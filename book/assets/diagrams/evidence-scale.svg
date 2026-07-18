@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" data-asset-id="diagram-medical-evidence-scale" data-asset-class="diagram" data-visual-mode="explanatory-diagram" data-min-placement-width-mm="150" data-min-placement-height-mm="187.5" data-min-font-size-pt="7.5" data-min-stroke-width-mm="0.2" role="img" aria-labelledby="evidence-title evidence-desc">
+  <title id="evidence-title">A–E: лестница применимости медицинских свидетельств</title>
+  <desc id="evidence-desc">Пять различимых по форме и подписи уровней от официальной рекомендации до исторического медицинского представления, с отдельными ограничениями переноса к обычной чашке пуэра.</desc>
+  <rect x="0" y="0" width="1200" height="1500" fill="#E9DECA"/>
+  <rect x="0" y="0" width="34" height="1500" fill="#253C32"/>
+  <rect x="58" y="74" width="1084" height="2" fill="#B88A58"/>
+
+  <g id="evidence-levels">
+    <g data-encoding="shape+label" data-meaning="уровень A официальное руководство" data-shape="circle">
+      <circle cx="154" cy="320" r="58" fill="#253C32" stroke="#211A16" stroke-width="3" data-stroke-width-mm="0.38"/>
+      <text x="154" y="336" text-anchor="middle" font-family="Cormorant" font-size="52" data-font-size-pt="18.43" fill="#E9DECA">A</text>
+      <rect x="248" y="250" width="830" height="140" rx="70" fill="none" stroke="#253C32" stroke-width="4" data-stroke-width-mm="0.50"/>
+      <text x="292" y="309" font-family="Literata" font-size="32" data-font-size-pt="11.34" fill="#211A16">A — официальная рекомендация</text>
+      <text x="292" y="349" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#91432D">для названной группы и вопроса; не «доза пользы»</text>
+    </g>
+    <g data-encoding="shape+label" data-meaning="уровень B систематический обзор" data-shape="double-rectangle">
+      <rect x="101" y="468" width="106" height="82" fill="none" stroke="#253C32" stroke-width="4" data-stroke-width-mm="0.50"/>
+      <rect x="113" y="480" width="82" height="58" fill="#B88A58" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+      <text x="154" y="530" text-anchor="middle" font-family="Cormorant" font-size="42" data-font-size-pt="14.88" fill="#211A16">B</text>
+      <rect x="248" y="440" width="830" height="140" rx="18" fill="none" stroke="#B88A58" stroke-width="4" data-stroke-width-mm="0.50"/>
+      <text x="292" y="499" font-family="Literata" font-size="32" data-font-size-pt="11.34" fill="#211A16">B — систематический обзор человеческих данных</text>
+      <text x="292" y="539" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#91432D">в текущем корпусе подходящая ступень пуста</text>
+    </g>
+    <g data-encoding="shape+label" data-meaning="уровень C исследование людей" data-shape="hexagon">
+      <polygon points="110,672 136,628 188,628 214,672 188,716 136,716" fill="#91432D" stroke="#211A16" stroke-width="3" data-stroke-width-mm="0.38"/>
+      <text x="162" y="686" text-anchor="middle" font-family="Cormorant" font-size="42" data-font-size-pt="14.88" fill="#E9DECA">C</text>
+      <path d="M248 630 H1078 V720 H248 Z" fill="none" stroke="#91432D" stroke-width="4" data-stroke-width-mm="0.50"/>
+      <text x="292" y="681" font-family="Literata" font-size="32" data-font-size-pt="11.34" fill="#211A16">C — исследование людей</text>
+      <text x="292" y="716" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#91432D">дизайн, форма продукта и исход всё ещё решают</text>
+    </g>
+    <g data-encoding="shape+label" data-meaning="уровень D лабораторная или доклиническая модель" data-shape="triangle">
+      <polygon points="154,808 99,902 209,902" fill="#B88A58" stroke="#211A16" stroke-width="3" data-stroke-width-mm="0.38"/>
+      <text x="154" y="881" text-anchor="middle" font-family="Cormorant" font-size="42" data-font-size-pt="14.88" fill="#211A16">D</text>
+      <path d="M248 820 L1050 820 L1078 865 L1050 910 H248 Z" fill="none" stroke="#B88A58" stroke-width="4" data-stroke-width-mm="0.50"/>
+      <text x="292" y="866" font-family="Literata" font-size="30" data-font-size-pt="10.63" fill="#211A16">D — животная, клеточная, химическая</text>
+      <text x="292" y="901" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#91432D">лабораторная или микробиологическая модель</text>
+    </g>
+    <g data-encoding="shape+label" data-meaning="уровень E историческое медицинское представление" data-shape="arch">
+      <path d="M102 1092 V1040 Q102 980 162 980 Q222 980 222 1040 V1092 Z" fill="#253C32" stroke="#211A16" stroke-width="3" data-stroke-width-mm="0.38"/>
+      <text x="162" y="1063" text-anchor="middle" font-family="Cormorant" font-size="42" data-font-size-pt="14.88" fill="#E9DECA">E</text>
+      <path d="M248 1010 H1078 V1100 H248 Z" fill="none" stroke="#253C32" stroke-width="4" data-stroke-width-mm="0.50"/>
+      <text x="292" y="1055" font-family="Literata" font-size="30" data-font-size-pt="10.63" fill="#211A16">E — историческое медицинское представление</text>
+      <text x="292" y="1090" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#91432D">культурный источник, не современное назначение</text>
+    </g>
+  </g>
+
+  <g id="applicability">
+    <line x1="154" y1="1150" x2="154" y2="1228" stroke="#253C32" stroke-width="6" data-stroke-width-mm="0.75"/>
+    <path d="M132 1202 L154 1234 L176 1202" fill="#253C32" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+    <text x="208" y="1183" font-family="Literata" font-size="26" data-font-size-pt="9.21" fill="#211A16">Чем дальше форма продукта и исход от чашки и здоровья,</text>
+    <text x="208" y="1220" font-family="Literata" font-size="26" data-font-size-pt="9.21" fill="#211A16">тем осторожнее перенос. Буква — начало чтения, не финал.</text>
+  </g>
+
+  <g id="limitations">
+    <rect x="74" y="1266" width="1068" height="82" rx="16" fill="#91432D"/>
+    <text x="600" y="1317" text-anchor="middle" font-family="Manrope" font-size="26" data-font-size-pt="9.21" fill="#E9DECA">Ступень не доказывает лечение или эффективность обычного настоя автоматически.</text>
+  </g>
+
+  <g id="labels">
+    <text x="74" y="140" font-family="Cormorant" font-size="56" data-font-size-pt="19.84" fill="#211A16">A–E: лестница применимости</text>
+    <text x="76" y="184" font-family="Literata" font-size="28" data-font-size-pt="9.92" fill="#91432D">Не рейтинг красоты исследования, а проверка масштаба вывода</text>
+  </g>
+
+  <g id="legend">
+    <circle cx="774" cy="226" r="13" fill="#253C32" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+    <text x="800" y="234" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#211A16">форма + буква + полная подпись</text>
+  </g>
+
+  <g id="sources">
+    <line x1="74" y1="1370" x2="1142" y2="1370" stroke="#B88A58" stroke-width="2" data-stroke-width-mm="0.25"/>
+    <text x="74" y="1408" font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#211A16">Редакционная шкала книги; медицинские границы сверены с EFSA, WHO</text>
+    <text x="74" y="1440" font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#211A16">и проверенным корпусом исследований пуэра.</text>
+  </g>
+</svg>

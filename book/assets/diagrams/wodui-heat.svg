@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" data-asset-id="diagram-wodui-heat" data-asset-class="diagram" data-visual-mode="explanatory-diagram" data-min-placement-width-mm="150" data-min-placement-height-mm="187.5" data-min-font-size-pt="7.5" data-min-stroke-width-mm="0.2" role="img" aria-labelledby="wodui-title wodui-desc">
+  <title id="wodui-title">Wodui: тепло, действия и неопределённость</title>
+  <desc id="wodui-desc">Условная стадийная температурная траектория влажной кучи и гипотетическая схема пространственного отбора, ясно отделённая от измеренной универсальной карты процесса.</desc>
+  <rect x="0" y="0" width="1200" height="1500" fill="#E9DECA"/>
+  <rect x="0" y="0" width="34" height="1500" fill="#91432D"/>
+  <rect x="58" y="74" width="1084" height="2" fill="#B88A58"/>
+
+  <g id="axes">
+    <line x1="132" y1="788" x2="760" y2="788" stroke="#211A16" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <line x1="132" y1="788" x2="132" y2="306" stroke="#211A16" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <line x1="125" y1="664" x2="146" y2="664" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+    <line x1="125" y1="540" x2="146" y2="540" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+    <line x1="125" y1="416" x2="146" y2="416" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+    <text x="94" y="560" transform="rotate(-90 94 560)" text-anchor="middle" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#211A16">Температура, °C · направление изменения</text>
+    <text x="446" y="856" text-anchor="middle" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#211A16">Стадии процесса, не универсальные дни</text>
+  </g>
+
+  <g id="measurements">
+    <line x1="158" y1="724" x2="202" y2="692" stroke="#91432D" stroke-width="8" data-stroke-width-mm="1.00"/>
+    <line x1="202" y1="692" x2="250" y2="566" stroke="#91432D" stroke-width="8" data-stroke-width-mm="1.00"/>
+    <line x1="250" y1="566" x2="304" y2="492" stroke="#91432D" stroke-width="8" data-stroke-width-mm="1.00"/>
+    <line x1="304" y1="492" x2="362" y2="452" stroke="#91432D" stroke-width="8" data-stroke-width-mm="1.00"/>
+    <line x1="362" y1="452" x2="410" y2="448" stroke="#91432D" stroke-width="8" data-stroke-width-mm="1.00"/>
+    <line x1="410" y1="448" x2="458" y2="470" stroke="#91432D" stroke-width="8" data-stroke-width-mm="1.00"/>
+    <line x1="458" y1="470" x2="515" y2="496" stroke="#91432D" stroke-width="8" data-stroke-width-mm="1.00"/>
+    <line x1="515" y1="496" x2="552" y2="464" stroke="#91432D" stroke-width="8" data-stroke-width-mm="1.00"/>
+    <line x1="552" y1="464" x2="602" y2="470" stroke="#91432D" stroke-width="8" data-stroke-width-mm="1.00"/>
+    <line x1="602" y1="470" x2="652" y2="516" stroke="#91432D" stroke-width="8" data-stroke-width-mm="1.00"/>
+    <line x1="652" y1="516" x2="700" y2="620" stroke="#91432D" stroke-width="8" data-stroke-width-mm="1.00"/>
+    <line x1="700" y1="620" x2="744" y2="690" stroke="#91432D" stroke-width="8" data-stroke-width-mm="1.00"/>
+    <line x1="158" y1="748" x2="202" y2="716" stroke="#B88A58" stroke-width="3" data-stroke-width-mm="0.38" stroke-dasharray="12 10"/>
+    <line x1="202" y1="716" x2="250" y2="590" stroke="#B88A58" stroke-width="3" data-stroke-width-mm="0.38" stroke-dasharray="12 10"/>
+    <line x1="250" y1="590" x2="304" y2="516" stroke="#B88A58" stroke-width="3" data-stroke-width-mm="0.38" stroke-dasharray="12 10"/>
+    <line x1="304" y1="516" x2="362" y2="476" stroke="#B88A58" stroke-width="3" data-stroke-width-mm="0.38" stroke-dasharray="12 10"/>
+    <line x1="362" y1="476" x2="410" y2="472" stroke="#B88A58" stroke-width="3" data-stroke-width-mm="0.38" stroke-dasharray="12 10"/>
+    <line x1="410" y1="472" x2="458" y2="494" stroke="#B88A58" stroke-width="3" data-stroke-width-mm="0.38" stroke-dasharray="12 10"/>
+    <line x1="458" y1="494" x2="515" y2="520" stroke="#B88A58" stroke-width="3" data-stroke-width-mm="0.38" stroke-dasharray="12 10"/>
+    <line x1="515" y1="520" x2="552" y2="488" stroke="#B88A58" stroke-width="3" data-stroke-width-mm="0.38" stroke-dasharray="12 10"/>
+    <line x1="552" y1="488" x2="602" y2="494" stroke="#B88A58" stroke-width="3" data-stroke-width-mm="0.38" stroke-dasharray="12 10"/>
+    <line x1="602" y1="494" x2="652" y2="540" stroke="#B88A58" stroke-width="3" data-stroke-width-mm="0.38" stroke-dasharray="12 10"/>
+    <line x1="652" y1="540" x2="700" y2="644" stroke="#B88A58" stroke-width="3" data-stroke-width-mm="0.38" stroke-dasharray="12 10"/>
+    <line x1="700" y1="644" x2="744" y2="714" stroke="#B88A58" stroke-width="3" data-stroke-width-mm="0.38" stroke-dasharray="12 10"/>
+    <circle cx="158" cy="724" r="14" fill="#E9DECA" stroke="#91432D" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <circle cx="304" cy="492" r="14" fill="#E9DECA" stroke="#91432D" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <circle cx="458" cy="470" r="14" fill="#E9DECA" stroke="#91432D" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <circle cx="602" cy="470" r="14" fill="#E9DECA" stroke="#91432D" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <circle cx="744" cy="690" r="14" fill="#E9DECA" stroke="#91432D" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <text x="164" y="270" font-family="Literata" font-size="26" data-font-size-pt="9.21" fill="#91432D">Повышенная фаза → охлаждение</text>
+    <text x="164" y="304" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#211A16">описано для одной опубликованной серии</text>
+  </g>
+
+  <g id="process-stages">
+    <g data-encoding="shape+label" data-meaning="увлажнение запускает влажную среду" data-shape="water-drop">
+      <path d="M158 866 C128 908 129 940 158 950 C187 940 188 908 158 866 Z" fill="#253C32" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+      <text x="158" y="990" text-anchor="middle" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#211A16">Увлажнение</text>
+    </g>
+    <g data-encoding="shape+label" data-meaning="формирование кучи и наблюдение" data-shape="mound">
+      <path d="M256 950 Q304 854 352 950 Z" fill="#B88A58" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+      <text x="304" y="990" text-anchor="middle" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#211A16">Куча</text>
+    </g>
+    <g data-encoding="shape+label" data-meaning="переворот как человеческое вмешательство" data-shape="crossing-arrows">
+      <path d="M406 908 H510 L488 888 M510 908 L488 928 M510 950 H406 L428 930 M406 950 L428 970" fill="none" stroke="#253C32" stroke-width="4" data-stroke-width-mm="0.50"/>
+      <text x="458" y="1008" text-anchor="middle" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#211A16">Переворот</text>
+    </g>
+    <g data-encoding="shape+label" data-meaning="повторное наблюдение после вмешательства" data-shape="eye">
+      <path d="M548 920 Q602 872 656 920 Q602 968 548 920 Z" fill="none" stroke="#91432D" stroke-width="4" data-stroke-width-mm="0.50"/>
+      <circle cx="602" cy="920" r="18" fill="#91432D" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+      <text x="602" y="1008" text-anchor="middle" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#211A16">Наблюдение</text>
+    </g>
+    <g data-encoding="shape+label" data-meaning="сушка завершает влажное кучевание" data-shape="sun-over-line">
+      <circle cx="744" cy="906" r="34" fill="#B88A58" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+      <line x1="698" y1="958" x2="790" y2="958" stroke="#253C32" stroke-width="4" data-stroke-width-mm="0.50"/>
+      <text x="744" y="1008" text-anchor="middle" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#211A16">Сушка</text>
+    </g>
+  </g>
+
+  <g id="uncertainty">
+    <rect x="820" y="272" width="322" height="746" rx="28" fill="#253C32"/>
+    <text x="854" y="326" font-family="Cormorant" font-size="42" data-font-size-pt="14.88" fill="#E9DECA">Где измерять?</text>
+    <text x="854" y="365" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#B88A58">[ГИПОТЕЗА]</text>
+    <path d="M860 712 Q981 434 1102 712 Z" fill="#91432D" stroke="#E9DECA" stroke-width="3" data-stroke-width-mm="0.38"/>
+    <g data-encoding="shape+label" data-meaning="гипотетическая проба края" data-shape="outlined-circle">
+      <circle cx="892" cy="650" r="22" fill="#E9DECA" stroke="#211A16" stroke-width="3" data-stroke-width-mm="0.38"/>
+      <text x="854" y="762" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#E9DECA">край</text>
+    </g>
+    <g data-encoding="shape+label" data-meaning="гипотетическая проба центра" data-shape="solid-circle">
+      <circle cx="981" cy="538" r="22" fill="#B88A58" stroke="#211A16" stroke-width="3" data-stroke-width-mm="0.38"/>
+      <text x="954" y="762" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#E9DECA">центр</text>
+    </g>
+    <g data-encoding="shape+label" data-meaning="гипотетическая проба основания" data-shape="square">
+      <rect x="1052" y="666" width="44" height="44" fill="#E9DECA" stroke="#211A16" stroke-width="3" data-stroke-width-mm="0.38"/>
+      <text x="1037" y="762" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#E9DECA">низ</text>
+    </g>
+    <path d="M892 650 L981 538 L1074 688" fill="none" stroke="#B88A58" stroke-width="3" data-stroke-width-mm="0.38" stroke-dasharray="10 10"/>
+    <text x="981" y="824" text-anchor="middle" font-family="Literata" font-size="24" data-font-size-pt="8.50" textLength="236" lengthAdjust="spacingAndGlyphs" fill="#E9DECA">Тепло, влага и воздух</text>
+    <text x="981" y="860" text-anchor="middle" font-family="Literata" font-size="24" data-font-size-pt="8.50" textLength="250" lengthAdjust="spacingAndGlyphs" fill="#E9DECA">могут различаться по зонам.</text>
+    <text x="981" y="914" text-anchor="middle" font-family="Manrope" font-size="24" data-font-size-pt="8.50" textLength="250" lengthAdjust="spacingAndGlyphs" fill="#B88A58">Это не измеренная карта.</text>
+    <text x="981" y="950" text-anchor="middle" font-family="Manrope" font-size="24" data-font-size-pt="8.50" textLength="224" lengthAdjust="spacingAndGlyphs" fill="#B88A58">Нужны локальные пробы.</text>
+  </g>
+
+  <g id="labels">
+    <text x="74" y="140" font-family="Cormorant" font-size="56" data-font-size-pt="19.84" fill="#211A16">Wodui: тепло как событие</text>
+    <text x="76" y="184" font-family="Literata" font-size="28" data-font-size-pt="9.92" fill="#91432D">Кривая включает среду, материал и работу людей</text>
+    <text x="74" y="1090" font-family="Cormorant" font-size="42" data-font-size-pt="14.88" fill="#211A16">Что линия не сообщает</text>
+    <text x="74" y="1134" font-family="Literata" font-size="26" data-font-size-pt="9.21" fill="#211A16">Она не назначает единственную причину тепла, точный срок</text>
+    <text x="74" y="1172" font-family="Literata" font-size="26" data-font-size-pt="9.21" fill="#211A16">или одинаковую температуру каждой куче и каждой фабрике.</text>
+  </g>
+
+  <g id="legend">
+    <line x1="74" y1="1248" x2="154" y2="1248" stroke="#91432D" stroke-width="8" data-stroke-width-mm="1.00"/>
+    <text x="176" y="1257" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#211A16">условная траектория наблюдения</text>
+    <line x1="624" y1="1248" x2="704" y2="1248" stroke="#B88A58" stroke-width="3" data-stroke-width-mm="0.38" stroke-dasharray="12 10"/>
+    <text x="726" y="1257" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#211A16">неопределённость</text>
+    <text x="74" y="1317" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#91432D">Значения и продолжительность условны и не универсальны.</text>
+  </g>
+
+  <g id="sources">
+    <line x1="74" y1="1384" x2="1142" y2="1384" stroke="#B88A58" stroke-width="2" data-stroke-width-mm="0.25"/>
+    <text x="74" y="1424" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#211A16">Опоры: Abe et al., 2008; DB5308/T 58—2020. Пространственные зоны — редакционная гипотеза.</text>
+  </g>
+</svg>

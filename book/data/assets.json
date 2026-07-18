@@ -1,0 +1,986 @@
+[
+  {
+    "id": "site-puer-hero-concept",
+    "kind": "illustration",
+    "title": "Site hero: old tea tree above misted mountains",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending — repository import has no embedded creator, source or licence metadata.",
+    "path": "public/images/puer-hero.webp",
+    "pixelWidth": 1672,
+    "pixelHeight": 941,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-opening"
+    ]
+  },
+  {
+    "id": "site-fermentation-microcosm-concept",
+    "kind": "illustration",
+    "title": "Site fermentation microcosm visual",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending — repository import has no embedded creator, source or licence metadata.",
+    "path": "public/images/fermentation-microcosm.webp",
+    "pixelWidth": 1672,
+    "pixelHeight": 941,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-fermentation"
+    ]
+  },
+  {
+    "id": "site-puer-material-culture-concept",
+    "kind": "illustration",
+    "title": "Site material-culture still life",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending — repository import has no embedded creator, source or licence metadata.",
+    "path": "public/images/puer-material-culture.webp",
+    "pixelWidth": 1672,
+    "pixelHeight": 941,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-object-atlas"
+    ]
+  },
+  {
+    "id": "site-sheng-shou-paths-concept",
+    "kind": "illustration",
+    "title": "Site sheng and shou paths visual",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending — repository import has no embedded creator, source or licence metadata.",
+    "path": "public/images/sheng-shou-paths.webp",
+    "pixelWidth": 1672,
+    "pixelHeight": 941,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-sheng-shou"
+    ]
+  },
+  {
+    "id": "photo-yunnan-mountain-landscape",
+    "kind": "photo",
+    "title": "Yunnan mountain landscape documentary plate",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/yunnan-mountain-landscape.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-yunnan-ecology"
+    ]
+  },
+  {
+    "id": "photo-tea-forest-landscape",
+    "kind": "photo",
+    "title": "Tea forest landscape documentary plate",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/tea-forest-landscape.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-yunnan-ecology"
+    ]
+  },
+  {
+    "id": "photo-tea-garden-documentary",
+    "kind": "photo",
+    "title": "Old tea garden documentary plate",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/tea-garden-documentary.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-tea-gardens"
+    ]
+  },
+  {
+    "id": "photo-assamica-botanical-macro",
+    "kind": "photo",
+    "title": "Camellia sinensis var. assamica botanical macro",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/assamica-botanical-macro.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-botany"
+    ]
+  },
+  {
+    "id": "photo-old-tea-tree-portraits",
+    "kind": "photo",
+    "title": "Old tea tree portrait series",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/old-tea-tree-portraits.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-tea-gardens"
+    ]
+  },
+  {
+    "id": "photo-maocha-production-sequence",
+    "kind": "photo",
+    "title": "Maocha production sequence overview",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/maocha-production-sequence.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-maocha-process"
+    ]
+  },
+  {
+    "id": "photo-harvest-hands",
+    "kind": "photo",
+    "title": "Harvest hands and fresh leaf detail",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/harvest-hands.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-maocha-process"
+    ]
+  },
+  {
+    "id": "photo-shaqing-worker-tools",
+    "kind": "photo",
+    "title": "Sha qing worker and tools",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/shaqing-worker-tools.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-maocha-process"
+    ]
+  },
+  {
+    "id": "photo-rolling-hands",
+    "kind": "photo",
+    "title": "Rolling hands documentary detail",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/rolling-hands.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-maocha-process"
+    ]
+  },
+  {
+    "id": "photo-sun-drying-terraces",
+    "kind": "photo",
+    "title": "Sun-drying terraces documentary plate",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/sun-drying-terraces.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-maocha-process"
+    ]
+  },
+  {
+    "id": "photo-sorting-workers",
+    "kind": "photo",
+    "title": "Sorting workers documentary plate",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/sorting-workers.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-maocha-process"
+    ]
+  },
+  {
+    "id": "photo-steaming-tools",
+    "kind": "photo",
+    "title": "Steaming tools and leaf detail",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/steaming-tools.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-pressing"
+    ]
+  },
+  {
+    "id": "photo-pressing-workers",
+    "kind": "photo",
+    "title": "Pressing workers and moulds",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/pressing-workers.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-pressing"
+    ]
+  },
+  {
+    "id": "photo-drying-racks",
+    "kind": "photo",
+    "title": "Pressed tea drying racks",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/drying-racks.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-pressing"
+    ]
+  },
+  {
+    "id": "photo-tea-worker-portrait",
+    "kind": "photo",
+    "title": "Tea worker portrait",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/tea-worker-portrait.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-living-culture"
+    ]
+  },
+  {
+    "id": "photo-tea-tools-still-life",
+    "kind": "photo",
+    "title": "Tea tools still life",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/tea-tools-still-life.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-object-atlas",
+      "guide-tools-water"
+    ]
+  },
+  {
+    "id": "photo-pressings-object-atlas",
+    "kind": "photo",
+    "title": "Pressed cakes and forms object atlas",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/pressings-object-atlas.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-object-atlas"
+    ]
+  },
+  {
+    "id": "photo-wrappers-object-atlas",
+    "kind": "photo",
+    "title": "Wrappers and seals object atlas",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/wrappers-object-atlas.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-object-atlas"
+    ]
+  },
+  {
+    "id": "photo-water-brewing-detail",
+    "kind": "photo",
+    "title": "Water and brewing detail",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/water-brewing-detail.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "guide-tools-water"
+    ]
+  },
+  {
+    "id": "photo-tea-liquor-cups",
+    "kind": "photo",
+    "title": "Tea liquor and cups comparison",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/photos/tea-liquor-cups.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-cup",
+      "guide-tasting"
+    ]
+  },
+  {
+    "id": "archive-qing-tribute-record",
+    "kind": "archive",
+    "title": "Qing tribute-tea record facsimile",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/archive/qing-tribute-record.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-qing-history"
+    ]
+  },
+  {
+    "id": "archive-tea-route-document",
+    "kind": "archive",
+    "title": "Historical tea-route document facsimile",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/archive/tea-route-document.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-tea-routes"
+    ]
+  },
+  {
+    "id": "map-yunnan-relief",
+    "kind": "map",
+    "title": "Yunnan relief and watersheds map",
+    "creator": "Редакция «Пуэр. Живая гора»",
+    "createdAt": "2026-07-17",
+    "location": "Yunnan editorial map frame",
+    "sourceUrl": "https://www.webmap.cn/commres.do?method=result25W",
+    "rights": "pending",
+    "licenseFile": "book/assets/rights/map-yunnan-relief.md",
+    "creditLine": "Rights clearance pending; редакционный preview, источники геоданных указаны.",
+    "path": "book/assets/maps/yunnan-relief.svg",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "preview",
+    "spreadIds": [
+      "album-yunnan-ecology"
+    ],
+    "viewBox": "0 0 1200 1500",
+    "cartography": {
+      "projection": "+proj=aea +lat_1=21 +lat_2=29 +lat_0=25 +lon_0=101.5 +ellps=GRS80 +units=m +no_defs",
+      "projectionStatus": "planned",
+      "datasetVersions": [
+        "NGCC 1:1 000 000 public base, product 2021, overall currency 2019",
+        "Copernicus DEM GLO-30 DGED 2024_1",
+        "HydroBASINS v1c"
+      ],
+      "boundaryReference": "Yunnan standard maps, 2024; final 审图号 pending",
+      "interpretiveLayer": "Generalized editorial relief and watershed rendering; not an official surveyed hydrographic map.",
+      "uncertaintyNote": "DEM is a surface model; generalized watershed boundaries and labels require final Chinese cartographic review.",
+      "sourceUrls": [
+        "https://www.webmap.cn/commres.do?method=result25W",
+        "https://dnr.yn.gov.cn/html/2024/tongzhigonggao_0905/4047492.html",
+        "https://dataspace.copernicus.eu/explore-data/data-collections/copernicus-contributing-missions/collections-description/COP-DEM",
+        "https://www.hydrosheds.org/products/hydrobasins",
+        "https://wcb.yn.gov.cn/html/2021/shuiligaikuang_1021/52794.html"
+      ],
+      "reviewStatus": {
+        "anchorVerification": "pending",
+        "chineseCartographicReview": "pending",
+        "printUse": "blocked",
+        "shenTuHao": "pending"
+      }
+    }
+  },
+  {
+    "id": "map-six-mountains",
+    "kind": "map",
+    "title": "Six historic tea mountains map",
+    "creator": "Редакция «Пуэр. Живая гора»",
+    "createdAt": "2026-07-17",
+    "location": "Mengla editorial map frame",
+    "sourceUrl": "https://www.webmap.cn/commres.do?method=result25W",
+    "rights": "pending",
+    "licenseFile": "book/assets/rights/map-six-mountains.md",
+    "creditLine": "Rights clearance pending; редакционный preview, источники указаны.",
+    "path": "book/assets/maps/six-mountains.svg",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "preview",
+    "spreadIds": [
+      "album-six-mountains"
+    ],
+    "viewBox": "0 0 1200 1500",
+    "cartography": {
+      "projection": "+proj=tmerc +lat_0=0 +lon_0=102 +k=1 +x_0=500000 +y_0=0 +ellps=GRS80 +units=m +no_defs",
+      "projectionStatus": "planned",
+      "datasetVersions": [
+        "NGCC 1:1 000 000 public base, product 2021, overall currency 2019",
+        "Qing textual list: zhao-facsimile-pku; ruan-puer-cha-ji-access; ruan-dianbi-catalog",
+        "Mengla public heritage note, 2019"
+      ],
+      "boundaryReference": "Yunnan standard maps, 2024; final 审图号 pending",
+      "interpretiveLayer": "Hatched editorial localization of historical tea regions; not surveyed peaks, garden parcels, or exact polygons.",
+      "uncertaintyNote": "Label anchors are approximate editorial centroids; Mansa and Yiwu are not treated as full synonyms across all periods.",
+      "sourceUrls": [
+        "https://www.webmap.cn/commres.do?method=result25W",
+        "https://dnr.yn.gov.cn/html/2024/tongzhigonggao_0905/4047492.html",
+        "https://ctext.org/wiki.pl?if=gb&chapter=194007",
+        "https://mzzj.yn.gov.cn/html/2019/difangdongtai_1223/34375.html"
+      ],
+      "reviewStatus": {
+        "anchorVerification": "pending",
+        "chineseCartographicReview": "pending",
+        "printUse": "blocked",
+        "shenTuHao": "pending"
+      }
+    }
+  },
+  {
+    "id": "map-tea-routes",
+    "kind": "map",
+    "title": "Tea routes evidence map",
+    "creator": "Редакция «Пуэр. Живая гора»",
+    "createdAt": "2026-07-17",
+    "location": "Yunnan–Tibet editorial map frame",
+    "sourceUrl": "https://www.webmap.cn/commres.do?method=result25W",
+    "rights": "pending",
+    "licenseFile": "book/assets/rights/map-tea-routes.md",
+    "creditLine": "Rights clearance pending; редакционный preview, источники указаны.",
+    "path": "book/assets/maps/tea-routes.svg",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "preview",
+    "spreadIds": [
+      "album-tea-routes"
+    ],
+    "viewBox": "0 0 1200 1500",
+    "cartography": {
+      "projection": "+proj=lcc +lat_1=21 +lat_2=31 +lat_0=26 +lon_0=99 +datum=WGS84 +units=m +no_defs",
+      "projectionStatus": "planned",
+      "datasetVersions": [
+        "NGCC 1:1 000 000 public base, product 2021, overall currency 2019",
+        "Seventh national protected heritage list, 2013",
+        "Published node evidence compiled in Zhang 2013"
+      ],
+      "boundaryReference": "Yunnan standard maps, 2024; final 审图号 pending",
+      "interpretiveLayer": "Evidence-network reconstruction: documented points, dashed editorial connections, and directional arrows; not one continuous ancient road.",
+      "uncertaintyNote": "No surveyed line geometry is claimed; chronology, continuity, cargo, and exact alignment differ by segment and period.",
+      "sourceUrls": [
+        "https://www.webmap.cn/commres.do?method=result25W",
+        "https://dnr.yn.gov.cn/html/2024/tongzhigonggao_0905/4047492.html",
+        "https://zwgk.mct.gov.cn/zfxxgkml/qt/202012/t20201206_918449.html",
+        "https://mzzj.yn.gov.cn/html/2025/difangdongtai_1201/4061605.html",
+        "https://uwapress.uw.edu/book/9780295993232/puer-tea/"
+      ],
+      "reviewStatus": {
+        "anchorVerification": "pending",
+        "chineseCartographicReview": "pending",
+        "printUse": "blocked",
+        "shenTuHao": "pending"
+      }
+    }
+  },
+  {
+    "id": "map-jingmai-landscape",
+    "kind": "map",
+    "title": "Jingmai cultural landscape map",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/maps/jingmai-landscape.svg",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-tea-gardens"
+    ],
+    "viewBox": null
+  },
+  {
+    "id": "map-puer-administration-history",
+    "kind": "map",
+    "title": "Pu'er administrative history map",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/maps/puer-administration-history.svg",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-puer-history"
+    ],
+    "viewBox": null
+  },
+  {
+    "id": "map-storage-climates",
+    "kind": "map",
+    "title": "Comparative storage climates map",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/maps/storage-climates.svg",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-storage"
+    ],
+    "viewBox": null
+  },
+  {
+    "id": "diagram-maocha-process",
+    "kind": "diagram",
+    "title": "Maocha process diagram",
+    "creator": "Редакция «Пуэр. Живая гора»",
+    "createdAt": "2026-07-17",
+    "location": "Digital editorial studio",
+    "sourceUrl": "https://std.samr.gov.cn/db/search/stdDBDetailed?id=A02D3325A6D8B71AE05397BE0A0A41E1",
+    "rights": "owned",
+    "licenseFile": "book/assets/rights/diagram-maocha-process.md",
+    "creditLine": "Редакция «Пуэр. Живая гора» — схема процесса маоча.",
+    "path": "book/assets/diagrams/maocha-process.svg",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "preview",
+    "spreadIds": [
+      "album-maocha-process"
+    ],
+    "viewBox": "0 0 1200 1500"
+  },
+  {
+    "id": "diagram-sheng-shou-fork",
+    "kind": "diagram",
+    "title": "Sheng and shou process fork",
+    "creator": "Редакция «Пуэр. Живая гора»",
+    "createdAt": "2026-07-17",
+    "location": "Digital editorial studio",
+    "sourceUrl": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=CAF792AAE4A96101F217C44250C8C8E4",
+    "rights": "owned",
+    "licenseFile": "book/assets/rights/diagram-sheng-shou-fork.md",
+    "creditLine": "Редакция «Пуэр. Живая гора» — технологическая развилка шэн/шу.",
+    "path": "book/assets/diagrams/sheng-shou-fork.svg",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "preview",
+    "spreadIds": [
+      "album-sheng-shou"
+    ],
+    "viewBox": "0 0 1200 1500"
+  },
+  {
+    "id": "diagram-wodui-heat",
+    "kind": "diagram",
+    "title": "Wodui moisture and heat diagram",
+    "creator": "Редакция «Пуэр. Живая гора»",
+    "createdAt": "2026-07-17",
+    "location": "Digital editorial studio",
+    "sourceUrl": "https://doi.org/10.1016/j.ijfoodmicro.2008.03.008",
+    "rights": "owned",
+    "licenseFile": "book/assets/rights/diagram-wodui-heat.md",
+    "creditLine": "Редакция «Пуэр. Живая гора» — объяснительная схема водуй.",
+    "path": "book/assets/diagrams/wodui-heat.svg",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "preview",
+    "spreadIds": [
+      "album-fermentation"
+    ],
+    "viewBox": "0 0 1200 1500"
+  },
+  {
+    "id": "diagram-storage-variables",
+    "kind": "diagram",
+    "title": "Storage variables diagram",
+    "creator": "Редакция «Пуэр. Живая гора»",
+    "createdAt": "2026-07-17",
+    "location": "Digital editorial studio",
+    "sourceUrl": "https://std.samr.gov.cn/db/search/stdDBDetailed?id=A02D3325A6D4B71AE05397BE0A0A41E1",
+    "rights": "owned",
+    "licenseFile": "book/assets/rights/diagram-storage-variables.md",
+    "creditLine": "Редакция «Пуэр. Живая гора» — карта переменных хранения.",
+    "path": "book/assets/diagrams/storage-map.svg",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "preview",
+    "spreadIds": [
+      "album-storage",
+      "guide-storage-safety"
+    ],
+    "viewBox": "0 0 1200 1500"
+  },
+  {
+    "id": "diagram-microbiology-community",
+    "kind": "diagram",
+    "title": "Microbial community explanatory plate",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/diagrams/microbiology-community.svg",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-microbiology"
+    ],
+    "viewBox": null
+  },
+  {
+    "id": "diagram-microbiology-safety-methods",
+    "kind": "diagram",
+    "title": "Microbiology safety and method limits plate",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/diagrams/microbiology-safety-methods.svg",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-microbiology-safety"
+    ],
+    "viewBox": null
+  },
+  {
+    "id": "diagram-medical-evidence-scale",
+    "kind": "diagram",
+    "title": "Medical evidence scale diagram",
+    "creator": "Редакция «Пуэр. Живая гора»",
+    "createdAt": "2026-07-17",
+    "location": "Digital editorial studio",
+    "sourceUrl": "https://www.efsa.europa.eu/en/topics/topic/caffeine",
+    "rights": "owned",
+    "licenseFile": "book/assets/rights/diagram-medical-evidence-scale.md",
+    "creditLine": "Редакция «Пуэр. Живая гора» — шкала применимости свидетельств.",
+    "path": "book/assets/diagrams/evidence-scale.svg",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "preview",
+    "spreadIds": [
+      "album-medical-evidence"
+    ],
+    "viewBox": "0 0 1200 1500"
+  },
+  {
+    "id": "diagram-medical-study-limitations",
+    "kind": "diagram",
+    "title": "Medical study limitations diagram",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/diagrams/medical-study-limitations.svg",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "album-medical-evidence"
+    ],
+    "viewBox": null
+  },
+  {
+    "id": "illustration-shennong-gate",
+    "kind": "illustration",
+    "title": "Shennong legend chapter-gate art",
+    "creator": "OpenAI image generation; art direction by the Пуэр. Живая гора editorial project",
+    "createdAt": "2026-07-17",
+    "location": "Digital editorial studio",
+    "sourceUrl": null,
+    "rights": "owned",
+    "licenseFile": "book/assets/rights/illustration-shennong-gate.md",
+    "creditLine": "Мифологическая иллюстрация создана с помощью OpenAI; арт-дирекция редакции.",
+    "path": "book/assets/private/illustrations/shennong-gate.tif",
+    "pixelWidth": 2906,
+    "pixelHeight": 3615,
+    "effectiveDpi": 300.1,
+    "placementWidthMm": 246,
+    "placementHeightMm": 306,
+    "status": "preview",
+    "spreadIds": [
+      "album-shennong-gate"
+    ]
+  },
+  {
+    "id": "illustration-zhuge-liang-legend",
+    "kind": "illustration",
+    "title": "Zhuge Liang tea legend art",
+    "creator": "OpenAI image generation; art direction by the Пуэр. Живая гора editorial project",
+    "createdAt": "2026-07-17",
+    "location": "Digital editorial studio",
+    "sourceUrl": null,
+    "rights": "owned",
+    "licenseFile": "book/assets/rights/illustration-zhuge-liang-legend.md",
+    "creditLine": "Легендарная иллюстрация создана с помощью OpenAI; арт-дирекция редакции.",
+    "path": "book/assets/private/illustrations/zhuge-liang-legend.tif",
+    "pixelWidth": 2906,
+    "pixelHeight": 3615,
+    "effectiveDpi": 300.1,
+    "placementWidthMm": 246,
+    "placementHeightMm": 306,
+    "status": "preview",
+    "spreadIds": [
+      "album-zhuge-legend"
+    ]
+  },
+  {
+    "id": "illustration-cover-living-mountain",
+    "kind": "illustration",
+    "title": "Living Mountain cover art",
+    "creator": "OpenAI image generation; art direction by the Пуэр. Живая гора editorial project",
+    "createdAt": "2026-07-17",
+    "location": "Digital editorial studio",
+    "sourceUrl": null,
+    "rights": "owned",
+    "licenseFile": "book/assets/rights/illustration-cover-living-mountain.md",
+    "creditLine": "Иллюстрация создана с помощью OpenAI; арт-дирекция редакции.",
+    "path": "book/assets/private/illustrations/cover-living-mountain.tif",
+    "pixelWidth": 2906,
+    "pixelHeight": 3615,
+    "effectiveDpi": 300.1,
+    "placementWidthMm": 246,
+    "placementHeightMm": 306,
+    "status": "preview",
+    "spreadIds": [
+      "album-cover"
+    ]
+  },
+  {
+    "id": "illustration-guide-spots",
+    "kind": "illustration",
+    "title": "Brewing guide spot illustration set",
+    "creator": null,
+    "createdAt": null,
+    "location": null,
+    "sourceUrl": null,
+    "rights": "pending",
+    "licenseFile": null,
+    "creditLine": "Pending creator, provenance, licence and final credit line.",
+    "path": "book/assets/private/illustrations/guide-spots.tif",
+    "pixelWidth": null,
+    "pixelHeight": null,
+    "effectiveDpi": null,
+    "status": "concept",
+    "spreadIds": [
+      "guide-quick-start",
+      "guide-choose-tea",
+      "guide-tools-water",
+      "guide-sheng",
+      "guide-shou",
+      "guide-simple-methods",
+      "guide-tasting",
+      "guide-storage-safety"
+    ]
+  }
+]

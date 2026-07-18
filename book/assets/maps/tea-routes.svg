@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" data-asset-id="map-tea-routes" data-asset-class="map" data-min-placement-width-mm="150" data-min-placement-height-mm="187.5" data-min-font-size-pt="7.5" data-min-stroke-width-mm="0.2" data-projection="+proj=lcc +lat_1=21 +lat_2=31 +lat_0=26 +lon_0=99 +datum=WGS84 +units=m +no_defs" data-projection-status="planned" data-dataset-versions="NGCC 1:1 000 000 public base, product 2021, overall currency 2019 | Seventh national protected heritage list, 2013 | Published node evidence compiled in Zhang 2013" data-boundary-reference="Yunnan standard maps, 2024; final 审图号 pending" data-interpretive-layer="Evidence-network reconstruction: documented points, dashed editorial connections, and directional arrows; not one continuous ancient road." data-uncertainty="No surveyed line geometry is claimed; chronology, continuity, cargo, and exact alignment differ by segment and period." data-review-status="blocked-pending-chinese-review" data-route-continuity="not-claimed" role="img" aria-labelledby="routes-title routes-desc">
+  <title id="routes-title">Чайные маршруты как сеть свидетельств</title>
+  <desc id="routes-desc">Предварительная карта документированных узлов и интерпретационных связей между Юньнанью, Тибетским нагорьем, Сычуанью и Юго-Восточной Азией; непрерывная древняя дорога не заявляется.</desc>
+  <metadata id="cartographic-compliance">projectionStatus: planned; projection: +proj=lcc +lat_1=21 +lat_2=31 +lat_0=26 +lon_0=99 +datum=WGS84 +units=m +no_defs; datasetVersions: NGCC 1:1 000 000 public base, product 2021, overall currency 2019 | Seventh national protected heritage list, 2013 | Published node evidence compiled in Zhang 2013; boundaryReference: Yunnan standard maps, 2024; final 审图号 pending; interpretiveLayer: Evidence-network reconstruction: documented points, dashed editorial connections, and directional arrows; not one continuous ancient road.; uncertaintyNote: No surveyed line geometry is claimed; chronology, continuity, cargo, and exact alignment differ by segment and period.; reviewStatus: standardMapChecked=false, reviewNumber=null, labelAnchorsVerified=false, protectedGeometryVerified=false; sourceUrls: https://www.webmap.cn/commres.do?method=result25W | https://dnr.yn.gov.cn/html/2024/tongzhigonggao_0905/4047492.html | https://zwgk.mct.gov.cn/zfxxgkml/qt/202012/t20201206_918449.html | https://mzzj.yn.gov.cn/html/2025/difangdongtai_1201/4061605.html | https://uwapress.uw.edu/book/9780295993232/puer-tea/</metadata>
+  <defs>
+    <marker id="route-arrow" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+      <path d="M0 0 L12 6 L0 12 Z" fill="#91432D"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1200" height="1500" fill="#E9DECA"/>
+  <rect x="0" y="0" width="34" height="1500" fill="#91432D"/>
+  <rect x="58" y="74" width="1084" height="2" fill="#B88A58"/>
+
+  <g id="terrain">
+    <path d="M106 304 C236 224 360 266 458 230 C596 180 748 226 850 320 C930 394 956 510 912 618 C864 738 778 816 710 928 C628 1058 442 1060 312 998 C190 940 112 826 96 692 C84 584 50 416 106 304 Z" fill="#B88A58"/>
+    <path d="M100 350 C250 270 398 320 526 250 C648 184 790 254 864 352 C754 320 650 374 568 448 C466 540 336 470 226 552 C164 598 114 558 88 508 Z" fill="#253C32"/>
+    <path d="M90 620 C244 514 388 612 522 530 C666 442 798 510 928 610 L882 716 C740 630 642 704 540 784 C416 882 260 782 116 870 Z" fill="#E9DECA"/>
+    <path d="M116 870 C270 784 426 886 564 800 C680 728 796 770 850 876 C800 960 758 1030 670 1070 L312 998 C222 956 156 916 116 870 Z" fill="#91432D"/>
+  </g>
+
+  <g id="rivers">
+    <path d="M330 282 C350 406 318 516 356 628 C390 730 366 838 408 970" fill="none" stroke="#211A16" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <path d="M566 248 C586 372 566 486 602 596 C632 690 620 808 650 932" fill="none" stroke="#253C32" stroke-width="6" data-stroke-width-mm="0.75"/>
+    <path d="M794 302 C730 408 754 520 714 624 C676 722 710 820 690 914" fill="none" stroke="#211A16" stroke-width="4" data-stroke-width-mm="0.50"/>
+  </g>
+
+  <g id="boundaries">
+    <path d="M106 304 C236 224 360 266 458 230 C596 180 748 226 850 320 C930 394 956 510 912 618 C864 738 778 816 710 928 C628 1058 442 1060 312 998 C190 940 112 826 96 692 C84 584 50 416 106 304 Z" fill="none" stroke="#211A16" stroke-width="6" data-stroke-width-mm="0.75"/>
+    <path d="M228 270 C272 414 250 558 292 704 M506 234 C548 386 522 534 562 706 M742 256 C786 414 752 570 790 744 M118 702 C304 640 502 678 908 588" fill="none" stroke="#E9DECA" stroke-width="2" data-stroke-width-mm="0.25" stroke-dasharray="12 10"/>
+  </g>
+
+  <g id="tea-regions">
+    <ellipse cx="556" cy="746" rx="110" ry="68" fill="#253C32" data-geometry-status="generalized-editorial"/>
+    <ellipse cx="680" cy="830" rx="84" ry="54" fill="#91432D" data-geometry-status="generalized-editorial"/>
+  </g>
+
+  <g id="routes">
+    <path d="M548 748 C498 680 454 610 420 534" fill="none" stroke="#211A16" stroke-width="6" data-stroke-width-mm="0.75" stroke-dasharray="18 14" data-evidence="interpretive" data-continuity="segment"/>
+    <path d="M420 534 C356 478 286 424 208 370" fill="none" stroke="#211A16" stroke-width="6" data-stroke-width-mm="0.75" stroke-dasharray="18 14" data-evidence="interpretive" data-continuity="segment"/>
+    <path d="M560 744 C620 672 684 606 758 548" fill="none" stroke="#211A16" stroke-width="6" data-stroke-width-mm="0.75" stroke-dasharray="18 14" data-evidence="interpretive" data-continuity="segment"/>
+    <path d="M574 764 C652 784 726 820 804 874" fill="none" stroke="#211A16" stroke-width="6" data-stroke-width-mm="0.75" stroke-dasharray="18 14" data-evidence="interpretive" data-continuity="segment"/>
+    <path d="M414 522 L446 530 L424 554 Z M202 358 L234 366 L212 390 Z M750 536 L762 568 L730 554 Z M798 862 L826 882 L794 894 Z" fill="#91432D"/>
+  </g>
+
+  <g id="labels">
+    <text x="74" y="140" font-family="Cormorant" font-size="56" data-font-size-pt="19.84" fill="#211A16">Чайные маршруты · сеть, не одна дорога</text>
+    <text x="76" y="184" font-family="Literata" font-size="28" data-font-size-pt="9.92" fill="#91432D">Документированные точки · интерпретационные связи · меняющиеся направления</text>
+    <circle cx="548" cy="748" r="15" fill="#B88A58" stroke="#211A16" stroke-width="3" data-stroke-width-mm="0.38"/>
+    <text x="578" y="738" font-family="Noto Serif CJK SC" font-size="26" data-font-size-pt="9.21" fill="#E9DECA">Пуэр · 普洱</text>
+    <circle cx="420" cy="534" r="15" fill="#B88A58" stroke="#211A16" stroke-width="3" data-stroke-width-mm="0.38"/>
+    <text x="324" y="514" font-family="Noto Serif CJK SC" font-size="24" data-font-size-pt="8.50" fill="#211A16">Дали · 大理</text>
+    <circle cx="208" cy="370" r="15" fill="#B88A58" stroke="#211A16" stroke-width="3" data-stroke-width-mm="0.38"/>
+    <text x="120" y="346" font-family="Noto Serif CJK SC" font-size="24" data-font-size-pt="8.50" fill="#E9DECA">Лхаса · 拉萨</text>
+    <circle cx="758" cy="548" r="15" fill="#B88A58" stroke="#211A16" stroke-width="3" data-stroke-width-mm="0.38"/>
+    <text x="668" y="522" font-family="Noto Serif CJK SC" font-size="24" data-font-size-pt="8.50" fill="#211A16">Куньмин · 昆明</text>
+    <circle cx="804" cy="874" r="15" fill="#B88A58" stroke="#211A16" stroke-width="3" data-stroke-width-mm="0.38"/>
+    <text x="610" y="838" font-family="Literata" font-size="24" data-font-size-pt="8.50" fill="#211A16">направления ЮВА</text>
+    <text x="148" y="1028" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#211A16" textLength="770" lengthAdjust="spacingAndGlyphs">Точки — документальные опоры; линии не восстанавливают точный след каравана.</text>
+  </g>
+
+  <g id="legend">
+    <rect x="834" y="276" width="308" height="530" rx="26" fill="#253C32"/>
+    <text x="866" y="322" font-family="Cormorant" font-size="38" data-font-size-pt="13.46" fill="#E9DECA">Классы</text>
+    <text x="866" y="356" font-family="Cormorant" font-size="38" data-font-size-pt="13.46" fill="#E9DECA">свидетельств</text>
+    <circle cx="888" cy="392" r="14" fill="#B88A58" stroke="#E9DECA" stroke-width="2" data-stroke-width-mm="0.25"/>
+    <text x="920" y="401" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#E9DECA">документированный</text>
+    <text x="920" y="435" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#E9DECA">узел</text>
+    <text font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#E9DECA"><tspan x="866" y="494">Документированные</tspan><tspan x="866" y="522"> сегменты: не нанесены</tspan></text>
+    <text x="866" y="558" font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#B88A58">Защищённая геометрия</text>
+    <text x="866" y="586" font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#B88A58">для печати не получена.</text>
+    <line x1="866" y1="612" x2="986" y2="612" stroke="#E9DECA" stroke-width="6" data-stroke-width-mm="0.75" data-legend="documented-segment-not-plotted"/>
+    <text x="1004" y="620" font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#E9DECA">образец</text>
+    <line x1="866" y1="640" x2="986" y2="640" stroke="#91432D" stroke-width="6" data-stroke-width-mm="0.75" stroke-dasharray="18 14"/>
+    <text x="866" y="662" font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#E9DECA">интерпретационная</text>
+    <text x="866" y="690" font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#E9DECA">связь</text>
+    <text x="866" y="726" font-family="Literata" font-size="22" data-font-size-pt="7.80" fill="#B88A58">Стрелка показывает лишь</text>
+    <text x="866" y="754" font-family="Literata" font-size="22" data-font-size-pt="7.80" fill="#B88A58">направление обмена.</text>
+    <text x="866" y="776" font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#E9DECA">Непрерывность</text>
+    <text x="866" y="800" font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#E9DECA">не заявлена.</text>
+  </g>
+
+  <g id="scale">
+    <line x1="852" y1="872" x2="1098" y2="872" stroke="#211A16" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <line x1="852" y1="856" x2="852" y2="888" stroke="#211A16" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <line x1="975" y1="856" x2="975" y2="888" stroke="#211A16" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <line x1="1098" y1="856" x2="1098" y2="888" stroke="#211A16" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <text x="852" y="918" font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#211A16">Схема · не маршрутный</text>
+    <text x="852" y="948" font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#211A16">расчёт</text>
+  </g>
+
+  <g id="north-arrow">
+    <path d="M1082 1030 L1114 958 L1146 1030 Z" fill="#91432D"/>
+    <line x1="1114" y1="1020" x2="1114" y2="1064" stroke="#211A16" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <text x="1102" y="1100" font-family="Manrope" font-size="28" data-font-size-pt="9.92" fill="#211A16">N</text>
+  </g>
+
+  <g id="sources">
+    <line x1="74" y1="1112" x2="1142" y2="1112" stroke="#B88A58" stroke-width="2" data-stroke-width-mm="0.25"/>
+    <text font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#211A16"><tspan x="74" y="1138">Проекция (план): +proj=lcc +lat_1=21</tspan><tspan x="74" y="1165"> +lat_2=31 +lat_0=26 +lon_0=99</tspan><tspan x="74" y="1192"> +datum=WGS84 +units=m +no_defs</tspan></text>
+    <text font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#211A16"><tspan x="74" y="1224">NGCC 1:1 000 000 public base, product 2021,</tspan><tspan x="74" y="1251"> overall currency 2019</tspan></text>
+    <text font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#211A16"><tspan x="74" y="1283" textLength="500" lengthAdjust="spacingAndGlyphs">Официальная основа: www.webmap.cn · dnr.yn.gov.cn</tspan><tspan x="74" y="1310" textLength="500" lengthAdjust="spacingAndGlyphs">zwgk.mct.gov.cn · mzzj.yn.gov.cn · uwapress.uw.edu</tspan></text>
+    <text font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#211A16"><tspan x="74" y="1342">Seventh national protected heritage list,</tspan><tspan x="74" y="1369"> 2013</tspan></text>
+    <text font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#211A16"><tspan x="74" y="1396">Published node evidence compiled</tspan><tspan x="74" y="1423"> in Zhang 2013</tspan></text>
+    <text x="74" y="1455" font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#211A16">Предварительный просмотр · 17 июля 2026.</text>
+    <text font-family="Noto Serif CJK SC" font-size="22" data-font-size-pt="7.80" fill="#211A16"><tspan x="620" y="1138">Границы: Yunnan standard maps, 2024;</tspan><tspan x="620" y="1165"> final 审图号 pending · anchor points pending</tspan></text>
+    <text font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#91432D"><tspan x="620" y="1197">Редакционное обобщение: Evidence-network</tspan><tspan x="620" y="1224"> reconstruction: documented points, dashed editorial</tspan><tspan x="620" y="1251"> connections, and directional arrows; not one</tspan><tspan x="620" y="1278"> continuous ancient road.</tspan></text>
+    <text font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#91432D"><tspan x="620" y="1310">Непроверенная геометрия: No surveyed line geometry</tspan><tspan x="620" y="1337"> is claimed; chronology, continuity, cargo, and exact</tspan><tspan x="620" y="1364"> alignment differ by segment and period.</tspan></text>
+    <text font-family="Literata" font-size="22" data-font-size-pt="7.80" fill="#91432D"><tspan x="620" y="1396">СТОП-ГЕЙТ · не допущено к печати.</tspan><tspan x="620" y="1423">Требуется китайская картографическая проверка.</tspan></text>
+    <text x="620" y="1455" font-family="Noto Serif CJK SC" font-size="22" data-font-size-pt="7.80" fill="#211A16">审图号 не получен · опорные точки не проверены.</text>
+  </g>
+</svg>

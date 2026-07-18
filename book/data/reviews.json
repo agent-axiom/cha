@@ -1,0 +1,551 @@
+[
+  {
+    "claimId": "hist-shennong-legend",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-18",
+    "note": "Внутренняя AI-рецензия выявила и исправила вложенную атрибуцию списка к 南詔備考; внешняя рецензия историка/синолога ожидается."
+  },
+  {
+    "claimId": "hist-tu-ambiguity",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-18",
+    "note": "Внутренняя AI-рецензия разделила слои 雲南志, 南詔備考 и авторскую помету 按; внешняя рецензия историка/синолога ожидается."
+  },
+  {
+    "claimId": "hist-early-tea-evidence",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-17",
+    "note": "Источники и формулировка проверены редакционно; внешняя рецензия историка ожидается."
+  },
+  {
+    "claimId": "hist-warring-states-remains",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-17",
+    "note": "Методы и границы вывода статьи проверены редакционно по странице издателя; внешняя археологическая и историческая рецензия ожидается."
+  },
+  {
+    "claimId": "hist-fan-chuo-yinsheng",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-17",
+    "note": "Источники и формулировка проверены редакционно; внешняя рецензия историка ожидается."
+  },
+  {
+    "claimId": "hist-zhao-six-mountains",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-17",
+    "note": "Источники и формулировка проверены редакционно; внешняя рецензия историка ожидается."
+  },
+  {
+    "claimId": "hist-zhao-hundred-illnesses",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-17",
+    "note": "Источники и формулировка проверены редакционно; внешняя рецензия историка ожидается."
+  },
+  {
+    "claimId": "hist-zhao-author-name",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-17",
+    "note": "Источники и формулировка проверены редакционно; внешняя рецензия историка ожидается."
+  },
+  {
+    "claimId": "hist-ruan-retrospective",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-17",
+    "note": "Источники и формулировка проверены редакционно; внешняя рецензия историка ожидается."
+  },
+  {
+    "claimId": "hist-wuhou-records-east-han",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-17",
+    "note": "Отклонение проверено редакционно; внешний историк должен отдельно подтвердить отрицательный результат поиска."
+  },
+  {
+    "claimId": "hist-puer-1700-years",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-17",
+    "note": "Отклонение проверено редакционно; внешняя рецензия историка ожидается."
+  },
+  {
+    "claimId": "hist-zhuge-liang-local-legend",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-17",
+    "note": "Источники и формулировка проверены редакционно; внешняя рецензия историка ожидается."
+  },
+  {
+    "claimId": "hist-xu-bowuzhi-western-fan",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-17",
+    "note": "Отклонение проверено по доступной цепочке цитирования; необходима внешняя сверка специалистом по текстам Южной Сун."
+  },
+  {
+    "claimId": "hist-qing-puer-administration",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-17",
+    "note": "Источники и формулировка проверены редакционно; внешняя рецензия историка ожидается."
+  },
+  {
+    "claimId": "hist-qing-tribute-tea",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-17",
+    "note": "Лист факсимиле проверен редакционно; внешняя рецензия историка и метрологическая проверка перевода 五斤 ожидаются."
+  },
+  {
+    "claimId": "hist-tea-horse-road-framing",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-17",
+    "note": "Проверена общая историографическая формулировка; постраничная сверка монографии недоступна, внешняя рецензия историка ожидается."
+  },
+  {
+    "claimId": "hist-fantianlu-composite-quote",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial research audit",
+    "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
+    "reviewedAt": "2026-07-18",
+    "note": "Отклонение относится к составной русской склейке; отдельный пассаж 梵天廬叢錄 найден в первичном скане, но его дипломатическую транскрипцию перед печатью должен независимо сверить синолог."
+  },
+  {
+    "claimId": "prod-maocha-process",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed tea technologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Операции сверены с официальным полным текстом; внешняя технологическая рецензия не получена."
+  },
+  {
+    "claimId": "prod-sheng-shou-distinct",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed tea technologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Категории сверены со стандартами; внешняя рецензия не получена."
+  },
+  {
+    "claimId": "prod-shou-wodui-operations",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed tea technologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Режимы ограничены областью местного регламента; внешняя рецензия не получена."
+  },
+  {
+    "claimId": "prod-green-removal-scope",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed tea technologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Сенсорный ориентир ограничен стадией 杀青; внешняя рецензия не получена."
+  },
+  {
+    "claimId": "prod-ten-percent-moisture",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed tea technologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Область числа не установлена; тезис исключён до точной сверки."
+  },
+  {
+    "claimId": "prod-fire-drying-always-worse",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed tea technologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Безусловная сенсорная иерархия не поддержана; внешняя рецензия не получена."
+  },
+  {
+    "claimId": "prod-age-rules",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed tea technologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Обязательные сроки не найдены в нормативных определениях; внешняя рецензия не получена."
+  },
+  {
+    "claimId": "prod-sheng-shortened-shou",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed tea technologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Раздельные маршруты сверены с официальным полным текстом; внешняя рецензия не получена."
+  },
+  {
+    "claimId": "storage-controlled-conditions",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed tea technologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Пункты 4.2–5.2 стандарта проверены постранично; внешняя рецензия не получена."
+  },
+  {
+    "claimId": "storage-gbt30375-current",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal catalogue-status audit; not a credentialed tea storage technologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Статусы стандарта и плана сверены только по официальной карточке SAMR; недоступные clauses не реконструированы, внешняя рецензия не получена."
+  },
+  {
+    "claimId": "storage-mould-is-damage",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed tea technologist or microbiologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Технические признаки порчи не превращены в медицинскую рекомендацию; внешняя рецензия не получена."
+  },
+  {
+    "claimId": "prod-shou-chronology-disagreement",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed tea historian",
+    "reviewedAt": "2026-07-18",
+    "note": "Добавлена самостоятельная гуандунская ветвь 1955–1959 годов и сохранено расхождение юньнаньских версий 1973–1975 годов; первичные фабричные журналы и внешняя архивная рецензия не получены."
+  },
+  {
+    "claimId": "prod-shou-antecedents",
+    "role": "historian",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed tea historian",
+    "reviewedAt": "2026-07-18",
+    "note": "Гуандунская ранняя ветвь отделена от юньнаньской передачи и адаптации; первичные фабричные журналы и архивы командировки недоступны."
+  },
+  {
+    "claimId": "prod-other-provinces-gi",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed tea technologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Вердикт ограничен географическим указанием GB/T 22111 и не отрицает иные постферментированные чаи."
+  },
+  {
+    "claimId": "prod-120-subspecies",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed tea technologist or botanist",
+    "reviewedAt": "2026-07-17",
+    "note": "Число и таксономическая категория не найдены в проверенных стандартах; внешняя рецензия не получена."
+  },
+  {
+    "claimId": "storage-rh-aw-distinction",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed food technologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Равновесное соотношение aw/ERH не перенесено на неравновесный складской чай; внешняя рецензия не получена."
+  },
+  {
+    "claimId": "storage-regional-labels",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed tea storage technologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Региональные ярлыки не представлены как воспроизводимые режимы без измерений; внешняя рецензия не получена."
+  },
+  {
+    "claimId": "micro-method-boundaries",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed microbiologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Методические границы сверены с дизайнами первичных статей; внешняя микробиологическая рецензия не получена."
+  },
+  {
+    "claimId": "micro-abe-timecourse",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed microbiologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Вывод ограничен одной 50-дневной фабричной серией и доступной методической информацией."
+  },
+  {
+    "claimId": "micro-ma-lab-succession",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed microbiologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Доминирование рода не превращено в видовое или универсальное утверждение; внешняя рецензия не получена."
+  },
+  {
+    "claimId": "micro-ma-chemical-shifts",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed microbiologist or food chemist",
+    "reviewedAt": "2026-07-18",
+    "note": "Внутренняя AI-рецензия исправила немонотонную динамику галловой кислоты, теафлавина и теарубигина и неодинаковые траектории катехинов; причинная атрибуция таксонам не заявляется."
+  },
+  {
+    "claimId": "micro-zhang-cross-sectional",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed microbiologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Поперечный дизайн, неоднородность продукта и примесь растительной ДНК сохранены как ограничения."
+  },
+  {
+    "claimId": "micro-zhao-metaomics",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed microbiologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Разделены охваты методов: 36 образцов для metabarcoding/metaproteomics/HPLC и 12 для UPLC-MS/MS metabolomics; связи не универсализированы и не объявлены причинными."
+  },
+  {
+    "claimId": "micro-haas-market-safety",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed microbiologist or toxicologist",
+    "reviewedAt": "2026-07-18",
+    "note": "Результаты ограничены 36 магазинными образцами, культурой и целевым набором токсинов; раскрыта занятость трёх авторов у производителя одного из тест-наборов."
+  },
+  {
+    "claimId": "micro-chau-market-safety",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed microbiologist or toxicologist",
+    "reviewedAt": "2026-07-18",
+    "note": "Выборка обозначена как 31 отраслево предоставленный сухой образец; численные критерии не названы отдельной нормой пуэра, а переход в настой и фактическая экспозиция не оценивались."
+  },
+  {
+    "claimId": "micro-safety-method-dependent",
+    "role": "technologist",
+    "status": "pending",
+    "reviewer": "Codex editorial evidence audit",
+    "qualification": "internal evidence audit; not a credentialed microbiologist or toxicologist",
+    "reviewedAt": "2026-07-17",
+    "note": "Различия результатов привязаны к выборке, analyte list и аналитическим пределам; медицинский вывод не делается."
+  },
+  {
+    "claimId": "medical-human-efficacy-is-extract-evidence",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician",
+    "reviewedAt": "2026-07-18",
+    "note": "Счётчик опубликованных human records привязан к поисковому срезу 17 июля 2026 года; NCT06401161 без результатов не включён как доказательство эффективности. Внешний медицинский reviewer не назначен."
+  },
+  {
+    "claimId": "medical-weight-extract-evidence",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician",
+    "reviewedAt": "2026-07-18",
+    "note": "Сохранены ограничения n, duration, attrition, extract-to-beverage applicability и subgroup-only signal Yang et al.; раскрыты финансирование Jensen производителем экстракта и занятость 3/5 авторов у спонсора. Требуется внешняя медицинская рецензия."
+  },
+  {
+    "claimId": "medical-lipid-extract-evidence",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician",
+    "reviewedAt": "2026-07-17",
+    "note": "Surrogate lipid endpoints, включая null abstract result Yang et al., отделены от clinical cardiovascular outcomes; требуется внешняя медицинская рецензия."
+  },
+  {
+    "claimId": "medical-glycaemia-inconclusive",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician",
+    "reviewedAt": "2026-07-17",
+    "note": "Abstract findings, включая отсутствие значимого HbA1c result у Yang et al., сохранены без причинного или лечебного вывода; требуется внешняя медицинская рецензия."
+  },
+  {
+    "claimId": "medical-enzyme-review-not-clinical",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician",
+    "reviewedAt": "2026-07-17",
+    "note": "Systematic review не повышен до human clinical evidence; требуется внешняя медицинская рецензия."
+  },
+  {
+    "claimId": "medical-caffeine-general-guidance",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician",
+    "reviewedAt": "2026-07-17",
+    "note": "EFSA/FDA jurisdiction and population scope retained; требуется внешняя медицинская рецензия."
+  },
+  {
+    "claimId": "medical-pregnancy-caffeine-guidance",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician",
+    "reviewedAt": "2026-07-17",
+    "note": "WHO >300 мг lowering recommendation и EFSA up-to-200 мг safety conclusion не слиты в один порог; требуется внешняя медицинская рецензия."
+  },
+  {
+    "claimId": "medical-caffeine-alertness-sleep",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician",
+    "reviewedAt": "2026-07-17",
+    "note": "Alertness и sleep wording ограничены official guidance; требуется внешняя медицинская рецензия."
+  },
+  {
+    "claimId": "medical-chemistry-not-clinical-efficacy",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician",
+    "reviewedAt": "2026-07-17",
+    "note": "Chemical composition and assays не перенесены на clinical efficacy; внешний медицинский reviewer pending."
+  },
+  {
+    "claimId": "medical-microbiome-preclinical",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician",
+    "reviewedAt": "2026-07-17",
+    "note": "Animal/in vitro/association evidence не превращено в human gut claim; внешний медицинский reviewer pending."
+  },
+  {
+    "claimId": "medical-antioxidant-assays-not-outcomes",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician",
+    "reviewedAt": "2026-07-17",
+    "note": "Assay endpoints отделены от disease outcomes; внешний медицинский reviewer pending."
+  },
+  {
+    "claimId": "medical-historical-hundred-illnesses",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician",
+    "reviewedAt": "2026-07-17",
+    "note": "Historical representation не оформлена как recommendation; внешний медицинский reviewer pending."
+  },
+  {
+    "claimId": "medical-food-storage-safety",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician or food-safety specialist",
+    "reviewedAt": "2026-07-17",
+    "note": "Storage guidance согласована с Task 5 dossier; внешний medical/food-safety reviewer pending."
+  },
+  {
+    "claimId": "medical-mycotoxin-evidence-limited",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician or toxicologist",
+    "reviewedAt": "2026-07-18",
+    "note": "Граница dry leaf → infusion → dose → exposure теперь видима в proof и имеет собственный claim marker; внешний medical/toxicology reviewer pending."
+  },
+  {
+    "claimId": "medical-interactions-individualize",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician or pharmacist",
+    "reviewedAt": "2026-07-18",
+    "note": "Неподкреплённая категория narrow therapeutic index удалена; сохранена индивидуальная консультация при регулярной лекарственной терапии. Внешний clinician/pharmacist review pending."
+  },
+  {
+    "claimId": "medical-no-universal-cup-limit",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician",
+    "reviewedAt": "2026-07-17",
+    "note": "Official caffeine values not converted into cups of unmeasured pu-erh; внешний medical review pending."
+  },
+  {
+    "claimId": "medical-tea-not-treatment",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician",
+    "reviewedAt": "2026-07-17",
+    "note": "Editorial non-substitution warning обновлён по corrected 8-record human corpus; внешний medical review pending."
+  },
+  {
+    "claimId": "medical-disease-claims-rejected",
+    "role": "medical",
+    "status": "pending",
+    "reviewer": "Codex internal evidence search",
+    "qualification": "internal evidence audit; not a licensed clinician",
+    "reviewedAt": "2026-07-17",
+    "note": "Unsupported treatment/detox/cancer/medicine-replacement claims остаются rejected после corrected Puerh search; внешний medical review pending."
+  }
+]

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" data-asset-id="diagram-maocha-process" data-asset-class="diagram" data-visual-mode="explanatory-diagram" data-min-placement-width-mm="150" data-min-placement-height-mm="187.5" data-min-font-size-pt="7.5" data-min-stroke-width-mm="0.2" role="img" aria-labelledby="maocha-title maocha-desc">
+  <title id="maocha-title">Рождение маоча: путь свежего листа</title>
+  <desc id="maocha-desc">Редакционная технологическая схема семи опорных операций от свежего листа до упаковки шайцин-маоча, с условиями наблюдения и границами применимости.</desc>
+  <rect x="0" y="0" width="1200" height="1500" fill="#E9DECA"/>
+  <rect x="0" y="0" width="34" height="1500" fill="#91432D"/>
+  <rect x="58" y="74" width="1084" height="2" fill="#B88A58"/>
+
+  <g id="process-steps">
+    <g data-encoding="shape+label" data-meaning="исходный свежий лист" data-shape="leaf">
+      <path d="M116 292 C116 222 183 189 246 214 C246 280 191 319 116 292 Z" fill="#253C32" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+      <path d="M130 284 C165 263 195 243 228 221" fill="none" stroke="#E9DECA" stroke-width="2" data-stroke-width-mm="0.25"/>
+      <text x="282" y="245" font-family="Literata" font-size="32" data-font-size-pt="11.34" fill="#211A16">Свежий лист</text>
+      <text x="282" y="280" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#91432D">Состояние партии фиксируют до обработки</text>
+    </g>
+    <g data-encoding="shape+label" data-meaning="раскладка листа" data-shape="open-tray">
+      <path d="M112 382 L250 382 L230 450 L132 450 Z" fill="none" stroke="#253C32" stroke-width="4" data-stroke-width-mm="0.50"/>
+      <line x1="132" y1="410" x2="230" y2="410" stroke="#B88A58" stroke-width="3" data-stroke-width-mm="0.38"/>
+      <text x="282" y="408" font-family="Literata" font-size="32" data-font-size-pt="11.34" fill="#211A16">Раскладка</text>
+      <text x="282" y="443" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#91432D">Слой и срок зависят от партии</text>
+    </g>
+    <g data-encoding="shape+label" data-meaning="шацин тепловая обработка" data-shape="bowl-with-flame">
+      <path d="M114 535 Q181 600 248 535" fill="none" stroke="#253C32" stroke-width="6" data-stroke-width-mm="0.75"/>
+      <path d="M166 576 C145 549 177 533 164 506 C206 529 207 557 184 582 Z" fill="#91432D" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+      <text x="282" y="536" font-family="Literata" font-size="32" data-font-size-pt="11.34" fill="#211A16">Шацин</text>
+      <text x="282" y="571" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#91432D">Тепло ограничивает ферменты листа</text>
+    </g>
+    <g data-encoding="shape+label" data-meaning="скручивание листа" data-shape="spiral">
+      <path d="M118 681 C162 637 242 657 242 709 C242 758 164 770 132 729 C111 702 149 678 182 691 C208 702 193 727 169 722" fill="none" stroke="#253C32" stroke-width="6" data-stroke-width-mm="0.75"/>
+      <text x="282" y="690" font-family="Literata" font-size="32" data-font-size-pt="11.34" fill="#211A16">Скручивание</text>
+      <text x="282" y="725" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#91432D">Давление меняет геометрию листа</text>
+    </g>
+    <g data-encoding="shape+label" data-meaning="разбивание комков" data-shape="separated-clusters">
+      <circle cx="147" cy="856" r="30" fill="#B88A58" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+      <circle cx="207" cy="830" r="22" fill="#B88A58" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+      <circle cx="224" cy="884" r="18" fill="#B88A58" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+      <text x="282" y="846" font-family="Literata" font-size="32" data-font-size-pt="11.34" fill="#211A16">Разбивание комков</text>
+      <text x="282" y="881" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#91432D">Снова разделить массу перед сушкой</text>
+    </g>
+    <g data-encoding="shape+label" data-meaning="солнечная сушка" data-shape="sun-over-tray">
+      <circle cx="178" cy="1007" r="34" fill="#B88A58" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+      <path d="M113 1070 L245 1070 L228 1107 L130 1107 Z" fill="none" stroke="#253C32" stroke-width="4" data-stroke-width-mm="0.50"/>
+      <line x1="178" y1="951" x2="178" y2="931" stroke="#91432D" stroke-width="3" data-stroke-width-mm="0.38"/>
+      <line x1="135" y1="969" x2="120" y2="954" stroke="#91432D" stroke-width="3" data-stroke-width-mm="0.38"/>
+      <line x1="221" y1="969" x2="236" y2="954" stroke="#91432D" stroke-width="3" data-stroke-width-mm="0.38"/>
+      <text x="282" y="1018" font-family="Literata" font-size="32" data-font-size-pt="11.34" fill="#211A16">Солнечная сушка</text>
+      <text x="282" y="1053" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#91432D">Без универсального числа влажности</text>
+    </g>
+    <g data-encoding="shape+label" data-meaning="упаковка готовой маоча" data-shape="sealed-sack">
+      <path d="M139 1195 L216 1195 L242 1235 L230 1322 L125 1322 L114 1235 Z" fill="#253C32" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+      <line x1="139" y1="1218" x2="216" y2="1218" stroke="#E9DECA" stroke-width="3" data-stroke-width-mm="0.38"/>
+      <text x="282" y="1236" font-family="Literata" font-size="32" data-font-size-pt="11.34" fill="#211A16">Упаковка · шайцин-маоча</text>
+      <text x="282" y="1271" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#91432D">Сухая основа будущих маршрутов шэна и шу</text>
+    </g>
+    <polyline points="181,324 181,362 181,362" fill="none" stroke="#B88A58" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <line x1="181" y1="462" x2="181" y2="493" stroke="#B88A58" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <line x1="181" y1="603" x2="181" y2="636" stroke="#B88A58" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <line x1="181" y1="775" x2="181" y2="799" stroke="#B88A58" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <line x1="181" y1="904" x2="181" y2="948" stroke="#B88A58" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <line x1="181" y1="1118" x2="181" y2="1174" stroke="#B88A58" stroke-width="4" data-stroke-width-mm="0.50"/>
+  </g>
+
+  <g id="conditions">
+    <rect x="790" y="300" width="352" height="390" rx="24" fill="#253C32"/>
+    <text x="824" y="350" font-family="Cormorant" font-size="42" data-font-size-pt="14.88" fill="#E9DECA">Что наблюдают</text>
+    <line x1="824" y1="370" x2="1108" y2="370" stroke="#B88A58" stroke-width="2" data-stroke-width-mm="0.25"/>
+    <text x="824" y="420" font-family="Manrope" font-size="26" data-font-size-pt="9.21" fill="#E9DECA">• состояние листа</text>
+      <text x="824" y="464" font-family="Manrope" font-size="24" data-font-size-pt="8.50" textLength="280" lengthAdjust="spacingAndGlyphs" fill="#E9DECA">• движение / равномерность</text>
+    <text x="824" y="508" font-family="Manrope" font-size="26" data-font-size-pt="9.21" fill="#E9DECA">• чистоту поверхности</text>
+      <text x="824" y="552" font-family="Manrope" font-size="24" data-font-size-pt="8.50" textLength="274" lengthAdjust="spacingAndGlyphs" fill="#E9DECA">• запах / тактильный ответ</text>
+      <text x="824" y="610" font-family="Literata" font-size="24" data-font-size-pt="8.50" textLength="274" lengthAdjust="spacingAndGlyphs" fill="#B88A58">Длительность, толщина слоя</text>
+    <text x="824" y="646" font-family="Literata" font-size="24" data-font-size-pt="8.50" fill="#B88A58">и жест зависят от партии.</text>
+  </g>
+
+  <g id="outcomes">
+    <path d="M790 770 H1142 V938 H790 Z" fill="none" stroke="#91432D" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <text x="966" y="824" text-anchor="middle" font-family="Cormorant" font-size="42" data-font-size-pt="14.88" textLength="276" lengthAdjust="spacingAndGlyphs" fill="#91432D">Результат — рубеж</text>
+    <text x="966" y="868" text-anchor="middle" font-family="Literata" font-size="24" data-font-size-pt="8.50" textLength="276" lengthAdjust="spacingAndGlyphs" fill="#211A16">Маоча — самостоятельное сырьё.</text>
+    <text x="966" y="904" text-anchor="middle" font-family="Literata" font-size="24" data-font-size-pt="8.50" textLength="246" lengthAdjust="spacingAndGlyphs" fill="#211A16">Это не «недоделанный» чай.</text>
+  </g>
+
+  <g id="labels">
+    <text x="74" y="140" font-family="Cormorant" font-size="56" data-font-size-pt="19.84" fill="#211A16">Рождение маоча</text>
+    <text x="76" y="184" font-family="Literata" font-size="28" data-font-size-pt="9.92" fill="#91432D">Один лист · семь опорных операций · множество решений</text>
+    <text x="790" y="1010" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#211A16">Порядок читается сверху вниз.</text>
+  </g>
+
+  <g id="legend">
+    <circle cx="808" cy="1068" r="16" fill="#253C32" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+    <text x="840" y="1077" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#211A16">материал / механика</text>
+    <circle cx="808" cy="1122" r="16" fill="#91432D" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+    <text x="840" y="1131" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#211A16">тепловое воздействие</text>
+    <circle cx="808" cy="1176" r="16" fill="#B88A58" stroke="#211A16" stroke-width="2" data-stroke-width-mm="0.25"/>
+    <text x="840" y="1185" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#211A16">наблюдение / переход</text>
+  </g>
+
+  <g id="sources">
+    <line x1="74" y1="1384" x2="1142" y2="1384" stroke="#B88A58" stroke-width="2" data-stroke-width-mm="0.25"/>
+    <text x="74" y="1424" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#211A16">Источник порядка: DB5308/T 58—2020; GB/T 22111. Редакционная схема, не универсальный режим.</text>
+  </g>
+</svg>

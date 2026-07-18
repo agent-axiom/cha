@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" data-asset-id="map-six-mountains" data-asset-class="map" data-min-placement-width-mm="150" data-min-placement-height-mm="187.5" data-min-font-size-pt="7.5" data-min-stroke-width-mm="0.2" data-projection="+proj=tmerc +lat_0=0 +lon_0=102 +k=1 +x_0=500000 +y_0=0 +ellps=GRS80 +units=m +no_defs" data-projection-status="planned" data-dataset-versions="NGCC 1:1 000 000 public base, product 2021, overall currency 2019 | Qing textual list: zhao-facsimile-pku; ruan-puer-cha-ji-access; ruan-dianbi-catalog | Mengla public heritage note, 2019" data-boundary-reference="Yunnan standard maps, 2024; final 审图号 pending" data-interpretive-layer="Hatched editorial localization of historical tea regions; not surveyed peaks, garden parcels, or exact polygons." data-uncertainty="Label anchors are approximate editorial centroids; Mansa and Yiwu are not treated as full synonyms across all periods." data-review-status="blocked-pending-chinese-review" role="img" aria-labelledby="mountains-title mountains-desc">
+  <title id="mountains-title">Шесть исторических чайных гор</title>
+  <desc id="mountains-desc">Предварительная редакционная локализация шести исторических чайных областей к востоку от Ланьцанцзяна: штрихованные области и приблизительные центроиды, а не снятые на местности вершины или точные участки садов.</desc>
+  <metadata id="cartographic-compliance">projectionStatus: planned; projection: +proj=tmerc +lat_0=0 +lon_0=102 +k=1 +x_0=500000 +y_0=0 +ellps=GRS80 +units=m +no_defs; datasetVersions: NGCC 1:1 000 000 public base, product 2021, overall currency 2019 | Qing textual list: zhao-facsimile-pku; ruan-puer-cha-ji-access; ruan-dianbi-catalog | Mengla public heritage note, 2019; boundaryReference: Yunnan standard maps, 2024; final 审图号 pending; interpretiveLayer: Hatched editorial localization of historical tea regions; not surveyed peaks, garden parcels, or exact polygons.; uncertaintyNote: Label anchors are approximate editorial centroids; Mansa and Yiwu are not treated as full synonyms across all periods.; reviewStatus: standardMapChecked=false, reviewNumber=null, labelAnchorsVerified=false, protectedGeometryVerified=false; sourceUrls: https://www.webmap.cn/commres.do?method=result25W | https://dnr.yn.gov.cn/html/2024/tongzhigonggao_0905/4047492.html | https://ctext.org/wiki.pl?if=gb&amp;chapter=194007 | https://mzzj.yn.gov.cn/html/2019/difangdongtai_1223/34375.html</metadata>
+  <defs>
+    <clipPath id="region-yule"><path d="M388 360 C420 314 492 310 526 354 C550 390 526 438 478 450 C426 464 374 416 388 360 Z"/></clipPath>
+    <clipPath id="region-gedeng"><path d="M520 440 C554 402 620 406 650 448 C672 484 646 530 598 536 C548 542 502 484 520 440 Z"/></clipPath>
+    <clipPath id="region-yibang"><path d="M376 520 C416 480 482 492 502 540 C518 578 478 620 430 614 C382 608 346 558 376 520 Z"/></clipPath>
+    <clipPath id="region-manzhi"><path d="M528 612 C566 566 636 576 662 624 C682 664 646 708 596 706 C544 704 500 652 528 612 Z"/></clipPath>
+    <clipPath id="region-manzhuan"><path d="M382 692 C420 646 492 654 516 704 C536 744 496 788 446 784 C394 780 356 734 382 692 Z"/></clipPath>
+    <clipPath id="region-mansa"><path d="M540 784 C584 730 674 736 710 790 C738 834 702 894 640 902 C576 910 508 838 540 784 Z"/></clipPath>
+  </defs>
+  <rect x="0" y="0" width="1200" height="1500" fill="#E9DECA"/>
+  <rect x="0" y="0" width="34" height="1500" fill="#91432D"/>
+  <rect x="58" y="74" width="1084" height="2" fill="#B88A58"/>
+
+  <g id="terrain">
+    <path d="M132 310 L280 244 L430 280 L566 238 L736 302 L820 420 L790 592 L836 722 L746 920 L594 986 L422 942 L286 988 L158 880 L116 698 L150 522 Z" fill="#B88A58"/>
+    <path d="M166 394 C278 314 390 332 490 286 C570 252 682 304 758 382 C668 354 598 390 532 442 C456 502 338 476 250 532 C210 558 170 538 142 510 Z" fill="#253C32"/>
+    <path d="M150 610 C284 522 404 594 514 524 C632 450 714 494 804 572 L790 692 C678 626 604 684 516 744 C410 814 284 746 146 824 L116 698 Z" fill="#E9DECA"/>
+    <path d="M176 860 C300 786 426 854 552 770 C652 704 746 750 804 822 L746 920 L594 986 L422 942 L286 988 L158 880 Z" fill="#91432D"/>
+    <path d="M180 430 C320 378 458 388 612 326 M170 580 C326 520 492 542 714 430 M160 752 C350 680 548 716 778 590 M246 906 C424 824 584 856 742 748" fill="none" stroke="#B88A58" stroke-width="2" data-stroke-width-mm="0.25"/>
+  </g>
+
+  <g id="rivers">
+    <path d="M238 270 C274 390 254 506 286 616 C316 722 286 834 328 958" fill="none" stroke="#253C32" stroke-width="6" data-stroke-width-mm="0.75"/>
+    <path d="M734 312 C700 424 720 528 686 632 C654 728 672 842 626 960" fill="none" stroke="#211A16" stroke-width="4" data-stroke-width-mm="0.50"/>
+  </g>
+
+  <g id="boundaries">
+    <path d="M132 310 L280 244 L430 280 L566 238 L736 302 L820 420 L790 592 L836 722 L746 920 L594 986 L422 942 L286 988 L158 880 L116 698 L150 522 Z" fill="none" stroke="#211A16" stroke-width="6" data-stroke-width-mm="0.75"/>
+    <path d="M350 282 C392 410 376 542 416 680 M600 256 C624 402 606 550 634 708 M214 674 C388 622 552 652 790 570" fill="none" stroke="#E9DECA" stroke-width="2" data-stroke-width-mm="0.25" stroke-dasharray="12 10"/>
+  </g>
+
+  <g id="tea-regions">
+    <path d="M388 360 C420 314 492 310 526 354 C550 390 526 438 478 450 C426 464 374 416 388 360 Z" fill="#E9DECA" stroke="#253C32" stroke-width="3" data-stroke-width-mm="0.38" data-geometry-status="generalized-editorial"/>
+    <path d="M410 400 L460 350 M430 420 L500 350 M460 430 L515 375" fill="none" stroke="#253C32" stroke-width="4" data-stroke-width-mm="0.50" data-geometry-status="generalized-editorial"/>
+    <path d="M520 440 C554 402 620 406 650 448 C672 484 646 530 598 536 C548 542 502 484 520 440 Z" fill="#E9DECA" stroke="#91432D" stroke-width="3" data-stroke-width-mm="0.38" data-geometry-status="generalized-editorial"/>
+    <path d="M540 480 L580 440 M560 510 L620 450 M590 520 L640 470" fill="none" stroke="#91432D" stroke-width="4" data-stroke-width-mm="0.50" data-geometry-status="generalized-editorial"/>
+    <path d="M376 520 C416 480 482 492 502 540 C518 578 478 620 430 614 C382 608 346 558 376 520 Z" fill="#E9DECA" stroke="#91432D" stroke-width="3" data-stroke-width-mm="0.38" data-geometry-status="generalized-editorial"/>
+    <path d="M390 570 L430 530 M410 596 L470 536 M440 604 L492 552" fill="none" stroke="#91432D" stroke-width="4" data-stroke-width-mm="0.50" data-geometry-status="generalized-editorial"/>
+    <path d="M528 612 C566 566 636 576 662 624 C682 664 646 708 596 706 C544 704 500 652 528 612 Z" fill="#E9DECA" stroke="#253C32" stroke-width="3" data-stroke-width-mm="0.38" data-geometry-status="generalized-editorial"/>
+    <path d="M548 660 L590 618 M570 688 L630 628 M602 696 L650 648" fill="none" stroke="#253C32" stroke-width="4" data-stroke-width-mm="0.50" data-geometry-status="generalized-editorial"/>
+    <path d="M382 692 C420 646 492 654 516 704 C536 744 496 788 446 784 C394 780 356 734 382 692 Z" fill="#E9DECA" stroke="#253C32" stroke-width="3" data-stroke-width-mm="0.38" data-geometry-status="generalized-editorial"/>
+    <path d="M400 744 L442 702 M422 772 L482 712 M452 778 L502 728" fill="none" stroke="#253C32" stroke-width="4" data-stroke-width-mm="0.50" data-geometry-status="generalized-editorial"/>
+    <path d="M540 784 C584 730 674 736 710 790 C738 834 702 894 640 902 C576 910 508 838 540 784 Z" fill="#E9DECA" stroke="#91432D" stroke-width="3" data-stroke-width-mm="0.38" data-geometry-status="generalized-editorial"/>
+    <path d="M562 846 L614 794 M590 882 L660 812 M630 892 L690 832" fill="none" stroke="#91432D" stroke-width="4" data-stroke-width-mm="0.50" data-geometry-status="generalized-editorial"/>
+    <circle cx="458" cy="384" r="12" fill="#253C32" data-geometry-status="generalized-editorial"/>
+    <circle cx="590" cy="470" r="12" fill="#91432D" data-geometry-status="generalized-editorial"/>
+    <circle cx="440" cy="554" r="12" fill="#91432D" data-geometry-status="generalized-editorial"/>
+    <circle cx="596" cy="640" r="12" fill="#253C32" data-geometry-status="generalized-editorial"/>
+    <circle cx="448" cy="720" r="12" fill="#253C32" data-geometry-status="generalized-editorial"/>
+    <circle cx="630" cy="816" r="12" fill="#91432D" data-geometry-status="generalized-editorial"/>
+  </g>
+
+  <g id="labels">
+    <text x="74" y="140" font-family="Cormorant" font-size="56" data-font-size-pt="19.84" fill="#211A16">Шесть гор · шесть исторических областей</text>
+    <text x="76" y="184" font-family="Literata" font-size="28" data-font-size-pt="9.92" fill="#91432D">Приблизительные центроиды вместо вымышленных вершин</text>
+    <text x="488" y="374" font-family="Noto Serif CJK SC" font-size="26" data-font-size-pt="9.21" fill="#211A16">Юлэ · 攸乐</text>
+    <text x="620" y="460" font-family="Noto Serif CJK SC" font-size="26" data-font-size-pt="9.21" fill="#211A16">Гэдэн · 革登</text>
+    <text x="470" y="544" font-family="Noto Serif CJK SC" font-size="26" data-font-size-pt="9.21" fill="#211A16">Ибан · 倚邦</text>
+    <text x="626" y="632" font-family="Noto Serif CJK SC" font-size="26" data-font-size-pt="9.21" fill="#211A16">Манчжи · 莽枝</text>
+    <text x="478" y="712" font-family="Noto Serif CJK SC" font-size="26" data-font-size-pt="9.21" fill="#211A16">Маньчжуань · 蛮砖</text>
+    <text x="556" y="806" font-family="Noto Serif CJK SC" font-size="22" data-font-size-pt="7.80" fill="#211A16">Маньса — район Иу</text>
+    <text x="586" y="838" font-family="Noto Serif CJK SC" font-size="22" data-font-size-pt="7.80" fill="#211A16">曼撒 — 易武</text>
+    <text x="166" y="604" transform="rotate(-78 166 604)" text-anchor="middle" font-family="Noto Serif CJK SC" font-size="24" data-font-size-pt="8.50" fill="#E9DECA">Ланьцанцзян · 澜沧江</text>
+  </g>
+
+  <g id="legend">
+    <rect x="852" y="276" width="290" height="630" rx="26" fill="#253C32"/>
+    <text x="884" y="322" font-family="Cormorant" font-size="38" data-font-size-pt="13.46" fill="#E9DECA">Степень</text>
+    <text x="884" y="356" font-family="Cormorant" font-size="38" data-font-size-pt="13.46" fill="#E9DECA">знания</text>
+    <rect x="884" y="380" width="70" height="54" fill="#E9DECA" stroke="#91432D" stroke-width="2" data-stroke-width-mm="0.25" data-geometry-status="generalized-editorial"/>
+    <path d="M886 430 L932 384 M902 434 L952 384 M926 434 L954 406" fill="none" stroke="#91432D" stroke-width="2" data-stroke-width-mm="0.25"/>
+    <text x="978" y="402" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#E9DECA">историческая</text>
+    <text x="978" y="436" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#E9DECA">область</text>
+    <circle cx="920" cy="500" r="12" fill="#B88A58" data-geometry-status="generalized-editorial"/>
+    <text x="978" y="509" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#E9DECA">редакционный</text>
+    <text x="978" y="543" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#E9DECA">центроид</text>
+    <text x="884" y="610" font-family="Literata" font-size="24" data-font-size-pt="8.50" fill="#B88A58">Не снятые на местности</text>
+    <text x="884" y="644" font-family="Literata" font-size="24" data-font-size-pt="8.50" fill="#B88A58">пики, границы садов</text>
+    <text x="884" y="678" font-family="Literata" font-size="24" data-font-size-pt="8.50" fill="#B88A58">или точные полигоны.</text>
+    <text x="884" y="744" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#E9DECA">Названия и области</text>
+    <text x="884" y="778" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#E9DECA">не эквивалентны</text>
+    <text x="884" y="812" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#E9DECA">во все периоды.</text>
+    <text x="884" y="864" font-family="Manrope" font-size="24" data-font-size-pt="8.50" fill="#B88A58">Маньса ≠ Иу всегда</text>
+  </g>
+
+  <g id="scale">
+    <line x1="852" y1="972" x2="1098" y2="972" stroke="#211A16" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <line x1="852" y1="956" x2="852" y2="988" stroke="#211A16" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <line x1="975" y1="956" x2="975" y2="988" stroke="#211A16" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <line x1="1098" y1="956" x2="1098" y2="988" stroke="#211A16" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <text x="852" y="1018" font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#211A16">Схема · расстояния</text>
+    <text x="852" y="1048" font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#211A16">не считывать</text>
+  </g>
+
+  <g id="north-arrow">
+    <path d="M1082 1030 L1114 958 L1146 1030 Z" fill="#91432D"/>
+    <line x1="1114" y1="1020" x2="1114" y2="1064" stroke="#211A16" stroke-width="4" data-stroke-width-mm="0.50"/>
+    <text x="1102" y="1100" font-family="Manrope" font-size="28" data-font-size-pt="9.92" fill="#211A16">N</text>
+  </g>
+
+  <g id="sources">
+    <line x1="74" y1="1112" x2="1142" y2="1112" stroke="#B88A58" stroke-width="2" data-stroke-width-mm="0.25"/>
+    <text font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#211A16"><tspan x="74" y="1138">Проекция (план): +proj=tmerc +lat_0=0</tspan><tspan x="74" y="1164"> +lon_0=102 +k=1 +x_0=500000 +y_0=0</tspan><tspan x="74" y="1190"> +ellps=GRS80 +units=m +no_defs</tspan></text>
+    <text font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#211A16"><tspan x="74" y="1222">NGCC 1:1 000 000 public base, product 2021,</tspan><tspan x="74" y="1248"> overall currency 2019</tspan></text>
+    <text font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#211A16"><tspan x="74" y="1280">Qing textual list: zhao-facsimile-pku;</tspan><tspan x="74" y="1306"> ruan-puer-cha-ji-access;</tspan><tspan x="74" y="1332"> ruan-dianbi-catalog</tspan></text>
+    <text x="74" y="1364" font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#211A16">Mengla public heritage note, 2019</text>
+    <text font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#211A16"><tspan x="74" y="1396">Официальная основа: www.webmap.cn</tspan><tspan x="74" y="1422">dnr.yn.gov.cn · ctext.org · mzzj.yn.gov.cn</tspan></text>
+    <text x="74" y="1464" font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#211A16">Предпросмотр · 17 июля 2026.</text>
+    <text font-family="Noto Serif CJK SC" font-size="22" data-font-size-pt="7.80" fill="#211A16"><tspan x="640" y="1138">Границы: Yunnan standard maps, 2024;</tspan><tspan x="640" y="1164"> final 审图号 pending</tspan></text>
+    <text font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#91432D"><tspan x="640" y="1196">Редакционное обобщение: Hatched editorial</tspan><tspan x="640" y="1222"> localization of historical tea regions; not surveyed</tspan><tspan x="640" y="1248"> peaks, garden parcels, or exact polygons.</tspan></text>
+    <text font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#91432D"><tspan x="640" y="1280">Непроверенная геометрия: Label anchors are</tspan><tspan x="640" y="1306"> approximate editorial centroids; Mansa and Yiwu are</tspan><tspan x="640" y="1332"> not treated as full synonyms across all periods.</tspan></text>
+    <text font-family="Literata" font-size="22" data-font-size-pt="7.80" fill="#91432D"><tspan x="640" y="1364">СТОП-ГЕЙТ · не допущено к печати.</tspan><tspan x="640" y="1390">Требуется китайская картографическая проверка.</tspan></text>
+    <text font-family="Noto Serif CJK SC" font-size="22" data-font-size-pt="7.80" fill="#211A16"><tspan x="640" y="1422">审图号 не получен · опорные точки</tspan><tspan x="640" y="1448">не проверены.</tspan></text>
+    <text x="640" y="1474" font-family="Manrope" font-size="22" data-font-size-pt="7.80" fill="#211A16">PROJ предложен; преобразование не выполнено.</text>
+  </g>
+</svg>

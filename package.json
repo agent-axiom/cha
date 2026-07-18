@@ -9,7 +9,14 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "book:test": "node --test book/tests/*.test.mjs",
+    "book:validate:data": "node book/scripts/validate-data.mjs",
+    "book:validate:manuscript": "node book/scripts/validate-manuscript.mjs",
+    "book:validate": "npm run book:validate:data && npm run book:validate:manuscript",
+    "book:apparatus": "node book/scripts/generate-apparatus.mjs",
+    "book:review:prepare": "node book/scripts/build-review-package.mjs",
+    "book:review:verify": "node book/scripts/verify-review-package.mjs"
   },
   "dependencies": {
     "react": "latest",
