@@ -43,12 +43,23 @@ export interface ProcessStep {
 
 export type MedicalKind = 'historical' | 'research' | 'safety'
 
+export type MedicalEvidenceType =
+  | 'historical'
+  | 'chemistry'
+  | 'preclinical'
+  | 'human'
+  | 'guidance'
+  | 'quality-control'
+
 export interface MedicalClaim {
   id: string
   title: string
   summary: string
-  evidenceLevel: 1 | 2 | 3 | 4 | 5
+  evidenceType: MedicalEvidenceType
   evidenceLabel: string
+  productForm: string
+  applicability: string
+  limitations: string
   kind: MedicalKind
   sourceIds: string[]
 }

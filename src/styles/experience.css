@@ -944,22 +944,23 @@
   box-shadow: 0 0 80px var(--accent-glow);
 }
 
-.evidence-card__level {
+.evidence-review-note {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 2.8rem;
-  color: var(--ink-dim);
-  font-size: 0.58rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  flex-wrap: wrap;
+  gap: 0.45rem 1.4rem;
+  margin-bottom: 1rem;
+  color: var(--ink-muted);
+  font-size: 0.72rem;
+  line-height: 1.6;
 }
 
-.evidence-card__level strong {
-  color: var(--accent);
-  font-family: var(--serif);
-  font-size: 1.5rem;
-  font-weight: 400;
+.evidence-review-note p {
+  margin: 0;
+}
+
+.evidence-review-note strong {
+  color: var(--ink);
+  font-weight: 500;
 }
 
 .evidence-card h3 {
@@ -970,6 +971,42 @@
   color: var(--ink-muted);
   font-size: 0.82rem;
   line-height: 1.7;
+}
+
+.evidence-card__meta {
+  display: grid;
+  gap: 0.8rem;
+  margin: 1.4rem 0;
+}
+
+.evidence-card__meta-row {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.evidence-card__meta-row dt {
+  color: var(--ink-dim);
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.evidence-card__meta-row dd {
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: 0.76rem;
+  line-height: 1.55;
+}
+
+.evidence-card__meta-row--type {
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.evidence-card__meta-row--type dd {
+  color: var(--accent);
+  font-family: var(--serif);
+  font-size: 1.05rem;
 }
 
 .medical-boundary {

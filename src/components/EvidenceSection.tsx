@@ -1,29 +1,37 @@
 import { useState } from 'react'
 import { medicineClaims } from '../content/medicine'
 import { sourceById } from '../content/sources'
+import type { MedicalEvidenceType } from '../content/types'
 
-type EvidenceFilter = 'all' | 'historical' | 'preclinical' | 'human' | 'safety'
+type EvidenceFilter = 'all' | 'historical' | 'laboratory' | 'human' | 'safety'
 
 const filters: Array<{ id: EvidenceFilter; label: string }> = [
   { id: 'all', label: 'Вся картина' },
-  { id: 'historical', label: 'Старинные тексты' },
-  { id: 'preclinical', label: 'Лаборатория и животные' },
-  { id: 'human', label: 'Исследования на людях' },
+  { id: 'historical', label: 'Исторические' },
+  { id: 'laboratory', label: 'Лаборатория' },
+  { id: 'human', label: 'Люди' },
   { id: 'safety', label: 'Безопасность' },
 ]
 
-function matchesFilter(filter: EvidenceFilter, level: number, kind: string) {
+const evidenceTypesByFilter: Record<
+  Exclude<EvidenceFilter, 'all'>,
+  readonly MedicalEvidenceType[]
+> = {
+  historical: ['historical'],
+  laboratory: ['chemistry', 'preclinical'],
+  human: ['human'],
+  safety: ['guidance', 'quality-control'],
+}
+
+function matchesFilter(filter: EvidenceFilter, evidenceType: MedicalEvidenceType) {
   if (filter === 'all') return true
-  if (filter === 'historical') return kind === 'historical'
-  if (filter === 'preclinical') return level === 2 || level === 3
-  if (filter === 'human') return level === 4
-  return kind === 'safety'
+  return evidenceTypesByFilter[filter].includes(evidenceType)
 }
 
 export function EvidenceSection() {
   const [filter, setFilter] = useState<EvidenceFilter>('all')
   const visibleClaims = medicineClaims.filter((claim) =>
-    matchesFilter(filter, claim.evidenceLevel, claim.kind),
+    matchesFilter(filter, claim.evidenceType),
   )
 
   return (
@@ -35,9 +43,15 @@ export function EvidenceSection() {
         </div>
         <p>
           Лабораторный эффект, исследование экстракта и польза чашки чая — не
-          одно и то же. Фильтр показывает, на каком уровне находится вывод.
+          одно и то же. Фильтр разделяет исторические, лабораторные,
+          человеческие данные и практическую безопасность.
         </p>
       </header>
+
+      <div className="evidence-review-note" role="note" aria-label="Граница медицинского раздела">
+        <p><strong>Граница:</strong> это обзор данных, не индивидуальная рекомендация.</p>
+        <p><strong>Поиск и редакционная проверка:</strong> 17 июля 2026.</p>
+      </div>
 
       <div className="evidence-filters" role="group" aria-label="Фильтр медицинских данных">
         {filters.map((item) => (
@@ -54,14 +68,32 @@ export function EvidenceSection() {
 
       <div className="evidence-grid" aria-live="polite">
         {visibleClaims.map((claim) => (
-          <article className={`evidence-card evidence-card--${claim.kind}`} key={claim.id}>
-            <div className="evidence-card__level">
-              <span>Уровень</span>
-              <strong>{claim.evidenceLevel}/5</strong>
-            </div>
-            <p className="eyebrow">{claim.evidenceLabel}</p>
-            <h3>{claim.title}</h3>
+          <article
+            aria-labelledby={`${claim.id}-title`}
+            className={`evidence-card evidence-card--${claim.kind}`}
+            data-evidence-type={claim.evidenceType}
+            key={claim.id}
+          >
+            <h3 id={`${claim.id}-title`}>{claim.title}</h3>
             <p>{claim.summary}</p>
+            <dl className="evidence-card__meta">
+              <div className="evidence-card__meta-row evidence-card__meta-row--type">
+                <dt>Тип данных</dt>
+                <dd>{claim.evidenceLabel}</dd>
+              </div>
+              <div className="evidence-card__meta-row">
+                <dt>Форма продукта</dt>
+                <dd>{claim.productForm}</dd>
+              </div>
+              <div className="evidence-card__meta-row">
+                <dt>Применимость к обычной чашке</dt>
+                <dd>{claim.applicability}</dd>
+              </div>
+              <div className="evidence-card__meta-row">
+                <dt>Ключевое ограничение</dt>
+                <dd>{claim.limitations}</dd>
+              </div>
+            </dl>
             <div className="source-links" aria-label="Источники медицинской записи">
               {claim.sourceIds.map((sourceId) => {
                 const source = sourceById.get(sourceId)
@@ -91,4 +123,3 @@ export function EvidenceSection() {
     </section>
   )
 }
-

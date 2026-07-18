@@ -146,10 +146,22 @@ describe('content integrity', () => {
     expect(findDuplicateIds([...history, ...medicineClaims])).toEqual([])
   })
 
-  it('never presents preliminary medical evidence as treatment', () => {
+  it('pairs preliminary medical evidence with explicit product and inference limits', () => {
+    const preliminaryTypes = new Set(['chemistry', 'preclinical', 'human'])
+    const preliminaryClaims = medicineClaims.filter((claim) =>
+      preliminaryTypes.has(claim.evidenceType),
+    )
+
+    expect(new Set(preliminaryClaims.map((claim) => claim.evidenceType))).toEqual(
+      preliminaryTypes,
+    )
     expect(
-      medicineClaims.every(
-        (claim) => claim.evidenceLevel < 5 || claim.kind === 'safety',
+      preliminaryClaims.every(
+        (claim) =>
+          claim.kind === 'research' &&
+          claim.productForm.trim().length > 0 &&
+          claim.applicability.trim().length > 0 &&
+          claim.limitations.trim().length > 0,
       ),
     ).toBe(true)
   })
