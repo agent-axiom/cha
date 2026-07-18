@@ -15,7 +15,7 @@ export interface Source {
   note: string
 }
 
-export type HistoryKind = 'legend' | 'source' | 'modern'
+export type HistoryKind = 'legend' | 'source' | 'retrospective' | 'modern'
 
 export interface HistoryEntry {
   id: string

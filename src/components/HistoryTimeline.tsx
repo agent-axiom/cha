@@ -5,6 +5,7 @@ import type { HistoryKind } from '../content/types'
 const kindLabels: Record<HistoryKind, string> = {
   legend: 'Легенда',
   source: 'Письменный источник',
+  retrospective: 'Поздняя реконструкция',
   modern: 'Современное знание',
 }
 export function HistoryTimeline() {
@@ -14,7 +15,7 @@ export function HistoryTimeline() {
         <p className="eyebrow">01 · Корни</p>
         <h2 id="history-title">История растёт не по прямой</h2>
         <p>
-          Предание, документ и научный вывод — три разных способа помнить.
+          Предание, документ, реконструкция и научный вывод — разные способы помнить.
           Мы сохраняем каждый, но не смешиваем их.
         </p>
       </header>

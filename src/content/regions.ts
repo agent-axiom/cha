@@ -28,8 +28,8 @@ export const regions: Region[] = [
     category: 'mountain',
     x: 54,
     y: 68,
-    description: 'Одна из исторических шести чайных гор к востоку от Ланьцанцзяна.',
-    sourceIds: ['zhao-1765'],
+    description: 'Одно из шести названий, которые «南詔備考» приводит в передаче цинской компиляции.',
+    sourceIds: ['zhao-facsimile-pku'],
   },
   {
     id: 'gedeng',
@@ -39,7 +39,7 @@ export const regions: Region[] = [
     x: 66,
     y: 58,
     description: 'Гора древнего списка; в поздних хрониках связана с легендой о Чжугэ Ляне.',
-    sourceIds: ['zhao-1765', 'puer-wuhou'],
+    sourceIds: ['zhao-facsimile-pku', 'puer-wuhou'],
   },
   {
     id: 'yibang',
@@ -48,8 +48,8 @@ export const regions: Region[] = [
     category: 'mountain',
     x: 72,
     y: 49,
-    description: 'Исторический центр производства и торговли, особо отмеченный Чжао Сюэминем за вкус чая.',
-    sourceIds: ['zhao-1765'],
+    description: 'Ибан входит в старый список гор. Чай Э в 1926 году называет Ибан в пассаже, где характеризует пуэр как тёплый по свойству и насыщенный по вкусу.',
+    sourceIds: ['zhao-facsimile-pku', 'fantianlu-vol18-scan'],
   },
   {
     id: 'mangzhi',
@@ -58,8 +58,8 @@ export const regions: Region[] = [
     category: 'mountain',
     x: 76,
     y: 61,
-    description: 'Часть восточной группы старых чайных гор Сишуанбаньны.',
-    sourceIds: ['zhao-1765'],
+    description: 'Одно из шести названий, сохранённых в «南詔備考» и переданных цинской компиляцией.',
+    sourceIds: ['zhao-facsimile-pku'],
   },
   {
     id: 'manzhuan',
@@ -68,8 +68,8 @@ export const regions: Region[] = [
     category: 'mountain',
     x: 82,
     y: 70,
-    description: 'Одна из шести гор, чай которой исторический текст выделяет рядом с Ибаном.',
-    sourceIds: ['zhao-1765'],
+    description: 'Одно из шести названий старого списка. Формула о вкусе принадлежит общему пассажу Чай Э 1926 года, а не дегустационной заметке Чжао о Маньчжуане.',
+    sourceIds: ['zhao-facsimile-pku', 'fantianlu-vol18-scan'],
   },
   {
     id: 'mansa',
@@ -78,7 +78,7 @@ export const regions: Region[] = [
     category: 'mountain',
     x: 88,
     y: 55,
-    description: 'Историческая гора, часто рассматриваемая вместе с более поздним чайным регионом Иу.',
-    sourceIds: ['zhao-1765', 'zhang-2013'],
+    description: 'Одно из шести названий, приведённых «南詔備考» в передаче цинской компиляции.',
+    sourceIds: ['zhao-facsimile-pku'],
   },
 ]
