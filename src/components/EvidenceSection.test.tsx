@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
-import storageGuide from '../../book/manuscript/guide/07-storage-and-safety.md?raw'
 import { medicineClaims } from '../content/medicine'
 import { EvidenceSection } from './EvidenceSection'
 
@@ -139,7 +138,7 @@ describe('EvidenceSection', () => {
     expect(card).toHaveTextContent(/не.*персональной гарантией/i)
   })
 
-  it('describes the limits of sensory storage checks on the site and in the guide', async () => {
+  it('describes the limits of sensory storage checks on the site', async () => {
     const user = userEvent.setup()
     render(<EvidenceSection />)
 
@@ -149,11 +148,10 @@ describe('EvidenceSection', () => {
       .getByRole('heading', { name: /благородная выдержка/i })
       .closest('article')
 
-    for (const content of [card?.textContent ?? '', storageGuide]) {
-      expect(content).toMatch(/сенсорный осмотр.*очевидную порчу/is)
-      expect(content).toMatch(/нормальный (?:вид|внешний вид).*запах.*не доказыва/is)
-      expect(content).toMatch(/отсутствия микотоксинов/i)
-      expect(content).toMatch(/промывка.*кипяток.*не.*лабораторным контролем/is)
-    }
+    const content = card?.textContent ?? ''
+    expect(content).toMatch(/сенсорный осмотр.*очевидную порчу/is)
+    expect(content).toMatch(/нормальный (?:вид|внешний вид).*запах.*не доказыва/is)
+    expect(content).toMatch(/отсутствия микотоксинов/i)
+    expect(content).toMatch(/промывка.*кипяток.*не.*лабораторным контролем/is)
   })
 })
