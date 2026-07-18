@@ -11,3 +11,4 @@ book/assets/fonts/files/
 book/output/
 book/tmp/
 book/.venv/
+__pycache__/

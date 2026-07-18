@@ -1,0 +1,14 @@
+[project]
+name = "puer-book-tools"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+  "pillow>=11,<13",
+  "reportlab>=4.4,<5",
+  "pypdf>=6,<7",
+  "pdfplumber>=0.11,<1",
+  "pytest>=8,<10"
+]
+
+[tool.uv]
+package = false

@@ -1137,6 +1137,16 @@ Expected: FAIL because proof PDFs do not exist.
 
 - [ ] **Step 4: Implement proof rendering**
 
+Review correction after Task 15: these files are editorial layout proofs, not
+print proofs. A committed low-resolution illustration preview may appear only
+with a visible `PREVIEW · NOT PRINT-READY` label. Preview SVGs, concepts and
+missing/uncleared documentary materials render as designed placeholder cards
+that name their status and gate; the builder never reads ignored private assets
+to make a clean layout proof pass. Final print export still blocks on every
+uncleared or non-print-ready asset. The implementation in
+`book/scripts/build_proof.py` is normative where the earlier sketch below uses
+the stricter print-master-only `asset_path` helper.
+
 Create `book/scripts/build_proof.py`:
 
 ```python
@@ -1338,7 +1348,14 @@ if __name__ == '__main__':
     main()
 ```
 
-The renderer reads publication config, flatplans, page-marked manuscripts, assets and typography tokens; registers all four fonts; creates page boxes including 3 mm bleed; draws crop marks only in reviewer mode; renders page numbers outside chapter gates; and writes stable proof filenames. Missing images, uncleared assets, SVGs without raster proof previews, missing glyph fonts, missing page markers, and text overflow block the build. Claim markers are stripped from visible copy.
+The renderer reads publication config, flatplans, page-marked manuscripts,
+assets and typography inputs; registers all four local licensed proof fonts;
+creates page boxes including 3 mm bleed; draws crop marks only in reviewer mode;
+renders page numbers and a visible editorial-proof footer; and writes stable
+proof filenames with invariant metadata. Missing fonts, missing page markers
+and text overflow below the documented proof minimum block the build. Missing
+or uncleared visuals become labelled placeholders and remain explicit
+production gates. Claim markers are stripped from visible copy.
 
 - [ ] **Step 5: Build and test proofs**
 
@@ -1352,7 +1369,7 @@ Expected: both PDFs exist; 208 and 48 pages; page dimensions include bleed; all 
 - [ ] **Step 6: Commit code, not output PDFs**
 
 ```bash
-git add book/pyproject.toml book/uv.lock book/scripts/build_proof.py book/tests/test_pdf.py
+git add .gitignore book/pyproject.toml book/uv.lock book/scripts/build_proof.py book/tests/test_pdf.py docs/superpowers/plans/2026-07-17-puer-gift-book.md
 git commit -m "feat(book): generate deterministic proof PDFs"
 ```
 
