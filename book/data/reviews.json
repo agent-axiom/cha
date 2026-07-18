@@ -5,8 +5,8 @@
     "status": "pending",
     "reviewer": "Codex editorial research audit",
     "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
-    "reviewedAt": "2026-07-17",
-    "note": "Источники и формулировка проверены редакционно; внешняя рецензия историка ожидается."
+    "reviewedAt": "2026-07-18",
+    "note": "Внутренняя AI-рецензия выявила и исправила вложенную атрибуцию списка к 南詔備考; внешняя рецензия историка/синолога ожидается."
   },
   {
     "claimId": "hist-tu-ambiguity",
@@ -14,8 +14,8 @@
     "status": "pending",
     "reviewer": "Codex editorial research audit",
     "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
-    "reviewedAt": "2026-07-17",
-    "note": "Источники и формулировка проверены редакционно; внешняя рецензия историка ожидается."
+    "reviewedAt": "2026-07-18",
+    "note": "Внутренняя AI-рецензия разделила слои 雲南志, 南詔備考 и авторскую помету 按; внешняя рецензия историка/синолога ожидается."
   },
   {
     "claimId": "hist-early-tea-evidence",
@@ -149,8 +149,8 @@
     "status": "pending",
     "reviewer": "Codex editorial research audit",
     "qualification": "Внутренняя проверка источников; не внешняя экспертная рецензия",
-    "reviewedAt": "2026-07-17",
-    "note": "Отклонение относится к составной атрибуции в представленном виде; точное издание «Фань тянь лу» остаётся неразысканным."
+    "reviewedAt": "2026-07-18",
+    "note": "Отклонение относится к составной русской склейке; отдельный пассаж 梵天廬叢錄 найден в первичном скане, но его дипломатическую транскрипцию перед печатью должен независимо сверить синолог."
   },
   {
     "claimId": "prod-maocha-process",
@@ -257,8 +257,8 @@
     "status": "pending",
     "reviewer": "Codex editorial evidence audit",
     "qualification": "internal evidence audit; not a credentialed tea historian",
-    "reviewedAt": "2026-07-17",
-    "note": "Расхождение официальной, региональной и корпоративной версий сохранено; архивная внешняя рецензия не получена."
+    "reviewedAt": "2026-07-18",
+    "note": "Добавлена самостоятельная гуандунская ветвь 1955–1959 годов и сохранено расхождение юньнаньских версий 1973–1975 годов; первичные фабричные журналы и внешняя архивная рецензия не получены."
   },
   {
     "claimId": "prod-shou-antecedents",
@@ -266,8 +266,8 @@
     "status": "pending",
     "reviewer": "Codex editorial evidence audit",
     "qualification": "internal evidence audit; not a credentialed tea historian",
-    "reviewedAt": "2026-07-17",
-    "note": "Antecedents отделены от кодифицированного юньнаньского процесса; первичные архивы командировки недоступны."
+    "reviewedAt": "2026-07-18",
+    "note": "Гуандунская ранняя ветвь отделена от юньнаньской передачи и адаптации; первичные фабричные журналы и архивы командировки недоступны."
   },
   {
     "claimId": "prod-other-provinces-gi",
@@ -338,8 +338,8 @@
     "status": "pending",
     "reviewer": "Codex editorial evidence audit",
     "qualification": "internal evidence audit; not a credentialed microbiologist or food chemist",
-    "reviewedAt": "2026-07-17",
-    "note": "Химические изменения описаны для двух лабораторных серий без причинной атрибуции таксонам."
+    "reviewedAt": "2026-07-18",
+    "note": "Внутренняя AI-рецензия исправила немонотонную динамику галловой кислоты, теафлавина и теарубигина и неодинаковые траектории катехинов; причинная атрибуция таксонам не заявляется."
   },
   {
     "claimId": "micro-zhang-cross-sectional",
@@ -365,8 +365,8 @@
     "status": "pending",
     "reviewer": "Codex editorial evidence audit",
     "qualification": "internal evidence audit; not a credentialed microbiologist or toxicologist",
-    "reviewedAt": "2026-07-17",
-    "note": "Результаты ограничены 36 магазинными образцами, культурой и целевым набором токсинов."
+    "reviewedAt": "2026-07-18",
+    "note": "Результаты ограничены 36 магазинными образцами, культурой и целевым набором токсинов; раскрыта занятость трёх авторов у производителя одного из тест-наборов."
   },
   {
     "claimId": "micro-chau-market-safety",
@@ -374,8 +374,8 @@
     "status": "pending",
     "reviewer": "Codex editorial evidence audit",
     "qualification": "internal evidence audit; not a credentialed microbiologist or toxicologist",
-    "reviewedAt": "2026-07-17",
-    "note": "Выборка обозначена как предоставленная отраслевыми организациями, а не розничная; значения ниже применённых MRL не превращены в заключение о других партиях или всей категории."
+    "reviewedAt": "2026-07-18",
+    "note": "Выборка обозначена как 31 отраслево предоставленный сухой образец; численные критерии не названы отдельной нормой пуэра, а переход в настой и фактическая экспозиция не оценивались."
   },
   {
     "claimId": "micro-safety-method-dependent",
@@ -392,8 +392,8 @@
     "status": "pending",
     "reviewer": "Codex internal evidence search",
     "qualification": "internal evidence audit; not a licensed clinician",
-    "reviewedAt": "2026-07-17",
-    "note": "Тип вмешательства сверён по доступным abstracts/full text, включая corrected Puerh search и две новые human records; внешний медицинский reviewer не назначен."
+    "reviewedAt": "2026-07-18",
+    "note": "Счётчик опубликованных human records привязан к поисковому срезу 17 июля 2026 года; NCT06401161 без результатов не включён как доказательство эффективности. Внешний медицинский reviewer не назначен."
   },
   {
     "claimId": "medical-weight-extract-evidence",
@@ -401,8 +401,8 @@
     "status": "pending",
     "reviewer": "Codex internal evidence search",
     "qualification": "internal evidence audit; not a licensed clinician",
-    "reviewedAt": "2026-07-17",
-    "note": "Сохранены ограничения n, duration, attrition, extract-to-beverage applicability и subgroup-only signal Yang et al.; требуется внешняя медицинская рецензия."
+    "reviewedAt": "2026-07-18",
+    "note": "Сохранены ограничения n, duration, attrition, extract-to-beverage applicability и subgroup-only signal Yang et al.; раскрыты финансирование Jensen производителем экстракта и занятость 3/5 авторов у спонсора. Требуется внешняя медицинская рецензия."
   },
   {
     "claimId": "medical-lipid-extract-evidence",
@@ -509,8 +509,8 @@
     "status": "pending",
     "reviewer": "Codex internal evidence search",
     "qualification": "internal evidence audit; not a licensed clinician or toxicologist",
-    "reviewedAt": "2026-07-17",
-    "note": "Samples, target panels, matrix and exposure limitations retained; внешний medical/toxicology reviewer pending."
+    "reviewedAt": "2026-07-18",
+    "note": "Граница dry leaf → infusion → dose → exposure теперь видима в proof и имеет собственный claim marker; внешний medical/toxicology reviewer pending."
   },
   {
     "claimId": "medical-interactions-individualize",
@@ -518,8 +518,8 @@
     "status": "pending",
     "reviewer": "Codex internal evidence search",
     "qualification": "internal evidence audit; not a licensed clinician or pharmacist",
-    "reviewedAt": "2026-07-17",
-    "note": "No universal contraindication list was invented; внешний clinician/pharmacist review pending."
+    "reviewedAt": "2026-07-18",
+    "note": "Неподкреплённая категория narrow therapeutic index удалена; сохранена индивидуальная консультация при регулярной лекарственной терапии. Внешний clinician/pharmacist review pending."
   },
   {
     "claimId": "medical-no-universal-cup-limit",

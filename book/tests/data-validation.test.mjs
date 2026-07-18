@@ -791,7 +791,7 @@ test('allows distinct mapped recipe topics on one guide spread and rejects ordin
   }
   const expectedBookends = new Map([
     ['G-S019', 'От коротких проливов шоу — к шэну в кружке'],
-    ['G-S022', 'Шоу в кружке — к внимательной дегустации'],
+    ['G-S022', 'Шу в кружке — к внимательной дегустации'],
   ])
   for (const [spreadId, expectedTitle] of expectedBookends) {
     const pages = guide.pages.filter((page) => page.spreadId === spreadId)

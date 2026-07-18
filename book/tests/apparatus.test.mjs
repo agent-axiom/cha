@@ -118,17 +118,17 @@ test('cites the deduplicated non-rejected claim union in fixed groups and stable
   )
   const cited = sources.filter(({ id }) => citedIds.has(id))
   const groups = [
-    ['primary-asian', 'Китайские первоисточники', 8],
-    ['research-asian', 'Азиатские исследования', 20],
+    ['primary-asian', 'Китайские первоисточники', 9],
+    ['research-asian', 'Азиатские исследования', 21],
     ['research-western', 'Западные исследования', 6],
-    ['guidance', 'Стандарты и рекомендации', 11],
+    ['guidance', 'Стандарты и рекомендации', 13],
   ]
   const expectedIds = groups.flatMap(([group]) => cited.filter((source) => source.group === group).sort(compareSources).map(({ id }) => id))
 
-  assert.equal(cited.length, 45)
-  assert.equal(citedIds.has('xu-2022'), false)
+  assert.equal(cited.length, 49)
+  assert.equal(citedIds.has('xu-2022'), true)
   assert.deepEqual(sourceIds(bibliographyText), expectedIds)
-  assert.equal(new Set(sourceIds(bibliographyText)).size, 45)
+  assert.equal(new Set(sourceIds(bibliographyText)).size, 49)
   for (const [group, title, count] of groups) {
     assert.equal(cited.filter((source) => source.group === group).length, count)
     assert.equal((bibliographyText.match(new RegExp(`^## ${title}$`, 'gm')) ?? []).length, 1)

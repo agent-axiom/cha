@@ -61,7 +61,7 @@ test('maps active claims to proof pages or an explicit registry-only exception',
   )
   assert.deepEqual(
     unlinked.map(({ claimId }) => claimId).sort(),
-    ['medical-mycotoxin-evidence-limited', 'storage-gbt30375-current'],
+    ['storage-gbt30375-current'],
   )
   for (const claim of unlinked) {
     assert.ok(claim.registryOnlyReason)
@@ -83,7 +83,7 @@ test('includes the exact generated bibliography and blank response templates', (
   const bibliographyIds = [...bibliography.matchAll(/<!-- source:([^ ]+) -->/gu)]
     .map(([, id]) => id)
     .sort()
-  assert.equal(bibliographyIds.length, 46)
+  assert.equal(bibliographyIds.length, 49)
   assert.deepEqual(bibliographyIds, sourceIds)
   assert.match(bibliography, /<!-- source:xu-2022 -->/u)
   assert.equal(result.manifest.bibliography.sha256, sha256(Buffer.from(bibliography)))

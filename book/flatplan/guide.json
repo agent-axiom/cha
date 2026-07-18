@@ -152,7 +152,7 @@
       "requiredTopics": [
         {
           "id": "shou-t01",
-          "title": "Шоу: чистота аромата и управляемая плотность"
+          "title": "Шу: чистота аромата и управляемая плотность"
         },
         {
           "id": "shou-t02",
@@ -215,7 +215,7 @@
         },
         {
           "id": "simple-methods-t03",
-          "title": "Шоу в большом чайнике",
+          "title": "Шу в большом чайнике",
           "expectedMethodIds": [
             "large-pot-shou"
           ]
@@ -229,14 +229,14 @@
         },
         {
           "id": "simple-methods-t05",
-          "title": "Шоу в термосе",
+          "title": "Шу в термосе",
           "expectedMethodIds": [
             "thermos-shou"
           ]
         },
         {
           "id": "simple-methods-t06",
-          "title": "Шоу в кружке",
+          "title": "Шу в кружке",
           "expectedMethodIds": [
             "mug-shou"
           ]
@@ -252,7 +252,7 @@
       "requiredTopics": [
         {
           "id": "tasting-t01",
-          "title": "Шоу в кружке — к внимательной дегустации"
+          "title": "Шу в кружке — к внимательной дегустации"
         },
         {
           "id": "tasting-t02",
@@ -774,7 +774,7 @@
       "spreadId": "G-S015",
       "sectionId": "shou",
       "topicId": "shou-t01",
-      "spreadTitle": "Шоу: чистота аромата и управляемая плотность",
+      "spreadTitle": "Шу: чистота аромата и управляемая плотность",
       "role": "Открывает раздел «Заваривание шоу» темой «Чистота аромата и управляемая плотность»",
       "spreadTemplate": "guide-troubleshooting",
       "template": "chapter-gate",
@@ -1002,13 +1002,13 @@
       "sectionId": "simple-methods",
       "topicId": "simple-methods-t03",
       "spreadTitle": "Большой чайник: шэн и шоу для компании",
-      "role": "Фиксирует воспроизводимый метод «Шоу в большом чайнике» и одну понятную корректировку",
+      "role": "Фиксирует воспроизводимый метод «Шу в большом чайнике» и одну понятную корректировку",
       "spreadTemplate": "guide-recipe",
       "template": "guide-recipe",
       "assetIds": [],
       "recipe": {
         "recipeId": "large-pot-shou",
-        "title": "Шоу в большом чайнике",
+        "title": "Шу в большом чайнике",
         "methodId": "large-pot-shou",
         "teaStyle": "shou",
         "vesselVolumeMl": 700,
@@ -1060,13 +1060,13 @@
       "sectionId": "simple-methods",
       "topicId": "simple-methods-t05",
       "spreadTitle": "Термос: длинная экстракция шэна и шоу",
-      "role": "Фиксирует воспроизводимый метод «Шоу в термосе» и одну понятную корректировку",
+      "role": "Фиксирует воспроизводимый метод «Шу в термосе» и одну понятную корректировку",
       "spreadTemplate": "guide-recipe",
       "template": "guide-recipe",
       "assetIds": [],
       "recipe": {
         "recipeId": "thermos-shou",
-        "title": "Шоу в термосе",
+        "title": "Шу в термосе",
         "methodId": "thermos-shou",
         "teaStyle": "shou",
         "vesselVolumeMl": 500,
@@ -1088,15 +1088,15 @@
       "spreadId": "G-S022",
       "sectionId": "simple-methods",
       "topicId": "simple-methods-t06",
-      "spreadTitle": "Шоу в кружке — к внимательной дегустации",
-      "role": "Фиксирует воспроизводимый метод «Шоу в кружке» и передаёт читателя к внимательной дегустации",
+      "spreadTitle": "Шу в кружке — к внимательной дегустации",
+      "role": "Фиксирует воспроизводимый метод «Шу в кружке» и передаёт читателя к внимательной дегустации",
       "spreadTemplate": "chapter-gate",
       "template": "guide-recipe",
       "assetIds": [],
       "crossSectionSpread": true,
       "recipe": {
         "recipeId": "mug-shou",
-        "title": "Шоу в кружке",
+        "title": "Шу в кружке",
         "methodId": "mug-shou",
         "teaStyle": "shou",
         "vesselVolumeMl": 300,
@@ -1118,7 +1118,7 @@
       "spreadId": "G-S022",
       "sectionId": "tasting",
       "topicId": "tasting-t01",
-      "spreadTitle": "Шоу в кружке — к внимательной дегустации",
+      "spreadTitle": "Шу в кружке — к внимательной дегустации",
       "role": "Открывает раздел «Дегустация» переходом от шоу в кружке к наблюдению цвета, аромата, вкуса и послевкусия",
       "spreadTemplate": "chapter-gate",
       "template": "chapter-gate",

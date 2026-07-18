@@ -21,6 +21,10 @@
 
 云南大益茶业集团 / Menghai Tea Factory. *大益历史 / TAETEA History*. без даты. [Источник](https://www.dayitea.com/en/da-yi-li-shi)
 
+<!-- source:fantianlu-vol18-scan -->
+
+柴萼 (Чай Э). *梵天廬叢錄（全十八冊）, 冊十八*. 1926; скан 4-го издания 1936 года. 上海: 中華書局; 4-е издание, март 1936 года. Локатор: PDF с. 4 из 159; раздел 梵天廬叢錄三十六, печатной пагинации нет. [Источник](https://upload.wikimedia.org/wikipedia/commons/f/fc/SSID-12435865_%E6%A2%B5%E5%A4%A9%E5%BB%AC%E5%8F%A2%E9%8C%84_18.pdf)
+
 <!-- source:fan-chuo-zhao-1985 -->
 
 樊绰 (Фань Чо); 校释: 赵吕甫 (Чжао Люйфу). *云南志校释 (комментированное издание «Юньнань чжи» / «Мань шу»)*. 1985. 赵吕甫校释; 北京: 中国社会科学出版社. С. 266. [Источник](https://ci.nii.ac.jp/ncid/BA45771109)
@@ -82,6 +86,10 @@ Houyuan Lu et al. *Earliest tea as evidence for one branch of the Silk Road acro
 <!-- source:lin-2019-meta -->
 
 Hsin-Cheng Lin, Chien-Tai Lee, Yea-Yin Yen, Chiao-Lee Chu, Yen-Ping Hsieh, Chi-Sheng Yang, Shou-Jen Lan. *Systematic review and meta-analysis of anti-hyperglycaemic effects of Pu-erh tea*. 2019. Published online 23 October 2018. С. 516–525. [DOI](https://doi.org/10.1111/ijfs.13966)
+
+<!-- source:xu-2022 -->
+
+Jia Xu, Yang Wei, Fanglan Li, Xinchu Weng, Xinlin Wei. *Regulation of fungal community and the quality formation and safety control of Pu-erh tea*. 2022. [Источник](https://pubmed.ncbi.nlm.nih.gov/36201379/)
 
 <!-- source:jiang-2021-warring-tea -->
 
@@ -175,6 +183,10 @@ Małgorzata Zielińska-Przyjemska, Agnieszka Dobrowolska-Zachwieja. *[Effect of 
 
 European Food Safety Authority. *Caffeine: safe intakes*. 2015. Scientific Opinion published 27 May 2015; current topic page checked 2026-07-17. EFSA Journal 13(5):4102, 1–120. [DOI](https://doi.org/10.2903/j.efsa.2015.4102) · [Источник](https://www.efsa.europa.eu/en/topics/topic/caffeine)
 
+<!-- source:nct06401161 -->
+
+Longgang District People's Hospital of Shenzhen. *Study on the Effect of 3T Pu'er Tea in Regulating Glucose and Lipid Metabolism*. 2024. NCT06401161. [Источник](https://clinicaltrials.gov/study/NCT06401161)
+
 <!-- page:A-P208 -->
 
 # Библиография
@@ -202,6 +214,10 @@ World Health Organization. *Restricting caffeine intake during pregnancy*. 2023.
 <!-- source:gbt-30375-2013 -->
 
 国家标准化管理委员会; 全国茶叶标准化技术委员会 (TC339). *GB/T 30375-2013 — 茶叶贮存 (Tea storage)*. 2013. [Источник](https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D7EE69D3A7E05397BE0A0AB82A)
+
+<!-- source:guangzhou-db4401-258-2024 -->
+
+广州市市场监督管理局. *DB4401/T 258—2024 茶文化服务规范*. 2024. DB4401/T 258—2024; приложение A, таблица A.1, строка 10. Локатор: PDF с. 19; печатная с. 13. [Источник](https://scjgj.gz.gov.cn/attachment/7/7575/7575757/9561176.pdf)
 
 <!-- source:db5308-storage-2020 -->
 

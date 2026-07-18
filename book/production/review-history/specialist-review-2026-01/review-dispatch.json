@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "cycleId": "specialist-review-2026-01",
+  "status": "prepared-not-dispatched",
+  "externalApprovals": 0,
+  "frozenAt": "2026-07-18T08:38:08+03:00",
+  "deadline": "2026-08-01T18:00:00+03:00",
+  "deadlineStatus": "proposed",
+  "gitCommit": "457e56f72f36cb9153cf9f9df38753ebdc0af9e4",
+  "packagePath": "book/output/review/specialist-review-2026-01",
+  "manifestSha256": "e5de6b6d4e0d2d97b65f2cdfb64d0273f85ea45f4a0d82bab0d78d97411962f9",
+  "proofSetSha256": "afd02d9d2faa28032429b62b173e1baf2b75b1bb621ba8f9b211443f972945fc",
+  "snapshotSha256": "85c7e3dc9d80c9472c20f180eb8ac462a57660b6aab1afdc6b61111ab6f1cfcd",
+  "roles": {
+    "historian": {
+      "activeClaims": 70,
+      "primaryFocus": 25,
+      "excludedFocus": 4
+    },
+    "technologist": {
+      "activeClaims": 70,
+      "primaryFocus": 41,
+      "excludedFocus": 6
+    },
+    "medical": {
+      "activeClaims": 70,
+      "primaryFocus": 23,
+      "excludedFocus": 1
+    }
+  },
+  "nextAction": "Confirm deadline and name one credentialed external reviewer for each role before dispatch."
+}

@@ -8,7 +8,10 @@ import { fileURLToPath } from 'node:url'
 
 const bookRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const repoRoot = path.dirname(bookRoot)
-const packageDir = path.join(bookRoot, 'output/review/specialist-review-2026-01')
+const reviewCycle = JSON.parse(
+  fs.readFileSync(path.join(bookRoot, 'config/review-cycle.json'), 'utf8'),
+)
+const packageDir = path.join(bookRoot, 'output/review', reviewCycle.cycleId)
 
 const loadVerifier = async () => import('../scripts/verify-review-package.mjs').catch(() => ({}))
 
@@ -103,7 +106,7 @@ test('verifies the frozen package on disk without modifying it', async () => {
   })
 
   assert.deepEqual(report, {
-    cycleId: 'specialist-review-2026-01',
+    cycleId: reviewCycle.cycleId,
     files: 16,
     roles: 3,
     activeClaims: 70,
