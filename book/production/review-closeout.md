@@ -1,10 +1,10 @@
 # Specialist review closeout — NOT CLOSED
 
-Cycle: `specialist-review-2026-01`
-Frozen commit: `457e56f72f36cb9153cf9f9df38753ebdc0af9e4`
-Proof set SHA-256: `afd02d9d2faa28032429b62b173e1baf2b75b1bb621ba8f9b211443f972945fc`
-Snapshot SHA-256: `85c7e3dc9d80c9472c20f180eb8ac462a57660b6aab1afdc6b61111ab6f1cfcd`
-Proposed deadline: `2026-08-01T18:00:00+03:00`
+Cycle: `specialist-review-2026-02`
+Frozen commit: `7a05d6b5ef8ef1e543b4f04eb02a52ac4c96e981`
+Proof set SHA-256: `7a0a833378c98416208a00d7532a85b9706ba20ea676fa05aa866895a4c0447b`
+Snapshot SHA-256: `8dccb4e6537ec841cafe641812691fd9d2b1da7c6e38b09145944093fe63e324`
+Proposed deadline: `2026-08-08T18:00:00+03:00`
 
 **External approvals: 0. Status: PREPARED, NOT DISPATCHED, NOT CLOSED.**
 

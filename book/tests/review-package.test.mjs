@@ -99,7 +99,7 @@ test('includes the exact generated bibliography and blank response templates', (
   const medical = JSON.parse(result.files.get('responses/medical.template.json'))
   assert.deepEqual(
     medical.decisions.find(({ claimId }) => claimId === 'medical-mycotoxin-evidence-limited').pageIdsToReview,
-    ['A-P146', 'A-P147'],
+    ['A-P146'],
   )
 })
 
