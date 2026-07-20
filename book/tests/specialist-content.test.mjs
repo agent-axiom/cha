@@ -22,16 +22,55 @@ const guideManuscript = () => guideFiles
   .map((name) => read(`manuscript/guide/${name}`))
   .join('\n')
 
+const guidePageBlocks = (manuscript) => {
+  const markers = [...manuscript.matchAll(/^<!-- page:(G-P\d{3}) -->$/gmu)]
+  return markers.map((marker, index) => ({
+    pageId: marker[1],
+    text: manuscript.slice(marker.index, markers[index + 1]?.index ?? manuscript.length),
+  }))
+}
+
 const guidePage = (pageId) => {
-  const marker = `<!-- page:${pageId} -->`
   for (const name of guideFiles) {
     const manuscript = read(`manuscript/guide/${name}`)
-    const start = manuscript.indexOf(marker)
-    if (start === -1) continue
-    const next = manuscript.indexOf('<!-- page:G-P', start + marker.length)
-    return manuscript.slice(start, next === -1 ? manuscript.length : next)
+    const page = guidePageBlocks(manuscript).find((block) => block.pageId === pageId)
+    if (page) return page.text
   }
   assert.fail(`missing guide page ${pageId}`)
+}
+
+const guideRecipePageIds = () => json('flatplan/guide.json').pages
+  .filter(({ recipe }) => recipe !== undefined)
+  .map(({ id }) => id)
+
+const guideField = (page, field, label = field) => {
+  const match = page.match(new RegExp(`\\*\\*${field}:\\*\\*\\s*([\\s\\S]*?)(?=\\n\\n\\*\\*[^\\n*]+:\\*\\*|$)`, 'u'))
+  assert.ok(match, `${label}: missing ${field}`)
+  return match[1]
+}
+
+const assertControlledComparison = (field, label) => {
+  assert.match(field, /свеж[а-яё]*/iu, `${label}: use fresh portions`)
+  assert.match(field, /эквивалентн[а-яё]*/iu, `${label}: use equivalent portions`)
+  assert.match(field, /(?:измен|уменьш|сократ|повыс|примен|соседн[а-яё]* температур)[а-яё]*/iu, `${label}: name a changed variable`)
+  assert.match(field, /(?:только|сохранив|при прежн[а-яё]*|оставив неизменн[а-яё]*|одинаков[а-яё]*)/iu, `${label}: isolate one variable`)
+  assert.match(field, /(?:повтор|верн)[а-яё]*[^.\n]*(?:исходн|базов)[а-яё]*[^.\n]*(?:режим|настройк|вариант)/iu, `${label}: return to the baseline`)
+}
+
+const assertGlobalRangeRule = (text, label) => {
+  const rule = text.split(/\n\s*\n/u).find((paragraph) => (
+    /(?:все|кажд[а-яё]*)/iu.test(paragraph)
+    && /числов[а-яё]*/iu.test(paragraph)
+    && /диапазон[а-яё]*/iu.test(paragraph)
+    && /завариван[а-яё]*/iu.test(paragraph)
+    && /гид[а-яё]*/iu.test(paragraph)
+  ))
+  assert.ok(rule, `${label}: scope the rule to every numeric brewing range in the guide`)
+  assert.match(rule, /редакционн[а-яё]*/iu, `${label}: identify editorial provenance`)
+  assert.match(rule, /стартов[а-яё]*/iu, `${label}: identify starting guidance`)
+  assert.match(rule, /ориентир[а-яё]*/iu, `${label}: bound the guidance as an orientation`)
+  assert.match(rule, /не[^.\n]*стандарт[а-яё]*/iu, `${label}: deny standard status`)
+  assert.match(rule, /не[^.\n]*гарантир[а-яё]*/iu, `${label}: deny guarantees`)
 }
 
 const collectVisibleFlatplanText = (value, key = '') => {
@@ -115,17 +154,36 @@ test('opens the guide for a novice before giving the first numeric recipe', () =
   assert.ok(numericRecipe > 0, 'G-P001 must retain a numeric starting recipe')
 
   const onboarding = firstPage.slice(0, numericRecipe)
-  assert.match(onboarding, /гид\s+(?:предназначен|написан)\s+для[^.]*без специальной подготовки/iu)
+  assert.match(onboarding, /(?:читател|нович|начина)[а-яё]*/iu)
+  assert.match(onboarding, /без[^.\n]*(?:специальн[а-яё]* )?подготовк[а-яё]*/iu)
   assert.match(onboarding, /сосуд[^.]*известн[а-яё]* объ[её]м/iu)
   assert.match(onboarding, /полностью отделить настой/iu)
   assert.match(onboarding, /чайник/iu)
   assert.match(onboarding, /чист[а-яё]* вод/iu)
-  assert.match(onboarding, /весы[^.]*термометр[^.]*полезн/iu)
-  assert.match(onboarding, /маркировк[а-яё]*[^.]*шэн[^.]*шу/iu)
-  assert.match(onboarding, /если тип[^.]*неизвестен[^.]*мягк[а-яё]* режим/iu)
-  assert.match(onboarding, /не[^.]*категори[а-яё]*[^.]*по цвету/iu)
+  assert.match(onboarding, /вес[а-яё]*/iu)
+  assert.match(onboarding, /термометр[а-яё]*/iu)
+  assert.match(onboarding, /полезн[а-яё]*[^.\n]*(?:повтор|измер)|(?:повтор|измер)[^.\n]*полезн[а-яё]*/iu)
+  assert.match(onboarding, /маркировк[а-яё]*/iu)
+  assert.match(onboarding, /шэн/iu)
+  assert.match(onboarding, /шу/iu)
+  assert.match(onboarding, /тип[^.\n]*неизвестен|неизвестн[а-яё]* тип/iu)
+  assert.match(onboarding, /мягк[а-яё]* режим/iu)
+  assert.match(onboarding, /не[^.\n]*по цвету/iu)
+
+  assertGlobalRangeRule(onboarding, 'G-P001')
 
   assert.doesNotMatch(guideManuscript(), /безопасная чашка/iu)
+})
+
+test('recognizes the global numeric-range boundary and rejects weakened variants', () => {
+  const bounded = 'Все числовые диапазоны заваривания во всём гиде — редакционные стартовые ориентиры: они не являются стандартами и не гарантируют результат.'
+  assert.doesNotThrow(() => assertGlobalRangeRule(bounded, 'bounded example'))
+
+  for (const weakened of [
+    'Этот числовой диапазон заваривания в гиде — редакционный стартовый ориентир: он не является стандартом и не гарантирует результат.',
+    'Все числовые диапазоны заваривания в гиде — редакционные стартовые ориентиры и стандарты, которые не гарантируют результат.',
+    'Все числовые диапазоны заваривания в гиде — редакционные стартовые ориентиры и гарантируют результат.',
+  ]) assert.throws(() => assertGlobalRangeRule(weakened, 'weakened example'))
 })
 
 test('separates adaptive brewing from controlled comparison and standardizes recipe cards', () => {
@@ -141,26 +199,92 @@ test('separates adaptive brewing from controlled comparison and standardizes rec
   assert.match(firstPage, /контролируем[а-яё]* сравнени[а-яё]*[^.]*две свеж[а-яё]* эквивалентн[а-яё]* порци/iu)
   assert.match(firstPage, /контролируем[а-яё]* сравнени[а-яё]*[\s\S]*одн[а-яё]* величин[а-яё]*[\s\S]*повтор[а-яё]* исходн[а-яё]* режим/iu)
 
-  const recipePages = [
-    'G-P018', 'G-P019',
-    'G-P022', 'G-P023', 'G-P024', 'G-P025',
-    'G-P030', 'G-P031', 'G-P032', 'G-P033',
-    'G-P037', 'G-P038', 'G-P039', 'G-P040', 'G-P041', 'G-P042',
-  ]
+  const recipePages = guideRecipePageIds()
+  assert.equal(recipePages.length, 16)
   for (const pageId of recipePages) {
     const page = guidePage(pageId)
     for (const field of ['Стартовый диапазон', 'Наблюдайте', 'Первая коррекция', 'Остановитесь', 'Для сравнения']) {
       assert.match(page, new RegExp(`\\*\\*${field}:\\*\\*`, 'u'), `${pageId}: ${field}`)
     }
+    assertControlledComparison(guideField(page, 'Для сравнения', pageId), pageId)
     assert.doesNotMatch(page, /\*\*(?:Исходная карточка|Следующий настой|Устранение ошибки|Остановка|Одна переменная):\*\*/u, pageId)
   }
 })
 
+test('rejects a controlled-comparison field with a weakened experimental contract', () => {
+  const valid = 'Возьмите свежие эквивалентные порции, измените только температуру, затем вернитесь к исходной настройке.'
+  assert.doesNotThrow(() => assertControlledComparison(valid, 'valid example'))
+
+  for (const weakened of [
+    'Возьмите эквивалентные порции, измените только температуру, затем вернитесь к исходной настройке.',
+    'Возьмите свежие порции, измените только температуру, затем вернитесь к исходной настройке.',
+    'Возьмите свежие эквивалентные порции, измените температуру и время, затем вернитесь к исходной настройке.',
+    'Возьмите свежие эквивалентные порции и измените только температуру.',
+  ]) assert.throws(() => assertControlledComparison(weakened, 'weakened example'))
+})
+
+test('preserves the ordered guide page-to-claim inventory', () => {
+  const inventory = json('flatplan/guide.json').pages.flatMap(({ id: pageId }) => (
+    [...guidePage(pageId).matchAll(/^<!-- claim:([^ ]+) -->$/gmu)]
+      .map(([, claimId]) => ({ pageId, claimId }))
+  ))
+  assert.equal(inventory.length, 19)
+  assert.deepEqual(inventory, [
+    { pageId: 'G-P001', claimId: 'medical-food-storage-safety' },
+    { pageId: 'G-P004', claimId: 'storage-mould-is-damage' },
+    { pageId: 'G-P007', claimId: 'hist-modern-authenticity' },
+    { pageId: 'G-P008', claimId: 'storage-mould-is-damage' },
+    { pageId: 'G-P008', claimId: 'prod-material-attribution-boundaries' },
+    { pageId: 'G-P009', claimId: 'prod-material-attribution-boundaries' },
+    { pageId: 'G-P010', claimId: 'storage-regional-labels' },
+    { pageId: 'G-P011', claimId: 'storage-mould-is-damage' },
+    { pageId: 'G-P029', claimId: 'medical-food-storage-safety' },
+    { pageId: 'G-P031', claimId: 'storage-mould-is-damage' },
+    { pageId: 'G-P035', claimId: 'storage-mould-is-damage' },
+    { pageId: 'G-P046', claimId: 'medical-tea-not-treatment' },
+    { pageId: 'G-P047', claimId: 'medical-caffeine-alertness-sleep' },
+    { pageId: 'G-P047', claimId: 'medical-no-universal-cup-limit' },
+    { pageId: 'G-P047', claimId: 'medical-pregnancy-caffeine-guidance' },
+    { pageId: 'G-P047', claimId: 'medical-interactions-individualize' },
+    { pageId: 'G-P048', claimId: 'medical-food-storage-safety' },
+    { pageId: 'G-P048', claimId: 'medical-mycotoxin-evidence-limited' },
+    { pageId: 'G-P048', claimId: 'storage-no-guaranteed-improvement' },
+  ])
+})
+
+test('preserves each key safety page boundary without inventing a universal checklist', () => {
+  const expectedBoundaries = new Map([
+    ['G-P001', [/плесен/iu, /намокан/iu, /вредител/iu, /затхл[^.\n]*запах|запах[^.\n]*затхл/iu, /чуж[^.\n]*запах|запах[^.\n]*чуж/iu, /не заваривайте/iu, /не пробуйте/iu]],
+    ['G-P011', [/плесен/iu, /намокан/iu, /вредител/iu, /затхл[^.\n]*запах|запах[^.\n]*затхл/iu, /чуж[^.\n]*запах|запах[^.\n]*чуж/iu, /не заваривайте/iu, /отказаться от пробы|не дегустировать/iu]],
+    ['G-P029', [/плесен/iu, /намокан/iu, /вредител/iu, /затхл[^.\n]*запах|запах[^.\n]*затхл/iu, /чуж[^.\n]*запах|запах[^.\n]*чуж/iu, /отказ от пробы/iu]],
+    ['G-P031', [/плесен/iu, /намокан/iu, /чуж[^.\n]*запах|запах[^.\n]*чуж/iu, /ополаскиван[^.\n]*не исправляет/iu]],
+    ['G-P035', [/плесен/iu, /затхл/iu, /чуж[^.\n]*запах|запах[^.\n]*чуж/iu, /не пробуйте дальше/iu]],
+    ['G-P048', [/плесен/iu, /след[а-яё]* вод|намокан/iu, /вредител/iu, /затхл[^.\n]*запах|запах[^.\n]*затхл/iu, /чуж[^.\n]*запах|запах[^.\n]*чуж/iu, /не пробуют/iu, /ополаскиван[^.\n]*кипяток[^.\n]*не возвращают/iu]],
+  ])
+
+  for (const [pageId, boundaries] of expectedBoundaries) {
+    const page = guidePage(pageId)
+    for (const boundary of boundaries) assert.match(page, boundary, `${pageId}: ${boundary}`)
+  }
+})
+
 test('closes every guide section and the whole guide with an operational checkpoint', () => {
-  for (const name of guideFiles) {
+  const expectedLastPages = new Map([
+    ['00-quick-start.md', 'G-P006'],
+    ['01-choose-tea.md', 'G-P012'],
+    ['02-tools-and-water.md', 'G-P020'],
+    ['03-sheng.md', 'G-P028'],
+    ['04-shou.md', 'G-P036'],
+    ['05-simple-methods.md', 'G-P042'],
+    ['06-tasting.md', 'G-P046'],
+    ['07-storage-and-safety.md', 'G-P048'],
+  ])
+  for (const [name, expectedPageId] of expectedLastPages) {
     const manuscript = read(`manuscript/guide/${name}`)
+    const finalPage = guidePageBlocks(manuscript).at(-1)
+    assert.equal(finalPage.pageId, expectedPageId, name)
     for (const field of ['Сделайте', 'Запишите', 'Остановитесь']) {
-      assert.match(manuscript, new RegExp(`\\*\\*${field}:\\*\\*`, 'u'), `${name}: ${field}`)
+      assert.match(finalPage.text, new RegExp(`\\*\\*${field}:\\*\\*`, 'u'), `${name}: ${field}`)
     }
   }
 
