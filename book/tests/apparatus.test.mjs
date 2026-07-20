@@ -81,6 +81,24 @@ const pageIds = (text) => [...text.matchAll(/^<!-- page:([AG]-P\d{3}) -->$/gm)].
 const sourceIds = (text) => [...text.matchAll(/^<!-- source:([a-z0-9-]+) -->$/gm)].map((match) => match[1])
 const glossaryIds = (text) => [...text.matchAll(/^<!-- glossary:([a-z0-9-]+) -->$/gm)].map((match) => match[1])
 
+const historicalDocumentClasses = new Set([
+  'historical-access-copy',
+  'critical-edition',
+  'facsimile',
+  'catalog-record',
+  'manuscript-catalog',
+])
+const historicalEvidenceRoles = new Set([
+  'primary-text',
+  'textual-witness',
+  'catalog-provenance',
+  'disputed-retrospective-attribution',
+])
+const retrospectiveDocumentClasses = new Set(['institutional-record', 'corporate-record', 'standard'])
+const retrospectiveEvidenceRoles = new Set(['institutional-retrospective', 'corporate-retrospective'])
+const guidanceDocumentClasses = new Set(['standard', 'guidance', 'institutional-heritage-record'])
+const guidanceEvidenceRoles = new Set(['normative-standard', 'safety-guidance', 'contextual-institutional-record'])
+
 const assertMarkerFirstPages = (text, expectedIds) => {
   assert.ok(text.endsWith('\n'), 'generated Markdown must have a final newline')
   assert.equal(text.startsWith(`<!-- page:${expectedIds[0]} -->\n`), true)
@@ -121,12 +139,12 @@ test('cites the deduplicated non-rejected claim union in fixed groups and stable
   )
   const cited = sources.filter(({ id, evidenceRole }) => citedIds.has(id) && evidenceRole !== 'provenance-only')
   const groups = [
-    ['Китайские исторические тексты, издания и копии', 8, (source) => source.group === 'primary-asian' && !['retrospective', 'trial-registration'].includes(source.publicationClass)],
-    ['Институциональные ретроспективы', 4, (source) => source.publicationClass === 'retrospective'],
-    ['Азиатские исследования', 19, (source) => source.group === 'research-asian' && !['retrospective', 'trial-registration'].includes(source.publicationClass)],
-    ['Западные исследования', 5, (source) => source.group === 'research-western' && !['retrospective', 'trial-registration'].includes(source.publicationClass)],
-    ['Реестры исследований', 1, (source) => source.publicationClass === 'trial-registration'],
-    ['Стандарты и рекомендации', 11, (source) => source.group === 'guidance' && !['retrospective', 'trial-registration'].includes(source.publicationClass)],
+    ['Китайские исторические тексты, издания и копии', 8, (source) => source.group === 'primary-asian' && historicalDocumentClasses.has(source.documentClass) && historicalEvidenceRoles.has(source.evidenceRole)],
+    ['Институциональные ретроспективы', 5, (source) => retrospectiveDocumentClasses.has(source.documentClass) && retrospectiveEvidenceRoles.has(source.evidenceRole)],
+    ['Азиатские исследования', 19, (source) => source.group === 'research-asian' && source.documentClass === 'research-publication' && source.evidenceRole === 'research-evidence'],
+    ['Западные исследования', 5, (source) => source.group === 'research-western' && source.documentClass === 'research-publication' && source.evidenceRole === 'research-evidence'],
+    ['Реестры исследований', 1, (source) => source.documentClass === 'trial-registration' && source.evidenceRole === 'trial-registry-record'],
+    ['Стандарты и рекомендации', 10, (source) => source.group === 'guidance' && guidanceDocumentClasses.has(source.documentClass) && guidanceEvidenceRoles.has(source.evidenceRole)],
   ]
   const expectedIds = groups.flatMap(([, , matches]) => cited.filter(matches).sort(compareSources).map(({ id }) => id))
 
@@ -173,8 +191,8 @@ test('prints independent reader-facing document and evidence-role labels', () =>
 test('uses evidenceRole rather than legacy publicationClass for publication exclusion', () => {
   const root = createFixtureBook({
     sources: [
-      sourceRecord({ id: 'included', publicationClass: 'research', evidenceRole: 'research-evidence' }),
-      sourceRecord({ id: 'excluded', publicationClass: 'research', evidenceRole: 'provenance-only' }),
+      sourceRecord({ id: 'included', group: 'research-western', publicationClass: 'provenance-only', documentClass: 'research-publication', evidenceRole: 'research-evidence' }),
+      sourceRecord({ id: 'excluded', group: 'research-western', publicationClass: 'research', documentClass: 'community-excerpt', evidenceRole: 'provenance-only' }),
     ],
     claims: [{ id: 'claim-1', status: 'verified', sourceIds: ['included', 'excluded'] }],
   })
@@ -183,6 +201,69 @@ test('uses evidenceRole rather than legacy publicationClass for publication excl
 
   assert.match(bibliographyText, /<!-- source:included -->/u)
   assert.doesNotMatch(bibliographyText, /<!-- source:excluded -->/u)
+})
+
+test('legacy publication classes cannot change semantic bibliography grouping or output', () => {
+  const sources = [
+    sourceRecord({ id: 'history-access', group: 'primary-asian', publicationClass: 'access-copy', documentClass: 'historical-access-copy', evidenceRole: 'primary-text' }),
+    sourceRecord({ id: 'history-catalog', group: 'primary-asian', publicationClass: 'manuscript-catalog', documentClass: 'manuscript-catalog', evidenceRole: 'catalog-provenance' }),
+    sourceRecord({ id: 'corporate-retro', group: 'primary-asian', publicationClass: 'retrospective', documentClass: 'corporate-record', evidenceRole: 'corporate-retrospective' }),
+    sourceRecord({ id: 'institutional-retro', group: 'guidance', publicationClass: 'retrospective', documentClass: 'standard', evidenceRole: 'institutional-retrospective' }),
+    sourceRecord({ id: 'asian-research', group: 'research-asian', publicationClass: 'research', documentClass: 'research-publication', evidenceRole: 'research-evidence' }),
+    sourceRecord({ id: 'western-research', group: 'research-western', publicationClass: 'research', documentClass: 'research-publication', evidenceRole: 'research-evidence' }),
+    sourceRecord({ id: 'trial-registry', group: 'guidance', publicationClass: 'trial-registration', documentClass: 'trial-registration', evidenceRole: 'trial-registry-record' }),
+    sourceRecord({ id: 'contextual-record', group: 'guidance', publicationClass: 'standard-guidance', documentClass: 'institutional-heritage-record', evidenceRole: 'contextual-institutional-record' }),
+    sourceRecord({ id: 'safety-guidance', group: 'guidance', publicationClass: 'standard-guidance', documentClass: 'guidance', evidenceRole: 'safety-guidance' }),
+    sourceRecord({ id: 'normative-standard', group: 'guidance', publicationClass: 'standard-guidance', documentClass: 'standard', evidenceRole: 'normative-standard' }),
+  ]
+  const claims = [{ id: 'claim-1', status: 'verified', sourceIds: sources.map(({ id }) => id) }]
+  const expected = buildApparatus({ root: createFixtureBook({ sources, claims }) }).bibliographyText
+  const contradictoryLegacyClasses = [
+    'retrospective',
+    'trial-registration',
+    'research',
+    'standard-guidance',
+    'retrospective',
+    'trial-registration',
+    'research',
+    'access-copy',
+    'trial-registration',
+    'retrospective',
+  ]
+  const mutatedSources = sources.map((source, index) => ({
+    ...source,
+    publicationClass: contradictoryLegacyClasses[index],
+  }))
+  const actual = buildApparatus({ root: createFixtureBook({ sources: mutatedSources, claims }) }).bibliographyText
+
+  assert.equal(actual, expected)
+})
+
+test('document class and evidence role changes control semantic bibliography grouping', () => {
+  const standard = sourceRecord({
+    id: 'mutable-source',
+    group: 'guidance',
+    publicationClass: 'standard-guidance',
+    documentClass: 'standard',
+    evidenceRole: 'normative-standard',
+  })
+  const claims = [{ id: 'claim-1', status: 'verified', sourceIds: [standard.id] }]
+  const guidance = buildApparatus({ root: createFixtureBook({ sources: [standard], claims }) }).bibliographyText
+  const retrospective = buildApparatus({
+    root: createFixtureBook({
+      sources: [{ ...standard, evidenceRole: 'institutional-retrospective' }],
+      claims,
+    }),
+  }).bibliographyText
+
+  assert.match(guidance, /^## Стандарты и рекомендации$/mu)
+  assert.match(retrospective, /^## Институциональные ретроспективы$/mu)
+  assert.throws(() => buildApparatus({
+    root: createFixtureBook({
+      sources: [{ ...standard, documentClass: 'research-publication' }],
+      claims,
+    }),
+  }), /every cited publication source must match exactly one bibliography group/u)
 })
 
 test('normalizes author punctuation and formats page, article, e-locator, facsimile, and journal locators', () => {

@@ -78,8 +78,8 @@ test('bounds the checked Ruan retrospective without upgrading the rejected Xu cl
 test('keeps the six-mountains map and maocha diagram on their correct proof pages', () => {
   assert.deepEqual(albumPage(37).assetIds, ['map-six-mountains'])
   assert.equal(albumPage(37).assetIds.includes('map-jingmai-landscape'), false)
-  assert.equal(source('zhao-renmin-1957').publicationClass, 'print-edition-catalog')
-  assert.equal(source('ruan-dianbi-catalog').publicationClass, 'manuscript-catalog')
+  assert.equal(source('zhao-renmin-1957').documentClass, 'catalog-record')
+  assert.equal(source('ruan-dianbi-catalog').documentClass, 'manuscript-catalog')
 
   const map = assets.find(({ id }) => id === 'map-six-mountains')
   assert.equal(map.status, 'preview')
@@ -92,11 +92,12 @@ test('keeps the six-mountains map and maocha diagram on their correct proof page
 })
 
 test('groups institutional retrospectives and trial registrations independently in the bibliography', () => {
-  for (const id of ['dayi-history-1973', 'puer-wuhou', 'yunnan-net-shou-2021', 'yunnan-agri-2018-shou']) {
-    assert.equal(source(id).publicationClass, 'retrospective', id)
+  for (const id of ['puer-wuhou', 'yunnan-net-shou-2021', 'yunnan-agri-2018-shou', 'guangzhou-db4401-258-2024']) {
+    assert.equal(source(id).evidenceRole, 'institutional-retrospective', id)
   }
-  assert.equal(source('guangzhou-db4401-258-2024').publicationClass, 'standard-guidance')
-  assert.equal(source('nct06401161').publicationClass, 'trial-registration')
+  assert.equal(source('dayi-history-1973').evidenceRole, 'corporate-retrospective')
+  assert.equal(source('nct06401161').documentClass, 'trial-registration')
+  assert.equal(source('nct06401161').evidenceRole, 'trial-registry-record')
 
   const bibliography = read('book/manuscript/album/92-bibliography.md')
   assert.match(bibliography, /^## Институциональные ретроспективы$/mu)
@@ -105,7 +106,7 @@ test('groups institutional retrospectives and trial registrations independently 
   assert.match(bibliography, /\*\*Роль в книге:\*\* Запись о планируемом исследовании; результатов нет/u)
   const retrospectiveStart = bibliography.indexOf('## Институциональные ретроспективы')
   const trialStart = bibliography.indexOf('## Реестры исследований')
-  for (const id of ['dayi-history-1973', 'puer-wuhou', 'yunnan-net-shou-2021', 'yunnan-agri-2018-shou']) {
+  for (const id of ['dayi-history-1973', 'puer-wuhou', 'yunnan-net-shou-2021', 'yunnan-agri-2018-shou', 'guangzhou-db4401-258-2024']) {
     const offset = bibliography.indexOf(`<!-- source:${id} -->`)
     assert.ok(offset > retrospectiveStart, id)
     assert.ok(trialStart === -1 || offset < trialStart, id)

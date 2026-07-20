@@ -5,36 +5,75 @@ import { fileURLToPath } from 'node:url'
 const defaultBookRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const generatedHeader = '<!-- generated: book/scripts/generate-apparatus.mjs -->'
 const sourceGroups = new Set(['primary-asian', 'research-asian', 'research-western', 'guidance'])
+const historicalDocumentClasses = new Set([
+  'historical-access-copy',
+  'critical-edition',
+  'facsimile',
+  'catalog-record',
+  'manuscript-catalog',
+])
+const historicalEvidenceRoles = new Set([
+  'primary-text',
+  'textual-witness',
+  'catalog-provenance',
+  'disputed-retrospective-attribution',
+])
+const retrospectiveDocumentClasses = new Set(['institutional-record', 'corporate-record', 'standard'])
+const retrospectiveEvidenceRoles = new Set(['institutional-retrospective', 'corporate-retrospective'])
+const guidanceDocumentClasses = new Set(['standard', 'guidance', 'institutional-heritage-record'])
+const guidanceEvidenceRoles = new Set(['normative-standard', 'safety-guidance', 'contextual-institutional-record'])
 const groupDefinitions = [
   {
     id: 'primary-asian',
     title: 'Китайские исторические тексты, издания и копии',
-    matches: (source) => source.group === 'primary-asian' && !['retrospective', 'trial-registration'].includes(source.publicationClass),
+    matches: (source) => (
+      source.group === 'primary-asian'
+      && historicalDocumentClasses.has(source.documentClass)
+      && historicalEvidenceRoles.has(source.evidenceRole)
+    ),
   },
   {
     id: 'institutional-retrospectives',
     title: 'Институциональные ретроспективы',
-    matches: (source) => source.publicationClass === 'retrospective',
+    matches: (source) => (
+      retrospectiveDocumentClasses.has(source.documentClass)
+      && retrospectiveEvidenceRoles.has(source.evidenceRole)
+    ),
   },
   {
     id: 'research-asian',
     title: 'Азиатские исследования',
-    matches: (source) => source.group === 'research-asian' && !['retrospective', 'trial-registration'].includes(source.publicationClass),
+    matches: (source) => (
+      source.group === 'research-asian'
+      && source.documentClass === 'research-publication'
+      && source.evidenceRole === 'research-evidence'
+    ),
   },
   {
     id: 'research-western',
     title: 'Западные исследования',
-    matches: (source) => source.group === 'research-western' && !['retrospective', 'trial-registration'].includes(source.publicationClass),
+    matches: (source) => (
+      source.group === 'research-western'
+      && source.documentClass === 'research-publication'
+      && source.evidenceRole === 'research-evidence'
+    ),
   },
   {
     id: 'trial-registrations',
     title: 'Реестры исследований',
-    matches: (source) => source.publicationClass === 'trial-registration',
+    matches: (source) => (
+      source.documentClass === 'trial-registration'
+      && source.evidenceRole === 'trial-registry-record'
+    ),
   },
   {
     id: 'guidance',
     title: 'Стандарты и рекомендации',
-    matches: (source) => source.group === 'guidance' && !['retrospective', 'trial-registration'].includes(source.publicationClass),
+    matches: (source) => (
+      source.group === 'guidance'
+      && guidanceDocumentClasses.has(source.documentClass)
+      && guidanceEvidenceRoles.has(source.evidenceRole)
+    ),
   },
 ]
 const documentClassLabels = new Map([

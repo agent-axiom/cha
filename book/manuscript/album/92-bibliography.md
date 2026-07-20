@@ -55,6 +55,10 @@
 
 **Ключ источника:** `yunnan-agri-2018-shou`. **Вид документа:** Институциональная запись. **Роль в книге:** Институциональная ретроспектива. 云南省农业厅. *对云南省十三届人大第一次会议第0270号建议的答复*. 2018. 云农茶〔2018〕2号. [Источник](https://nync.yn.gov.cn/html/2018/tianjianyibanli2018_0612/375055.html?cid=3406)
 
+<!-- source:guangzhou-db4401-258-2024 -->
+
+**Ключ источника:** `guangzhou-db4401-258-2024`. **Вид документа:** Стандарт. **Роль в книге:** Институциональная ретроспектива. 广州市市场监督管理局. *DB4401/T 258—2024 茶文化服务规范*. 2024. DB4401/T 258—2024; приложение A, таблица A.1, строка 10. Локатор: PDF с. 19; печатная с. 13. [Источник](https://scjgj.gz.gov.cn/attachment/7/7575/7575757/9561176.pdf)
+
 <!-- source:yunnan-net-shou-2021 -->
 
 **Ключ источника:** `yunnan-net-shou-2021`. **Вид документа:** Институциональная запись. **Роль в книге:** Институциональная ретроспектива. 茶叶复兴; перепечатано 云南网. *云南现代熟茶的诞生*. 2021. Отрывок из «熟茶：一片茶叶的蝶变与升华». [Источник](https://txpe.yunnan.cn/system/2021/03/24/031353942.shtml)
@@ -85,13 +89,13 @@
 
 **Ключ источника:** `lu-2016-earliest-tea`. **Вид документа:** Исследовательская публикация. **Роль в книге:** Исследовательская опора. Houyuan Lu et al. *Earliest tea as evidence for one branch of the Silk Road across the Tibetan Plateau*. 2016. С. 1–8. [DOI](https://doi.org/10.1038/srep18955)
 
-<!-- source:lin-2019-meta -->
-
-**Ключ источника:** `lin-2019-meta`. **Вид документа:** Исследовательская публикация. **Роль в книге:** Исследовательская опора. Hsin-Cheng Lin, Chien-Tai Lee, Yea-Yin Yen, Chiao-Lee Chu, Yen-Ping Hsieh, Chi-Sheng Yang, Shou-Jen Lan. *Systematic review and meta-analysis of anti-hyperglycaemic effects of Pu-erh tea*. 2019. Published online 23 October 2018. С. 516–525. [DOI](https://doi.org/10.1111/ijfs.13966)
-
 <!-- page:A-P205 -->
 
 # Библиография
+
+<!-- source:lin-2019-meta -->
+
+**Ключ источника:** `lin-2019-meta`. **Вид документа:** Исследовательская публикация. **Роль в книге:** Исследовательская опора. Hsin-Cheng Lin, Chien-Tai Lee, Yea-Yin Yen, Chiao-Lee Chu, Yen-Ping Hsieh, Chi-Sheng Yang, Shou-Jen Lan. *Systematic review and meta-analysis of anti-hyperglycaemic effects of Pu-erh tea*. 2019. Published online 23 October 2018. С. 516–525. [DOI](https://doi.org/10.1111/ijfs.13966)
 
 <!-- source:xu-2022 -->
 
@@ -125,13 +129,13 @@
 
 **Ключ источника:** `chu-2011`. **Вид документа:** Исследовательская публикация. **Роль в книге:** Исследовательская опора. Song-Ling Chu, Hong Fu, Jin-Xia Yang, Geng-Xin Liu, Pan Dou, Liang Zhang, Peng-Fei Tu, Xue-Mei Wang. *A randomized double-blind placebo-controlled study of Pu'er tea extract on the regulation of metabolic syndrome*. 2011. С. 492–498. [DOI](https://doi.org/10.1007/s11655-011-0781-4) · [Источник](https://pubmed.ncbi.nlm.nih.gov/21725873/)
 
-<!-- source:fan-2022 -->
-
-**Ключ источника:** `fan-2022`. **Вид документа:** Исследовательская публикация. **Роль в книге:** Исследовательская опора. Sunan Wang, Yi Qiu, Ren-You Gan, Fan Zhu. *Chemical constituents and biological properties of Pu-erh tea*. 2022. [Источник](https://pubmed.ncbi.nlm.nih.gov/35337597/)
-
 <!-- page:A-P206 -->
 
 # Библиография
+
+<!-- source:fan-2022 -->
+
+**Ключ источника:** `fan-2022`. **Вид документа:** Исследовательская публикация. **Роль в книге:** Исследовательская опора. Sunan Wang, Yi Qiu, Ren-You Gan, Fan Zhu. *Chemical constituents and biological properties of Pu-erh tea*. 2022. [Источник](https://pubmed.ncbi.nlm.nih.gov/35337597/)
 
 <!-- source:yang-2014-weight -->
 
@@ -173,15 +177,15 @@
 
 **Ключ источника:** `nct06401161`. **Вид документа:** Регистрация исследования. **Роль в книге:** Запись о планируемом исследовании; результатов нет. Longgang District People's Hospital of Shenzhen. *Study on the Effect of 3T Pu'er Tea in Regulating Glucose and Lipid Metabolism*. 2024. NCT06401161. [Источник](https://clinicaltrials.gov/study/NCT06401161)
 
+<!-- page:A-P207 -->
+
+# Библиография
+
 ## Стандарты и рекомендации
 
 <!-- source:gbt-22111 -->
 
 **Ключ источника:** `gbt-22111`. **Вид документа:** Стандарт. **Роль в книге:** Нормативный ориентир. Государственное управление по регулированию рынка КНР. *GB/T 22111-2008 — географическое указание «Пуэрский чай»*. 2008. [Источник](https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=CAF792AAE4A96101F217C44250C8C8E4)
-
-<!-- page:A-P207 -->
-
-# Библиография
 
 <!-- source:yunnan-2023 -->
 
@@ -210,10 +214,6 @@
 <!-- source:gbt-30375-2013 -->
 
 **Ключ источника:** `gbt-30375-2013`. **Вид документа:** Стандарт. **Роль в книге:** Нормативный ориентир. 国家标准化管理委员会; 全国茶叶标准化技术委员会 (TC339). *GB/T 30375-2013 — 茶叶贮存 (Tea storage)*. 2013. [Источник](https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D7EE69D3A7E05397BE0A0AB82A)
-
-<!-- source:guangzhou-db4401-258-2024 -->
-
-**Ключ источника:** `guangzhou-db4401-258-2024`. **Вид документа:** Стандарт. **Роль в книге:** Институциональная ретроспектива. 广州市市场监督管理局. *DB4401/T 258—2024 茶文化服务规范*. 2024. DB4401/T 258—2024; приложение A, таблица A.1, строка 10. Локатор: PDF с. 19; печатная с. 13. [Источник](https://scjgj.gz.gov.cn/attachment/7/7575/7575757/9561176.pdf)
 
 <!-- source:db5308-storage-2020 -->
 
