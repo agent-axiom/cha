@@ -143,9 +143,9 @@ READER_POLICY = ProofPolicy(
     footer="READER PROOF · NOT PRINT-READY · NOT PDF/X",
     show_role=False,
     show_claim_band=False,
-    placeholder_label="Иллюстрация готовится к финальному изданию",
-    placeholder_title="Место будущей иллюстрации",
-    placeholder_detail="В читательской пробе оставлено место будущего изображения.",
+    placeholder_label="Место иллюстрации в читательской пробе",
+    placeholder_title=None,
+    placeholder_detail=None,
     unresolved_visual_height_mm=38,
     preview_label="PRELIMINARY · NOT PRINT-READY",
     show_asset_metadata=False,
@@ -358,8 +358,8 @@ def draw_placeholder_card(
     width: float,
     height: float,
     *,
-    title: str,
-    detail: str,
+    title: str | None,
+    detail: str | None,
     dark: bool,
     label: str = "UNRESOLVED VISUAL · EDITORIAL PLACEHOLDER",
 ) -> None:
@@ -368,6 +368,12 @@ def draw_placeholder_card(
     canvas.setStrokeColor(COPPER)
     canvas.setLineWidth(1.1)
     canvas.roundRect(x, y, width, height, 5 * MM, fill=1, stroke=1)
+    if title is None and detail is None:
+        canvas.setFillColor(white if dark else INK)
+        canvas.setFont("Cormorant", 15)
+        canvas.drawString(x + 4 * MM, y + height / 2 - 5, label)
+        canvas.restoreState()
+        return
     canvas.setFillColor(COPPER)
     canvas.rect(x, y + height - 9 * MM, width, 9 * MM, fill=1, stroke=0)
     canvas.setFillColor(INK)
@@ -441,12 +447,14 @@ def draw_visual(
             width,
             height,
             title=(
-                policy.placeholder_title
-                or asset.get("title")
-                or asset["id"]
+                None
+                if policy.mode == "reader"
+                else policy.placeholder_title or asset.get("title") or asset["id"]
             ),
             detail=(
-                policy.placeholder_detail
+                None
+                if policy.mode == "reader"
+                else policy.placeholder_detail
                 or (
                     f"{asset['id']} · status: {asset.get('status', 'unknown')} · "
                     f"rights: {asset.get('rights', 'unknown')}. "
@@ -466,11 +474,15 @@ def draw_visual(
             width,
             height,
             title=(
-                policy.placeholder_title
+                None
+                if policy.mode == "reader"
+                else policy.placeholder_title
                 or f"{placeholder.get('kind', 'visual')} · commission brief"
             ),
             detail=(
-                policy.placeholder_detail
+                None
+                if policy.mode == "reader"
+                else policy.placeholder_detail
                 or placeholder.get("brief", "Нужен визуальный материал.")
             ),
             dark=dark,

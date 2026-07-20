@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import html
 import importlib.util
 import json
 import os
@@ -29,6 +30,7 @@ READER_METADATA = {
     "/PuerPdfStandard": "not-pdf-x",
 }
 READER_FOOTER = "READER PROOF · NOT PRINT-READY · NOT PDF/X"
+READER_PLACEHOLDER_CAPTION = "Место иллюстрации в читательской пробе"
 READER_FILENAMES = (
     "puer-album-reader-proof.pdf",
     "puer-guide-reader-proof.pdf",
@@ -87,8 +89,9 @@ def test_proof_policy_exposes_immutable_editorial_and_reader_modes() -> None:
     assert reader.show_role is False
     assert reader.show_claim_band is False
     assert reader.footer == READER_FOOTER
-    assert reader.placeholder_label == "Иллюстрация готовится к финальному изданию"
-    assert reader.placeholder_title == "Место будущей иллюстрации"
+    assert reader.placeholder_label == READER_PLACEHOLDER_CAPTION
+    assert reader.placeholder_title is None
+    assert reader.placeholder_detail is None
     assert reader.preview_label == "PRELIMINARY · NOT PRINT-READY"
     for key, value in READER_METADATA.items():
         assert reader.metadata[key] == value
@@ -99,6 +102,38 @@ def test_proof_policy_exposes_immutable_editorial_and_reader_modes() -> None:
 
     with pytest.raises(FrozenInstanceError):
         reader.mode = "editorial"
+
+
+def test_reader_unresolved_visual_renders_one_neutral_caption(
+    tmp_path: Path,
+) -> None:
+    BUILD_PROOF.register_fonts()
+    output = tmp_path / "reader-placeholder.pdf"
+    asset_id = "unit-unresolved-asset"
+    canvas = Canvas(str(output), pagesize=(400, 200), invariant=1)
+    result = BUILD_PROOF.draw_visual(
+        canvas,
+        {"assetIds": [asset_id]},
+        {
+            asset_id: {
+                "id": asset_id,
+                "kind": "photo",
+                "title": "Будущая финальная иллюстрация",
+            }
+        },
+        10,
+        10,
+        380,
+        180,
+        dark=False,
+        policy=BUILD_PROOF.PROOF_POLICIES["reader"],
+    )
+    canvas.showPage()
+    canvas.save()
+
+    assert result == "placeholder"
+    text = " ".join((PdfReader(output).pages[0].extract_text() or "").split())
+    assert text == READER_PLACEHOLDER_CAPTION
 
 
 def test_reader_body_projection_removes_only_internal_production_paragraphs() -> None:
@@ -383,6 +418,30 @@ def registered_assets() -> dict[str, dict]:
     return {record["id"]: record for record in records}
 
 
+def reader_visual_expectations(
+    flatplan_name: str,
+) -> tuple[set[str], set[str]]:
+    assets = registered_assets()
+    flatplan = json.loads(
+        (BOOK / "flatplan" / flatplan_name).read_text(encoding="utf-8")
+    )
+    unresolved: set[str] = set()
+    previews: set[str] = set()
+    for page in flatplan["pages"]:
+        asset_ids = page.get("assetIds", [])
+        if asset_ids and BUILD_PROOF.preview_path(assets[asset_ids[0]]) is not None:
+            previews.add(page["id"])
+        elif asset_ids or page.get("visualPlaceholder"):
+            unresolved.add(page["id"])
+    return unresolved, previews
+
+
+def normalized_markup_text(markdown: str) -> str:
+    markup = BUILD_PROOF.paragraph_markup(markdown)
+    without_tags = re.sub(r"<[^>]+>", " ", markup)
+    return " ".join(html.unescape(without_tags).split())
+
+
 def selected_fonts(page, reader: PdfReader) -> set[str]:
     used: set[str] = set()
     content = page.get_contents()
@@ -628,17 +687,46 @@ def test_reader_proof_hides_editorial_scaffolding_and_uses_reader_labels(
     for asset_id in registered_assets():
         assert asset_id not in corpus
 
+    unresolved_total = 0
+    observed_caption_total = 0
     for flatplan_name, reader in zip(("album.json", "guide.json"), readers):
         flatplan = json.loads(
             (BOOK / "flatplan" / flatplan_name).read_text(encoding="utf-8")
         )
+        manuscript = BUILD_PROOF.manuscript_pages(flatplan_name.removesuffix(".json"))
+        reader_policy = BUILD_PROOF.PROOF_POLICIES["reader"]
+        unresolved_ids, preview_ids = reader_visual_expectations(flatplan_name)
+        unresolved_total += len(unresolved_ids)
         for page_definition, page in zip(flatplan["pages"], reader.pages):
             role = " ".join(page_definition.get("role", "").split())
             page_text = " ".join((page.extract_text() or "").split())
             if role:
                 assert role not in page_text, page_definition["id"]
+            caption_count = page_text.count(READER_PLACEHOLDER_CAPTION)
+            if page_definition["id"] in unresolved_ids:
+                assert caption_count == 1, page_definition["id"]
+                observed_caption_total += caption_count
+                body_text = normalized_markup_text(
+                    reader_policy.project_body(manuscript[page_definition["id"]])
+                )
+                body_anchor = body_text[:80]
+                caption_start = page_text.find(READER_PLACEHOLDER_CAPTION)
+                caption_end = caption_start + len(READER_PLACEHOLDER_CAPTION)
+                body_start = page_text.find(body_anchor, caption_end)
+                assert caption_start >= 0, page_definition["id"]
+                assert body_start >= 0, page_definition["id"]
+                placeholder_context = page_text[caption_start:body_start]
+                assert placeholder_context.count(READER_PLACEHOLDER_CAPTION) == 1
+                assert "финальн" not in placeholder_context.lower()
+                assert "будущ" not in placeholder_context.lower()
+            else:
+                assert caption_count == 0, page_definition["id"]
+            if page_definition["id"] in preview_ids:
+                assert "PRELIMINARY · NOT PRINT-READY" in page_text
 
-    assert "Иллюстрация готовится к финальному изданию" in corpus
+    assert unresolved_total == 136
+    assert observed_caption_total == unresolved_total
+    assert corpus.count(READER_PLACEHOLDER_CAPTION) == unresolved_total
     assert "PRELIMINARY · NOT PRINT-READY" in corpus
 
 
