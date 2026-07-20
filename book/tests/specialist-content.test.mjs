@@ -39,9 +39,14 @@ const guidePage = (pageId) => {
   assert.fail(`missing guide page ${pageId}`)
 }
 
-const guideRecipePageIds = () => json('flatplan/guide.json').pages
+const allGuidePageBlocks = () => guideFiles.flatMap((name) => (
+  guidePageBlocks(read(`manuscript/guide/${name}`))
+))
+
+const guideRecipePages = () => json('flatplan/guide.json').pages
   .filter(({ recipe }) => recipe !== undefined)
-  .map(({ id }) => id)
+
+const guideRecipePageIds = () => guideRecipePages().map(({ id }) => id)
 
 const guideField = (page, field, label = field) => {
   const match = page.match(new RegExp(`\\*\\*${field}:\\*\\*\\s*([\\s\\S]*?)(?=\\n\\n\\*\\*[^\\n*]+:\\*\\*|$)`, 'u'))
@@ -56,30 +61,44 @@ const brewingVariablePatterns = [
   ['vessel preheating', /прогрев[а-яё]*/iu],
   ['rinse', /ополаскиван[а-яё]*/iu],
   ['lid position', /(?:положен[а-яё]*[^,.;\n]*крыш|крыш[а-яё]*[^,.;\n]*положен)[а-яё]*/iu],
+  ['kettle', /чайник[а-яё]*/iu],
   ['volume', /объ[её]м[а-яё]*/iu],
   ['water', /вод[а-яё]*/iu],
   ['drain', /слив[а-яё]*/iu],
 ]
+
+const comparisonChangeAction = /(?:измен|уменьш|сократ|повыс|пониз|увелич|добав|убав|смен|помен|варьир|примен)[а-яё]*/iu
 
 const assertControlledComparison = (field, label) => {
   assert.match(field, /свеж[а-яё]*/iu, `${label}: use fresh portions`)
   assert.match(field, /эквивалентн[а-яё]*/iu, `${label}: use equivalent portions`)
   assert.match(field, /порци(?:и|й|ям|ями|ях)/iu, `${label}: use multiple portions`)
 
-  const portionIntroduction = field.split(/[,.;]/u, 1)[0]
-  assert.doesNotMatch(portionIntroduction, /(?:одн[а-яё]*|единственн[а-яё]*)/iu, `${label}: do not use a single portion`)
+  assert.doesNotMatch(field, /(?:одн[а-яё]*|единственн[а-яё]*)[^,.;\n]{0,80}порци[а-яё]*/iu, `${label}: do not use a single portion`)
 
   assert.match(field, /(?:измен|уменьш|сократ|повыс|примен|соседн[а-яё]* температур)[а-яё]*/iu, `${label}: name a changed variable`)
-  const changeSegment = field.split(/(?:,?\s+(?:и\s+)?сохранив|,?\s+при прежн[а-яё]*|,?\s+оставив неизменн[а-яё]*|,?\s+одинаков[а-яё]*|[;,]\s*(?:и\s+)?затем)/iu, 1)[0]
+  const changeSegment = field.split(/(?:,?\s+(?:и\s+)?сохранив|,?\s+при прежн[а-яё]*|,?\s+оставив неизменн[а-яё]*|,?\s+одинаков[а-яё]*\s+(?:прогрев|подач)[а-яё]*|[;,]\s*(?:(?:и|а)\s+)?затем)/iu, 1)[0]
   const changedVariables = brewingVariablePatterns
     .filter(([, pattern]) => pattern.test(changeSegment))
     .map(([name]) => name)
+  if (
+    changedVariables.includes('vessel preheating')
+    && changedVariables.includes('kettle')
+    && /(?:прогрев[а-яё]*[^,.;\n]*чайник|чайник[а-яё]*[^,.;\n]*прогрев)/iu.test(changeSegment)
+  ) changedVariables.splice(changedVariables.indexOf('kettle'), 1)
+  if (changedVariables.length === 0 && /одн[а-яё]*\s+(?:величин|переменн)[а-яё]*/iu.test(changeSegment)) {
+    changedVariables.push('explicit single variable')
+  }
   const offersOneOfTwoVariables = changedVariables.length === 2 && /только[^,.;\n]*\sили\s/iu.test(changeSegment)
   assert.ok(
     changedVariables.length === 1 || offersOneOfTwoVariables,
     `${label}: change exactly one variable, found ${changedVariables.join(', ') || 'none'}`,
   )
-  assert.match(field, /(?:повтор|верн)[а-яё]*[^.\n]*(?:исходн|базов)[а-яё]*[^.\n]*(?:режим|настройк|вариант)/iu, `${label}: return to the baseline`)
+  const baseline = field.match(/(?:повтор|верн)[а-яё]*[^.\n]*(?:исходн|базов)[а-яё]*[^.\n]*(?:режим|настройк|вариант)/iu)
+  assert.ok(baseline, `${label}: return to the baseline`)
+  const beforeBaseline = field.slice(0, baseline.index)
+  const sequencedTail = beforeBaseline.match(/(?:затем|после этого|далее)\s+([^.;\n]*)$/iu)?.[1] ?? ''
+  assert.doesNotMatch(sequencedTail, comparisonChangeAction, `${label}: do not change another variable before returning to the baseline`)
 }
 
 const assertGlobalRangeRule = (text, label) => {
@@ -96,6 +115,28 @@ const assertGlobalRangeRule = (text, label) => {
   assert.match(rule, /ориентир[а-яё]*/iu, `${label}: bound the guidance as an orientation`)
   assert.match(rule, /не[^.\n]*стандарт[а-яё]*/iu, `${label}: deny standard status`)
   assert.match(rule, /не[^.\n]*гарантир[а-яё]*/iu, `${label}: deny guarantees`)
+}
+
+const parseStartingRange = (field, label) => {
+  const match = field.match(/сосуд\s+(\d+(?:[.,]\d+)?)\s*мл\s*;\s*лист\s+(\d+(?:[.,]\d+)?)(?:\s*[–—-]\s*(\d+(?:[.,]\d+)?))?\s*г\s*;\s*вода\s+(\d+(?:[.,]\d+)?)\s*[–—-]\s*(\d+(?:[.,]\d+)?)\s*°\s*C\s*;\s*перв(?:ый|ое)\s+(?:настой|настаивание|контакт)\s+(\d+(?:[.,]\d+)?)\s*[–—-]\s*(\d+(?:[.,]\d+)?)\s*секунд/iu)
+  assert.ok(match, `${label}: parse starting range`)
+  const number = (value) => Number(value.replace(',', '.'))
+  const leafMinimum = number(match[2])
+  return {
+    vesselVolumeMl: number(match[1]),
+    leafMassG: match[3] === undefined ? leafMinimum : [leafMinimum, number(match[3])],
+    temperatureRangeC: [number(match[4]), number(match[5])],
+    firstInfusionRangeSec: [number(match[6]), number(match[7])],
+  }
+}
+
+const assertStartingRangeMatchesRecipe = (field, recipe, label) => {
+  assert.deepEqual(parseStartingRange(field, label), {
+    vesselVolumeMl: recipe.vesselVolumeMl,
+    leafMassG: recipe.leafMassG,
+    temperatureRangeC: recipe.temperatureRangeC,
+    firstInfusionRangeSec: recipe.firstInfusionRangeSec,
+  }, `${label}: manuscript range must match flatplan recipe`)
 }
 
 const collectVisibleFlatplanText = (value, key = '') => {
@@ -211,6 +252,13 @@ test('recognizes the global numeric-range boundary and rejects weakened variants
   ]) assert.throws(() => assertGlobalRangeRule(weakened, 'weakened example'))
 })
 
+test('keeps the first local recipe concise under the guide-wide numeric rule', () => {
+  const localRecipe = guidePage('G-P001').match(/^\*\*Стартовый диапазон:\*\*\s*(.+)$/mu)
+  assert.ok(localRecipe, 'G-P001: local starting range')
+  assert.match(localRecipe[1], /общ[а-яё]* правил[а-яё]*[^.\n]*выше|правил[а-яё]*[^.\n]*для всего гида/iu)
+  assert.doesNotMatch(localRecipe[1], /не[^.\n]*стандарт[а-яё]*[^.\n]*не[^.\n]*гарантир[а-яё]*/iu)
+})
+
 test('separates adaptive brewing from controlled comparison and standardizes recipe cards', () => {
   const guide = guideManuscript()
   for (const concept of ['стартовый диапазон', 'адаптивная настройка', 'контролируемое сравнение']) {
@@ -218,8 +266,10 @@ test('separates adaptive brewing from controlled comparison and standardizes rec
   }
 
   const firstPage = guidePage('G-P001')
-  assert.match(firstPage, /стартов[а-яё]* редакционн[а-яё]* ориентир/iu)
-  assert.match(firstPage, /не (?:являются|считаются) стандартом[^.]*не гарантируют/iu)
+  for (const boundary of [/редакционн[а-яё]*/iu, /стартов[а-яё]*/iu, /ориентир[а-яё]*/iu]) {
+    assert.match(firstPage, boundary)
+  }
+  assert.match(firstPage, /не (?:являются|считаются) стандарт[а-яё]*[^.]*не гарантируют/iu)
   assert.match(firstPage, /адаптивн[а-яё]* настройк[а-яё]*[^.]*в пределах (?:одной )?сессии/iu)
   assert.match(firstPage, /контролируем[а-яё]* сравнени[а-яё]*[^.]*две свеж[а-яё]* эквивалентн[а-яё]* порци/iu)
   assert.match(firstPage, /контролируем[а-яё]* сравнени[а-яё]*[\s\S]*одн[а-яё]* величин[а-яё]*[\s\S]*повтор[а-яё]* исходн[а-яё]* режим/iu)
@@ -236,6 +286,32 @@ test('separates adaptive brewing from controlled comparison and standardizes rec
   }
 })
 
+test('matches every recipe starting range to its flatplan declaration', () => {
+  const recipes = guideRecipePages()
+  assert.equal(recipes.length, 16)
+  for (const { id: pageId, recipe } of recipes) {
+    assertStartingRangeMatchesRecipe(guideField(guidePage(pageId), 'Стартовый диапазон', pageId), recipe, pageId)
+  }
+
+  const [{ id: samplePageId, recipe: sampleRecipe }] = recipes
+  const sample = guideField(guidePage(samplePageId), 'Стартовый диапазон', samplePageId)
+  for (const drifted of [
+    sample.replace(/сосуд\s+100\s*мл/iu, 'сосуд 110 мл'),
+    sample.replace(/лист\s+5\s*г/iu, 'лист 4–5 г'),
+  ]) assert.throws(() => assertStartingRangeMatchesRecipe(drifted, sampleRecipe, 'mutated recipe'))
+})
+
+test('applies the controlled-comparison contract to every guide page that names it', () => {
+  const comparisonPages = allGuidePageBlocks().filter(({ text }) => /контролируемое сравнение/iu.test(text))
+  for (const { pageId, text } of comparisonPages) {
+    const contracts = text.split(/\n\s*\n/u)
+      .filter((paragraph) => !/^#{1,6}\s/mu.test(paragraph) && /контролируемое сравнение/iu.test(paragraph))
+    assert.ok(contracts.length > 0, `${pageId}: explicit controlled-comparison paragraph`)
+    for (const contract of contracts) assertControlledComparison(contract, pageId)
+  }
+  assert.deepEqual(comparisonPages.map(({ pageId }) => pageId), ['G-P001', 'G-P015', 'G-P017'])
+})
+
 test('rejects a controlled-comparison field with a weakened experimental contract', () => {
   const valid = 'Возьмите свежие эквивалентные порции, измените только температуру, затем вернитесь к исходной настройке.'
   assert.doesNotThrow(() => assertControlledComparison(valid, 'valid example'))
@@ -246,6 +322,7 @@ test('rejects a controlled-comparison field with a weakened experimental contrac
     'Возьмите свежие эквивалентные порции, измените температуру и время, затем вернитесь к исходной настройке.',
     'Возьмите одну свежую эквивалентную порцию, измените температуру и время, сохранив массу, затем повторите исходный режим.',
     'Возьмите единственную свежую эквивалентную порцию, измените только температуру, затем повторите исходный режим.',
+    'Возьмите две свежие эквивалентные порции, измените только температуру; затем сократите время и повторите исходный режим.',
     'Возьмите свежие эквивалентные порции и измените только температуру.',
   ]) assert.throws(() => assertControlledComparison(weakened, 'weakened example'))
 })
