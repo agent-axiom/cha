@@ -1,10 +1,14 @@
 from __future__ import annotations
 
 import argparse
+import fcntl
+import hashlib
 import html
 import json
 import os
 import re
+import uuid
+from contextlib import contextmanager
 from dataclasses import dataclass
 from pathlib import Path
 from types import MappingProxyType
@@ -61,44 +65,68 @@ READER_PROOF_METADATA = {
 }
 
 
-def _identity_body(markdown: str) -> str:
+def _identity_body(_page_id: str, markdown: str) -> str:
     return markdown
 
 
-READER_INTERNAL_MARKER = re.compile(
-    r"\[(?:ИСТОЧНИК|СОВРЕМЕННАЯ ПРОВЕРКА|ГИПОТЕЗА|ОТКЛОНЕНО|"
-    r"ЛЕГЕНДА|РЕТРОСПЕКТИВА)\][ \t]*",
-    re.IGNORECASE,
+READER_SENTENCE_REMOVALS: Mapping[str, tuple[str, ...]] = MappingProxyType(
+    {
+        "A-P109": ("Пока вместо финальной схемы стоит открытый commission brief.",),
+        "A-P111": ("До заказа финальной карточки proof показывает commission brief.",),
+    }
+)
+READER_PARAGRAPH_REPLACEMENTS: Mapping[str, Mapping[str, str | None]] = (
+    MappingProxyType(
+        {
+            "A-P208": MappingProxyType(
+                {
+                    "**Статус проверки.**": (
+                        "**Статус проверки.** Для текущей версии зафиксировано "
+                        "0 внешних согласований: независимая внешняя проверка ещё "
+                        "не получена. Замечания и исправления принимаются через "
+                        "реестр ошибок проекта."
+                    ),
+                    "**Как читать ключи источников.**": None,
+                    "**Статус файла.**": (
+                        "**Статус файла.** Это читательская проба для проверки "
+                        "читаемости. Она не готова к печати и не является PDF/X. "
+                        "Права на финальные изображения и независимые профильные "
+                        "заключения пока не закрыты."
+                    ),
+                }
+            )
+        }
+    )
 )
 
 
-def _reader_body(markdown: str) -> str:
-    projected: list[str] = []
-    for paragraph in re.split(r"\n\s*\n", markdown.strip()):
-        paragraph = READER_INTERNAL_MARKER.sub("", paragraph)
-        lowered = paragraph.lower()
-        if "prepared-not-dispatched" in lowered:
-            projected.append(
-                "**Статус проверки.** Независимые внешние экспертные заключения "
-                "для этой версии пока не получены. Замечания и исправления "
-                "принимаются через реестр ошибок проекта."
-            )
+def _reader_body(page_id: str, markdown: str) -> str:
+    projected = markdown
+    for sentence in READER_SENTENCE_REMOVALS.get(page_id, ()):
+        if projected.count(sentence) != 1:
+            raise ValueError(f"reader transform sentence mismatch on {page_id}")
+        projected = projected.replace(sentence, "")
+
+    replacements = READER_PARAGRAPH_REPLACEMENTS.get(page_id)
+    if replacements is None:
+        return projected
+    paragraphs: list[str] = []
+    matched: set[str] = set()
+    for paragraph in re.split(r"\n\s*\n", projected.strip()):
+        heading = next(
+            (candidate for candidate in replacements if paragraph.startswith(candidate)),
+            None,
+        )
+        if heading is None:
+            paragraphs.append(paragraph)
             continue
-        if any(
-            token in lowered
-            for token in ("commission brief", "claim-id", "source-id", "provenance-only")
-        ):
-            continue
-        if paragraph.lstrip().startswith("**Статус файла.**"):
-            projected.append(
-                "**Статус файла.** Это читательская проба для проверки читаемости. "
-                "Она не является финальным изданием, не является печатным файлом "
-                "и не является PDF/X. Права на финальные изображения и независимые "
-                "профильные заключения пока не закрыты."
-            )
-            continue
-        projected.append(paragraph)
-    return "\n\n".join(projected)
+        matched.add(heading)
+        replacement = replacements[heading]
+        if replacement is not None:
+            paragraphs.append(replacement)
+    if matched != set(replacements):
+        raise ValueError(f"reader transform paragraph mismatch on {page_id}")
+    return "\n\n".join(paragraphs)
 
 
 @dataclass(frozen=True)
@@ -115,10 +143,11 @@ class ProofPolicy:
     unresolved_visual_height_mm: float | None
     preview_label: str
     show_asset_metadata: bool
-    body_projector: Callable[[str], str]
+    show_placeholder_details: bool
+    body_projector: Callable[[str, str], str]
 
-    def project_body(self, markdown: str) -> str:
-        return self.body_projector(markdown)
+    def project_body(self, page_id: str, markdown: str) -> str:
+        return self.body_projector(page_id, markdown)
 
 
 EDITORIAL_POLICY = ProofPolicy(
@@ -134,6 +163,7 @@ EDITORIAL_POLICY = ProofPolicy(
     unresolved_visual_height_mm=None,
     preview_label="PREVIEW · NOT PRINT-READY",
     show_asset_metadata=True,
+    show_placeholder_details=True,
     body_projector=_identity_body,
 )
 READER_POLICY = ProofPolicy(
@@ -149,6 +179,7 @@ READER_POLICY = ProofPolicy(
     unresolved_visual_height_mm=38,
     preview_label="PRELIMINARY · NOT PRINT-READY",
     show_asset_metadata=False,
+    show_placeholder_details=False,
     body_projector=_reader_body,
 )
 PROOF_POLICIES: Mapping[str, ProofPolicy] = MappingProxyType(
@@ -448,12 +479,12 @@ def draw_visual(
             height,
             title=(
                 None
-                if policy.mode == "reader"
+                if not policy.show_placeholder_details
                 else policy.placeholder_title or asset.get("title") or asset["id"]
             ),
             detail=(
                 None
-                if policy.mode == "reader"
+                if not policy.show_placeholder_details
                 else policy.placeholder_detail
                 or (
                     f"{asset['id']} · status: {asset.get('status', 'unknown')} · "
@@ -475,13 +506,13 @@ def draw_visual(
             height,
             title=(
                 None
-                if policy.mode == "reader"
+                if not policy.show_placeholder_details
                 else policy.placeholder_title
                 or f"{placeholder.get('kind', 'visual')} · commission brief"
             ),
             detail=(
                 None
-                if policy.mode == "reader"
+                if not policy.show_placeholder_details
                 else policy.placeholder_detail
                 or placeholder.get("brief", "Нужен визуальный материал.")
             ),
@@ -621,7 +652,7 @@ def draw_page(
 
     footer_y = bleed + 5 * MM
     content_bottom = footer_y + 8 * MM
-    projected_body = policy.project_body(body)
+    projected_body = policy.project_body(page["id"], body)
     claim_lines = (
         claim_source_lines(
             body,
@@ -737,33 +768,156 @@ def stage_editorial_metadata(source: Path, target: Path) -> None:
     stage_proof_metadata(source, target, EDITORIAL_POLICY)
 
 
-def publish_pair(*pairs: tuple[Path, Path]) -> None:
-    """Publish staged PDFs together and restore both previous files on failure."""
-    backups: list[tuple[Path, Path, bool]] = []
-    published: list[Path] = []
+def run_artifact_path(final: Path, run_id: str, artifact: str) -> Path:
+    return final.with_name(f".{final.name}.{artifact}-{run_id}")
+
+
+def _output_set_sidecars(finals: tuple[Path, ...]) -> tuple[Path, Path]:
+    if not finals:
+        raise ValueError("proof publication requires at least one output")
+    parents = {final.parent.resolve() for final in finals}
+    if len(parents) != 1:
+        raise ValueError("proof publication outputs must share one directory")
+    identity = "\0".join(sorted(str(final.resolve()) for final in finals))
+    digest = hashlib.sha256(identity.encode()).hexdigest()[:16]
+    directory = finals[0].parent
+    return (
+        directory / f".proof-pair-{digest}.lock",
+        directory / f".proof-pair-{digest}.journal.json",
+    )
+
+
+@contextmanager
+def _output_set_lock(finals: tuple[Path, ...]):
+    lock_path, journal_path = _output_set_sidecars(finals)
+    lock_path.parent.mkdir(parents=True, exist_ok=True)
+    with lock_path.open("a+b") as lock_stream:
+        fcntl.flock(lock_stream.fileno(), fcntl.LOCK_EX)
+        try:
+            yield journal_path
+        finally:
+            fcntl.flock(lock_stream.fileno(), fcntl.LOCK_UN)
+
+
+def _write_publish_journal(transaction: dict[str, Any]) -> None:
+    journal = Path(transaction["journal"])
+    temporary = run_artifact_path(
+        journal,
+        transaction["transactionId"],
+        "journal-stage",
+    )
     try:
-        for _, final in pairs:
-            backup = final.with_name(f".{final.name}.pair-backup")
-            backup.unlink(missing_ok=True)
-            existed = final.is_file()
-            if existed:
-                os.replace(final, backup)
-            backups.append((backup, final, existed))
-        for staged, final in pairs:
-            os.replace(staged, final)
-            published.append(final)
-    except Exception:
-        for final in published:
+        with temporary.open("w", encoding="utf-8") as stream:
+            json.dump(transaction, stream, ensure_ascii=False, indent=2)
+            stream.write("\n")
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary, journal)
+    finally:
+        temporary.unlink(missing_ok=True)
+
+
+def _load_publish_journal(
+    journal: Path,
+    finals: tuple[Path, ...],
+) -> dict[str, Any]:
+    transaction = json.loads(journal.read_text(encoding="utf-8"))
+    recorded_finals = {
+        Path(entry["final"]).resolve() for entry in transaction.get("entries", [])
+    }
+    if (
+        transaction.get("version") != 1
+        or transaction.get("journal") != str(journal)
+        or recorded_finals != {final.resolve() for final in finals}
+    ):
+        raise ValueError(f"invalid proof publication journal: {journal}")
+    return transaction
+
+
+def _rollback_publish_transaction(transaction: dict[str, Any]) -> None:
+    for entry in reversed(transaction["entries"]):
+        staged = Path(entry["staged"])
+        final = Path(entry["final"])
+        backup = Path(entry["backup"])
+        if backup.is_file():
             final.unlink(missing_ok=True)
-        for backup, final, existed in reversed(backups):
-            if existed and backup.is_file():
-                os.replace(backup, final)
-            elif not existed:
-                final.unlink(missing_ok=True)
-        raise
+            os.replace(backup, final)
+        elif not entry["existed"]:
+            final.unlink(missing_ok=True)
+        staged.unlink(missing_ok=True)
+    Path(transaction["journal"]).unlink(missing_ok=True)
+
+
+def _cleanup_published_transaction(transaction: dict[str, Any]) -> None:
+    for entry in transaction["entries"]:
+        Path(entry["staged"]).unlink(missing_ok=True)
+        Path(entry["backup"]).unlink(missing_ok=True)
+    Path(transaction["journal"]).unlink(missing_ok=True)
+
+
+def _recover_publish_transaction(
+    journal: Path,
+    finals: tuple[Path, ...],
+) -> None:
+    if not journal.is_file():
+        return
+    transaction = _load_publish_journal(journal, finals)
+    if transaction.get("phase") == "published":
+        _cleanup_published_transaction(transaction)
     else:
-        for backup, _, _ in backups:
-            backup.unlink(missing_ok=True)
+        _rollback_publish_transaction(transaction)
+
+
+def recover_publish_pair(*finals: Path) -> None:
+    final_tuple = tuple(finals)
+    with _output_set_lock(final_tuple) as journal:
+        _recover_publish_transaction(journal, final_tuple)
+
+
+def publish_pair(
+    *pairs: tuple[Path, Path],
+    transaction_id: str | None = None,
+) -> None:
+    """Publish a recoverable output-set transaction under an exclusive lock."""
+    transaction_id = transaction_id or uuid.uuid4().hex
+    finals = tuple(final for _, final in pairs)
+    with _output_set_lock(finals) as journal:
+        _recover_publish_transaction(journal, finals)
+        entries = [
+            {
+                "staged": str(staged),
+                "final": str(final),
+                "backup": str(
+                    run_artifact_path(final, transaction_id, "pair-backup")
+                ),
+                "existed": final.is_file(),
+            }
+            for staged, final in pairs
+        ]
+        transaction: dict[str, Any] = {
+            "version": 1,
+            "transactionId": transaction_id,
+            "phase": "prepared",
+            "journal": str(journal),
+            "entries": entries,
+        }
+        _write_publish_journal(transaction)
+        try:
+            for entry in entries:
+                final = Path(entry["final"])
+                backup = Path(entry["backup"])
+                if backup.exists():
+                    raise FileExistsError(f"transaction backup already exists: {backup}")
+                if entry["existed"]:
+                    os.replace(final, backup)
+            for entry in entries:
+                os.replace(entry["staged"], entry["final"])
+            transaction["phase"] = "published"
+            _write_publish_journal(transaction)
+        except Exception:
+            _rollback_publish_transaction(transaction)
+            raise
+        _cleanup_published_transaction(transaction)
 
 
 def build(
@@ -774,6 +928,7 @@ def build(
     *,
     reviewer_marks: bool,
     policy: ProofPolicy = EDITORIAL_POLICY,
+    run_id: str | None = None,
 ) -> Path:
     publication = load_json("config/publication.json")[kind]
     flatplan = load_json(f"flatplan/{flatplan_name}")
@@ -809,50 +964,54 @@ def build(
     )
     output_dir = BOOK / "output/pdf"
     output_dir.mkdir(parents=True, exist_ok=True)
-    temporary = output_dir / f".{output_name}.canvas.pdf"
-    staged_output = output_dir / f".{output_name}.pair-stage"
-    canvas = Canvas(
-        str(temporary),
-        pagesize=size,
-        pageCompression=1,
-        invariant=1,
-        initialFontName="Manrope",
-        initialFontSize=7.2,
-        initialLeading=10,
-    )
-    bleed = bleed_mm * MM
-    canvas.setTrimBox(
-        (
-            bleed,
-            bleed,
-            bleed + publication["widthMm"] * MM,
-            bleed + publication["heightMm"] * MM,
+    final = output_dir / output_name
+    run_id = run_id or uuid.uuid4().hex
+    temporary = run_artifact_path(final, run_id, "canvas.pdf")
+    staged_output = run_artifact_path(final, run_id, "pair-stage")
+    try:
+        canvas = Canvas(
+            str(temporary),
+            pagesize=size,
+            pageCompression=1,
+            invariant=1,
+            initialFontName="Manrope",
+            initialFontSize=7.2,
+            initialLeading=10,
         )
-    )
-    canvas.setBleedBox((0, 0, size[0], size[1]))
-    canvas.setTitle(policy.metadata["/Title"])
-    canvas.setAuthor(policy.metadata["/Author"])
-    canvas.setSubject(policy.metadata["/Subject"])
-    canvas.setCreator(policy.metadata["/Creator"])
-    for page in flatplan["pages"]:
-        draw_page(
-            canvas,
-            page,
-            pages[page["id"]],
-            assets,
-            claims_by_id,
-            known_source_ids,
-            provenance_only_ids,
-            size,
-            bleed_mm * MM,
-            kind=kind,
-            reviewer_marks=reviewer_marks,
-            policy=policy,
+        bleed = bleed_mm * MM
+        canvas.setTrimBox(
+            (
+                bleed,
+                bleed,
+                bleed + publication["widthMm"] * MM,
+                bleed + publication["heightMm"] * MM,
+            )
         )
-    canvas.save()
-    stage_proof_metadata(temporary, staged_output, policy)
-    temporary.unlink()
-    return staged_output
+        canvas.setBleedBox((0, 0, size[0], size[1]))
+        canvas.setTitle(policy.metadata["/Title"])
+        canvas.setAuthor(policy.metadata["/Author"])
+        canvas.setSubject(policy.metadata["/Subject"])
+        canvas.setCreator(policy.metadata["/Creator"])
+        for page in flatplan["pages"]:
+            draw_page(
+                canvas,
+                page,
+                pages[page["id"]],
+                assets,
+                claims_by_id,
+                known_source_ids,
+                provenance_only_ids,
+                size,
+                bleed_mm * MM,
+                kind=kind,
+                reviewer_marks=reviewer_marks,
+                policy=policy,
+            )
+        canvas.save()
+        stage_proof_metadata(temporary, staged_output, policy)
+        return staged_output
+    finally:
+        temporary.unlink(missing_ok=True)
 
 
 def build_all(
@@ -864,10 +1023,12 @@ def build_all(
         policy = PROOF_POLICIES[mode]
     except KeyError as error:
         raise ValueError(f"unknown proof mode: {mode}") from error
-    register_fonts()
     output_dir = BOOK / "output/pdf"
     album_final = output_dir / f"puer-album{policy.output_suffix}"
     guide_final = output_dir / f"puer-guide{policy.output_suffix}"
+    recover_publish_pair(album_final, guide_final)
+    register_fonts()
+    run_id = uuid.uuid4().hex
     staged: list[Path] = []
     try:
         staged_album = build(
@@ -877,6 +1038,7 @@ def build_all(
             album_final.name,
             reviewer_marks=reviewer_marks,
             policy=policy,
+            run_id=run_id,
         )
         staged.append(staged_album)
         staged_guide = build(
@@ -886,9 +1048,14 @@ def build_all(
             guide_final.name,
             reviewer_marks=reviewer_marks,
             policy=policy,
+            run_id=run_id,
         )
         staged.append(staged_guide)
-        publish_pair((staged_album, album_final), (staged_guide, guide_final))
+        publish_pair(
+            (staged_album, album_final),
+            (staged_guide, guide_final),
+            transaction_id=run_id,
+        )
     except Exception:
         for path in staged:
             path.unlink(missing_ok=True)

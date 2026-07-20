@@ -81,6 +81,7 @@ def test_proof_policy_exposes_immutable_editorial_and_reader_modes() -> None:
     assert editorial.output_suffix == "-proof.pdf"
     assert editorial.show_role is True
     assert editorial.show_claim_band is True
+    assert editorial.show_placeholder_details is True
     assert editorial.footer == "EDITORIAL PROOF · NOT PRINT-READY · NOT PDF/X"
     assert dict(editorial.metadata) == BUILD_PROOF.PROOF_METADATA
 
@@ -88,6 +89,7 @@ def test_proof_policy_exposes_immutable_editorial_and_reader_modes() -> None:
     assert reader.output_suffix == "-reader-proof.pdf"
     assert reader.show_role is False
     assert reader.show_claim_band is False
+    assert reader.show_placeholder_details is False
     assert reader.footer == READER_FOOTER
     assert reader.placeholder_label == READER_PLACEHOLDER_CAPTION
     assert reader.placeholder_title is None
@@ -102,6 +104,10 @@ def test_proof_policy_exposes_immutable_editorial_and_reader_modes() -> None:
 
     with pytest.raises(FrozenInstanceError):
         reader.mode = "editorial"
+    with pytest.raises(TypeError):
+        reader.metadata["/Title"] = "mutable reader title"
+    with pytest.raises(TypeError):
+        policies["reader"] = editorial
 
 
 def test_reader_unresolved_visual_renders_one_neutral_caption(
@@ -136,62 +142,71 @@ def test_reader_unresolved_visual_renders_one_neutral_caption(
     assert text == READER_PLACEHOLDER_CAPTION
 
 
-def test_reader_body_projection_removes_only_internal_production_paragraphs() -> None:
-    body = """[ИСТОЧНИК] Обычный читательский абзац.
+EVIDENCE_LABELS = (
+    "[ИСТОЧНИК]",
+    "[РЕТРОСПЕКТИВА]",
+    "[ЛЕГЕНДА]",
+    "[ГИПОТЕЗА]",
+    "[СОВРЕМЕННАЯ ПРОВЕРКА]",
+    "[ОТКЛОНЕНО]",
+)
 
-[СОВРЕМЕННАЯ ПРОВЕРКА] Второй читательский абзац.
 
-[ГИПОТЕЗА] Третий читательский абзац.
+def test_reader_projection_preserves_the_six_evidence_labels_on_a_p011() -> None:
+    body = BUILD_PROOF.manuscript_pages("album")["A-P011"]
+    projected = BUILD_PROOF.PROOF_POLICIES["reader"].project_body("A-P011", body)
 
-[ОТКЛОНЕНО] Четвёртый читательский абзац.
+    for label in EVIDENCE_LABELS:
+        assert projected.count(label) == 1
 
-[ЛЕГЕНДА] Пятый читательский абзац.
 
-[РЕТРОСПЕКТИВА] Шестой читательский абзац.
+def test_reader_projection_preserves_ordinary_token_like_prose() -> None:
+    body = (
+        "Обычный абзац обсуждает commission brief как термин, а claim-id, "
+        "source-id, provenance-only и prepared-not-dispatched — как примеры."
+    )
 
-ИИ применялся для инвентаризации источников. Этот процесс не является внешней экспертной рецензией.
+    projected = BUILD_PROOF.PROOF_POLICIES["reader"].project_body("A-P050", body)
 
-Пока вместо финальной схемы стоит открытый commission brief.
+    assert projected == body
 
-**Статус проверки.** Для текущего цикла 0 внешних согласований; пакет имеет статус `prepared-not-dispatched`.
 
-**Как читать ключи источников.** `Тезис claim-id → источники: source-id`; provenance-only запись хранится в репозитории.
+@pytest.mark.parametrize(
+    ("page_id", "meaningful_phrases"),
+    [
+        ("A-P109", ("два маршрута", "пар, ткань, распределение, давление")),
+        ("A-P111", ("четыре поля", "форму, поверхность, среду и время осмотра")),
+    ],
+)
+def test_reader_projection_keeps_meaning_without_commission_briefs(
+    page_id: str,
+    meaningful_phrases: tuple[str, ...],
+) -> None:
+    body = BUILD_PROOF.manuscript_pages("album")[page_id]
+    projected = BUILD_PROOF.PROOF_POLICIES["reader"].project_body(page_id, body)
 
-**Статус файла.** Это редакционный proof, но не печатный PDF/X.
-"""
-    editorial = BUILD_PROOF.PROOF_POLICIES["editorial"]
-    reader = BUILD_PROOF.PROOF_POLICIES["reader"]
-    assert editorial.project_body(body) == body
+    assert "commission brief" not in projected.lower()
+    for phrase in meaningful_phrases:
+        assert phrase in projected
 
-    projected = reader.project_body(body)
-    assert "Обычный читательский абзац" in projected
-    assert "Второй читательский абзац" in projected
-    assert "Третий читательский абзац" in projected
-    assert "Четвёртый читательский абзац" in projected
-    assert "Пятый читательский абзац" in projected
-    assert "Шестой читательский абзац" in projected
-    assert "ИИ применялся" in projected
-    assert "не является внешней экспертной рецензией" in projected
+
+def test_reader_projection_rewrites_a_p208_without_raw_status_or_keys() -> None:
+    body = BUILD_PROOF.manuscript_pages("album")["A-P208"]
+    projected = BUILD_PROOF.PROOF_POLICIES["reader"].project_body("A-P208", body)
+
     for forbidden in (
-        "commission brief",
+        "prepared-not-dispatched",
         "claim-id",
         "source-id",
         "provenance-only",
-        "prepared-not-dispatched",
         "редакционный proof",
-        "[источник]",
-        "[современная проверка]",
-        "[гипотеза]",
-        "[отклонено]",
-        "[легенда]",
-        "[ретроспектива]",
     ):
-        assert forbidden.lower() not in projected.lower()
-    assert "внешние экспертные заключения" in projected
-    assert "пока не получены" in projected
+        assert forbidden not in projected.lower()
+    assert "ИИ применялся" in projected
+    assert "0 внешних согласований" in projected
+    assert "внешняя проверка ещё не получена" in projected
     assert "читательская проба" in projected
-    assert "не является финальным изданием" in projected
-    assert "не является печатным файлом" in projected
+    assert "не готова к печати" in projected
     assert "не является PDF/X" in projected
 
 
@@ -200,8 +215,8 @@ def test_build_all_defaults_to_editorial_policy_and_filenames(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     book = tmp_path / "book"
-    calls: list[tuple[str, str, object, bool]] = []
-    published: list[tuple[tuple[Path, Path], ...]] = []
+    calls: list[tuple[str, str, object, bool, str]] = []
+    published: list[tuple[tuple[tuple[Path, Path], ...], str]] = []
     monkeypatch.setattr(BUILD_PROOF, "BOOK", book)
     monkeypatch.setattr(BUILD_PROOF, "register_fonts", lambda: None)
 
@@ -213,15 +228,16 @@ def test_build_all_defaults_to_editorial_policy_and_filenames(
         *,
         reviewer_marks,
         policy,
+        run_id,
     ):
-        calls.append((kind, output_name, policy, reviewer_marks))
-        return tmp_path / f"{kind}.pair-stage"
+        calls.append((kind, output_name, policy, reviewer_marks, run_id))
+        return tmp_path / f"{kind}.{run_id}.pair-stage"
 
     monkeypatch.setattr(BUILD_PROOF, "build", fake_build)
     monkeypatch.setattr(
         BUILD_PROOF,
         "publish_pair",
-        lambda *pairs: published.append(pairs),
+        lambda *pairs, transaction_id: published.append((pairs, transaction_id)),
     )
 
     outputs = BUILD_PROOF.build_all()
@@ -231,20 +247,24 @@ def test_build_all_defaults_to_editorial_policy_and_filenames(
         "puer-album-proof.pdf",
         "puer-guide-proof.pdf",
     ]
-    assert [(kind, name) for kind, name, _, _ in calls] == [
+    assert [(kind, name) for kind, name, _, _, _ in calls] == [
         ("album", "puer-album-proof.pdf"),
         ("guide", "puer-guide-proof.pdf"),
     ]
-    assert all(policy is editorial for _, _, policy, _ in calls)
-    assert all(reviewer_marks is False for _, _, _, reviewer_marks in calls)
+    assert all(policy is editorial for _, _, policy, _, _ in calls)
+    assert all(reviewer_marks is False for _, _, _, reviewer_marks, _ in calls)
+    run_ids = {run_id for _, _, _, _, run_id in calls}
+    assert len(run_ids) == 1
     assert len(published) == 1
-    assert [final.name for _, final in published[0]] == [
+    pairs, transaction_id = published[0]
+    assert transaction_id in run_ids
+    assert [final.name for _, final in pairs] == [
         "puer-album-proof.pdf",
         "puer-guide-proof.pdf",
     ]
 
 
-def test_build_all_reader_publishes_atomically_to_reader_filenames_only(
+def test_build_all_reader_publishes_transactionally_to_reader_filenames_only(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -266,10 +286,11 @@ def test_build_all_reader_publishes_atomically_to_reader_filenames_only(
         *,
         reviewer_marks,
         policy,
+        run_id,
     ):
         assert reviewer_marks is False
         assert policy is BUILD_PROOF.PROOF_POLICIES["reader"]
-        staged = output / f".{output_name}.pair-stage"
+        staged = output / f".{output_name}.{run_id}.pair-stage"
         staged.write_bytes(f"reader {kind}".encode())
         return staged
 
@@ -674,12 +695,6 @@ def test_reader_proof_hides_editorial_scaffolding_and_uses_reader_labels(
         "editorial proof · not print-ready · not pdf/x",
         "status:",
         "rights:",
-        "[источник]",
-        "[современная проверка]",
-        "[гипотеза]",
-        "[отклонено]",
-        "[легенда]",
-        "[ретроспектива]",
     ):
         assert forbidden not in lowercase
     assert not re.search(r"Тезис\s+[a-z0-9-]+\s+→\s+источники", corpus)
@@ -707,7 +722,9 @@ def test_reader_proof_hides_editorial_scaffolding_and_uses_reader_labels(
                 assert caption_count == 1, page_definition["id"]
                 observed_caption_total += caption_count
                 body_text = normalized_markup_text(
-                    reader_policy.project_body(manuscript[page_definition["id"]])
+                    reader_policy.project_body(
+                        page_definition["id"], manuscript[page_definition["id"]]
+                    )
                 )
                 body_anchor = body_text[:80]
                 caption_start = page_text.find(READER_PLACEHOLDER_CAPTION)
@@ -728,6 +745,9 @@ def test_reader_proof_hides_editorial_scaffolding_and_uses_reader_labels(
     assert observed_caption_total == unresolved_total
     assert corpus.count(READER_PLACEHOLDER_CAPTION) == unresolved_total
     assert "PRELIMINARY · NOT PRINT-READY" in corpus
+    page_011 = " ".join((readers[0].pages[10].extract_text() or "").split())
+    for label in EVIDENCE_LABELS:
+        assert page_011.count(label) == 1
 
 
 def test_reader_album_keeps_honest_review_and_ai_boundaries(
@@ -737,11 +757,10 @@ def test_reader_album_keeps_honest_review_and_ai_boundaries(
     text = " ".join((page.extract_text() or "").split())
     assert "ИИ применялся" in text
     assert "не является внешней экспертной рецензией" in text
-    assert "Независимые внешние экспертные заключения" in text
-    assert "пока не получены" in text
+    assert "0 внешних согласований" in text
+    assert "внешняя проверка ещё не получена" in text
     assert "читательская проба" in text
-    assert "не является финальным изданием" in text
-    assert "не является печатным файлом" in text
+    assert "не готова к печати" in text
     assert "не является PDF/X" in text
 
 
@@ -855,6 +874,145 @@ def test_publish_pair_rolls_back_both_previous_outputs(
 
     assert album_final.read_bytes() == b"previous album"
     assert guide_final.read_bytes() == b"previous guide"
+
+
+def test_run_artifact_paths_are_unique_and_transaction_scoped(tmp_path: Path) -> None:
+    final = tmp_path / "album.pdf"
+
+    first = BUILD_PROOF.run_artifact_path(final, "run-a", "pair-stage")
+    second = BUILD_PROOF.run_artifact_path(final, "run-b", "pair-stage")
+    backup = BUILD_PROOF.run_artifact_path(final, "run-a", "pair-backup")
+
+    assert len({first, second, backup}) == 3
+    assert "run-a" in first.name
+    assert "run-b" in second.name
+    assert first.parent == final.parent
+
+
+def test_publish_pair_holds_an_exclusive_output_set_lock(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    album_staged = tmp_path / "album.staged.pdf"
+    guide_staged = tmp_path / "guide.staged.pdf"
+    album_final = tmp_path / "album.pdf"
+    guide_final = tmp_path / "guide.pdf"
+    album_staged.write_bytes(b"album")
+    guide_staged.write_bytes(b"guide")
+    lock_operations: list[int] = []
+    monkeypatch.setattr(
+        BUILD_PROOF.fcntl,
+        "flock",
+        lambda _descriptor, operation: lock_operations.append(operation),
+    )
+
+    BUILD_PROOF.publish_pair(
+        (album_staged, album_final),
+        (guide_staged, guide_final),
+        transaction_id="locked-run",
+    )
+
+    assert lock_operations == [BUILD_PROOF.fcntl.LOCK_EX, BUILD_PROOF.fcntl.LOCK_UN]
+
+
+def test_recovery_rolls_back_an_incomplete_pre_published_transaction(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    album_staged = tmp_path / "album.staged.pdf"
+    guide_staged = tmp_path / "guide.staged.pdf"
+    album_final = tmp_path / "album.pdf"
+    guide_final = tmp_path / "guide.pdf"
+    album_staged.write_bytes(b"new album")
+    guide_staged.write_bytes(b"new guide")
+    album_final.write_bytes(b"old album")
+    guide_final.write_bytes(b"old guide")
+    real_replace = os.replace
+
+    def crash_during_publish(source, target) -> None:
+        if Path(source) == guide_staged and Path(target) == guide_final:
+            raise SystemExit("simulated process death")
+        real_replace(source, target)
+
+    monkeypatch.setattr(BUILD_PROOF.os, "replace", crash_during_publish)
+    with pytest.raises(SystemExit, match="simulated process death"):
+        BUILD_PROOF.publish_pair(
+            (album_staged, album_final),
+            (guide_staged, guide_final),
+            transaction_id="pre-published-run",
+        )
+    monkeypatch.setattr(BUILD_PROOF.os, "replace", real_replace)
+
+    BUILD_PROOF.recover_publish_pair(album_final, guide_final)
+
+    assert album_final.read_bytes() == b"old album"
+    assert guide_final.read_bytes() == b"old guide"
+    assert not list(tmp_path.glob("*.journal.json"))
+    assert not list(tmp_path.glob("*.pair-backup-*"))
+
+
+def test_recovery_finalizes_a_published_transaction(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    album_staged = tmp_path / "album.staged.pdf"
+    guide_staged = tmp_path / "guide.staged.pdf"
+    album_final = tmp_path / "album.pdf"
+    guide_final = tmp_path / "guide.pdf"
+    album_staged.write_bytes(b"new album")
+    guide_staged.write_bytes(b"new guide")
+    album_final.write_bytes(b"old album")
+    guide_final.write_bytes(b"old guide")
+    real_cleanup = BUILD_PROOF._cleanup_published_transaction
+    monkeypatch.setattr(
+        BUILD_PROOF,
+        "_cleanup_published_transaction",
+        lambda _transaction: (_ for _ in ()).throw(SystemExit("cleanup crash")),
+    )
+
+    with pytest.raises(SystemExit, match="cleanup crash"):
+        BUILD_PROOF.publish_pair(
+            (album_staged, album_final),
+            (guide_staged, guide_final),
+            transaction_id="published-run",
+        )
+    monkeypatch.setattr(BUILD_PROOF, "_cleanup_published_transaction", real_cleanup)
+
+    BUILD_PROOF.recover_publish_pair(album_final, guide_final)
+
+    assert album_final.read_bytes() == b"new album"
+    assert guide_final.read_bytes() == b"new guide"
+    assert not list(tmp_path.glob("*.journal.json"))
+    assert not list(tmp_path.glob("*.pair-backup-*"))
+
+
+def test_build_cleans_run_scoped_canvas_when_metadata_staging_fails(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    captured: list[tuple[Path, Path]] = []
+    BUILD_PROOF.register_fonts()
+
+    def fail_metadata(source: Path, target: Path, _policy) -> None:
+        captured.append((source, target))
+        raise RuntimeError("injected metadata failure")
+
+    monkeypatch.setattr(BUILD_PROOF, "stage_proof_metadata", fail_metadata)
+    with pytest.raises(RuntimeError, match="injected metadata failure"):
+        BUILD_PROOF.build(
+            "guide",
+            "guide.json",
+            "guide",
+            "cleanup-reader-proof.pdf",
+            reviewer_marks=False,
+            policy=BUILD_PROOF.PROOF_POLICIES["reader"],
+            run_id="cleanup-run",
+        )
+
+    assert len(captured) == 1
+    canvas_path, staged_path = captured[0]
+    assert "cleanup-run" in canvas_path.name
+    assert "cleanup-run" in staged_path.name
+    assert not canvas_path.exists()
 
 
 @pytest.mark.parametrize(
