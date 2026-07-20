@@ -80,14 +80,35 @@ READER_PARAGRAPH_REPLACEMENTS: Mapping[str, Mapping[str, str | None]] = (
         {
             "A-P208": MappingProxyType(
                 {
-                    "**Статус проверки.**": (
+                    (
+                        "**Статус проверки.** Поиск и редакционная верификация "
+                        "обновлены 18 июля 2026 года. Для текущего цикла "
+                        "зафиксировано 0 внешних согласований; пакет имеет статус "
+                        "`prepared-not-dispatched`. Замечания и исправления "
+                        "принимаются через [реестр ошибок]"
+                        "(https://github.com/agent-axiom/cha/issues)."
+                    ): (
                         "**Статус проверки.** Для текущей версии зафиксировано "
                         "0 внешних согласований: независимая внешняя проверка ещё "
                         "не получена. Замечания и исправления принимаются через "
                         "реестр ошибок проекта."
                     ),
-                    "**Как читать ключи источников.**": None,
-                    "**Статус файла.**": (
+                    (
+                        "**Как читать ключи источников.** Внизу содержательных "
+                        "полос напечатана связь `Тезис claim-id → источники: "
+                        "source-id`; полные записи с теми же ключами находятся на "
+                        "с. 203–207. Помета «редакционный реестр» означает "
+                        "provenance-only запись, которая хранится в репозитории "
+                        "проекта и не входит в публикационную библиографию."
+                    ): None,
+                    (
+                        "**Статус файла.** Это редакционный proof для проверки "
+                        "текста, структуры и размещения материалов, но не печатный "
+                        "PDF/X. До передачи в типографию остаются открытыми права "
+                        "на финальные изображения, независимые профильные "
+                        "заключения, ICC-профиль, параметры бумаги и переплёта, "
+                        "цветопроба и типографский preflight."
+                    ): (
                         "**Статус файла.** Это читательская проба для проверки "
                         "читаемости. Она не готова к печати и не является PDF/X. "
                         "Права на финальные изображения и независимые профильные "
@@ -110,22 +131,14 @@ def _reader_body(page_id: str, markdown: str) -> str:
     replacements = READER_PARAGRAPH_REPLACEMENTS.get(page_id)
     if replacements is None:
         return projected
+    source_paragraphs = re.split(r"\n\s*\n", projected.strip())
+    if any(source_paragraphs.count(source) != 1 for source in replacements):
+        raise ValueError(f"reader transform paragraph mismatch on {page_id}")
     paragraphs: list[str] = []
-    matched: set[str] = set()
-    for paragraph in re.split(r"\n\s*\n", projected.strip()):
-        heading = next(
-            (candidate for candidate in replacements if paragraph.startswith(candidate)),
-            None,
-        )
-        if heading is None:
-            paragraphs.append(paragraph)
-            continue
-        matched.add(heading)
-        replacement = replacements[heading]
+    for paragraph in source_paragraphs:
+        replacement = replacements.get(paragraph, paragraph)
         if replacement is not None:
             paragraphs.append(replacement)
-    if matched != set(replacements):
-        raise ValueError(f"reader transform paragraph mismatch on {page_id}")
     return "\n\n".join(paragraphs)
 
 
@@ -1029,6 +1042,11 @@ def build_all(
     recover_publish_pair(album_final, guide_final)
     register_fonts()
     run_id = uuid.uuid4().hex
+    run_artifacts = tuple(
+        run_artifact_path(final, run_id, artifact)
+        for final in (album_final, guide_final)
+        for artifact in ("pair-stage", "canvas.pdf")
+    )
     staged: list[Path] = []
     try:
         staged_album = build(
@@ -1056,8 +1074,8 @@ def build_all(
             (staged_guide, guide_final),
             transaction_id=run_id,
         )
-    except Exception:
-        for path in staged:
+    except BaseException:
+        for path in (*run_artifacts, *staged):
             path.unlink(missing_ok=True)
         raise
     return album_final, guide_final

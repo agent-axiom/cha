@@ -110,6 +110,12 @@ def test_proof_policy_exposes_immutable_editorial_and_reader_modes() -> None:
         policies["reader"] = editorial
 
 
+def test_readme_limits_transaction_recovery_to_the_next_build_of_the_same_mode() -> None:
+    readme = (BOOK / "README.md").read_text(encoding="utf-8")
+
+    assert "при следующей сборке того же режима" in readme
+
+
 def test_reader_unresolved_visual_renders_one_neutral_caption(
     tmp_path: Path,
 ) -> None:
@@ -210,6 +216,26 @@ def test_reader_projection_rewrites_a_p208_without_raw_status_or_keys() -> None:
     assert "не является PDF/X" in projected
 
 
+@pytest.mark.parametrize(
+    ("source_fragment", "mutated_fragment"),
+    [
+        ("0 внешних согласований", "2 внешних согласования"),
+        ("provenance-only запись", "provenance запись"),
+        ("но не печатный PDF/X", "но ещё не печатный PDF/X"),
+    ],
+)
+def test_reader_projection_rejects_drift_in_each_a_p208_source_paragraph(
+    source_fragment: str,
+    mutated_fragment: str,
+) -> None:
+    body = BUILD_PROOF.manuscript_pages("album")["A-P208"]
+    mutated = body.replace(source_fragment, mutated_fragment)
+    assert mutated != body
+
+    with pytest.raises(ValueError, match="reader transform paragraph mismatch on A-P208"):
+        BUILD_PROOF.PROOF_POLICIES["reader"].project_body("A-P208", mutated)
+
+
 def test_build_all_defaults_to_editorial_policy_and_filenames(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -303,6 +329,50 @@ def test_build_all_reader_publishes_transactionally_to_reader_filenames_only(
     assert outputs[1].read_bytes() == b"reader guide"
     assert editorial_album.read_bytes() == b"frozen editorial album"
     assert editorial_guide.read_bytes() == b"frozen editorial guide"
+
+
+@pytest.mark.parametrize("interruption", [KeyboardInterrupt, SystemExit])
+def test_build_all_cleans_current_run_artifacts_after_base_exception(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    interruption: type[BaseException],
+) -> None:
+    book = tmp_path / "book"
+    output = book / "output/pdf"
+    monkeypatch.setattr(BUILD_PROOF, "BOOK", book)
+    monkeypatch.setattr(BUILD_PROOF, "register_fonts", lambda: None)
+    observed_artifacts: list[Path] = []
+
+    def interrupted_build(
+        kind,
+        _flatplan_name,
+        _manuscript_subdir,
+        output_name,
+        *,
+        reviewer_marks,
+        policy,
+        run_id,
+    ):
+        assert reviewer_marks is False
+        assert policy is BUILD_PROOF.PROOF_POLICIES["reader"]
+        final = output / output_name
+        stage = BUILD_PROOF.run_artifact_path(final, run_id, "pair-stage")
+        canvas = BUILD_PROOF.run_artifact_path(final, run_id, "canvas.pdf")
+        stage.parent.mkdir(parents=True, exist_ok=True)
+        stage.write_bytes(f"staged {kind}".encode())
+        canvas.write_bytes(f"canvas {kind}".encode())
+        observed_artifacts.extend((stage, canvas))
+        if kind == "guide":
+            raise interruption("injected build interruption")
+        return stage
+
+    monkeypatch.setattr(BUILD_PROOF, "build", interrupted_build)
+
+    with pytest.raises(interruption, match="injected build interruption"):
+        BUILD_PROOF.build_all(mode="reader")
+
+    assert len(observed_artifacts) == 4
+    assert all(not path.exists() for path in observed_artifacts)
 
 
 def test_cli_selects_reader_mode_without_enabling_reviewer_marks(
