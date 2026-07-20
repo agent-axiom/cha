@@ -4,7 +4,9 @@ import importlib.util
 import json
 import os
 import re
+import sys
 from copy import deepcopy
+from dataclasses import FrozenInstanceError
 from pathlib import Path
 
 import pytest
@@ -21,6 +23,16 @@ PROOF_METADATA = {
     "/PuerPrintReadiness": "not-print-ready",
     "/PuerPdfStandard": "not-pdf-x",
 }
+READER_METADATA = {
+    "/PuerProofStatus": "reader-proof",
+    "/PuerPrintReadiness": "not-print-ready",
+    "/PuerPdfStandard": "not-pdf-x",
+}
+READER_FOOTER = "READER PROOF · NOT PRINT-READY · NOT PDF/X"
+READER_FILENAMES = (
+    "puer-album-reader-proof.pdf",
+    "puer-guide-reader-proof.pdf",
+)
 AI_ILLUSTRATION_PREVIEWS = {
     "illustration-cover-living-mountain": (
         "illustration-cover-living-mountain--preview-v01.png"
@@ -38,6 +50,7 @@ def load_build_proof_module():
     spec = importlib.util.spec_from_file_location("puer_build_proof", path)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     return module
 
@@ -54,6 +67,209 @@ def test_paragraph_markup_drops_standalone_markdown_rules() -> None:
     assert "---" not in markup
     assert "Первый абзац" in markup
     assert "Второй абзац" in markup
+
+
+def test_proof_policy_exposes_immutable_editorial_and_reader_modes() -> None:
+    policies = BUILD_PROOF.PROOF_POLICIES
+    assert set(policies) == {"editorial", "reader"}
+
+    editorial = policies["editorial"]
+    reader = policies["reader"]
+    assert editorial.mode == "editorial"
+    assert editorial.output_suffix == "-proof.pdf"
+    assert editorial.show_role is True
+    assert editorial.show_claim_band is True
+    assert editorial.footer == "EDITORIAL PROOF · NOT PRINT-READY · NOT PDF/X"
+    assert dict(editorial.metadata) == BUILD_PROOF.PROOF_METADATA
+
+    assert reader.mode == "reader"
+    assert reader.output_suffix == "-reader-proof.pdf"
+    assert reader.show_role is False
+    assert reader.show_claim_band is False
+    assert reader.footer == READER_FOOTER
+    assert reader.placeholder_label == "Иллюстрация готовится к финальному изданию"
+    assert reader.placeholder_title == "Место будущей иллюстрации"
+    assert reader.preview_label == "PRELIMINARY · NOT PRINT-READY"
+    for key, value in READER_METADATA.items():
+        assert reader.metadata[key] == value
+    assert "reader proof" in reader.metadata["/Title"].lower()
+    assert "not print-ready" in reader.metadata["/Title"].lower()
+    assert "reader proof" in reader.metadata["/Subject"].lower()
+    assert "not print-ready" in reader.metadata["/Subject"].lower()
+
+    with pytest.raises(FrozenInstanceError):
+        reader.mode = "editorial"
+
+
+def test_reader_body_projection_removes_only_internal_production_paragraphs() -> None:
+    body = """[ИСТОЧНИК] Обычный читательский абзац.
+
+[СОВРЕМЕННАЯ ПРОВЕРКА] Второй читательский абзац.
+
+[ГИПОТЕЗА] Третий читательский абзац.
+
+[ОТКЛОНЕНО] Четвёртый читательский абзац.
+
+[ЛЕГЕНДА] Пятый читательский абзац.
+
+[РЕТРОСПЕКТИВА] Шестой читательский абзац.
+
+ИИ применялся для инвентаризации источников. Этот процесс не является внешней экспертной рецензией.
+
+Пока вместо финальной схемы стоит открытый commission brief.
+
+**Статус проверки.** Для текущего цикла 0 внешних согласований; пакет имеет статус `prepared-not-dispatched`.
+
+**Как читать ключи источников.** `Тезис claim-id → источники: source-id`; provenance-only запись хранится в репозитории.
+
+**Статус файла.** Это редакционный proof, но не печатный PDF/X.
+"""
+    editorial = BUILD_PROOF.PROOF_POLICIES["editorial"]
+    reader = BUILD_PROOF.PROOF_POLICIES["reader"]
+    assert editorial.project_body(body) == body
+
+    projected = reader.project_body(body)
+    assert "Обычный читательский абзац" in projected
+    assert "Второй читательский абзац" in projected
+    assert "Третий читательский абзац" in projected
+    assert "Четвёртый читательский абзац" in projected
+    assert "Пятый читательский абзац" in projected
+    assert "Шестой читательский абзац" in projected
+    assert "ИИ применялся" in projected
+    assert "не является внешней экспертной рецензией" in projected
+    for forbidden in (
+        "commission brief",
+        "claim-id",
+        "source-id",
+        "provenance-only",
+        "prepared-not-dispatched",
+        "редакционный proof",
+        "[источник]",
+        "[современная проверка]",
+        "[гипотеза]",
+        "[отклонено]",
+        "[легенда]",
+        "[ретроспектива]",
+    ):
+        assert forbidden.lower() not in projected.lower()
+    assert "внешние экспертные заключения" in projected
+    assert "пока не получены" in projected
+    assert "читательская проба" in projected
+    assert "не является финальным изданием" in projected
+    assert "не является печатным файлом" in projected
+    assert "не является PDF/X" in projected
+
+
+def test_build_all_defaults_to_editorial_policy_and_filenames(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    book = tmp_path / "book"
+    calls: list[tuple[str, str, object, bool]] = []
+    published: list[tuple[tuple[Path, Path], ...]] = []
+    monkeypatch.setattr(BUILD_PROOF, "BOOK", book)
+    monkeypatch.setattr(BUILD_PROOF, "register_fonts", lambda: None)
+
+    def fake_build(
+        kind,
+        _flatplan,
+        _manuscript,
+        output_name,
+        *,
+        reviewer_marks,
+        policy,
+    ):
+        calls.append((kind, output_name, policy, reviewer_marks))
+        return tmp_path / f"{kind}.pair-stage"
+
+    monkeypatch.setattr(BUILD_PROOF, "build", fake_build)
+    monkeypatch.setattr(
+        BUILD_PROOF,
+        "publish_pair",
+        lambda *pairs: published.append(pairs),
+    )
+
+    outputs = BUILD_PROOF.build_all()
+
+    editorial = BUILD_PROOF.PROOF_POLICIES["editorial"]
+    assert [path.name for path in outputs] == [
+        "puer-album-proof.pdf",
+        "puer-guide-proof.pdf",
+    ]
+    assert [(kind, name) for kind, name, _, _ in calls] == [
+        ("album", "puer-album-proof.pdf"),
+        ("guide", "puer-guide-proof.pdf"),
+    ]
+    assert all(policy is editorial for _, _, policy, _ in calls)
+    assert all(reviewer_marks is False for _, _, _, reviewer_marks in calls)
+    assert len(published) == 1
+    assert [final.name for _, final in published[0]] == [
+        "puer-album-proof.pdf",
+        "puer-guide-proof.pdf",
+    ]
+
+
+def test_build_all_reader_publishes_atomically_to_reader_filenames_only(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    book = tmp_path / "book"
+    output = book / "output" / "pdf"
+    output.mkdir(parents=True)
+    editorial_album = output / "puer-album-proof.pdf"
+    editorial_guide = output / "puer-guide-proof.pdf"
+    editorial_album.write_bytes(b"frozen editorial album")
+    editorial_guide.write_bytes(b"frozen editorial guide")
+    monkeypatch.setattr(BUILD_PROOF, "BOOK", book)
+    monkeypatch.setattr(BUILD_PROOF, "register_fonts", lambda: None)
+
+    def fake_build(
+        kind,
+        _flatplan,
+        _manuscript,
+        output_name,
+        *,
+        reviewer_marks,
+        policy,
+    ):
+        assert reviewer_marks is False
+        assert policy is BUILD_PROOF.PROOF_POLICIES["reader"]
+        staged = output / f".{output_name}.pair-stage"
+        staged.write_bytes(f"reader {kind}".encode())
+        return staged
+
+    monkeypatch.setattr(BUILD_PROOF, "build", fake_build)
+
+    outputs = BUILD_PROOF.build_all(mode="reader")
+
+    assert [path.name for path in outputs] == list(READER_FILENAMES)
+    assert outputs[0].read_bytes() == b"reader album"
+    assert outputs[1].read_bytes() == b"reader guide"
+    assert editorial_album.read_bytes() == b"frozen editorial album"
+    assert editorial_guide.read_bytes() == b"frozen editorial guide"
+
+
+def test_cli_selects_reader_mode_without_enabling_reviewer_marks(
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    calls: list[tuple[str, bool]] = []
+    monkeypatch.setattr(sys, "argv", ["build_proof.py", "--mode", "reader"])
+    monkeypatch.setattr(
+        BUILD_PROOF,
+        "build_all",
+        lambda *, mode, reviewer_marks: (
+            calls.append((mode, reviewer_marks))
+            or (Path("album-reader.pdf"), Path("guide-reader.pdf"))
+        ),
+    )
+
+    BUILD_PROOF.main()
+
+    assert calls == [("reader", False)]
+    output = capsys.readouterr().out
+    assert "reader proof written: album-reader.pdf" in output
+    assert "reader proof written: guide-reader.pdf" in output
 
 
 def test_claim_source_lines_are_readable_deduplicated_and_provenance_labeled() -> None:
@@ -126,6 +342,30 @@ def test_metadata_staging_is_incremental_and_preserves_canvas_bytes(
     metadata = PdfReader(target).metadata or {}
     for key, value in PROOF_METADATA.items():
         assert metadata.get(key) == value
+
+
+def test_reader_metadata_staging_is_incremental_and_policy_selected(
+    tmp_path: Path,
+) -> None:
+    source = tmp_path / "source.pdf"
+    target = tmp_path / "reader.pdf"
+    canvas = Canvas(str(source), pagesize=(100, 100), invariant=1)
+    canvas.drawString(10, 50, "reader-resource-regression")
+    canvas.save()
+    source_bytes = source.read_bytes()
+
+    BUILD_PROOF.stage_proof_metadata(
+        source,
+        target,
+        BUILD_PROOF.PROOF_POLICIES["reader"],
+    )
+
+    assert target.read_bytes().startswith(source_bytes)
+    metadata = PdfReader(target).metadata or {}
+    for key, value in READER_METADATA.items():
+        assert metadata.get(key) == value
+    assert "reader proof" in metadata["/Title"].lower()
+    assert "not print-ready" in metadata["/Subject"].lower()
 
 
 def assert_close(actual: float, expected: float, *, label: str) -> None:
@@ -244,6 +484,177 @@ def assert_editorial_proof(
         assert isinstance(resolved(page["/Resources"]), DictionaryObject)
 
     return reader
+
+
+@pytest.fixture(scope="session")
+def reader_proof_paths() -> tuple[Path, Path]:
+    paths = BUILD_PROOF.build_all(mode="reader")
+    assert tuple(path.name for path in paths) == READER_FILENAMES
+    return paths
+
+
+def assert_reader_proof(
+    path: Path,
+    *,
+    pages: int,
+    prefix: str,
+    trim_width_mm: int,
+    trim_height_mm: int,
+    bleed_mm: int = 3,
+) -> PdfReader:
+    assert path.exists(), f"missing reader proof PDF: {path}"
+    reader = PdfReader(path)
+    assert len(reader.pages) == pages
+
+    metadata = reader.metadata or {}
+    for key, value in READER_METADATA.items():
+        assert metadata.get(key) == value
+    assert "reader proof" in metadata["/Title"].lower()
+    assert "not print-ready" in metadata["/Title"].lower()
+    assert "reader proof" in metadata["/Subject"].lower()
+    assert "not print-ready" in metadata["/Subject"].lower()
+    assert "not pdf/x" in metadata["/Subject"].lower()
+    assert "/GTS_PDFXVersion" not in metadata
+    assert "/GTS_PDFXConformance" not in metadata
+
+    output_intents = resolved(reader.trailer["/Root"].get("/OutputIntents", []))
+    for intent in output_intents:
+        intent = resolved(intent)
+        assert str(intent.get("/S", "")) != "/GTS_PDFX"
+
+    media_width_mm = trim_width_mm + bleed_mm * 2
+    media_height_mm = trim_height_mm + bleed_mm * 2
+    observed_fonts: set[str] = set()
+    for page_number, page in enumerate(reader.pages, start=1):
+        assert_box(
+            page.mediabox,
+            left_mm=0,
+            bottom_mm=0,
+            width_mm=media_width_mm,
+            height_mm=media_height_mm,
+            label=f"{path.name} page {page_number} MediaBox",
+        )
+        assert_box(
+            page.trimbox,
+            left_mm=bleed_mm,
+            bottom_mm=bleed_mm,
+            width_mm=trim_width_mm,
+            height_mm=trim_height_mm,
+            label=f"{path.name} page {page_number} TrimBox",
+        )
+        assert_box(
+            page.bleedbox,
+            left_mm=0,
+            bottom_mm=0,
+            width_mm=media_width_mm,
+            height_mm=media_height_mm,
+            label=f"{path.name} page {page_number} BleedBox",
+        )
+        resources = resolved(page["/Resources"])
+        assert isinstance(resources, DictionaryObject)
+        fonts = resolved(resources.get("/Font", {}))
+        for font_name in selected_fonts(page, reader):
+            observed_fonts.add(font_name)
+            assert font_name in fonts, f"{path.name} page {page_number}: missing {font_name}"
+            files = embedded_font_files(fonts[font_name])
+            assert files, f"{path.name} page {page_number}: {font_name} is not embedded"
+            assert all(file.get_data() for file in files)
+
+        text = page.extract_text() or ""
+        expected_id = f"{prefix}-P{page_number:03d}"
+        assert VISIBLE_PAGE_ID_RE.findall(text) == [expected_id]
+        assert READER_FOOTER in text
+        assert f"{expected_id} · {page_number}" in text
+    assert observed_fonts, f"{path.name}: no selected fonts found"
+    return reader
+
+
+@pytest.mark.parametrize(
+    ("index", "pages", "prefix", "trim_width_mm", "trim_height_mm"),
+    [
+        (0, 208, "A", 240, 300),
+        (1, 48, "G", 150, 220),
+    ],
+)
+def test_reader_proof_geometry_metadata_fonts_and_page_order(
+    reader_proof_paths: tuple[Path, Path],
+    index: int,
+    pages: int,
+    prefix: str,
+    trim_width_mm: int,
+    trim_height_mm: int,
+) -> None:
+    assert_reader_proof(
+        reader_proof_paths[index],
+        pages=pages,
+        prefix=prefix,
+        trim_width_mm=trim_width_mm,
+        trim_height_mm=trim_height_mm,
+    )
+
+
+def test_reader_proof_hides_editorial_scaffolding_and_uses_reader_labels(
+    reader_proof_paths: tuple[Path, Path],
+) -> None:
+    readers = [PdfReader(path) for path in reader_proof_paths]
+    page_texts = [
+        page.extract_text() or ""
+        for reader in readers
+        for page in reader.pages
+    ]
+    corpus = "\n".join(page_texts)
+    lowercase = corpus.lower()
+    for forbidden in (
+        "claim-id",
+        "source-id",
+        "provenance-only",
+        "prepared-not-dispatched",
+        "commission brief",
+        "unresolved visual",
+        "editorial placeholder",
+        "editorial proof · not print-ready · not pdf/x",
+        "status:",
+        "rights:",
+        "[источник]",
+        "[современная проверка]",
+        "[гипотеза]",
+        "[отклонено]",
+        "[легенда]",
+        "[ретроспектива]",
+    ):
+        assert forbidden not in lowercase
+    assert not re.search(r"Тезис\s+[a-z0-9-]+\s+→\s+источники", corpus)
+
+    for asset_id in registered_assets():
+        assert asset_id not in corpus
+
+    for flatplan_name, reader in zip(("album.json", "guide.json"), readers):
+        flatplan = json.loads(
+            (BOOK / "flatplan" / flatplan_name).read_text(encoding="utf-8")
+        )
+        for page_definition, page in zip(flatplan["pages"], reader.pages):
+            role = " ".join(page_definition.get("role", "").split())
+            page_text = " ".join((page.extract_text() or "").split())
+            if role:
+                assert role not in page_text, page_definition["id"]
+
+    assert "Иллюстрация готовится к финальному изданию" in corpus
+    assert "PRELIMINARY · NOT PRINT-READY" in corpus
+
+
+def test_reader_album_keeps_honest_review_and_ai_boundaries(
+    reader_proof_paths: tuple[Path, Path],
+) -> None:
+    page = PdfReader(reader_proof_paths[0]).pages[207]
+    text = " ".join((page.extract_text() or "").split())
+    assert "ИИ применялся" in text
+    assert "не является внешней экспертной рецензией" in text
+    assert "Независимые внешние экспертные заключения" in text
+    assert "пока не получены" in text
+    assert "читательская проба" in text
+    assert "не является финальным изданием" in text
+    assert "не является печатным файлом" in text
+    assert "не является PDF/X" in text
 
 
 @pytest.mark.parametrize(

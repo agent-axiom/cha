@@ -5,8 +5,10 @@ import html
 import json
 import os
 import re
+from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
+from types import MappingProxyType
+from typing import Any, Callable, Mapping
 
 from pypdf import PdfWriter
 from reportlab.lib.colors import HexColor, white
@@ -44,6 +46,117 @@ PROOF_METADATA = {
     "/PuerPrintReadiness": "not-print-ready",
     "/PuerPdfStandard": "not-pdf-x",
 }
+READER_PROOF_SUBJECT = (
+    "Reader proof for readability review only - not print-ready and not PDF/X."
+)
+READER_PROOF_METADATA = {
+    "/Title": "Пуэр. Живая гора — reader proof — not print-ready",
+    "/Author": "Пуэр. Живая гора editorial project",
+    "/Subject": READER_PROOF_SUBJECT,
+    "/Creator": "puer-book-tools deterministic reader proof builder",
+    "/Producer": "ReportLab + pypdf — reader proof",
+    "/PuerProofStatus": "reader-proof",
+    "/PuerPrintReadiness": "not-print-ready",
+    "/PuerPdfStandard": "not-pdf-x",
+}
+
+
+def _identity_body(markdown: str) -> str:
+    return markdown
+
+
+READER_INTERNAL_MARKER = re.compile(
+    r"\[(?:ИСТОЧНИК|СОВРЕМЕННАЯ ПРОВЕРКА|ГИПОТЕЗА|ОТКЛОНЕНО|"
+    r"ЛЕГЕНДА|РЕТРОСПЕКТИВА)\][ \t]*",
+    re.IGNORECASE,
+)
+
+
+def _reader_body(markdown: str) -> str:
+    projected: list[str] = []
+    for paragraph in re.split(r"\n\s*\n", markdown.strip()):
+        paragraph = READER_INTERNAL_MARKER.sub("", paragraph)
+        lowered = paragraph.lower()
+        if "prepared-not-dispatched" in lowered:
+            projected.append(
+                "**Статус проверки.** Независимые внешние экспертные заключения "
+                "для этой версии пока не получены. Замечания и исправления "
+                "принимаются через реестр ошибок проекта."
+            )
+            continue
+        if any(
+            token in lowered
+            for token in ("commission brief", "claim-id", "source-id", "provenance-only")
+        ):
+            continue
+        if paragraph.lstrip().startswith("**Статус файла.**"):
+            projected.append(
+                "**Статус файла.** Это читательская проба для проверки читаемости. "
+                "Она не является финальным изданием, не является печатным файлом "
+                "и не является PDF/X. Права на финальные изображения и независимые "
+                "профильные заключения пока не закрыты."
+            )
+            continue
+        projected.append(paragraph)
+    return "\n\n".join(projected)
+
+
+@dataclass(frozen=True)
+class ProofPolicy:
+    mode: str
+    output_suffix: str
+    metadata: Mapping[str, str]
+    footer: str
+    show_role: bool
+    show_claim_band: bool
+    placeholder_label: str
+    placeholder_title: str | None
+    placeholder_detail: str | None
+    unresolved_visual_height_mm: float | None
+    preview_label: str
+    show_asset_metadata: bool
+    body_projector: Callable[[str], str]
+
+    def project_body(self, markdown: str) -> str:
+        return self.body_projector(markdown)
+
+
+EDITORIAL_POLICY = ProofPolicy(
+    mode="editorial",
+    output_suffix="-proof.pdf",
+    metadata=MappingProxyType(dict(PROOF_METADATA)),
+    footer="EDITORIAL PROOF · NOT PRINT-READY · NOT PDF/X",
+    show_role=True,
+    show_claim_band=True,
+    placeholder_label="UNRESOLVED VISUAL · EDITORIAL PLACEHOLDER",
+    placeholder_title=None,
+    placeholder_detail=None,
+    unresolved_visual_height_mm=None,
+    preview_label="PREVIEW · NOT PRINT-READY",
+    show_asset_metadata=True,
+    body_projector=_identity_body,
+)
+READER_POLICY = ProofPolicy(
+    mode="reader",
+    output_suffix="-reader-proof.pdf",
+    metadata=MappingProxyType(dict(READER_PROOF_METADATA)),
+    footer="READER PROOF · NOT PRINT-READY · NOT PDF/X",
+    show_role=False,
+    show_claim_band=False,
+    placeholder_label="Иллюстрация готовится к финальному изданию",
+    placeholder_title="Место будущей иллюстрации",
+    placeholder_detail="В читательской пробе оставлено место будущего изображения.",
+    unresolved_visual_height_mm=38,
+    preview_label="PRELIMINARY · NOT PRINT-READY",
+    show_asset_metadata=False,
+    body_projector=_reader_body,
+)
+PROOF_POLICIES: Mapping[str, ProofPolicy] = MappingProxyType(
+    {
+        EDITORIAL_POLICY.mode: EDITORIAL_POLICY,
+        READER_POLICY.mode: READER_POLICY,
+    }
+)
 ALLOWED_PROOF_PREVIEW_IDS = {
     "illustration-cover-living-mountain",
     "illustration-shennong-gate",
@@ -248,6 +361,7 @@ def draw_placeholder_card(
     title: str,
     detail: str,
     dark: bool,
+    label: str = "UNRESOLVED VISUAL · EDITORIAL PLACEHOLDER",
 ) -> None:
     canvas.saveState()
     canvas.setFillColor(INK if dark else PAPER)
@@ -258,7 +372,7 @@ def draw_placeholder_card(
     canvas.rect(x, y + height - 9 * MM, width, 9 * MM, fill=1, stroke=0)
     canvas.setFillColor(INK)
     canvas.setFont("Manrope", 7.2)
-    canvas.drawString(x + 4 * MM, y + height - 6 * MM, "UNRESOLVED VISUAL · EDITORIAL PLACEHOLDER")
+    canvas.drawString(x + 4 * MM, y + height - 6 * MM, label)
     title_style = ParagraphStyle(
         "placeholder-title",
         fontName="Cormorant",
@@ -292,6 +406,7 @@ def draw_visual(
     height: float,
     *,
     dark: bool,
+    policy: ProofPolicy = EDITORIAL_POLICY,
 ) -> str:
     asset_ids = page.get("assetIds", [])
     if asset_ids:
@@ -309,10 +424,13 @@ def draw_visual(
             canvas.setFillAlpha(1)
             canvas.setFillColor(white)
             canvas.setFont("Manrope", 7.2)
+            preview_label = policy.preview_label
+            if policy.show_asset_metadata:
+                preview_label = f"{preview_label} · {asset['id']}"
             canvas.drawString(
                 x + 4 * MM,
                 y + 3.5 * MM,
-                f"PREVIEW · NOT PRINT-READY · {asset['id']}",
+                preview_label,
             )
             canvas.restoreState()
             return "preview"
@@ -322,13 +440,21 @@ def draw_visual(
             y,
             width,
             height,
-            title=asset.get("title") or asset["id"],
+            title=(
+                policy.placeholder_title
+                or asset.get("title")
+                or asset["id"]
+            ),
             detail=(
-                f"{asset['id']} · status: {asset.get('status', 'unknown')} · "
-                f"rights: {asset.get('rights', 'unknown')}. "
-                "В редакционной пробе показано место материала; исходник не используется."
+                policy.placeholder_detail
+                or (
+                    f"{asset['id']} · status: {asset.get('status', 'unknown')} · "
+                    f"rights: {asset.get('rights', 'unknown')}. "
+                    "В редакционной пробе показано место материала; исходник не используется."
+                )
             ),
             dark=dark,
+            label=policy.placeholder_label,
         )
         return "placeholder"
     placeholder = page.get("visualPlaceholder")
@@ -339,9 +465,16 @@ def draw_visual(
             y,
             width,
             height,
-            title=f"{placeholder.get('kind', 'visual')} · commission brief",
-            detail=placeholder.get("brief", "Нужен визуальный материал."),
+            title=(
+                policy.placeholder_title
+                or f"{placeholder.get('kind', 'visual')} · commission brief"
+            ),
+            detail=(
+                policy.placeholder_detail
+                or placeholder.get("brief", "Нужен визуальный материал.")
+            ),
             dark=dark,
+            label=policy.placeholder_label,
         )
         return "placeholder"
     return "none"
@@ -427,6 +560,7 @@ def draw_page(
     *,
     kind: str,
     reviewer_marks: bool,
+    policy: ProofPolicy = EDITORIAL_POLICY,
 ) -> None:
     width, height = size
     chapter_gate = page["template"] == "chapter-gate"
@@ -458,26 +592,33 @@ def draw_page(
     title_y = height - inset - title_h
     title.drawOn(canvas, inset, title_y)
 
-    role_style = ParagraphStyle(
-        "page-role",
-        fontName="Manrope",
-        fontSize=7.2,
-        leading=9,
-        textColor=COPPER if chapter_gate else CLAY,
-    )
-    role = Paragraph(paragraph_markup(page.get("role", "")), role_style)
-    role_h = role.wrap(safe_width, 14 * MM)[1]
-    role_y = title_y - 2 * MM - role_h
-    role.drawOn(canvas, inset, role_y)
+    content_top = title_y - 5 * MM
+    if policy.show_role:
+        role_style = ParagraphStyle(
+            "page-role",
+            fontName="Manrope",
+            fontSize=7.2,
+            leading=9,
+            textColor=COPPER if chapter_gate else CLAY,
+        )
+        role = Paragraph(paragraph_markup(page.get("role", "")), role_style)
+        role_h = role.wrap(safe_width, 14 * MM)[1]
+        role_y = title_y - 2 * MM - role_h
+        role.drawOn(canvas, inset, role_y)
+        content_top = role_y - 5 * MM
 
     footer_y = bleed + 5 * MM
     content_bottom = footer_y + 8 * MM
-    content_top = role_y - 5 * MM
-    claim_lines = claim_source_lines(
-        body,
-        claims_by_id,
-        known_source_ids=known_source_ids,
-        provenance_only_ids=provenance_only_ids,
+    projected_body = policy.project_body(body)
+    claim_lines = (
+        claim_source_lines(
+            body,
+            claims_by_id,
+            known_source_ids=known_source_ids,
+            provenance_only_ids=provenance_only_ids,
+        )
+        if policy.show_claim_band
+        else []
     )
     claim_paragraph, claim_note_height = claim_note_paragraph(
         claim_lines,
@@ -492,7 +633,20 @@ def draw_page(
     has_visual = bool(page.get("assetIds") or page.get("visualPlaceholder"))
 
     if has_visual:
-        visual_h = min(content_height * (0.43 if kind == "album" else 0.35), 92 * MM)
+        asset_ids = page.get("assetIds", [])
+        has_preview = bool(
+            asset_ids and preview_path(assets[asset_ids[0]]) is not None
+        )
+        if not has_preview and policy.unresolved_visual_height_mm is not None:
+            visual_h = min(
+                content_height * (0.43 if kind == "album" else 0.35),
+                policy.unresolved_visual_height_mm * MM,
+            )
+        else:
+            visual_h = min(
+                content_height * (0.43 if kind == "album" else 0.35),
+                92 * MM,
+            )
         visual_y = content_top - visual_h
         draw_visual(
             canvas,
@@ -503,6 +657,7 @@ def draw_page(
             safe_width,
             visual_h,
             dark=chapter_gate,
+            policy=policy,
         )
         body_top = visual_y - 5 * MM
         body_h = body_top - body_bottom
@@ -514,7 +669,7 @@ def draw_page(
     draw_body(
         canvas,
         page["id"],
-        body,
+        projected_body,
         inset,
         body_bottom,
         safe_width,
@@ -534,7 +689,7 @@ def draw_page(
 
     canvas.setFillColor(COPPER if chapter_gate else CLAY)
     canvas.setFont("Manrope", 6.8)
-    canvas.drawString(inset, footer_y, "EDITORIAL PROOF · NOT PRINT-READY · NOT PDF/X")
+    canvas.drawString(inset, footer_y, policy.footer)
     canvas.drawRightString(width - inset, footer_y, f"{page['id']} · {page['number']}")
     canvas.bookmarkPage(page["id"])
     if reviewer_marks:
@@ -542,15 +697,19 @@ def draw_page(
     canvas.showPage()
 
 
-def stage_editorial_metadata(source: Path, target: Path) -> None:
-    """Add proof metadata without rewriting ReportLab page/resource objects.
+def stage_proof_metadata(
+    source: Path,
+    target: Path,
+    policy: ProofPolicy,
+) -> None:
+    """Add selected proof metadata without rewriting page/resource objects.
 
     A full pypdf clone can produce a structurally readable file that still
     drops text and vectors in Poppler. Incremental mode preserves the canvas
     PDF byte-for-byte and appends only the metadata update.
     """
     writer = PdfWriter(source, incremental=True)
-    writer.add_metadata(PROOF_METADATA)
+    writer.add_metadata(dict(policy.metadata))
     staged = target.with_name(f".{target.name}.incremental-stage")
     try:
         with staged.open("wb") as stream:
@@ -559,6 +718,11 @@ def stage_editorial_metadata(source: Path, target: Path) -> None:
     except Exception:
         staged.unlink(missing_ok=True)
         raise
+
+
+def stage_editorial_metadata(source: Path, target: Path) -> None:
+    """Backward-compatible editorial metadata staging helper."""
+    stage_proof_metadata(source, target, EDITORIAL_POLICY)
 
 
 def publish_pair(*pairs: tuple[Path, Path]) -> None:
@@ -597,6 +761,7 @@ def build(
     output_name: str,
     *,
     reviewer_marks: bool,
+    policy: ProofPolicy = EDITORIAL_POLICY,
 ) -> Path:
     publication = load_json("config/publication.json")[kind]
     flatplan = load_json(f"flatplan/{flatplan_name}")
@@ -653,10 +818,10 @@ def build(
         )
     )
     canvas.setBleedBox((0, 0, size[0], size[1]))
-    canvas.setTitle(PROOF_METADATA["/Title"])
-    canvas.setAuthor(PROOF_METADATA["/Author"])
-    canvas.setSubject(PROOF_SUBJECT)
-    canvas.setCreator(PROOF_METADATA["/Creator"])
+    canvas.setTitle(policy.metadata["/Title"])
+    canvas.setAuthor(policy.metadata["/Author"])
+    canvas.setSubject(policy.metadata["/Subject"])
+    canvas.setCreator(policy.metadata["/Creator"])
     for page in flatplan["pages"]:
         draw_page(
             canvas,
@@ -670,18 +835,27 @@ def build(
             bleed_mm * MM,
             kind=kind,
             reviewer_marks=reviewer_marks,
+            policy=policy,
         )
     canvas.save()
-    stage_editorial_metadata(temporary, staged_output)
+    stage_proof_metadata(temporary, staged_output, policy)
     temporary.unlink()
     return staged_output
 
 
-def build_all(*, reviewer_marks: bool = False) -> tuple[Path, Path]:
+def build_all(
+    *,
+    mode: str = "editorial",
+    reviewer_marks: bool = False,
+) -> tuple[Path, Path]:
+    try:
+        policy = PROOF_POLICIES[mode]
+    except KeyError as error:
+        raise ValueError(f"unknown proof mode: {mode}") from error
     register_fonts()
     output_dir = BOOK / "output/pdf"
-    album_final = output_dir / "puer-album-proof.pdf"
-    guide_final = output_dir / "puer-guide-proof.pdf"
+    album_final = output_dir / f"puer-album{policy.output_suffix}"
+    guide_final = output_dir / f"puer-guide{policy.output_suffix}"
     staged: list[Path] = []
     try:
         staged_album = build(
@@ -690,6 +864,7 @@ def build_all(*, reviewer_marks: bool = False) -> tuple[Path, Path]:
             "album",
             album_final.name,
             reviewer_marks=reviewer_marks,
+            policy=policy,
         )
         staged.append(staged_album)
         staged_guide = build(
@@ -698,6 +873,7 @@ def build_all(*, reviewer_marks: bool = False) -> tuple[Path, Path]:
             "guide",
             guide_final.name,
             reviewer_marks=reviewer_marks,
+            policy=policy,
         )
         staged.append(staged_guide)
         publish_pair((staged_album, album_final), (staged_guide, guide_final))
@@ -709,12 +885,17 @@ def build_all(*, reviewer_marks: bool = False) -> tuple[Path, Path]:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Build deterministic editorial proof PDFs.")
+    parser = argparse.ArgumentParser(description="Build deterministic proof PDFs.")
+    parser.add_argument(
+        "--mode",
+        choices=tuple(PROOF_POLICIES),
+        default="editorial",
+    )
     parser.add_argument("--reviewer-marks", action="store_true")
     args = parser.parse_args()
-    outputs = build_all(reviewer_marks=args.reviewer_marks)
+    outputs = build_all(mode=args.mode, reviewer_marks=args.reviewer_marks)
     for output in outputs:
-        print(f"editorial proof written: {output}")
+        print(f"{args.mode} proof written: {output}")
 
 
 if __name__ == "__main__":
