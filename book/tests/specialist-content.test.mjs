@@ -18,6 +18,43 @@ const guideFiles = [
   '07-storage-and-safety.md',
 ]
 
+const albumFiles = [
+  '00-entry.md',
+  '01-living-mountain.md',
+  '02-roads-and-name.md',
+  '03-maocha.md',
+  '04-sheng-and-shou.md',
+  '05-microcosm.md',
+  '06-tea-and-body.md',
+  '07-tea-room.md',
+  '89-publication-notes.md',
+  '90-chronology.md',
+  '91-glossary.md',
+  '92-bibliography.md',
+]
+
+const albumManuscript = () => albumFiles
+  .map((name) => read(`manuscript/album/${name}`))
+  .join('\n')
+
+const albumPageBlocks = (manuscript) => {
+  const markers = [...manuscript.matchAll(/^<!-- page:(A-P\d{3}) -->$/gmu)]
+  return markers.map((marker, index) => ({
+    pageId: marker[1],
+    text: manuscript.slice(marker.index, markers[index + 1]?.index ?? manuscript.length),
+  }))
+}
+
+const allAlbumPageBlocks = () => albumFiles.flatMap((name) => (
+  albumPageBlocks(read(`manuscript/album/${name}`))
+))
+
+const albumPage = (pageId) => {
+  const page = allAlbumPageBlocks().find((block) => block.pageId === pageId)
+  assert.ok(page, `missing album page ${pageId}`)
+  return page.text
+}
+
 const guideManuscript = () => guideFiles
   .map((name) => read(`manuscript/guide/${name}`))
   .join('\n')
@@ -178,6 +215,76 @@ test('uses chapter-level H1 headings and canonical reader-visible tea terms', ()
   for (const term of ['Шэньнун', 'шацин', '杀青', 'шайцин', '晒青', 'шайцин-маоча', '晒青毛茶', 'водуй', '渥堆', 'шэн', 'шу']) {
     assert.match(corpus, new RegExp(term, 'u'), term)
   }
+})
+
+test('states the gift-album reader promise by A-P006 without losing the sensory opening', () => {
+  const opening = allAlbumPageBlocks()
+    .filter(({ pageId }) => pageId >= 'A-P001' && pageId <= 'A-P006')
+    .map(({ text }) => text)
+    .join('\n')
+
+  assert.match(albumPage('A-P001'), /крышк[а-яё]* гайван[а-яё]*[\s\S]*пар[а-яё]*[\s\S]*мокр[а-яё]* кор[а-яё]*/iu)
+  assert.match(opening, /подарочн[а-яё]* научно-популярн[а-яё]* альбом/iu)
+  assert.match(opening, /не требует специальн[а-яё]* подготовк/iu)
+  assert.match(opening, /маршрут[а-яё]* чтени/iu)
+  assert.match(opening, /различ[а-яё]* легенд[а-яё]*[^.]*документ[а-яё]*[^.]*современн[а-яё]* провер/iu)
+  assert.match(opening, /шэн[а-яё]*[^.]*шу[^.]*дв[а-яё]* технолог/iu)
+  assert.match(opening, /осторожн[а-яё]*[^.]*медицинск[а-яё]* обещан/iu)
+})
+
+test('points to the six evidence windows on A-P011 before the first repeated label', () => {
+  const openingThroughLegend = allAlbumPageBlocks()
+    .filter(({ pageId }) => pageId >= 'A-P001' && pageId <= 'A-P011')
+    .map(({ text }) => text)
+    .join('\n')
+  const labels = [...openingThroughLegend.matchAll(/\[(?:ИСТОЧНИК|РЕТРОСПЕКТИВА|ЛЕГЕНДА|ГИПОТЕЗА|СОВРЕМЕННАЯ ПРОВЕРКА|ОТКЛОНЕНО)\]/gu)]
+  assert.ok(labels.length >= 2, 'opening must exercise the evidence navigation')
+  const pointer = openingThroughLegend.search(/шесть окон[^.\n]*(?:A-P011|с\.\s*11)/iu)
+  assert.ok(pointer >= 0, 'opening must point to the six-window legend on A-P011 / p. 11')
+  assert.ok(pointer < labels[1].index, 'six-window pointer must precede the first repeated evidence label')
+})
+
+test('closes every major album chapter with one compact three-observation checkpoint', () => {
+  for (const pageId of ['A-P046', 'A-P076', 'A-P100', 'A-P130', 'A-P154', 'A-P176', 'A-P192']) {
+    const page = albumPage(pageId)
+    assert.equal((page.match(/\*\*После этой главы видно:\*\*/gu) ?? []).length, 1, pageId)
+    const checkpoint = page.match(/\*\*После этой главы видно:\*\*\s*\n((?:- [^\n]+\n?){3})/u)
+    assert.ok(checkpoint, `${pageId}: checkpoint must contain exactly three bullet observations`)
+    const observations = checkpoint[1].trim().split('\n')
+    assert.equal(observations.length, 3, pageId)
+    for (const observation of observations) {
+      assert.ok(observation.length <= 150, `${pageId}: observation is not compact`)
+      assert.doesNotMatch(observation, /\b(?:сделайте|запишите|попробуйте|сравните)\b/iu, `${pageId}: checkpoint is an outcome, not an exercise`)
+    }
+  }
+})
+
+test('uses one chapter method callout where evidence boundaries repeat most densely', () => {
+  const medical = read('manuscript/album/06-tea-and-body.md')
+  assert.equal((medical.match(/\*\*Метод главы\.\*\*/gu) ?? []).length, 1)
+  const method = albumPage('A-P156')
+  assert.match(method, /тип[^.]*форм[^.]*ограничени/iu)
+  assert.match(method, /сначала[^.]*явлени|явлени[^.]*сначала/iu)
+  assert.match(method, /экстракт[^.]*чашк/iu)
+  assert.match(method, /механизм[^.]*клиническ/iu)
+  assert.doesNotMatch(albumPage('A-P161'), /экстракт не превращается в чашку/iu)
+  assert.doesNotMatch(albumPage('A-P172'), /заменить исследованный концентрат чашкой/iu)
+  for (let number = 155; number <= 176; number += 1) {
+    const pageId = `A-P${String(number).padStart(3, '0')}`
+    const visible = albumPage(pageId).replace(/<!--.*?-->/gsu, '').trim()
+    const paragraphs = visible.split(/\n\s*\n/u).filter((paragraph) => !/^#{1,6}\s/u.test(paragraph))
+    assert.doesNotMatch(paragraphs[0], /^\[(?:ИСТОЧНИК|РЕТРОСПЕКТИВА|ЛЕГЕНДА|ГИПОТЕЗА|СОВРЕМЕННАЯ ПРОВЕРКА|ОТКЛОНЕНО)\]/u, `${pageId}: describe the phenomenon before its evidence boundary`)
+  }
+})
+
+test('keeps Ruan Fu as a checked disputed retrospective and removes reader-visible draft', () => {
+  assert.doesNotMatch(albumManuscript(), /\bdraft\b/iu)
+  const claim = json('data/claims.json').find(({ id }) => id === 'hist-ruan-retrospective')
+  assert.equal(claim.status, 'checked')
+  assert.equal(claim.evidence, 'retrospective')
+  assert.match(claim.text, /приписыва[а-яё]*|атрибуц[а-яё]*/iu)
+  assert.match(claim.text, /поздн[а-яё]*|ретроспектив/iu)
+  assert.match(claim.text, /не[^.]*прям[а-яё]*[^.]*танск/iu)
 })
 
 test('states the complete fresh-leaf sequence and keeps sheng separate from wodui', () => {
@@ -439,13 +546,17 @@ test('publication bibliography excludes provenance-only records while the review
   assert.equal(sources.length, 49)
   assert.ok(sources.every(({ publicationClass }) => allowed.has(publicationClass)))
   assert.equal(sources.find(({ id }) => id === 'vinogrodsky-user-excerpt').publicationClass, 'provenance-only')
+  assert.equal(sources.find(({ id }) => id === 'vinogrodsky-user-excerpt').evidenceRole, 'provenance-only')
 
   const bibliography = read('manuscript/album/92-bibliography.md')
   const publishedIds = [...bibliography.matchAll(/<!-- source:([^ ]+) -->/gu)].map(([, id]) => id)
   assert.equal(publishedIds.length, 48)
   assert.equal(publishedIds.includes('vinogrodsky-user-excerpt'), false)
-  for (const label of ['Факсимиле', 'Печатное издание: каталогическая запись', 'Копия доступа', 'Ретроспектива', 'Исследование', 'Стандарт или руководство', 'Регистрация исследования; результатов нет']) {
-    assert.match(bibliography, new RegExp(`\\*\\*Класс:\\*\\* ${label}`, 'u'), label)
+  for (const label of ['Факсимиле', 'Каталогическая запись издания', 'Копия исторического текста', 'Институциональная запись', 'Исследовательская публикация', 'Стандарт', 'Регистрация исследования']) {
+    assert.match(bibliography, new RegExp(`\\*\\*Вид документа:\\*\\* ${label}`, 'u'), label)
+  }
+  for (const label of ['Текстологическое свидетельство', 'Каталогическое подтверждение', 'Спорная поздняя атрибуция', 'Исследовательская опора', 'Институциональная ретроспектива', 'Нормативный ориентир', 'Запись о планируемом исследовании; результатов нет']) {
+    assert.match(bibliography, new RegExp(`\\*\\*Роль в книге:\\*\\* ${label}`, 'u'), label)
   }
 
   const claims = json('data/claims.json')

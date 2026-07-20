@@ -269,6 +269,15 @@ def paragraph_markup(markdown: str) -> str:
     return re.sub(r"\n{2,}", "<br/><br/>", escaped).replace("\n", "<br/>")
 
 
+def provenance_only_source_ids(sources: list[dict[str, Any]]) -> set[str]:
+    """Resolve the source role used only for editorial provenance notes."""
+    return {
+        source["id"]
+        for source in sources
+        if source.get("evidenceRole") == "provenance-only"
+    }
+
+
 def claim_source_lines(
     body: str,
     claims_by_id: dict[str, dict[str, Any]],
@@ -954,11 +963,7 @@ def build(
     known_source_ids = {source["id"] for source in sources}
     if len(known_source_ids) != len(sources):
         raise ValueError("duplicate source id in proof registry")
-    provenance_only_ids = {
-        source["id"]
-        for source in sources
-        if source.get("publicationClass") == "provenance-only"
-    }
+    provenance_only_ids = provenance_only_source_ids(sources)
     expected_count = publication["pages"]
     if len(flatplan["pages"]) != expected_count:
         raise ValueError(

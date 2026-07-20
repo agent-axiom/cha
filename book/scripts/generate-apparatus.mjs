@@ -37,17 +37,34 @@ const groupDefinitions = [
     matches: (source) => source.group === 'guidance' && !['retrospective', 'trial-registration'].includes(source.publicationClass),
   },
 ]
-const publicationClassLabels = new Map([
-  ['primary-text', 'Первичный текст'],
-  ['facsimile', 'Факсимиле'],
+const documentClassLabels = new Map([
+  ['research-publication', 'Исследовательская публикация'],
+  ['historical-access-copy', 'Копия исторического текста'],
   ['critical-edition', 'Критическое издание'],
-  ['print-edition-catalog', 'Печатное издание: каталогическая запись'],
-  ['manuscript-catalog', 'Каталог рукописи; без факсимиле листа'],
-  ['access-copy', 'Копия доступа'],
-  ['retrospective', 'Ретроспектива'],
-  ['research', 'Исследование'],
-  ['standard-guidance', 'Стандарт или руководство'],
-  ['trial-registration', 'Регистрация исследования; результатов нет'],
+  ['facsimile', 'Факсимиле'],
+  ['catalog-record', 'Каталогическая запись издания'],
+  ['manuscript-catalog', 'Каталог рукописи'],
+  ['community-excerpt', 'Пользовательский фрагмент'],
+  ['institutional-record', 'Институциональная запись'],
+  ['corporate-record', 'Корпоративная запись'],
+  ['standard', 'Стандарт'],
+  ['guidance', 'Рекомендация'],
+  ['institutional-heritage-record', 'Институциональная запись о наследии'],
+  ['trial-registration', 'Регистрация исследования'],
+])
+const evidenceRoleLabels = new Map([
+  ['primary-text', 'Прямая текстовая опора'],
+  ['textual-witness', 'Текстологическое свидетельство'],
+  ['catalog-provenance', 'Каталогическое подтверждение'],
+  ['disputed-retrospective-attribution', 'Спорная поздняя атрибуция'],
+  ['research-evidence', 'Исследовательская опора'],
+  ['institutional-retrospective', 'Институциональная ретроспектива'],
+  ['corporate-retrospective', 'Корпоративная ретроспектива'],
+  ['normative-standard', 'Нормативный ориентир'],
+  ['safety-guidance', 'Ориентир безопасности'],
+  ['contextual-institutional-record', 'Контекстная институциональная запись'],
+  ['trial-registry-record', 'Запись о планируемом исследовании; результатов нет'],
+  ['provenance-only', 'Только редакционное происхождение'],
 ])
 
 const clean = (value = '') => String(value ?? '').trim()
@@ -229,7 +246,7 @@ const renderSource = (root, source, groupTitle, startsGroup) => {
     formatLocator(source.pages),
     links,
   ].filter(Boolean).join(' ')
-  const classifiedCitation = `**Ключ источника:** \`${clean(source.id)}\`. **Класс:** ${publicationClassLabels.get(source.publicationClass)}. ${citation}`
+  const classifiedCitation = `**Ключ источника:** \`${clean(source.id)}\`. **Вид документа:** ${documentClassLabels.get(source.documentClass)}. **Роль в книге:** ${evidenceRoleLabels.get(source.evidenceRole)}. ${citation}`
   return [
     ...(startsGroup ? [`## ${groupTitle}`] : []),
     `<!-- source:${clean(source.id)} -->`,
@@ -261,7 +278,7 @@ const selectCitedSources = (claims, sources) => {
   for (const source of cited) {
     if (source.status !== 'checked') throw new Error(`cited source is not checked: ${source.id}`)
   }
-  return cited.filter(({ publicationClass }) => publicationClass !== 'provenance-only')
+  return cited.filter(({ evidenceRole }) => evidenceRole !== 'provenance-only')
 }
 
 const validateGlossary = (glossary, sources, cited) => {
@@ -299,8 +316,10 @@ export const buildApparatus = ({ root = defaultBookRoot } = {}) => {
   validateGlossary(glossary, sources, cited)
   const invalidSource = cited.find(({ group }) => !sourceGroups.has(group))
   if (invalidSource) throw new Error(`cited source has unsupported group: ${invalidSource.id}`)
-  const invalidPublicationClass = cited.find(({ publicationClass }) => !publicationClassLabels.has(publicationClass))
-  if (invalidPublicationClass) throw new Error(`cited source has unsupported publication class: ${invalidPublicationClass.id}`)
+  const invalidDocumentClass = cited.find(({ documentClass }) => !documentClassLabels.has(documentClass))
+  if (invalidDocumentClass) throw new Error(`cited source has unsupported document class: ${invalidDocumentClass.id}`)
+  const invalidEvidenceRole = cited.find(({ evidenceRole }) => !evidenceRoleLabels.has(evidenceRole))
+  if (invalidEvidenceRole) throw new Error(`cited source has unsupported evidence role: ${invalidEvidenceRole.id}`)
 
   const bibliographyItems = groupDefinitions.flatMap(({ title, matches }) => (
     cited

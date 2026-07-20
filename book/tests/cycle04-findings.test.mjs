@@ -56,12 +56,13 @@ test('keeps Zhao Xueming nested attributions separate in every reader channel', 
   assert.match(corpus, /Пуэр[^.\n]*север[^.\n]*Чэли/iu)
 })
 
-test('downgrades the Ruan line evidence without upgrading the rejected Xu claim', () => {
+test('bounds the checked Ruan retrospective without upgrading the rejected Xu claim', () => {
   const ruan = claim('hist-ruan-retrospective')
-  assert.equal(ruan.status, 'draft')
-  assert.match(ruan.text, /доступн[а-яё]* электронн[а-яё]* копи[а-яё]*, приписываем[а-яё]* тексту Жуань Фу, переда[её]т/iu)
+  assert.equal(ruan.status, 'checked')
+  assert.match(ruan.text, /спорно приписываем[а-яё]* Жуань Фу/iu)
+  assert.match(ruan.text, /поздн[а-яё]* ретроспектив/iu)
   assert.match(ruan.text, /каталог[^.]*существован/iu)
-  assert.match(ruan.text, /не[^.]*строчн[а-яё]* доказательств/iu)
+  assert.match(ruan.text, /не[^.]*прям[а-яё]*[^.]*танск/iu)
   assert.equal(claim('hist-xu-bowuzhi-western-fan').status, 'rejected')
   assert.match(source('ruan-puer-cha-ji-access').author, /приписыва/iu)
   assert.match(source('ruan-dianbi-catalog').author, /каталогическ[а-яё]* атрибуц/iu)
@@ -100,8 +101,8 @@ test('groups institutional retrospectives and trial registrations independently 
   const bibliography = read('book/manuscript/album/92-bibliography.md')
   assert.match(bibliography, /^## Институциональные ретроспективы$/mu)
   assert.match(bibliography, /^## Реестры исследований$/mu)
-  assert.match(bibliography, /\*\*Класс:\*\* Печатное издание: каталогическая запись/u)
-  assert.match(bibliography, /\*\*Класс:\*\* Регистрация исследования; результатов нет/u)
+  assert.match(bibliography, /\*\*Вид документа:\*\* Каталогическая запись издания/u)
+  assert.match(bibliography, /\*\*Роль в книге:\*\* Запись о планируемом исследовании; результатов нет/u)
   const retrospectiveStart = bibliography.indexOf('## Институциональные ретроспективы')
   const trialStart = bibliography.indexOf('## Реестры исследований')
   for (const id of ['dayi-history-1973', 'puer-wuhou', 'yunnan-net-shou-2021', 'yunnan-agri-2018-shou']) {

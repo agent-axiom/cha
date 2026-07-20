@@ -429,6 +429,23 @@ def test_claim_source_lines_are_readable_deduplicated_and_provenance_labeled() -
         )
 
 
+def test_provenance_only_proof_labels_follow_evidence_role_not_legacy_class() -> None:
+    sources = [
+        {
+            "id": "included",
+            "publicationClass": "provenance-only",
+            "evidenceRole": "research-evidence",
+        },
+        {
+            "id": "registry-source",
+            "publicationClass": "research",
+            "evidenceRole": "provenance-only",
+        },
+    ]
+
+    assert BUILD_PROOF.provenance_only_source_ids(sources) == {"registry-source"}
+
+
 def test_claim_source_lines_reject_unknown_claim_marker() -> None:
     with pytest.raises(ValueError, match="unknown claim marker in proof: missing-claim"):
         BUILD_PROOF.claim_source_lines(

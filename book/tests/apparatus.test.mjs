@@ -29,6 +29,8 @@ const sourceRecord = (overrides = {}) => ({
   group: 'guidance',
   status: 'checked',
   publicationClass: 'standard-guidance',
+  documentClass: 'standard',
+  evidenceRole: 'normative-standard',
   href: 'https://example.test/source',
   ...overrides,
 })
@@ -117,7 +119,7 @@ test('cites the deduplicated non-rejected claim union in fixed groups and stable
   const citedIds = new Set(
     claims.filter(({ status }) => status !== 'rejected').flatMap(({ sourceIds: ids = [] }) => ids),
   )
-  const cited = sources.filter(({ id, publicationClass }) => citedIds.has(id) && publicationClass !== 'provenance-only')
+  const cited = sources.filter(({ id, evidenceRole }) => citedIds.has(id) && evidenceRole !== 'provenance-only')
   const groups = [
     ['Китайские исторические тексты, издания и копии', 8, (source) => source.group === 'primary-asian' && !['retrospective', 'trial-registration'].includes(source.publicationClass)],
     ['Институциональные ретроспективы', 4, (source) => source.publicationClass === 'retrospective'],
@@ -145,11 +147,42 @@ test('prints stable source keys and keeps trial registration out of guidance', (
   const bibliographyText = fs.readFileSync(bibliographyPath, 'utf8')
   assert.match(bibliographyText, /\*\*Ключ источника:\*\* `zhao-facsimile-pku`/u)
   assert.match(bibliographyText, /^## Реестры исследований$/mu)
-  assert.match(bibliographyText, /`nct06401161`\. \*\*Класс:\*\* Регистрация исследования; результатов нет/u)
+  assert.match(bibliographyText, /`nct06401161`\. \*\*Вид документа:\*\* Регистрация исследования\. \*\*Роль в книге:\*\* Запись о планируемом исследовании; результатов нет/u)
   const registrySection = bibliographyText.split('## Реестры исследований')[1].split('## Стандарты и рекомендации')[0]
   assert.match(registrySection, /nct06401161/u)
   const guidanceSection = bibliographyText.split('## Стандарты и рекомендации')[1]
   assert.doesNotMatch(guidanceSection, /nct06401161/u)
+})
+
+test('prints independent reader-facing document and evidence-role labels', () => {
+  const bibliographyText = fs.readFileSync(bibliographyPath, 'utf8')
+  const expected = [
+    ['ruan-puer-cha-ji-access', 'Копия исторического текста', 'Спорная поздняя атрибуция'],
+    ['ruan-dianbi-catalog', 'Каталог рукописи', 'Каталогическое подтверждение'],
+    ['guangzhou-db4401-258-2024', 'Стандарт', 'Институциональная ретроспектива'],
+    ['unesco-jingmai', 'Институциональная запись о наследии', 'Контекстная институциональная запись'],
+  ]
+  for (const [id, documentLabel, roleLabel] of expected) {
+    const block = bibliographyText.split(`<!-- source:${id} -->`)[1].split('<!-- source:')[0]
+    assert.match(block, new RegExp(`\\*\\*Вид документа:\\*\\* ${documentLabel}`, 'u'), id)
+    assert.match(block, new RegExp(`\\*\\*Роль в книге:\\*\\* ${roleLabel}`, 'u'), id)
+  }
+  assert.doesNotMatch(bibliographyText, /\*\*Класс:\*\*/u)
+})
+
+test('uses evidenceRole rather than legacy publicationClass for publication exclusion', () => {
+  const root = createFixtureBook({
+    sources: [
+      sourceRecord({ id: 'included', publicationClass: 'research', evidenceRole: 'research-evidence' }),
+      sourceRecord({ id: 'excluded', publicationClass: 'research', evidenceRole: 'provenance-only' }),
+    ],
+    claims: [{ id: 'claim-1', status: 'verified', sourceIds: ['included', 'excluded'] }],
+  })
+
+  const { bibliographyText } = buildApparatus({ root })
+
+  assert.match(bibliographyText, /<!-- source:included -->/u)
+  assert.doesNotMatch(bibliographyText, /<!-- source:excluded -->/u)
 })
 
 test('normalizes author punctuation and formats page, article, e-locator, facsimile, and journal locators', () => {

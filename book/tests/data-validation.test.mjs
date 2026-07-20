@@ -91,6 +91,48 @@ const publicationClasses = [
   'trial-registration',
   'provenance-only',
 ]
+const documentClasses = [
+  'research-publication',
+  'historical-access-copy',
+  'critical-edition',
+  'facsimile',
+  'catalog-record',
+  'manuscript-catalog',
+  'community-excerpt',
+  'institutional-record',
+  'corporate-record',
+  'standard',
+  'guidance',
+  'institutional-heritage-record',
+  'trial-registration',
+]
+const evidenceRoles = [
+  'primary-text',
+  'textual-witness',
+  'catalog-provenance',
+  'disputed-retrospective-attribution',
+  'research-evidence',
+  'institutional-retrospective',
+  'corporate-retrospective',
+  'normative-standard',
+  'safety-guidance',
+  'contextual-institutional-record',
+  'trial-registry-record',
+  'provenance-only',
+]
+const sourceFixture = (overrides = {}) => ({
+  id: 'a',
+  title: 'A',
+  href: 'https://a.example',
+  group: 'guidance',
+  status: 'checked',
+  bookUse: 'core',
+  siteVisible: true,
+  publicationClass: 'standard-guidance',
+  documentClass: 'standard',
+  evidenceRole: 'normative-standard',
+  ...overrides,
+})
 const expectedAlbumSections = [
   ['entry', 20, 1, 20],
   ['living-mountain', 26, 21, 46],
@@ -261,7 +303,7 @@ const validateAssetFiles = (...args) => {
 }
 
 test('rejects duplicate source ids', () => {
-  assert.throws(() => validateSources([{ id: 'a', title: 'A', href: 'https://a.example', group: 'guidance', status: 'checked', bookUse: 'core', siteVisible: true, publicationClass: 'standard-guidance' }, { id: 'a', title: 'B', href: 'https://b.example', group: 'guidance', status: 'checked', bookUse: 'core', siteVisible: true, publicationClass: 'standard-guidance' }]), /duplicate source id: a/)
+  assert.throws(() => validateSources([sourceFixture(), sourceFixture({ title: 'B', href: 'https://b.example' })]), /duplicate source id: a/)
 })
 
 test('rejects missing source ids', () => {
@@ -289,7 +331,7 @@ test('rejects invalid source book use', () => {
 })
 
 test('requires a deliberate publication classification for every source', () => {
-  const valid = { id: 'a', title: 'A', href: 'https://a.example', group: 'guidance', status: 'checked', bookUse: 'core', siteVisible: true }
+  const valid = sourceFixture({ publicationClass: undefined })
   assert.throws(() => validateSources([valid]), /invalid source publication class: undefined/)
   assert.throws(() => validateSources([{ ...valid, publicationClass: 'misc' }]), /invalid source publication class: misc/)
   for (const publicationClass of publicationClasses) {
@@ -297,8 +339,41 @@ test('requires a deliberate publication classification for every source', () => 
   }
 })
 
+test('requires independent document class and evidence role classifications', () => {
+  assert.throws(() => validateSources([sourceFixture({ documentClass: undefined })]), /invalid source document class: undefined/)
+  assert.throws(() => validateSources([sourceFixture({ documentClass: 'misc' })]), /invalid source document class: misc/)
+  assert.throws(() => validateSources([sourceFixture({ evidenceRole: undefined })]), /invalid source evidence role: undefined/)
+  assert.throws(() => validateSources([sourceFixture({ evidenceRole: 'misc' })]), /invalid source evidence role: misc/)
+  for (const documentClass of documentClasses) {
+    assert.doesNotThrow(() => validateSources([sourceFixture({ documentClass })]))
+  }
+  for (const evidenceRole of evidenceRoles) {
+    assert.doesNotThrow(() => validateSources([sourceFixture({ evidenceRole })]))
+  }
+  assert.doesNotThrow(() => validateSources([
+    sourceFixture({ id: 'standard-context', documentClass: 'standard', evidenceRole: 'institutional-retrospective' }),
+    sourceFixture({ id: 'record-context', documentClass: 'institutional-record', evidenceRole: 'institutional-retrospective' }),
+  ]))
+})
+
+test('classifies the highlighted records by document form and role in this book', () => {
+  const sources = new Map(readBookJson('data/sources.json').map((source) => [source.id, source]))
+  const expected = new Map([
+    ['ruan-puer-cha-ji-access', ['historical-access-copy', 'disputed-retrospective-attribution']],
+    ['ruan-dianbi-catalog', ['manuscript-catalog', 'catalog-provenance']],
+    ['guangzhou-db4401-258-2024', ['standard', 'institutional-retrospective']],
+    ['unesco-jingmai', ['institutional-heritage-record', 'contextual-institutional-record']],
+  ])
+  for (const [id, [documentClass, evidenceRole]] of expected) {
+    assert.equal(sources.get(id).documentClass, documentClass, `${id}: documentClass`)
+    assert.equal(sources.get(id).evidenceRole, evidenceRole, `${id}: evidenceRole`)
+  }
+  assert.notEqual(sources.get('guangzhou-db4401-258-2024').evidenceRole, 'normative-standard')
+  assert.notEqual(sources.get('unesco-jingmai').documentClass, 'standard')
+})
+
 test('rejects non-boolean source visibility', () => {
-  assert.throws(() => validateSources([{ id: 'a', title: 'A', href: 'https://a.example', group: 'guidance', status: 'checked', bookUse: 'core', siteVisible: 'true', publicationClass: 'standard-guidance' }]), /source siteVisible must be boolean: a/)
+  assert.throws(() => validateSources([sourceFixture({ siteVisible: 'true' })]), /source siteVisible must be boolean: a/)
 })
 
 test('rejects claims with missing sources', () => {
@@ -548,7 +623,7 @@ test('rejects missing, empty, and whitespace-only asset ids', () => {
 })
 
 test('accepts a complete valid evidence and rights registry', () => {
-  const sourceIds = validateSources([{ id: 's1', title: 'Source', href: 'https://source.example', group: 'guidance', status: 'checked', bookUse: 'core', siteVisible: true, publicationClass: 'standard-guidance' }])
+  const sourceIds = validateSources([sourceFixture({ id: 's1', title: 'Source', href: 'https://source.example' })])
   const claims = [{ id: 'c1', text: 'Claim', evidence: 'source', sourceIds: ['s1'], status: 'verified' }]
   const claimIds = validateClaims(claims, sourceIds)
   const reviews = [
