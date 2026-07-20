@@ -7,6 +7,32 @@ import { fileURLToPath } from 'node:url'
 const bookRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const read = (relativePath) => fs.readFileSync(path.join(bookRoot, relativePath), 'utf8')
 const json = (relativePath) => JSON.parse(read(relativePath))
+const guideFiles = [
+  '00-quick-start.md',
+  '01-choose-tea.md',
+  '02-tools-and-water.md',
+  '03-sheng.md',
+  '04-shou.md',
+  '05-simple-methods.md',
+  '06-tasting.md',
+  '07-storage-and-safety.md',
+]
+
+const guideManuscript = () => guideFiles
+  .map((name) => read(`manuscript/guide/${name}`))
+  .join('\n')
+
+const guidePage = (pageId) => {
+  const marker = `<!-- page:${pageId} -->`
+  for (const name of guideFiles) {
+    const manuscript = read(`manuscript/guide/${name}`)
+    const start = manuscript.indexOf(marker)
+    if (start === -1) continue
+    const next = manuscript.indexOf('<!-- page:G-P', start + marker.length)
+    return manuscript.slice(start, next === -1 ? manuscript.length : next)
+  }
+  assert.fail(`missing guide page ${pageId}`)
+}
 
 const collectVisibleFlatplanText = (value, key = '') => {
   if (Array.isArray(value)) return value.flatMap((item) => collectVisibleFlatplanText(item))
@@ -81,6 +107,69 @@ test('corrects extraction, infusion timing, and storage safety in the concise gu
   assert.match(storage, /сенсорн[а-яё]* осмотр[^.]*очевидн[а-яё]* поврежден/iu)
   assert.match(storage, /ополаскивание и кипя(?:чение|ток)[^.]*не (?:являются|заменяют) лабораторн/iu)
   assert.match(storage, /не (?:доказывают|устанавливают) отсутстви[а-яё]* загрязнен/iu)
+})
+
+test('opens the guide for a novice before giving the first numeric recipe', () => {
+  const firstPage = guidePage('G-P001')
+  const numericRecipe = firstPage.search(/\d+\s*(?:г|мл|°C|секунд)/u)
+  assert.ok(numericRecipe > 0, 'G-P001 must retain a numeric starting recipe')
+
+  const onboarding = firstPage.slice(0, numericRecipe)
+  assert.match(onboarding, /гид\s+(?:предназначен|написан)\s+для[^.]*без специальной подготовки/iu)
+  assert.match(onboarding, /сосуд[^.]*известн[а-яё]* объ[её]м/iu)
+  assert.match(onboarding, /полностью отделить настой/iu)
+  assert.match(onboarding, /чайник/iu)
+  assert.match(onboarding, /чист[а-яё]* вод/iu)
+  assert.match(onboarding, /весы[^.]*термометр[^.]*полезн/iu)
+  assert.match(onboarding, /маркировк[а-яё]*[^.]*шэн[^.]*шу/iu)
+  assert.match(onboarding, /если тип[^.]*неизвестен[^.]*мягк[а-яё]* режим/iu)
+  assert.match(onboarding, /не[^.]*категори[а-яё]*[^.]*по цвету/iu)
+
+  assert.doesNotMatch(guideManuscript(), /безопасная чашка/iu)
+})
+
+test('separates adaptive brewing from controlled comparison and standardizes recipe cards', () => {
+  const guide = guideManuscript()
+  for (const concept of ['стартовый диапазон', 'адаптивная настройка', 'контролируемое сравнение']) {
+    assert.match(guide, new RegExp(concept, 'iu'), concept)
+  }
+
+  const firstPage = guidePage('G-P001')
+  assert.match(firstPage, /стартов[а-яё]* редакционн[а-яё]* ориентир/iu)
+  assert.match(firstPage, /не (?:являются|считаются) стандартом[^.]*не гарантируют/iu)
+  assert.match(firstPage, /адаптивн[а-яё]* настройк[а-яё]*[^.]*в пределах (?:одной )?сессии/iu)
+  assert.match(firstPage, /контролируем[а-яё]* сравнени[а-яё]*[^.]*две свеж[а-яё]* эквивалентн[а-яё]* порци/iu)
+  assert.match(firstPage, /контролируем[а-яё]* сравнени[а-яё]*[\s\S]*одн[а-яё]* величин[а-яё]*[\s\S]*повтор[а-яё]* исходн[а-яё]* режим/iu)
+
+  const recipePages = [
+    'G-P018', 'G-P019',
+    'G-P022', 'G-P023', 'G-P024', 'G-P025',
+    'G-P030', 'G-P031', 'G-P032', 'G-P033',
+    'G-P037', 'G-P038', 'G-P039', 'G-P040', 'G-P041', 'G-P042',
+  ]
+  for (const pageId of recipePages) {
+    const page = guidePage(pageId)
+    for (const field of ['Стартовый диапазон', 'Наблюдайте', 'Первая коррекция', 'Остановитесь', 'Для сравнения']) {
+      assert.match(page, new RegExp(`\\*\\*${field}:\\*\\*`, 'u'), `${pageId}: ${field}`)
+    }
+    assert.doesNotMatch(page, /\*\*(?:Исходная карточка|Следующий настой|Устранение ошибки|Остановка|Одна переменная):\*\*/u, pageId)
+  }
+})
+
+test('closes every guide section and the whole guide with an operational checkpoint', () => {
+  for (const name of guideFiles) {
+    const manuscript = read(`manuscript/guide/${name}`)
+    for (const field of ['Сделайте', 'Запишите', 'Остановитесь']) {
+      assert.match(manuscript, new RegExp(`\\*\\*${field}:\\*\\*`, 'u'), `${name}: ${field}`)
+    }
+  }
+
+  const finalPage = guidePage('G-P048')
+  assert.match(finalPage, /\*\*Итог всего гида\.\*\*/u)
+  assert.match(finalPage, /стартов[а-яё]* диапазон/iu)
+  assert.match(finalPage, /адаптивн[а-яё]* настройк/iu)
+  assert.match(finalPage, /контролируем[а-яё]* сравнени/iu)
+  assert.match(finalPage, /\*\*Сделайте:\*\*[\s\S]*\*\*Запишите:\*\*[\s\S]*\*\*Остановитесь:\*\*/u)
 })
 
 test('provides reader navigation, publication notes, and an editorial style sheet', () => {
