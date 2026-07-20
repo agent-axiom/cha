@@ -61,8 +61,7 @@ const sharedSteps = [
 export const processSteps: ProcessStep[] = [
   ...sharedSteps.map((step) => ({
     ...step,
-    id: `sheng-${step.id}`,
-    path: 'sheng' as const,
+    path: 'shared' as const,
     sourceIds: ['gbt-22111', 'lv-2013'],
   })),
   {
@@ -85,12 +84,6 @@ export const processSteps: ProcessStep[] = [
     transformation: 'Профиль чая может меняться; направление зависит от партии и условий хранения.',
     sourceIds: ['fan-2022', 'zhang-2013'],
   },
-  ...sharedSteps.map((step) => ({
-    ...step,
-    id: `shou-${step.id}`,
-    path: 'shou' as const,
-    sourceIds: ['gbt-22111', 'lv-2013'],
-  })),
   {
     id: 'shou-wodui',
     path: 'shou',

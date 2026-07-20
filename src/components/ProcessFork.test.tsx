@@ -2,9 +2,25 @@ import { render, screen, within } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 import { processSteps } from '../content/process'
 import { sourceById } from '../content/sources'
+import { sourceCitationLabel } from './SourceCitation'
 import { ProcessFork } from './ProcessFork'
 
 describe('ProcessFork', () => {
+  it('renders the shared maocha sequence once before branch-only steps', () => {
+    render(<ProcessFork selectedPath="sheng" />)
+
+    const shared = screen.getByRole('list', { name: /общие этапы до шайцин-маоча/i })
+    const sheng = screen.getByRole('list', { name: /этапы шэн/i })
+    const shou = screen.getByRole('list', { name: /этапы шу/i })
+
+    expect(within(shared).getAllByRole('listitem')).toHaveLength(7)
+    expect(within(sheng).getAllByRole('listitem')).toHaveLength(2)
+    expect(within(shou).getAllByRole('listitem')).toHaveLength(3)
+    expect(screen.getAllByRole('heading', { name: 'Свежий лист' })).toHaveLength(1)
+    expect(within(sheng).queryByRole('heading', { name: 'Свежий лист' })).not.toBeInTheDocument()
+    expect(within(shou).queryByRole('heading', { name: 'Свежий лист' })).not.toBeInTheDocument()
+  })
+
   it('keeps wet piling exclusive to the shou path', () => {
     render(<ProcessFork selectedPath="sheng" />)
 
@@ -52,7 +68,10 @@ describe('ProcessFork', () => {
     expectedSourceIds.forEach((sourceId) => {
       const source = sourceById.get(sourceId)
       expect(source, `missing site source ${sourceId}`).toBeDefined()
-      expect(within(sourceLinks).getByRole('link', { name: source?.author })).toHaveAttribute(
+      const label = source ? sourceCitationLabel(source) : ''
+      expect(within(sourceLinks).getByRole('link', {
+        name: (accessibleName) => accessibleName.startsWith(label),
+      })).toHaveAttribute(
         'href',
         source?.href,
       )
@@ -63,5 +82,18 @@ describe('ProcessFork', () => {
     const { container } = render(<ProcessFork selectedPath="sheng" />)
 
     expect(container.querySelectorAll('li[aria-current]')).toHaveLength(0)
+  })
+
+  it('highlights one complete branch without hiding or disabling the other', () => {
+    const { container } = render(<ProcessFork selectedPath="shou" />)
+
+    const sheng = container.querySelector<HTMLElement>('.process-path--sheng')
+    const shou = container.querySelector<HTMLElement>('.process-path--shou')
+    expect(sheng).toHaveAttribute('data-highlighted', 'false')
+    expect(shou).toHaveAttribute('data-highlighted', 'true')
+    expect(sheng).not.toHaveAttribute('hidden')
+    expect(shou).not.toHaveAttribute('hidden')
+    expect(screen.getByRole('list', { name: /этапы шэн/i })).toBeInTheDocument()
+    expect(screen.getByRole('list', { name: /этапы шу/i })).toBeInTheDocument()
   })
 })

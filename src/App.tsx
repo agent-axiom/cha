@@ -9,6 +9,7 @@ import { ProcessFork } from './components/ProcessFork'
 import { SiteHeader } from './components/SiteHeader'
 import { SourcesSection } from './components/SourcesSection'
 import { TeaMountainsMap } from './components/TeaMountainsMap'
+import { TeaPathsOverview } from './components/TeaPathsOverview'
 
 export function App() {
   const [teaPath, setTeaPath] = useState<TeaPath>('sheng')
@@ -21,6 +22,7 @@ export function App() {
       <SiteHeader />
       <main id="content">
         <Hero teaPath={teaPath} onTeaPathChange={setTeaPath} />
+        <TeaPathsOverview />
         <HistoryTimeline />
         <MythologyCabinet />
         <TeaMountainsMap />

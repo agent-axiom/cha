@@ -20,13 +20,13 @@ const options: Array<{
     value: 'shou',
     name: 'Шу',
     chinese: '熟',
-    note: 'зрелый · влажное кучевание',
+    note: 'водуй · влажное кучевание',
   },
 ]
 
 export function TeaPathSwitch({ value, onChange }: TeaPathSwitchProps) {
   return (
-    <div className="tea-switch" role="group" aria-label="Выберите путь пуэра">
+    <div className="tea-switch" role="group" aria-label="Подсветить путь">
       {options.map((option) => (
         <button
           className="tea-switch__option"

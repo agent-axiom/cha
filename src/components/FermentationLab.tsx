@@ -1,6 +1,8 @@
 import { useId, useState, type CSSProperties } from 'react'
 import { fermentationLayers } from '../content/process'
 import { sourceById } from '../content/sources'
+import { InlineDefinition } from './InlineDefinition'
+import { SourceCitation } from './SourceCitation'
 
 const MODEL_DISCLAIMER = 'Это не микрофотография и не модель всего пуэра.'
 
@@ -99,17 +101,22 @@ export function FermentationLab() {
           <article className="lab-note" aria-live="polite">
             <p className="eyebrow">{active.eyebrow}</p>
             <h3>{active.title}</h3>
+            {active.id === 'microbes' ? (
+              <p className="lab-note__glossary">
+                Здесь{' '}
+                <InlineDefinition
+                  term="таксон"
+                  definition="Группа организмов, выделенная в биологической классификации, например род или вид."
+                />{' '}
+                — название классификационной группы, обнаруженной анализом.
+              </p>
+            ) : null}
             <p>{active.description}</p>
             <div className="source-links" aria-label="Источники объяснения">
               {active.sourceIds.map((sourceId) => {
                 const source = sourceById.get(sourceId)
                 if (!source) return null
-                return (
-                  <a key={sourceId} href={source.href} target="_blank" rel="noreferrer">
-                    {source.author}
-                    <span aria-hidden="true"> ↗</span>
-                  </a>
-                )
+                return <SourceCitation key={sourceId} source={source} />
               })}
             </div>
           </article>

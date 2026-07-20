@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { regions } from '../content/regions'
 import { sourceById } from '../content/sources'
+import { SourceCitation } from './SourceCitation'
 
 export function TeaMountainsMap() {
   const [selectedId, setSelectedId] = useState(regions[0]?.id ?? '')
@@ -80,12 +81,7 @@ export function TeaMountainsMap() {
               const source = sourceById.get(sourceId)
               if (!source) return null
 
-              return (
-                <a key={sourceId} href={source.href} target="_blank" rel="noreferrer">
-                  {source.author}
-                  <span aria-hidden="true"> ↗</span>
-                </a>
-              )
+              return <SourceCitation key={sourceId} source={source} />
             })}
           </div>
         </article>

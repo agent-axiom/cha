@@ -11,7 +11,7 @@ describe('TeaMountainsMap', () => {
     await user.click(screen.getByRole('button', { name: /ибан/i }))
 
     expect(screen.getByRole('heading', { name: /ибан/i })).toBeInTheDocument()
-    expect(screen.getByText(/чай э.*1926/i)).toBeInTheDocument()
+    expect(screen.getByText(/чай э.*1926/i, { selector: 'p' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /чай э/i })).toBeInTheDocument()
     expect(screen.queryByText(/особо отмеченный чжао/i)).not.toBeInTheDocument()
   })

@@ -1,6 +1,8 @@
-import { render, screen, within } from '@testing-library/react'
+import { fireEvent, render, screen, within } from '@testing-library/react'
 import axe from 'axe-core'
 import { describe, expect, it } from 'vitest'
+import { sourceById } from './content/sources'
+import { sourceCitationLabel } from './components/SourceCitation'
 import { App } from './App'
 
 describe('application shell', () => {
@@ -14,12 +16,45 @@ describe('application shell', () => {
       }),
     ).toBeInTheDocument()
     expect(screen.getByRole('navigation', { name: /разделы/i })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /перейти к истории/i })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: /сравнить два пути/i })).toHaveAttribute(
       'href',
-      '#history',
+      '#paths-overview',
     )
     expect(screen.getByRole('button', { name: /шэн/i })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /шу/i })).toBeInTheDocument()
+  })
+
+  it('places the novice reader contract in the hero with exactly three outcomes', () => {
+    render(<App />)
+
+    const hero = screen.getByRole('region', { name: /две судьбы одного листа/i })
+    expect(within(hero).getByText(/онлайн-компаньон к книге «Пуэр\. Живая гора»/i)).toBeInTheDocument()
+    expect(within(hero).getByText(/не требует специальной подготовки/i)).toBeInTheDocument()
+    const outcomes = within(hero).getByRole('list', { name: /три результата чтения/i })
+    expect(within(outcomes).getAllByRole('listitem')).toHaveLength(3)
+    expect(outcomes).toHaveTextContent(/различать шэн и шу/i)
+    expect(outcomes).toHaveTextContent(/легенду.*доказательств/i)
+    expect(outcomes).toHaveTextContent(/утверждения о здоровье.*осторожно/i)
+  })
+
+  it('describes shou as a managed process rather than accelerated maturity', () => {
+    render(<App />)
+    fireEvent.click(screen.getByRole('button', { name: /шу/i }))
+
+    expect(screen.queryByText(/зрелость за недели/i)).not.toBeInTheDocument()
+    expect(screen.getByText(/управляемое влажное преобразование.*недел/i)).toBeInTheDocument()
+  })
+
+  it('labels the path control as highlighting and keeps both craft branches present', () => {
+    const { container } = render(<App />)
+
+    const control = screen.getByRole('group', { name: /подсветить путь/i })
+    fireEvent.click(within(control).getByRole('button', { name: /шу/i }))
+    const craft = container.querySelector('#craft') as HTMLElement
+    expect(within(craft).getByRole('list', { name: /этапы шэн/i })).toBeInTheDocument()
+    expect(within(craft).getByRole('list', { name: /этапы шу/i })).toBeInTheDocument()
+    expect(craft.querySelector('.process-path--sheng')).toHaveAttribute('data-highlighted', 'false')
+    expect(craft.querySelector('.process-path--shou')).toHaveAttribute('data-highlighted', 'true')
   })
 
   it('lets keyboard users skip directly to the main story', () => {
@@ -40,6 +75,7 @@ describe('application shell', () => {
     )
     expect(mainSectionIds).toEqual([
       'top',
+      'paths-overview',
       'history',
       'myths',
       'geography',
@@ -53,6 +89,7 @@ describe('application shell', () => {
         .slice(1)
         .map((section) => section.querySelector('.eyebrow')?.textContent),
     ).toEqual([
+      'Перед началом · Два пути',
       '01 · Корни',
       '02 · Мифология',
       '03 · Терруар',
@@ -81,6 +118,33 @@ describe('application shell', () => {
     ])
   })
 
+  it('puts a concise two-path overview immediately after the hero', () => {
+    render(<App />)
+
+    const main = screen.getByRole('main')
+    const overview = main.children[1]
+    expect(overview).toHaveAttribute('id', 'paths-overview')
+    expect(within(overview as HTMLElement).getByRole('heading', {
+      level: 2,
+      name: /сначала — карта двух путей/i,
+    })).toBeInTheDocument()
+    expect(within(overview as HTMLElement).getByRole('heading', { level: 3, name: 'Шэн' })).toBeInTheDocument()
+    expect(within(overview as HTMLElement).getByRole('heading', { level: 3, name: 'Шу' })).toBeInTheDocument()
+    expect(overview).toHaveTextContent(/общая основа.*шайцин-маоча/i)
+    expect(within(overview as HTMLElement).getByRole('link', {
+      name: /перейти к полной технологической схеме/i,
+    })).toHaveAttribute('href', '#craft')
+  })
+
+  it('connects the site, album, and brewing guide without claiming print readiness', () => {
+    render(<App />)
+
+    expect(screen.getByRole('link', { name: /интерактивный сайт/i })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /подарочный альбом/i })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /краткий гид/i })).toBeInTheDocument()
+    expect(document.body).not.toHaveTextContent(/готово к печати|print-ready/i)
+  })
+
   it('has no automatically detectable accessibility violations', async () => {
     render(<App />)
 
@@ -91,5 +155,21 @@ describe('application shell', () => {
     })
 
     expect(results.violations).toEqual([])
+  })
+
+  it('uses human-readable author, year, title, and locator labels for inline citations', () => {
+    const { container } = render(<App />)
+
+    const citations = Array.from(
+      container.querySelectorAll<HTMLAnchorElement>('.source-links a'),
+    )
+    expect(citations.length).toBeGreaterThan(0)
+    for (const citation of citations) {
+      const source = [...sourceById.values()].find(
+        ({ href }) => href === citation.getAttribute('href'),
+      )
+      expect(source).toBeDefined()
+      expect(citation).toHaveTextContent(source ? sourceCitationLabel(source) : '')
+    }
   })
 })

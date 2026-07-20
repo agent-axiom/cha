@@ -3,7 +3,11 @@ import {
   furtherReadingSources,
 } from '../content/citations'
 import { siteEditorialReviewDate } from '../content/editorial'
-import type { Source, SourcePublicationClass } from '../content/types'
+import {
+  sourceDocumentClassLabels,
+  sourceEvidenceRoleLabels,
+} from '../content/sources'
+import type { Source } from '../content/types'
 import { formatSourceCount } from '../lib/formatSourceCount'
 
 const groups: Array<{
@@ -16,53 +20,51 @@ const groups: Array<{
     id: 'primary-asian',
     title: 'Китайские исторические тексты, издания и копии',
     subtitle: 'Факсимиле, копии доступа и каталоги выполняют разные доказательные функции.',
-    matches: (source) => source.group === 'primary-asian' && source.publicationClass !== 'retrospective',
+    matches: (source) => source.group === 'primary-asian' && [
+      'primary-text',
+      'textual-witness',
+      'catalog-provenance',
+      'disputed-retrospective-attribution',
+    ].includes(source.evidenceRole),
   },
   {
     id: 'institutional-retrospectives',
     title: 'Институциональные ретроспективы',
     subtitle: 'Поздние музейные, ведомственные и корпоративные версии событий, а не синхронные документы.',
-    matches: (source) => source.publicationClass === 'retrospective',
+    matches: (source) => [
+      'institutional-retrospective',
+      'corporate-retrospective',
+    ].includes(source.evidenceRole),
   },
   {
     id: 'research-asian',
     title: 'Азиатские исследователи',
     subtitle: 'История, химия, производство и безопасность из университетов региона.',
-    matches: (source) => source.group === 'research-asian' && source.publicationClass === 'research',
+    matches: (source) => source.group === 'research-asian' && source.evidenceRole === 'research-evidence',
   },
   {
     id: 'research-western',
     title: 'Западные исследования',
     subtitle: 'Историография Китая, клинические и токсикологические работы.',
-    matches: (source) => source.group === 'research-western' && source.publicationClass === 'research',
+    matches: (source) => source.group === 'research-western' && source.evidenceRole === 'research-evidence',
   },
   {
     id: 'trial-registrations',
     title: 'Реестры исследований',
     subtitle: 'Регистрационные записи описывают план исследования, но не заменяют опубликованные результаты.',
-    matches: (source) => source.publicationClass === 'trial-registration',
+    matches: (source) => source.evidenceRole === 'trial-registry-record',
   },
   {
     id: 'guidance',
     title: 'Стандарты и рекомендации',
     subtitle: 'Официальные определения, географическое указание и безопасность кофеина.',
-    matches: (source) => source.group === 'guidance' && source.publicationClass === 'standard-guidance',
+    matches: (source) => source.group === 'guidance' && [
+      'normative-standard',
+      'safety-guidance',
+      'contextual-institutional-record',
+    ].includes(source.evidenceRole),
   },
 ]
-
-const publicationClassLabels: Record<SourcePublicationClass, string> = {
-  'primary-text': 'Первичный текст',
-  facsimile: 'Факсимиле',
-  'critical-edition': 'Критическое издание',
-  'print-edition-catalog': 'Печатное издание: каталогическая запись',
-  'manuscript-catalog': 'Каталог рукописи; без факсимиле листа',
-  'access-copy': 'Копия доступа',
-  retrospective: 'Ретроспектива',
-  research: 'Исследование',
-  'standard-guidance': 'Стандарт или руководство',
-  'trial-registration': 'Регистрация исследования; результатов нет',
-  'provenance-only': 'Только редакционное происхождение',
-}
 
 interface SourceStratumProps {
   id: 'cited' | 'further-reading'
@@ -73,14 +75,25 @@ interface SourceStratumProps {
 
 function SourceStratum({ id, title, description, entries }: SourceStratumProps) {
   return (
-    <section className="source-stratum" aria-labelledby={`sources-${id}-title`}>
-      <header className="source-stratum__header">
-        <div>
-          <p className="source-stratum__count">{formatSourceCount(entries.length)}</p>
-          <h3 id={`sources-${id}-title`}>{title}</h3>
-        </div>
-        <p>{description}</p>
-      </header>
+    <details
+      className="source-stratum"
+      aria-labelledby={`sources-${id}-title`}
+      open={id === 'cited'}
+    >
+      <summary className="source-stratum__header">
+        <span className="source-stratum__heading">
+          <span className="source-stratum__count">{formatSourceCount(entries.length)}</span>
+          <span
+            className="source-stratum__title"
+            id={`sources-${id}-title`}
+            role="heading"
+            aria-level={3}
+          >
+            {title}
+          </span>
+        </span>
+        <span className="source-stratum__description">{description}</span>
+      </summary>
 
       <div className="source-groups">
         {groups.map((group) => {
@@ -89,18 +102,29 @@ function SourceStratum({ id, title, description, entries }: SourceStratumProps) 
 
           const headingId = `sources-${id}-${group.id}`
           return (
-            <section className="source-group" key={group.id} aria-labelledby={headingId}>
-              <header>
-                <div>
-                  <p className="source-group__count">
+            <details
+              className="source-group"
+              key={group.id}
+              aria-labelledby={headingId}
+              open={id === 'cited'}
+            >
+              <summary>
+                <span className="source-group__heading">
+                  <span className="source-group__count">
                     {formatSourceCount(groupSources.length)}
-                  </p>
-                  <h4 id={headingId} aria-label={`${group.title} — ${title}`}>
+                  </span>
+                  <span
+                    className="source-group__title"
+                    id={headingId}
+                    role="heading"
+                    aria-level={4}
+                    aria-label={`${group.title} — ${title}`}
+                  >
                     {group.title}
-                  </h4>
-                </div>
-                <p>{group.subtitle}</p>
-              </header>
+                  </span>
+                </span>
+                <span className="source-group__description">{group.subtitle}</span>
+              </summary>
               <ol>
                 {groupSources.map((source) => (
                   <li key={source.id} data-source-id={source.id}>
@@ -110,7 +134,8 @@ function SourceStratum({ id, title, description, entries }: SourceStratumProps) 
                         <strong>{source.title}</strong>
                         <small>{source.author} · {source.origin}</small>
                         <span className="source-entry__class">
-                          {publicationClassLabels[source.publicationClass]}
+                          <span>Вид документа: {sourceDocumentClassLabels.get(source.documentClass)}</span>
+                          <span>Роль в книге: {sourceEvidenceRoleLabels.get(source.evidenceRole)}</span>
                         </span>
                         <em>{source.note}</em>
                       </span>
@@ -120,11 +145,11 @@ function SourceStratum({ id, title, description, entries }: SourceStratumProps) 
                   </li>
                 ))}
               </ol>
-            </section>
+            </details>
           )
         })}
       </div>
-    </section>
+    </details>
   )
 }
 

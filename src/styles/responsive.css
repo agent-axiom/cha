@@ -22,6 +22,11 @@
     padding-right: 1rem;
   }
 
+  .reader-contract ol,
+  .section-takeaway ul {
+    grid-template-columns: 1fr;
+  }
+
   .section-heading--split {
     grid-template-columns: 1fr;
     gap: 0.75rem;
@@ -100,8 +105,11 @@
   }
 
   .site-header {
+    display: grid;
+    grid-template-columns: auto 1fr;
     min-height: 60px;
-    overflow: hidden;
+    overflow: visible;
+    background: rgba(5, 12, 9, 0.96);
   }
 
   .site-header__brand span:last-child {
@@ -113,16 +121,63 @@
     height: 1.8rem;
   }
 
-  .site-header nav a {
-    font-size: 0.58rem;
+  .site-header__contents {
+    display: inline-flex;
+    justify-self: end;
+    align-items: center;
+    gap: 0.7rem;
+    min-width: 24px;
+    min-height: 44px;
+    padding: 0.55rem 0.75rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--ink);
+    background: transparent;
+    cursor: pointer;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   .site-header nav {
-    max-width: calc(100vw - 64px);
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    max-width: none;
+    max-height: 0;
+    overflow: hidden;
+    border-bottom: 1px solid transparent;
+    background: rgba(5, 12, 9, 0.98);
+    opacity: 0;
+    visibility: hidden;
+    transition: max-height 180ms ease, opacity 180ms ease, visibility 180ms ease;
+  }
+
+  .site-header nav[data-open='true'] {
+    max-height: 70vh;
+    border-bottom-color: var(--line);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .site-header ul {
+    display: grid;
+    width: auto;
+    padding: 0.7rem 16px 1rem;
+  }
+
+  .site-header nav a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 0.68rem;
   }
 
   .hero {
-    min-height: 850px;
+    min-height: 100svh;
+    padding-block: 6rem 3.5rem;
     align-items: start;
   }
 
@@ -138,7 +193,7 @@
   }
 
   .hero__content {
-    margin-top: 8rem;
+    margin-top: 2rem;
   }
 
   .hero h1 {
@@ -163,6 +218,27 @@
 
   .hero__taxonomy {
     font-size: 0.75rem;
+  }
+
+  .reader-contract ol {
+    gap: 0.5rem;
+  }
+
+  .reader-contract li {
+    font-size: 0.69rem;
+  }
+
+  .paths-overview__routes,
+  .process-shared ol {
+    grid-template-columns: 1fr;
+  }
+
+  .process-shared li:nth-child(odd) {
+    border-right: 0;
+  }
+
+  .section-takeaway ul {
+    grid-template-columns: 1fr;
   }
 
   .tea-switch {
@@ -267,7 +343,7 @@
     opacity: 0.84;
   }
 
-  .process-path[data-active='true'] {
+  .process-path[data-highlighted='true'] {
     transform: none;
   }
 
@@ -320,7 +396,7 @@
     gap: 0.75rem;
   }
 
-  .source-group > header {
+  .source-group > summary {
     grid-template-columns: 1fr;
     gap: 0.5rem;
   }

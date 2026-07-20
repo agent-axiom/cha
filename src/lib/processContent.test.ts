@@ -8,18 +8,19 @@ function chineseTerm(chinese: string | undefined) {
 }
 
 describe('process content', () => {
-  it.each(['sheng', 'shou'] as const)('uses the exact canonical shared chain for %s', (path) => {
+  it('stores the exact canonical shared chain once before either branch', () => {
     const sharedChain = processSteps
-      .filter((step) => step.path === path)
-      .slice(0, canonicalSharedChain.length)
+      .filter((step) => step.path === 'shared')
 
     expect(sharedChain.map((step) => chineseTerm(step.chinese))).toEqual(canonicalSharedChain)
     expect(sharedChain.map((step) => step.order)).toEqual([1, 2, 3, 4, 5, 6, 7])
+    expect(processSteps.filter((step) => step.path === 'sheng').map((step) => step.order)).toEqual([8, 9])
+    expect(processSteps.filter((step) => step.path === 'shou').map((step) => step.order)).toEqual([8, 9, 10])
   })
 
   it('names maocha as sun-dried raw tea and does not assert hand-picking', () => {
     const text = processSteps.map((step) => `${step.title} ${step.summary} ${step.transformation}`).join(' ')
-    const maocha = processSteps.find((step) => step.id === 'sheng-maocha')
+    const maocha = processSteps.find((step) => step.id === 'maocha')
 
     expect(maocha?.summary).toMatch(/шайцин-маоча/i)
     expect(maocha?.summary).toMatch(/чай-сырец солнечной сушки/i)

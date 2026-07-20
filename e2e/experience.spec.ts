@@ -10,10 +10,13 @@ test('switches from Sheng to Shou and keeps source navigation intact', async ({ 
   await expect(heroImage).toBeVisible()
   await expect.poll(() => heroImage.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0)
 
-  const shou = page.getByRole('button', { name: 'Шу зрелый · влажное кучевание' })
+  const shou = page.getByRole('button', { name: 'Шу водуй · влажное кучевание' })
   await shou.click()
   await expect(shou).toHaveAttribute('aria-pressed', 'true')
   await expect(page.locator('.app')).toHaveAttribute('data-tea', 'shou')
+  await expect(page.locator('.process-path')).toHaveCount(2)
+  await expect(page.locator('.process-path--sheng')).toBeAttached()
+  await expect(page.locator('.process-path--shou')).toHaveAttribute('data-highlighted', 'true')
 
   await page.getByRole('link', { name: 'Медицина', exact: true }).click()
   await expect(page).toHaveURL(/#medicine$/)
@@ -53,4 +56,13 @@ test('fits a narrow screen without document-level horizontal movement', async ({
   expect(geometry.titleLeft).toBeGreaterThanOrEqual(0)
   expect(geometry.titleRight).toBeLessThanOrEqual(geometry.viewport)
   await expect(page.getByRole('button', { name: 'Шэн сырой · меняется медленно' })).toBeVisible()
+
+  const contents = page.getByRole('button', { name: 'Содержание' })
+  await expect(contents).toBeVisible()
+  const contentsBox = await contents.boundingBox()
+  expect(contentsBox?.width).toBeGreaterThanOrEqual(24)
+  expect(contentsBox?.height).toBeGreaterThanOrEqual(24)
+  await contents.click()
+  await expect(contents).toHaveAttribute('aria-expanded', 'true')
+  await expect(page.getByRole('navigation', { name: 'Разделы' })).toBeVisible()
 })

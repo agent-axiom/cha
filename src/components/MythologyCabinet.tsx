@@ -1,5 +1,6 @@
 import { myths } from '../content/mythology'
 import { sourceById } from '../content/sources'
+import { SourceCitation } from './SourceCitation'
 
 export function MythologyCabinet() {
   return (
@@ -43,12 +44,7 @@ export function MythologyCabinet() {
               {myth.sourceIds.map((sourceId) => {
                 const source = sourceById.get(sourceId)
                 if (!source) return null
-                return (
-                  <a key={sourceId} href={source.href} target="_blank" rel="noreferrer">
-                    {source.author}
-                    <span aria-hidden="true"> ↗</span>
-                  </a>
-                )
+                return <SourceCitation key={sourceId} source={source} />
               })}
             </div>
           </article>

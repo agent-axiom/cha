@@ -1,6 +1,7 @@
 import { history } from '../content/history'
 import { sourceById } from '../content/sources'
 import type { HistoryKind } from '../content/types'
+import { SourceCitation } from './SourceCitation'
 
 const kindLabels: Record<HistoryKind, string> = {
   legend: 'Легенда',
@@ -33,20 +34,18 @@ export function HistoryTimeline() {
               </div>
               <h3>{entry.title}</h3>
               <p className="timeline__summary">{entry.summary}</p>
-              <p className="timeline__detail">{entry.detail}</p>
-              <div className="source-links" aria-label="Источники записи">
-                {entry.sourceIds.map((sourceId) => {
-                  const source = sourceById.get(sourceId)
-                  if (!source) return null
+              <details className="timeline__disclosure">
+                <summary>Подробнее и источники</summary>
+                <p className="timeline__detail">{entry.detail}</p>
+                <div className="source-links" aria-label="Источники записи">
+                  {entry.sourceIds.map((sourceId) => {
+                    const source = sourceById.get(sourceId)
+                    if (!source) return null
 
-                  return (
-                    <a key={sourceId} href={source.href} target="_blank" rel="noreferrer">
-                      {source.title}
-                      <span aria-hidden="true"> ↗</span>
-                    </a>
-                  )
-                })}
-              </div>
+                    return <SourceCitation key={sourceId} source={source} />
+                  })}
+                </div>
+              </details>
             </article>
           </li>
         ))}

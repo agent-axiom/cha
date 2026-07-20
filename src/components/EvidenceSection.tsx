@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { medicineClaims } from '../content/medicine'
 import { sourceById } from '../content/sources'
 import type { MedicalEvidenceType } from '../content/types'
+import { InlineDefinition } from './InlineDefinition'
+import { SourceCitation } from './SourceCitation'
 
 type EvidenceFilter = 'all' | 'historical' | 'laboratory' | 'human' | 'safety'
 
@@ -76,6 +78,15 @@ export function EvidenceSection() {
             key={claim.id}
           >
             <h3 id={`${claim.id}-title`}>{claim.title}</h3>
+            {claim.id === 'human-metabolic-trials' ? (
+              <p className="evidence-card__glossary">
+                <InlineDefinition
+                  term="суррогатный исход"
+                  definition="Измеряемый промежуточный показатель, который используют вместо события, непосредственно важного для здоровья."
+                />{' '}
+                не равен доказанному улучшению здоровья.
+              </p>
+            ) : null}
             <p>{claim.summary}</p>
             <dl className="evidence-card__meta">
               <div className="evidence-card__meta-row evidence-card__meta-row--type">
@@ -99,12 +110,7 @@ export function EvidenceSection() {
               {claim.sourceIds.map((sourceId) => {
                 const source = sourceById.get(sourceId)
                 if (!source) return null
-                return (
-                  <a key={sourceId} href={source.href} target="_blank" rel="noreferrer">
-                    {source.author}
-                    <span aria-hidden="true"> ↗</span>
-                  </a>
-                )
+                return <SourceCitation key={sourceId} source={source} />
               })}
             </div>
           </article>

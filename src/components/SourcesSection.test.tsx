@@ -21,7 +21,7 @@ describe('source bibliography', () => {
         'shennong-myth',
         'myth-wuhou',
         'puer-city',
-        'sheng-fresh-leaf',
+        'fresh-leaf',
         'microbes',
         'caffeine-safety',
       ]),
@@ -77,7 +77,7 @@ describe('source bibliography', () => {
       screen.getByText(/ссылки на источники открываются в новой вкладке/i),
     ).toBeInTheDocument()
     expect(
-      screen.getAllByRole('link', { name: /открывается в новой вкладке/i }),
+      container.querySelectorAll('.source-group a'),
     ).toHaveLength(sources.length)
 
     const renderedIds = Array.from(
@@ -90,10 +90,10 @@ describe('source bibliography', () => {
 
     const citedStratum = screen
       .getByRole('heading', { level: 3, name: 'Цитируются на этой странице' })
-      .closest('section')
+      .closest('details')
     const furtherReadingStratum = screen
       .getByRole('heading', { level: 3, name: 'Дальнейшее чтение' })
-      .closest('section')
+      .closest('details')
     expect(within(citedStratum as HTMLElement).getByText(formatSourceCount(citedSources.length))).toBeInTheDocument()
     expect(within(furtherReadingStratum as HTMLElement).getByText(formatSourceCount(furtherReadingSources.length))).toBeInTheDocument()
     expect(
@@ -104,7 +104,7 @@ describe('source bibliography', () => {
       const entry = container.querySelector<HTMLElement>(`[data-source-id="${id}"]`)
       expect(entry).toHaveTextContent(/ретроспектива/i)
       expect(
-        within(entry?.closest('section') as HTMLElement).getByRole('heading', {
+        within(entry?.closest('details') as HTMLElement).getByRole('heading', {
           level: 4,
           name: /институциональные ретроспективы/i,
         }),
@@ -112,5 +112,107 @@ describe('source bibliography', () => {
     }
     expect(container.querySelector('[data-source-id="zhao-facsimile-pku"]')).toHaveTextContent(/факсимиле/i)
     expect(container.querySelector('[data-source-id="ruan-dianbi-catalog"]')).toHaveTextContent(/каталог рукописи/i)
+  })
+
+  it('renders canonical document and evidence-role labels for disputed and institutional records', () => {
+    const { container } = render(<SourcesSection />)
+
+    expect(
+      container.querySelector('[data-source-id="guangzhou-db4401-258-2024"]'),
+    ).toHaveTextContent(/Стандарт[\s\S]*Институциональная ретроспектива/u)
+    expect(
+      container.querySelector('[data-source-id="unesco-jingmai"]'),
+    ).toHaveTextContent(
+      /Институциональная запись о наследии[\s\S]*Контекстная институциональная запись/u,
+    )
+    expect(
+      container.querySelector('[data-source-id="ruan-puer-cha-ji-access"]'),
+    ).toHaveTextContent(
+      /Копия исторического текста[\s\S]*Спорная поздняя атрибуция/u,
+    )
+  })
+
+  it('keeps semantic grouping and labels unchanged under a contradictory legacy class', () => {
+    const source = sources.find(
+      ({ id }) => id === 'guangzhou-db4401-258-2024',
+    ) as (typeof sources)[number] & { publicationClass?: string }
+    const baselineRender = render(<SourcesSection />)
+    const baselineEntry = baselineRender.container.querySelector(
+      '[data-source-id="guangzhou-db4401-258-2024"]',
+    )
+    const baseline = {
+      group: baselineEntry?.closest('.source-group')
+        ?.querySelector('[role="heading"][aria-level="4"]')?.textContent,
+      labels: baselineEntry?.textContent,
+    }
+    baselineRender.unmount()
+
+    source.publicationClass = 'provenance-only'
+    try {
+      const mutatedRender = render(<SourcesSection />)
+      const mutatedEntry = mutatedRender.container.querySelector(
+        '[data-source-id="guangzhou-db4401-258-2024"]',
+      )
+      expect({
+        group: mutatedEntry?.closest('.source-group')
+          ?.querySelector('[role="heading"][aria-level="4"]')?.textContent,
+        labels: mutatedEntry?.textContent,
+      }).toEqual(baseline)
+    } finally {
+      delete source.publicationClass
+    }
+  })
+
+  it('opens cited strata and groups while keeping further reading collapsed', () => {
+    render(<SourcesSection />)
+
+    const citedHeading = screen.getByRole('heading', {
+      level: 3,
+      name: 'Цитируются на этой странице',
+    })
+    const furtherHeading = screen.getByRole('heading', {
+      level: 3,
+      name: 'Дальнейшее чтение',
+    })
+    const cited = citedHeading.closest('details')
+    const further = furtherHeading.closest('details')
+    expect(cited).toHaveAttribute('open')
+    expect(further).not.toHaveAttribute('open')
+    expect(cited?.querySelector('summary')).toHaveTextContent(/цитируются на этой странице/i)
+    expect(further?.querySelector('summary')).toHaveTextContent(/дальнейшее чтение/i)
+
+    const citedGroups = Array.from(
+      cited?.querySelectorAll<HTMLDetailsElement>('.source-group') ?? [],
+    )
+    expect(citedGroups.length).toBeGreaterThan(0)
+    expect(citedGroups.every((group) => group.open)).toBe(true)
+    const furtherGroups = Array.from(
+      further?.querySelectorAll<HTMLDetailsElement>('.source-group') ?? [],
+    )
+    expect(furtherGroups.length).toBeGreaterThan(0)
+    expect(furtherGroups.every((group) => !group.open)).toBe(true)
+  })
+
+  it('uses phrasing content inside every native disclosure summary', () => {
+    const { container } = render(<SourcesSection />)
+    const summaries = Array.from(
+      container.querySelectorAll('.source-stratum > summary, .source-group > summary'),
+    )
+
+    expect(summaries.length).toBeGreaterThan(0)
+    expect(
+      summaries.every((summary) =>
+        Array.from(summary.children).every(({ tagName }) => tagName === 'SPAN'),
+      ),
+    ).toBe(true)
+  })
+
+  it('keeps internal source IDs out of reader-visible bibliography labels', () => {
+    const { container } = render(<SourcesSection />)
+    const visibleCopy = container.textContent ?? ''
+
+    for (const source of sources) {
+      expect(visibleCopy).not.toContain(`Ключ источника: ${source.id}`)
+    }
   })
 })

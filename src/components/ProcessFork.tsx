@@ -1,6 +1,7 @@
 import { processSteps } from '../content/process'
 import { sourceById } from '../content/sources'
 import type { TeaPath } from '../content/types'
+import { SourceCitation } from './SourceCitation'
 
 interface ProcessForkProps {
   selectedPath: TeaPath
@@ -17,8 +18,39 @@ function stepsForPath(path: TeaPath) {
     .sort((first, second) => first.order - second.order)
 }
 
+const sharedSteps = processSteps
+  .filter((step) => step.path === 'shared')
+  .sort((first, second) => first.order - second.order)
+
+interface ProcessStepListProps {
+  label: string
+  steps: typeof processSteps
+}
+
+function ProcessStepList({ label, steps }: ProcessStepListProps) {
+  return (
+    <ol aria-label={label}>
+      {steps.map((step) => (
+        <li key={step.id}>
+          <span className="process-step__number" aria-hidden="true">
+            {String(step.order).padStart(2, '0')}
+          </span>
+          <div>
+            {step.chinese ? <p className="process-step__chinese">{step.chinese}</p> : null}
+            <h4>{step.title}</h4>
+            <p>{step.summary}</p>
+            <details>
+              <summary>Что меняется</summary>
+              <p>{step.transformation}</p>
+            </details>
+          </div>
+        </li>
+      ))}
+    </ol>
+  )
+}
+
 export function ProcessFork({ selectedPath }: ProcessForkProps) {
-  const visibleSteps = stepsForPath(selectedPath)
   const displayedSourceIds = [
     ...new Set(processSteps.flatMap((step) => step.sourceIds)),
   ]
@@ -49,15 +81,23 @@ export function ProcessFork({ selectedPath }: ProcessForkProps) {
         </figcaption>
       </figure>
 
+      <article className="process-shared">
+        <header>
+          <p className="eyebrow">Общая основа</p>
+          <h3>До развилки: шайцин-маоча</h3>
+        </header>
+        <ProcessStepList label="Общие этапы до шайцин-маоча" steps={sharedSteps} />
+      </article>
+
       <div className="process-fork">
         {(['sheng', 'shou'] as const).map((path) => {
           const meta = pathMeta[path]
-          const steps = path === selectedPath ? visibleSteps : stepsForPath(path)
+          const steps = stepsForPath(path)
 
           return (
             <article
               className={`process-path process-path--${path}`}
-              data-active={selectedPath === path}
+              data-highlighted={selectedPath === path}
               key={path}
             >
               <header className="process-path__header">
@@ -68,24 +108,7 @@ export function ProcessFork({ selectedPath }: ProcessForkProps) {
                 </div>
               </header>
 
-              <ol aria-label={`Этапы ${meta.name}`}>
-                {steps.map((step) => (
-                  <li key={step.id}>
-                    <span className="process-step__number" aria-hidden="true">
-                      {String(step.order).padStart(2, '0')}
-                    </span>
-                    <div>
-                      {step.chinese ? <p className="process-step__chinese">{step.chinese}</p> : null}
-                      <h4>{step.title}</h4>
-                      <p>{step.summary}</p>
-                      <details>
-                        <summary>Что меняется</summary>
-                        <p>{step.transformation}</p>
-                      </details>
-                    </div>
-                  </li>
-                ))}
-              </ol>
+              <ProcessStepList label={`Этапы ${meta.name}`} steps={steps} />
             </article>
           )
         })}
@@ -98,12 +121,7 @@ export function ProcessFork({ selectedPath }: ProcessForkProps) {
         {displayedSourceIds.map((sourceId) => {
           const source = sourceById.get(sourceId)
           if (!source) return null
-          return (
-            <a key={sourceId} href={source.href} target="_blank" rel="noreferrer">
-              {source.author}
-              <span aria-hidden="true"> ↗</span>
-            </a>
-          )
+          return <SourceCitation key={sourceId} source={source} />
         })}
       </div>
     </section>

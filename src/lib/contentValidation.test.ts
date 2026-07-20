@@ -13,7 +13,9 @@ import {
 } from '../content/sources'
 import { findBrokenSourceRefs, findDuplicateIds } from './contentValidation'
 
-function makeBookSource(overrides: Partial<BookSource> = {}): BookSource {
+function makeBookSource(
+  overrides: Partial<BookSource> & Record<string, unknown> = {},
+): BookSource {
   return {
     id: 'visible-checked',
     title: 'Visible checked source',
@@ -22,17 +24,19 @@ function makeBookSource(overrides: Partial<BookSource> = {}): BookSource {
     href: 'https://example.com/visible-checked',
     group: 'guidance',
     publicationClass: 'standard-guidance',
+    documentClass: 'standard',
+    evidenceRole: 'normative-standard',
     origin: 'Test registry',
     note: 'Included by the site policy.',
     status: 'checked',
     siteVisible: true,
     bookUse: 'core',
     ...overrides,
-  }
+  } as BookSource
 }
 
 describe('content integrity', () => {
-  it('selects only checked visible non-rejected sources and strips book metadata', () => {
+  it('selects only checked visible non-rejected sources and keeps semantic source fields', () => {
     const selected = selectSiteSources([
       { ...makeBookSource(), edition: 'First' },
       makeBookSource({ id: 'candidate', status: 'candidate' }),
@@ -48,7 +52,8 @@ describe('content integrity', () => {
         year: '2026',
         href: 'https://example.com/visible-checked',
         group: 'guidance',
-        publicationClass: 'standard-guidance',
+        documentClass: 'standard',
+        evidenceRole: 'normative-standard',
         origin: 'Test registry',
         note: 'Included by the site policy.',
       },
@@ -81,10 +86,55 @@ describe('content integrity', () => {
       'source registry entry 0 field "group" must be one of: primary-asian, research-asian, research-western, guidance',
     )
     expect(() =>
-      parseBookSources([{ ...makeBookSource(), publicationClass: 'misc' }]),
+      parseBookSources([{ ...makeBookSource(), documentClass: 'misc' }]),
+    ).toThrow('source registry entry 0 field "documentClass" must be one of:')
+    expect(() =>
+      parseBookSources([{ ...makeBookSource(), evidenceRole: 'misc' }]),
+    ).toThrow('source registry entry 0 field "evidenceRole" must be one of:')
+  })
+
+  it('rejects document-class and evidence-role pairs outside the canonical taxonomy', () => {
+    expect(() =>
+      parseBookSources([
+        makeBookSource({
+          documentClass: 'catalog-record',
+          evidenceRole: 'primary-text',
+        }),
+      ]),
     ).toThrow(
-      'source registry entry 0 field "publicationClass" must be one of:',
+      'source registry entry 0 has unsupported documentClass/evidenceRole pair: catalog-record/primary-text',
     )
+  })
+
+  it('ignores contradictory legacy publication classes', () => {
+    const source = makeBookSource()
+    const baseline = selectSiteSources([source])
+    const mutated = selectSiteSources([
+      { ...source, publicationClass: 'provenance-only' },
+    ])
+
+    expect(mutated).toEqual(baseline)
+    expect(mutated[0]).not.toHaveProperty('publicationClass')
+  })
+
+  it('preserves optional locator and claim relations while rejecting blank values', () => {
+    const [selected] = selectSiteSources([
+      makeBookSource({
+        pages: 'с. 21–31, 200',
+        claimId: 'hist-shennong-legend',
+      }),
+    ])
+
+    expect(selected).toMatchObject({
+      locator: 'с. 21–31, 200',
+      claimId: 'hist-shennong-legend',
+    })
+    expect(() =>
+      parseBookSources([makeBookSource({ locator: '   ' })]),
+    ).toThrow('field "locator" must be a non-empty string when present')
+    expect(() =>
+      parseBookSources([makeBookSource({ claimId: '' })]),
+    ).toThrow('field "claimId" must be a non-empty string when present')
   })
 
   it('rejects invalid source policy values with field context', () => {

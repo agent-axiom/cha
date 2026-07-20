@@ -4,17 +4,33 @@ export type SourceGroup =
   | 'research-western'
   | 'guidance'
 
-export type SourcePublicationClass =
-  | 'primary-text'
-  | 'facsimile'
+export type SourceDocumentClass =
+  | 'research-publication'
+  | 'historical-access-copy'
   | 'critical-edition'
-  | 'print-edition-catalog'
+  | 'facsimile'
+  | 'catalog-record'
   | 'manuscript-catalog'
-  | 'access-copy'
-  | 'retrospective'
-  | 'research'
-  | 'standard-guidance'
+  | 'community-excerpt'
+  | 'institutional-record'
+  | 'corporate-record'
+  | 'standard'
+  | 'guidance'
+  | 'institutional-heritage-record'
   | 'trial-registration'
+
+export type SourceEvidenceRole =
+  | 'primary-text'
+  | 'textual-witness'
+  | 'catalog-provenance'
+  | 'disputed-retrospective-attribution'
+  | 'research-evidence'
+  | 'institutional-retrospective'
+  | 'corporate-retrospective'
+  | 'normative-standard'
+  | 'safety-guidance'
+  | 'contextual-institutional-record'
+  | 'trial-registry-record'
   | 'provenance-only'
 
 export interface Source {
@@ -24,9 +40,12 @@ export interface Source {
   year: string
   href: string
   group: SourceGroup
-  publicationClass: SourcePublicationClass
+  documentClass: SourceDocumentClass
+  evidenceRole: SourceEvidenceRole
   origin: string
   note: string
+  locator?: string
+  claimId?: string
 }
 
 export type HistoryKind = 'legend' | 'source' | 'retrospective' | 'modern'
@@ -46,7 +65,7 @@ export type TeaPath = 'sheng' | 'shou'
 
 export interface ProcessStep {
   id: string
-  path: TeaPath
+  path: TeaPath | 'shared'
   order: number
   title: string
   chinese?: string
