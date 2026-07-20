@@ -494,6 +494,36 @@ def test_reader_metadata_staging_is_incremental_and_policy_selected(
     assert "not print-ready" in metadata["/Subject"].lower()
 
 
+@pytest.mark.parametrize("interruption", [KeyboardInterrupt, SystemExit])
+def test_metadata_staging_cleans_incremental_stage_after_base_exception(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    interruption: type[BaseException],
+) -> None:
+    source = tmp_path / "source.pdf"
+    target = tmp_path / "reader.pdf"
+    staged = target.with_name(f".{target.name}.incremental-stage")
+    canvas = Canvas(str(source), pagesize=(100, 100), invariant=1)
+    canvas.drawString(10, 50, "metadata-interruption-regression")
+    canvas.save()
+
+    def interrupt_write(_writer, stream) -> None:
+        stream.write(b"partial incremental metadata")
+        raise interruption("injected metadata interruption")
+
+    monkeypatch.setattr(BUILD_PROOF.PdfWriter, "write", interrupt_write)
+
+    with pytest.raises(interruption, match="injected metadata interruption"):
+        BUILD_PROOF.stage_proof_metadata(
+            source,
+            target,
+            BUILD_PROOF.PROOF_POLICIES["reader"],
+        )
+
+    assert not staged.exists()
+    assert not target.exists()
+
+
 def assert_close(actual: float, expected: float, *, label: str) -> None:
     assert abs(actual - expected) < POINT_TOLERANCE, (
         f"{label}: {actual:.3f} pt != {expected:.3f} pt"

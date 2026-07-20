@@ -771,9 +771,8 @@ def stage_proof_metadata(
         with staged.open("wb") as stream:
             writer.write(stream)
         os.replace(staged, target)
-    except Exception:
+    finally:
         staged.unlink(missing_ok=True)
-        raise
 
 
 def stage_editorial_metadata(source: Path, target: Path) -> None:
