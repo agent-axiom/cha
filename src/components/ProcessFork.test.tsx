@@ -2,7 +2,6 @@ import { render, screen, within } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 import { processSteps } from '../content/process'
 import { sourceById } from '../content/sources'
-import { sourceCitationLabel } from './SourceCitation'
 import { ProcessFork } from './ProcessFork'
 
 describe('ProcessFork', () => {
@@ -68,13 +67,11 @@ describe('ProcessFork', () => {
     expectedSourceIds.forEach((sourceId) => {
       const source = sourceById.get(sourceId)
       expect(source, `missing site source ${sourceId}`).toBeDefined()
-      const label = source ? sourceCitationLabel(source) : ''
-      expect(within(sourceLinks).getByRole('link', {
-        name: (accessibleName) => accessibleName.startsWith(label),
-      })).toHaveAttribute(
-        'href',
-        source?.href,
+      const link = within(sourceLinks).getAllByRole('link').find(
+        (candidate) => candidate.getAttribute('href') === source?.href,
       )
+      expect(link).toBeDefined()
+      expect(link?.firstChild?.textContent).toContain(source?.year)
     })
   })
 

@@ -1,6 +1,8 @@
 import { history } from '../content/history'
 import { sourceById } from '../content/sources'
 import type { HistoryKind } from '../content/types'
+import { DisclosureChevron } from './DisclosureChevron'
+import { SectionTakeaway } from './SectionTakeaway'
 import { SourceCitation } from './SourceCitation'
 
 const kindLabels: Record<HistoryKind, string> = {
@@ -35,7 +37,10 @@ export function HistoryTimeline() {
               <h3>{entry.title}</h3>
               <p className="timeline__summary">{entry.summary}</p>
               <details className="timeline__disclosure">
-                <summary>Подробнее и источники</summary>
+                <summary>
+                  Подробнее и источники
+                  <DisclosureChevron />
+                </summary>
                 <p className="timeline__detail">{entry.detail}</p>
                 <div className="source-links" aria-label="Источники записи">
                   {entry.sourceIds.map((sourceId) => {
@@ -50,6 +55,16 @@ export function HistoryTimeline() {
           </li>
         ))}
       </ol>
+
+      <SectionTakeaway
+        title="Что унести из истории"
+        className="section-takeaway--conclusion"
+      >
+        <p>
+          Смотрите не только на дату, но и на тип свидетельства: предание,
+          текст, позднюю ретроспективу или современное исследование.
+        </p>
+      </SectionTakeaway>
     </section>
   )
 }

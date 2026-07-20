@@ -1,3 +1,4 @@
+import { shortenAtWordBoundary } from '../content/sources'
 import type { Source } from '../content/types'
 
 interface SourceCitationProps {
@@ -5,7 +6,12 @@ interface SourceCitationProps {
 }
 
 export function sourceCitationLabel(source: Source) {
-  return [source.author, source.year, source.title, source.locator]
+  return [
+    shortenAtWordBoundary(source.author),
+    source.year,
+    source.citationTitle,
+    source.locator,
+  ]
     .filter((part): part is string => Boolean(part))
     .join(' · ')
 }

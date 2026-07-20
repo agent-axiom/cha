@@ -9,6 +9,8 @@ import {
 } from '../content/sources'
 import type { Source } from '../content/types'
 import { formatSourceCount } from '../lib/formatSourceCount'
+import { DisclosureChevron } from './DisclosureChevron'
+import { SectionTakeaway } from './SectionTakeaway'
 
 const groups: Array<{
   id: string
@@ -93,6 +95,7 @@ function SourceStratum({ id, title, description, entries }: SourceStratumProps) 
           </span>
         </span>
         <span className="source-stratum__description">{description}</span>
+        <DisclosureChevron />
       </summary>
 
       <div className="source-groups">
@@ -124,6 +127,7 @@ function SourceStratum({ id, title, description, entries }: SourceStratumProps) 
                   </span>
                 </span>
                 <span className="source-group__description">{group.subtitle}</span>
+                <DisclosureChevron />
               </summary>
               <ol>
                 {groupSources.map((source) => (
@@ -223,6 +227,16 @@ export function SourcesSection() {
           entries={furtherReadingSources}
         />
       </div>
+
+      <SectionTakeaway
+        title="Как проверить утверждение"
+        className="section-takeaway--conclusion"
+      >
+        <p>
+          Откройте ссылку рядом с нужным тезисом. Сопоставьте вид документа,
+          его роль и точный фрагмент, если он указан.
+        </p>
+      </SectionTakeaway>
 
       <footer className="site-footer">
         <p className="site-footer__mark" aria-hidden="true">茶</p>

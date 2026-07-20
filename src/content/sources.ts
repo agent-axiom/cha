@@ -20,6 +20,27 @@ const sourceBookUses = [
   'rejected',
 ] as const
 
+export const CITATION_FIELD_MAX_LENGTH = 72
+
+export function shortenAtWordBoundary(
+  value: string,
+  maxLength = CITATION_FIELD_MAX_LENGTH,
+) {
+  if (!Number.isInteger(maxLength) || maxLength < 2) {
+    throw new Error('citation text limit must be an integer of at least 2')
+  }
+  if (value.length <= maxLength) return value
+
+  const prefix = value.slice(0, maxLength - 1)
+  const whitespaceBoundary = prefix.lastIndexOf(' ')
+  const minimumUsefulBoundary = Math.floor((maxLength - 1) / 2)
+  const stem = whitespaceBoundary >= minimumUsefulBoundary
+    ? prefix.slice(0, whitespaceBoundary)
+    : prefix
+
+  return `${stem.trimEnd()}…`
+}
+
 export type BookSource = Source & {
   status: 'candidate' | 'checked' | 'rejected'
   siteVisible: boolean
@@ -226,9 +247,11 @@ export function parseBookSources(input: unknown): BookSource[] {
     const locator = readOptionalNonBlankString(source, index, 'locator')
       ?? readOptionalNonBlankString(source, index, 'pages')
     const claimId = readOptionalNonBlankString(source, index, 'claimId')
+    const title = readNonBlankString(source, index, 'title')
     return {
       id: readNonBlankString(source, index, 'id'),
-      title: readNonBlankString(source, index, 'title'),
+      title,
+      citationTitle: shortenAtWordBoundary(title),
       author: readNonBlankString(source, index, 'author'),
       year: readNonBlankString(source, index, 'year'),
       href: readNonBlankString(source, index, 'href'),
@@ -258,6 +281,7 @@ export function selectSiteSources(input: unknown): Source[] {
       ({
         id,
         title,
+        citationTitle,
         author,
         year,
         href,
@@ -271,6 +295,7 @@ export function selectSiteSources(input: unknown): Source[] {
       }) => ({
         id,
         title,
+        citationTitle,
         author,
         year,
         href,

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { regions } from '../content/regions'
 import { sourceById } from '../content/sources'
+import { SectionTakeaway } from './SectionTakeaway'
 import { SourceCitation } from './SourceCitation'
 
 export function TeaMountainsMap() {
@@ -86,6 +87,16 @@ export function TeaMountainsMap() {
           </div>
         </article>
       </div>
+
+      <SectionTakeaway
+        title="Что говорит название горы"
+        className="section-takeaway--conclusion"
+      >
+        <p>
+          Название указывает на культурную и торговую географию; оно не
+          гарантирует точный участок, возраст дерева или вкус конкретного чая.
+        </p>
+      </SectionTakeaway>
     </section>
   )
 }

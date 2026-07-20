@@ -48,6 +48,7 @@ describe('content integrity', () => {
       {
         id: 'visible-checked',
         title: 'Visible checked source',
+        citationTitle: 'Visible checked source',
         author: 'Test Author',
         year: '2026',
         href: 'https://example.com/visible-checked',

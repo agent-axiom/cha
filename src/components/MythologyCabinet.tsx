@@ -1,5 +1,6 @@
 import { myths } from '../content/mythology'
 import { sourceById } from '../content/sources'
+import { SectionTakeaway } from './SectionTakeaway'
 import { SourceCitation } from './SourceCitation'
 
 export function MythologyCabinet() {
@@ -50,6 +51,16 @@ export function MythologyCabinet() {
           </article>
         ))}
       </div>
+
+      <SectionTakeaway
+        title="Как читать предание"
+        className="section-takeaway--conclusion"
+      >
+        <p>
+          Сохраняйте культурный смысл сюжета, не превращая его в доказательство
+          происхождения чая или лечебного действия.
+        </p>
+      </SectionTakeaway>
     </section>
   )
 }

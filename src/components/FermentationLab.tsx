@@ -2,6 +2,7 @@ import { useId, useState, type CSSProperties } from 'react'
 import { fermentationLayers } from '../content/process'
 import { sourceById } from '../content/sources'
 import { InlineDefinition } from './InlineDefinition'
+import { SectionTakeaway } from './SectionTakeaway'
 import { SourceCitation } from './SourceCitation'
 
 const MODEL_DISCLAIMER = 'Это не микрофотография и не модель всего пуэра.'
@@ -122,6 +123,16 @@ export function FermentationLab() {
           </article>
         </div>
       </div>
+
+      <SectionTakeaway
+        title="Что объясняет модель"
+        className="section-takeaway--conclusion"
+      >
+        <p>
+          Водуй связывает сырьё, условия, микробное сообщество и действия
+          производителя. Обнаруженный таксон не равен видимой плесени.
+        </p>
+      </SectionTakeaway>
     </section>
   )
 }

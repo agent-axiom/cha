@@ -27,6 +27,10 @@
     grid-template-columns: 1fr;
   }
 
+  .section-takeaway--conclusion {
+    grid-template-columns: 1fr;
+  }
+
   .section-heading--split {
     grid-template-columns: 1fr;
     gap: 0.75rem;
@@ -109,6 +113,7 @@
     grid-template-columns: auto 1fr;
     min-height: 60px;
     overflow: visible;
+    contain: none;
     background: rgba(5, 12, 9, 0.96);
   }
 

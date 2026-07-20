@@ -1,6 +1,8 @@
 import { processSteps } from '../content/process'
 import { sourceById } from '../content/sources'
 import type { TeaPath } from '../content/types'
+import { DisclosureChevron } from './DisclosureChevron'
+import { SectionTakeaway } from './SectionTakeaway'
 import { SourceCitation } from './SourceCitation'
 
 interface ProcessForkProps {
@@ -40,7 +42,10 @@ function ProcessStepList({ label, steps }: ProcessStepListProps) {
             <h4>{step.title}</h4>
             <p>{step.summary}</p>
             <details>
-              <summary>Что меняется</summary>
+              <summary>
+                Что меняется
+                <DisclosureChevron />
+              </summary>
               <p>{step.transformation}</p>
             </details>
           </div>
@@ -124,6 +129,16 @@ export function ProcessFork({ selectedPath }: ProcessForkProps) {
           return <SourceCitation key={sourceId} source={source} />
         })}
       </div>
+
+      <SectionTakeaway
+        title="Главное о развилке"
+        className="section-takeaway--conclusion"
+      >
+        <p>
+          Сначала идёт общий путь до шайцин-маоча; после него — пар, пресс и
+          хранение шэна либо водуй, сушка и сортировка шу.
+        </p>
+      </SectionTakeaway>
     </section>
   )
 }

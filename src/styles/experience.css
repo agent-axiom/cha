@@ -491,6 +491,27 @@
   font-size: 0.75rem !important;
 }
 
+.section-takeaway--conclusion {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.55fr) minmax(0, 1fr);
+  gap: clamp(1rem, 4vw, 3.5rem);
+  align-items: center;
+  max-width: 1180px;
+  margin-inline: auto;
+  background:
+    linear-gradient(110deg, var(--accent-glow), transparent 65%),
+    rgba(8, 16, 12, 0.72);
+}
+
+.section-takeaway--conclusion h3,
+.section-takeaway--conclusion > p {
+  margin: 0;
+}
+
+.section-takeaway--conclusion h3 {
+  font-size: clamp(1.7rem, 3vw, 2.6rem);
+}
+
 .timeline-section {
   padding-bottom: calc(var(--section-space) * 0.75);
 }
@@ -615,6 +636,9 @@
 }
 
 .timeline__disclosure > summary {
+  display: inline-flex;
+  gap: 0.45rem;
+  align-items: center;
   width: max-content;
   min-height: 24px;
   color: var(--accent);
@@ -627,6 +651,41 @@
 
 .timeline__disclosure[open] > summary {
   margin-bottom: 0.8rem;
+}
+
+.disclosure-chevron {
+  display: inline-grid;
+  width: 1.15rem;
+  height: 1.15rem;
+  flex: 0 0 auto;
+  place-items: center;
+  transition: transform 180ms ease;
+}
+
+.disclosure-chevron::before {
+  content: '›';
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+details[open] > summary .disclosure-chevron {
+  transform: rotate(90deg);
+}
+
+.timeline__disclosure > summary::marker,
+.process-path summary::marker,
+.process-shared summary::marker,
+.source-stratum > summary::marker,
+.source-group > summary::marker {
+  content: '';
+}
+
+.timeline__disclosure > summary::-webkit-details-marker,
+.process-path summary::-webkit-details-marker,
+.process-shared summary::-webkit-details-marker,
+.source-stratum > summary::-webkit-details-marker,
+.source-group > summary::-webkit-details-marker {
+  display: none;
 }
 
 .tea-map {
@@ -1010,6 +1069,7 @@
 .process-path summary,
 .process-shared summary {
   display: flex;
+  gap: 0.35rem;
   align-items: center;
   width: max-content;
   min-height: 24px;
@@ -1473,8 +1533,9 @@
 }
 
 .source-stratum > summary {
+  position: relative;
   min-height: 44px;
-  padding: clamp(1.4rem, 3vw, 2rem);
+  padding: clamp(1.4rem, 3vw, 2rem) clamp(3rem, 5vw, 4rem) clamp(1.4rem, 3vw, 2rem) clamp(1.4rem, 3vw, 2rem);
   border: 1px solid var(--line-strong);
   border-radius: 1.2rem;
   background: linear-gradient(120deg, var(--accent-glow), rgba(8, 16, 12, 0.58));
@@ -1538,17 +1599,25 @@
 }
 
 .source-group > summary {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
   align-items: end;
-  padding: clamp(1.5rem, 4vw, 2.5rem);
+  padding: clamp(1.5rem, 4vw, 2.5rem) clamp(3rem, 5vw, 4rem) clamp(1.5rem, 4vw, 2.5rem) clamp(1.5rem, 4vw, 2.5rem);
   border-bottom: 1px solid var(--line);
   cursor: pointer;
 }
 
 .source-group:not([open]) > summary {
   border-bottom: 0;
+}
+
+.source-stratum > summary > .disclosure-chevron,
+.source-group > summary > .disclosure-chevron {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.25rem;
 }
 
 .source-group__count {

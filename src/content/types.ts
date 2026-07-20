@@ -36,6 +36,7 @@ export type SourceEvidenceRole =
 export interface Source {
   id: string
   title: string
+  citationTitle: string
   author: string
   year: string
   href: string

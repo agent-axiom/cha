@@ -3,6 +3,7 @@ import { medicineClaims } from '../content/medicine'
 import { sourceById } from '../content/sources'
 import type { MedicalEvidenceType } from '../content/types'
 import { InlineDefinition } from './InlineDefinition'
+import { SectionTakeaway } from './SectionTakeaway'
 import { SourceCitation } from './SourceCitation'
 
 type EvidenceFilter = 'all' | 'historical' | 'laboratory' | 'human' | 'safety'
@@ -127,6 +128,16 @@ export function EvidenceSection() {
           </p>
         </div>
       </aside>
+
+      <SectionTakeaway
+        title="Как читать обещание о пользе"
+        className="section-takeaway--conclusion"
+      >
+        <p>
+          Проверяйте форму продукта, тип данных и ограничение. Результат
+          экстракта или суррогатный исход не обещает эффект обычной чашки.
+        </p>
+      </SectionTakeaway>
     </section>
   )
 }

@@ -2,7 +2,6 @@ import { fireEvent, render, screen, within } from '@testing-library/react'
 import axe from 'axe-core'
 import { describe, expect, it } from 'vitest'
 import { sourceById } from './content/sources'
-import { sourceCitationLabel } from './components/SourceCitation'
 import { App } from './App'
 
 describe('application shell', () => {
@@ -169,7 +168,11 @@ describe('application shell', () => {
         ({ href }) => href === citation.getAttribute('href'),
       )
       expect(source).toBeDefined()
-      expect(citation).toHaveTextContent(source ? sourceCitationLabel(source) : '')
+      const visibleLabel = citation.firstChild?.textContent ?? ''
+      expect(visibleLabel).toContain(source?.year)
+      expect(visibleLabel).not.toContain(source?.id)
+      if (source?.locator) expect(visibleLabel).toContain(source.locator)
+      if (source?.claimId) expect(visibleLabel).not.toContain(source.claimId)
     }
   })
 })
