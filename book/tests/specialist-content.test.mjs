@@ -49,11 +49,36 @@ const guideField = (page, field, label = field) => {
   return match[1]
 }
 
+const brewingVariablePatterns = [
+  ['temperature', /температур[а-яё]*/iu],
+  ['leaf mass', /масс[а-яё]*/iu],
+  ['contact time', /(?:врем[а-яё]*|контакт[а-яё]*)/iu],
+  ['vessel preheating', /прогрев[а-яё]*/iu],
+  ['rinse', /ополаскиван[а-яё]*/iu],
+  ['lid position', /(?:положен[а-яё]*[^,.;\n]*крыш|крыш[а-яё]*[^,.;\n]*положен)[а-яё]*/iu],
+  ['volume', /объ[её]м[а-яё]*/iu],
+  ['water', /вод[а-яё]*/iu],
+  ['drain', /слив[а-яё]*/iu],
+]
+
 const assertControlledComparison = (field, label) => {
   assert.match(field, /свеж[а-яё]*/iu, `${label}: use fresh portions`)
   assert.match(field, /эквивалентн[а-яё]*/iu, `${label}: use equivalent portions`)
+  assert.match(field, /порци(?:и|й|ям|ями|ях)/iu, `${label}: use multiple portions`)
+
+  const portionIntroduction = field.split(/[,.;]/u, 1)[0]
+  assert.doesNotMatch(portionIntroduction, /(?:одн[а-яё]*|единственн[а-яё]*)/iu, `${label}: do not use a single portion`)
+
   assert.match(field, /(?:измен|уменьш|сократ|повыс|примен|соседн[а-яё]* температур)[а-яё]*/iu, `${label}: name a changed variable`)
-  assert.match(field, /(?:только|сохранив|при прежн[а-яё]*|оставив неизменн[а-яё]*|одинаков[а-яё]*)/iu, `${label}: isolate one variable`)
+  const changeSegment = field.split(/(?:,?\s+(?:и\s+)?сохранив|,?\s+при прежн[а-яё]*|,?\s+оставив неизменн[а-яё]*|,?\s+одинаков[а-яё]*|[;,]\s*(?:и\s+)?затем)/iu, 1)[0]
+  const changedVariables = brewingVariablePatterns
+    .filter(([, pattern]) => pattern.test(changeSegment))
+    .map(([name]) => name)
+  const offersOneOfTwoVariables = changedVariables.length === 2 && /только[^,.;\n]*\sили\s/iu.test(changeSegment)
+  assert.ok(
+    changedVariables.length === 1 || offersOneOfTwoVariables,
+    `${label}: change exactly one variable, found ${changedVariables.join(', ') || 'none'}`,
+  )
   assert.match(field, /(?:повтор|верн)[а-яё]*[^.\n]*(?:исходн|базов)[а-яё]*[^.\n]*(?:режим|настройк|вариант)/iu, `${label}: return to the baseline`)
 }
 
@@ -219,6 +244,8 @@ test('rejects a controlled-comparison field with a weakened experimental contrac
     'Возьмите эквивалентные порции, измените только температуру, затем вернитесь к исходной настройке.',
     'Возьмите свежие порции, измените только температуру, затем вернитесь к исходной настройке.',
     'Возьмите свежие эквивалентные порции, измените температуру и время, затем вернитесь к исходной настройке.',
+    'Возьмите одну свежую эквивалентную порцию, измените температуру и время, сохранив массу, затем повторите исходный режим.',
+    'Возьмите единственную свежую эквивалентную порцию, измените только температуру, затем повторите исходный режим.',
     'Возьмите свежие эквивалентные порции и измените только температуру.',
   ]) assert.throws(() => assertControlledComparison(weakened, 'weakened example'))
 })
