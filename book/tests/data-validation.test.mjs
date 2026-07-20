@@ -133,6 +133,23 @@ const sourceFixture = (overrides = {}) => ({
   evidenceRole: 'normative-standard',
   ...overrides,
 })
+
+test('defines one complete source taxonomy for exactly the observed classification pairs', () => {
+  const taxonomyPath = path.join(bookRoot, 'data', 'source-taxonomy.json')
+  assert.equal(fs.existsSync(taxonomyPath), true, 'missing canonical source taxonomy')
+  const taxonomy = readBookJson('data/source-taxonomy.json')
+  const taxonomyDocumentClasses = taxonomy.documentClasses.map(({ id }) => id)
+  const taxonomyEvidenceRoles = taxonomy.evidenceRoles.map(({ id }) => id)
+  assert.deepEqual(taxonomyDocumentClasses, documentClasses)
+  assert.deepEqual(taxonomyEvidenceRoles, evidenceRoles)
+  assert.ok(taxonomy.documentClasses.every(({ readerLabel }) => typeof readerLabel === 'string' && readerLabel.trim()))
+  assert.ok(taxonomy.evidenceRoles.every(({ readerLabel }) => typeof readerLabel === 'string' && readerLabel.trim()))
+
+  const expectedPairs = new Set(readBookJson('data/sources.json').map(({ documentClass, evidenceRole }) => `${documentClass}\u0000${evidenceRole}`))
+  const allowedPairs = new Set(taxonomy.allowedPairs.map(({ documentClass, evidenceRole }) => `${documentClass}\u0000${evidenceRole}`))
+  assert.equal(allowedPairs.size, 16)
+  assert.deepEqual(allowedPairs, expectedPairs)
+})
 const expectedAlbumSections = [
   ['entry', 20, 1, 20],
   ['living-mountain', 26, 21, 46],
@@ -339,21 +356,46 @@ test('requires a deliberate publication classification for every source', () => 
   }
 })
 
-test('requires independent document class and evidence role classifications', () => {
+test('accepts only enumerated document classes, evidence roles, and exact allowed pairs', () => {
+  const taxonomy = readBookJson('data/source-taxonomy.json')
   assert.throws(() => validateSources([sourceFixture({ documentClass: undefined })]), /invalid source document class: undefined/)
   assert.throws(() => validateSources([sourceFixture({ documentClass: 'misc' })]), /invalid source document class: misc/)
   assert.throws(() => validateSources([sourceFixture({ evidenceRole: undefined })]), /invalid source evidence role: undefined/)
   assert.throws(() => validateSources([sourceFixture({ evidenceRole: 'misc' })]), /invalid source evidence role: misc/)
-  for (const documentClass of documentClasses) {
-    assert.doesNotThrow(() => validateSources([sourceFixture({ documentClass })]))
+  for (const { documentClass, evidenceRole } of taxonomy.allowedPairs) {
+    assert.doesNotThrow(() => validateSources([sourceFixture({ documentClass, evidenceRole })]), `${documentClass}+${evidenceRole}`)
   }
-  for (const evidenceRole of evidenceRoles) {
-    assert.doesNotThrow(() => validateSources([sourceFixture({ evidenceRole })]))
+  for (const [documentClass, evidenceRole] of [
+    ['catalog-record', 'primary-text'],
+    ['research-publication', 'normative-standard'],
+    ['guidance', 'research-evidence'],
+  ]) {
+    assert.throws(
+      () => validateSources([sourceFixture({ documentClass, evidenceRole })]),
+      new RegExp(`invalid source classification pair: ${documentClass}\\+${evidenceRole}`, 'u'),
+    )
   }
-  assert.doesNotThrow(() => validateSources([
-    sourceFixture({ id: 'standard-context', documentClass: 'standard', evidenceRole: 'institutional-retrospective' }),
-    sourceFixture({ id: 'record-context', documentClass: 'institutional-record', evidenceRole: 'institutional-retrospective' }),
-  ]))
+})
+
+test('rejects an incompatible evidence-role mutation for every observed source pair', () => {
+  const taxonomy = readBookJson('data/source-taxonomy.json')
+  const allowedPairs = new Set(taxonomy.allowedPairs.map(({ documentClass, evidenceRole }) => `${documentClass}\u0000${evidenceRole}`))
+  const roles = taxonomy.evidenceRoles.map(({ id }) => id)
+  const representativeByPair = new Map()
+  for (const source of readBookJson('data/sources.json')) {
+    representativeByPair.set(`${source.documentClass}\u0000${source.evidenceRole}`, source)
+  }
+  assert.equal(representativeByPair.size, 16)
+
+  for (const source of representativeByPair.values()) {
+    const incompatibleRole = roles.find((role) => !allowedPairs.has(`${source.documentClass}\u0000${role}`))
+    assert.ok(incompatibleRole, `${source.documentClass}: expected an incompatible role`)
+    assert.throws(
+      () => validateSources([{ ...source, evidenceRole: incompatibleRole }]),
+      /invalid source classification pair/u,
+      `${source.documentClass}+${source.evidenceRole} -> ${incompatibleRole}`,
+    )
+  }
 })
 
 test('classifies the highlighted records by document form and role in this book', () => {

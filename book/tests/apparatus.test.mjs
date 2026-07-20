@@ -50,12 +50,14 @@ const createFixtureBook = ({
   sources = [sourceRecord()],
   claims = [{ id: 'claim-1', status: 'verified', sourceIds: ['source-1'] }],
   glossary = [],
+  taxonomy = readJson('data/source-taxonomy.json'),
 } = {}) => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'book-apparatus-fixture-'))
   temporaryRoots.push(root)
   writeJson(path.join(root, 'data', 'claims.json'), claims)
   writeJson(path.join(root, 'data', 'sources.json'), sources)
   writeJson(path.join(root, 'data', 'glossary.json'), glossary)
+  writeJson(path.join(root, 'data', 'source-taxonomy.json'), taxonomy)
   writeJson(path.join(root, 'flatplan', 'album.json'), {
     pages: [
       { id: 'A-P199', apparatus: 'glossary' },
@@ -188,6 +190,25 @@ test('prints independent reader-facing document and evidence-role labels', () =>
   assert.doesNotMatch(bibliographyText, /\*\*Класс:\*\*/u)
 })
 
+test('renders reader labels from the fixture taxonomy', () => {
+  const taxonomy = readJson('data/source-taxonomy.json')
+  const customTaxonomy = {
+    ...taxonomy,
+    documentClasses: taxonomy.documentClasses.map((entry) => (
+      entry.id === 'standard' ? { ...entry, readerLabel: 'Тестовый вид документа' } : entry
+    )),
+    evidenceRoles: taxonomy.evidenceRoles.map((entry) => (
+      entry.id === 'normative-standard' ? { ...entry, readerLabel: 'Тестовая роль' } : entry
+    )),
+  }
+  const root = createFixtureBook({ taxonomy: customTaxonomy })
+
+  const { bibliographyText } = buildApparatus({ root })
+
+  assert.match(bibliographyText, /\*\*Вид документа:\*\* Тестовый вид документа/u)
+  assert.match(bibliographyText, /\*\*Роль в книге:\*\* Тестовая роль/u)
+})
+
 test('uses evidenceRole rather than legacy publicationClass for publication exclusion', () => {
   const root = createFixtureBook({
     sources: [
@@ -263,7 +284,7 @@ test('document class and evidence role changes control semantic bibliography gro
       sources: [{ ...standard, documentClass: 'research-publication' }],
       claims,
     }),
-  }), /every cited publication source must match exactly one bibliography group/u)
+  }), /invalid source classification pair: research-publication\+normative-standard/u)
 })
 
 test('normalizes author punctuation and formats page, article, e-locator, facsimile, and journal locators', () => {
@@ -519,10 +540,14 @@ test('refuses unchecked cited sources before writing output', () => {
       year: '2026',
       group: 'guidance',
       status: 'draft',
+      publicationClass: 'standard-guidance',
+      documentClass: 'standard',
+      evidenceRole: 'normative-standard',
       href: 'https://example.test/source',
     },
   ])
   writeJson(path.join(root, 'data', 'glossary.json'), [])
+  writeJson(path.join(root, 'data', 'source-taxonomy.json'), readJson('data/source-taxonomy.json'))
   writeJson(path.join(root, 'flatplan', 'album.json'), {
     pages: [
       { id: 'A-P199', apparatus: 'glossary' },
@@ -536,6 +561,31 @@ test('refuses unchecked cited sources before writing output', () => {
   )
   assert.equal(fs.existsSync(path.join(root, 'manuscript', 'album', '91-glossary.md')), false)
   assert.equal(fs.existsSync(path.join(root, 'manuscript', 'album', '92-bibliography.md')), false)
+})
+
+test('rejects an invalid classification pair before writing apparatus output', () => {
+  const root = createFixtureBook({
+    sources: [sourceRecord({
+      group: 'primary-asian',
+      publicationClass: 'print-edition-catalog',
+      documentClass: 'catalog-record',
+      evidenceRole: 'primary-text',
+    })],
+  })
+  const album = path.join(root, 'manuscript', 'album')
+  const glossary = path.join(album, '91-glossary.md')
+  const bibliography = path.join(album, '92-bibliography.md')
+  fs.mkdirSync(album, { recursive: true })
+  fs.writeFileSync(glossary, 'previous glossary\n')
+  fs.writeFileSync(bibliography, 'previous bibliography\n')
+
+  assert.throws(
+    () => generateApparatus({ root }),
+    /invalid source classification pair: catalog-record\+primary-text/u,
+  )
+  assert.equal(fs.readFileSync(glossary, 'utf8'), 'previous glossary\n')
+  assert.equal(fs.readFileSync(bibliography, 'utf8'), 'previous bibliography\n')
+  assert.deepEqual(fs.readdirSync(album).filter((name) => name.startsWith('.apparatus-')), [])
 })
 
 test('rolls back both apparatus files and cleans staging after a second promotion failure', () => {
@@ -564,7 +614,7 @@ test('rolls back both apparatus files and cleans staging after a second promotio
 test('writes idempotently in isolation and completes all 256 checked-in manuscript pages', () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'book-apparatus-idempotence-'))
   temporaryRoots.push(root)
-  for (const relativePath of ['data/claims.json', 'data/sources.json', 'data/glossary.json', 'flatplan/album.json']) {
+  for (const relativePath of ['data/claims.json', 'data/sources.json', 'data/glossary.json', 'data/source-taxonomy.json', 'flatplan/album.json']) {
     writeJson(path.join(root, relativePath), readJson(relativePath))
   }
   fs.mkdirSync(path.join(root, 'research'), { recursive: true })

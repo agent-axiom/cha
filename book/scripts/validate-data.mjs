@@ -1,8 +1,10 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { assertSourceClassification, loadSourceTaxonomy } from './source-taxonomy.mjs'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
+const sourceTaxonomy = loadSourceTaxonomy(root)
 const read = (name) => JSON.parse(fs.readFileSync(path.join(root, 'data', name), 'utf8'))
 const readFlatplan = (name) => JSON.parse(fs.readFileSync(path.join(root, 'flatplan', name), 'utf8'))
 const readProduction = (name) => JSON.parse(fs.readFileSync(path.join(root, 'production', name), 'utf8'))
@@ -36,35 +38,7 @@ export function validateSources(sources) {
       'trial-registration',
       'provenance-only',
     ], 'invalid source publication class')
-    oneOf(source.documentClass, [
-      'research-publication',
-      'historical-access-copy',
-      'critical-edition',
-      'facsimile',
-      'catalog-record',
-      'manuscript-catalog',
-      'community-excerpt',
-      'institutional-record',
-      'corporate-record',
-      'standard',
-      'guidance',
-      'institutional-heritage-record',
-      'trial-registration',
-    ], 'invalid source document class')
-    oneOf(source.evidenceRole, [
-      'primary-text',
-      'textual-witness',
-      'catalog-provenance',
-      'disputed-retrospective-attribution',
-      'research-evidence',
-      'institutional-retrospective',
-      'corporate-retrospective',
-      'normative-standard',
-      'safety-guidance',
-      'contextual-institutional-record',
-      'trial-registry-record',
-      'provenance-only',
-    ], 'invalid source evidence role')
+    assertSourceClassification(source, sourceTaxonomy)
     if (typeof source.siteVisible !== 'boolean') throw new Error(`source siteVisible must be boolean: ${source.id}`)
   }
   return seen

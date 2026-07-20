@@ -239,9 +239,15 @@ test('points to the six evidence windows on A-P011 before the first repeated lab
     .join('\n')
   const labels = [...openingThroughLegend.matchAll(/\[(?:ИСТОЧНИК|РЕТРОСПЕКТИВА|ЛЕГЕНДА|ГИПОТЕЗА|СОВРЕМЕННАЯ ПРОВЕРКА|ОТКЛОНЕНО)\]/gu)]
   assert.ok(labels.length >= 2, 'opening must exercise the evidence navigation')
-  const pointer = openingThroughLegend.search(/шесть окон[^.\n]*(?:A-P011|с\.\s*11)/iu)
-  assert.ok(pointer >= 0, 'opening must point to the six-window legend on A-P011 / p. 11')
+  const pointer = openingThroughLegend.search(/шесть окон[^.\n]*с\.\s*11/iu)
+  assert.ok(pointer >= 0, 'opening must point to the six-window legend on p. 11')
   assert.ok(pointer < labels[1].index, 'six-window pointer must precede the first repeated evidence label')
+})
+
+test('keeps internal album folio ids and nonbreaking hyphens out of reader-visible prose', () => {
+  const visibleAlbum = albumManuscript().replace(/<!--[\s\S]*?-->/gu, '')
+  assert.doesNotMatch(visibleAlbum, /\bA[-‐‑‒–—−]P\d{3}\b/u)
+  assert.doesNotMatch(visibleAlbum, /\u2011/u)
 })
 
 test('closes every major album chapter with one compact three-observation checkpoint', () => {

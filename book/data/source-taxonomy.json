@@ -1,0 +1,172 @@
+{
+  "documentClasses": [
+    {
+      "id": "research-publication",
+      "readerLabel": "Исследовательская публикация"
+    },
+    {
+      "id": "historical-access-copy",
+      "readerLabel": "Копия исторического текста"
+    },
+    {
+      "id": "critical-edition",
+      "readerLabel": "Критическое издание"
+    },
+    {
+      "id": "facsimile",
+      "readerLabel": "Факсимиле"
+    },
+    {
+      "id": "catalog-record",
+      "readerLabel": "Каталогическая запись издания"
+    },
+    {
+      "id": "manuscript-catalog",
+      "readerLabel": "Каталог рукописи"
+    },
+    {
+      "id": "community-excerpt",
+      "readerLabel": "Пользовательский фрагмент"
+    },
+    {
+      "id": "institutional-record",
+      "readerLabel": "Институциональная запись"
+    },
+    {
+      "id": "corporate-record",
+      "readerLabel": "Корпоративная запись"
+    },
+    {
+      "id": "standard",
+      "readerLabel": "Стандарт"
+    },
+    {
+      "id": "guidance",
+      "readerLabel": "Рекомендация"
+    },
+    {
+      "id": "institutional-heritage-record",
+      "readerLabel": "Институциональная запись о наследии"
+    },
+    {
+      "id": "trial-registration",
+      "readerLabel": "Регистрация исследования"
+    }
+  ],
+  "evidenceRoles": [
+    {
+      "id": "primary-text",
+      "readerLabel": "Прямая текстовая опора"
+    },
+    {
+      "id": "textual-witness",
+      "readerLabel": "Текстологическое свидетельство"
+    },
+    {
+      "id": "catalog-provenance",
+      "readerLabel": "Каталогическое подтверждение"
+    },
+    {
+      "id": "disputed-retrospective-attribution",
+      "readerLabel": "Спорная поздняя атрибуция"
+    },
+    {
+      "id": "research-evidence",
+      "readerLabel": "Исследовательская опора"
+    },
+    {
+      "id": "institutional-retrospective",
+      "readerLabel": "Институциональная ретроспектива"
+    },
+    {
+      "id": "corporate-retrospective",
+      "readerLabel": "Корпоративная ретроспектива"
+    },
+    {
+      "id": "normative-standard",
+      "readerLabel": "Нормативный ориентир"
+    },
+    {
+      "id": "safety-guidance",
+      "readerLabel": "Ориентир безопасности"
+    },
+    {
+      "id": "contextual-institutional-record",
+      "readerLabel": "Контекстная институциональная запись"
+    },
+    {
+      "id": "trial-registry-record",
+      "readerLabel": "Запись о планируемом исследовании; результатов нет"
+    },
+    {
+      "id": "provenance-only",
+      "readerLabel": "Только редакционное происхождение"
+    }
+  ],
+  "allowedPairs": [
+    {
+      "documentClass": "research-publication",
+      "evidenceRole": "research-evidence"
+    },
+    {
+      "documentClass": "historical-access-copy",
+      "evidenceRole": "primary-text"
+    },
+    {
+      "documentClass": "historical-access-copy",
+      "evidenceRole": "disputed-retrospective-attribution"
+    },
+    {
+      "documentClass": "critical-edition",
+      "evidenceRole": "textual-witness"
+    },
+    {
+      "documentClass": "facsimile",
+      "evidenceRole": "textual-witness"
+    },
+    {
+      "documentClass": "catalog-record",
+      "evidenceRole": "catalog-provenance"
+    },
+    {
+      "documentClass": "manuscript-catalog",
+      "evidenceRole": "catalog-provenance"
+    },
+    {
+      "documentClass": "community-excerpt",
+      "evidenceRole": "provenance-only"
+    },
+    {
+      "documentClass": "institutional-record",
+      "evidenceRole": "institutional-retrospective"
+    },
+    {
+      "documentClass": "corporate-record",
+      "evidenceRole": "corporate-retrospective"
+    },
+    {
+      "documentClass": "standard",
+      "evidenceRole": "normative-standard"
+    },
+    {
+      "documentClass": "standard",
+      "evidenceRole": "institutional-retrospective"
+    },
+    {
+      "documentClass": "guidance",
+      "evidenceRole": "normative-standard"
+    },
+    {
+      "documentClass": "guidance",
+      "evidenceRole": "safety-guidance"
+    },
+    {
+      "documentClass": "institutional-heritage-record",
+      "evidenceRole": "contextual-institutional-record"
+    },
+    {
+      "documentClass": "trial-registration",
+      "evidenceRole": "trial-registry-record"
+    }
+  ]
+}

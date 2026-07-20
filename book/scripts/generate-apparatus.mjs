@@ -1,6 +1,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { assertSourceClassification, loadSourceTaxonomy } from './source-taxonomy.mjs'
 
 const defaultBookRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const generatedHeader = '<!-- generated: book/scripts/generate-apparatus.mjs -->'
@@ -76,36 +77,6 @@ const groupDefinitions = [
     ),
   },
 ]
-const documentClassLabels = new Map([
-  ['research-publication', 'Исследовательская публикация'],
-  ['historical-access-copy', 'Копия исторического текста'],
-  ['critical-edition', 'Критическое издание'],
-  ['facsimile', 'Факсимиле'],
-  ['catalog-record', 'Каталогическая запись издания'],
-  ['manuscript-catalog', 'Каталог рукописи'],
-  ['community-excerpt', 'Пользовательский фрагмент'],
-  ['institutional-record', 'Институциональная запись'],
-  ['corporate-record', 'Корпоративная запись'],
-  ['standard', 'Стандарт'],
-  ['guidance', 'Рекомендация'],
-  ['institutional-heritage-record', 'Институциональная запись о наследии'],
-  ['trial-registration', 'Регистрация исследования'],
-])
-const evidenceRoleLabels = new Map([
-  ['primary-text', 'Прямая текстовая опора'],
-  ['textual-witness', 'Текстологическое свидетельство'],
-  ['catalog-provenance', 'Каталогическое подтверждение'],
-  ['disputed-retrospective-attribution', 'Спорная поздняя атрибуция'],
-  ['research-evidence', 'Исследовательская опора'],
-  ['institutional-retrospective', 'Институциональная ретроспектива'],
-  ['corporate-retrospective', 'Корпоративная ретроспектива'],
-  ['normative-standard', 'Нормативный ориентир'],
-  ['safety-guidance', 'Ориентир безопасности'],
-  ['contextual-institutional-record', 'Контекстная институциональная запись'],
-  ['trial-registry-record', 'Запись о планируемом исследовании; результатов нет'],
-  ['provenance-only', 'Только редакционное происхождение'],
-])
-
 const clean = (value = '') => String(value ?? '').trim()
 const readJson = (root, relativePath) => JSON.parse(
   fs.readFileSync(path.join(root, relativePath), 'utf8'),
@@ -275,7 +246,7 @@ const formatLocator = (value) => {
   return sentence(`Локатор: ${locator}`)
 }
 
-const renderSource = (root, source, groupTitle, startsGroup) => {
+const renderSource = (root, source, groupTitle, startsGroup, taxonomy) => {
   const links = sourceLinks(root, source)
   const citation = [
     sentence(source.author),
@@ -285,7 +256,7 @@ const renderSource = (root, source, groupTitle, startsGroup) => {
     formatLocator(source.pages),
     links,
   ].filter(Boolean).join(' ')
-  const classifiedCitation = `**Ключ источника:** \`${clean(source.id)}\`. **Вид документа:** ${documentClassLabels.get(source.documentClass)}. **Роль в книге:** ${evidenceRoleLabels.get(source.evidenceRole)}. ${citation}`
+  const classifiedCitation = `**Ключ источника:** \`${clean(source.id)}\`. **Вид документа:** ${taxonomy.documentClassLabels.get(source.documentClass)}. **Роль в книге:** ${taxonomy.evidenceRoleLabels.get(source.evidenceRole)}. ${citation}`
   return [
     ...(startsGroup ? [`## ${groupTitle}`] : []),
     `<!-- source:${clean(source.id)} -->`,
@@ -349,22 +320,19 @@ const validateGlossary = (glossary, sources, cited) => {
 export const buildApparatus = ({ root = defaultBookRoot } = {}) => {
   const claims = readJson(root, 'data/claims.json')
   const sources = readJson(root, 'data/sources.json')
+  const sourceTaxonomy = loadSourceTaxonomy(root)
   const glossary = readJson(root, 'data/glossary.json')
   const flatplan = readJson(root, 'flatplan/album.json')
+  for (const source of sources) assertSourceClassification(source, sourceTaxonomy)
   const cited = selectCitedSources(claims, sources)
   validateGlossary(glossary, sources, cited)
   const invalidSource = cited.find(({ group }) => !sourceGroups.has(group))
   if (invalidSource) throw new Error(`cited source has unsupported group: ${invalidSource.id}`)
-  const invalidDocumentClass = cited.find(({ documentClass }) => !documentClassLabels.has(documentClass))
-  if (invalidDocumentClass) throw new Error(`cited source has unsupported document class: ${invalidDocumentClass.id}`)
-  const invalidEvidenceRole = cited.find(({ evidenceRole }) => !evidenceRoleLabels.has(evidenceRole))
-  if (invalidEvidenceRole) throw new Error(`cited source has unsupported evidence role: ${invalidEvidenceRole.id}`)
-
   const bibliographyItems = groupDefinitions.flatMap(({ title, matches }) => (
     cited
       .filter(matches)
       .sort(compareSources)
-      .map((source, index) => renderSource(root, source, title, index === 0))
+      .map((source, index) => renderSource(root, source, title, index === 0, sourceTaxonomy))
   ))
   const groupedIds = bibliographyItems.flatMap((item) => [...item.matchAll(/<!-- source:([^ ]+) -->/gu)].map(([, id]) => id))
   if (groupedIds.length !== cited.length || new Set(groupedIds).size !== cited.length) {
