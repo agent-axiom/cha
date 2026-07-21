@@ -1132,6 +1132,41 @@ def test_build_cleans_run_scoped_canvas_when_metadata_staging_fails(
     assert not canvas_path.exists()
 
 
+def test_current_guide_builds_complete_editorial_proof() -> None:
+    BUILD_PROOF.register_fonts()
+    run_id = f"pytest-current-guide-editorial-{os.getpid()}"
+    final = OUTPUT / f"{run_id}.pdf"
+    expected_staged = BUILD_PROOF.run_artifact_path(final, run_id, "pair-stage")
+    expected_canvas = BUILD_PROOF.run_artifact_path(final, run_id, "canvas.pdf")
+
+    try:
+        staged = BUILD_PROOF.build(
+            "guide",
+            "guide.json",
+            "guide",
+            final.name,
+            reviewer_marks=False,
+            policy=BUILD_PROOF.EDITORIAL_POLICY,
+            run_id=run_id,
+        )
+
+        assert staged == expected_staged
+        assert staged.exists()
+        assert len(PdfReader(staged).pages) == 48
+    finally:
+        cleanup = {
+            final,
+            expected_staged,
+            expected_canvas,
+            *OUTPUT.glob(f"*{run_id}*"),
+            *OUTPUT.glob(f".*{run_id}*"),
+        }
+        for path in cleanup:
+            path.unlink(missing_ok=True)
+        assert not list(OUTPUT.glob(f"*{run_id}*"))
+        assert not list(OUTPUT.glob(f".*{run_id}*"))
+
+
 @pytest.mark.parametrize(
     ("filename", "prefix", "pages"),
     [
