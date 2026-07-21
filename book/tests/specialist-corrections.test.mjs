@@ -56,6 +56,17 @@ test('registers the disputed heicha classification boundary without turning agin
   assert.match(officialResponse.note, /хэй ча.*систем.*прежде всего.*шу/iu)
 })
 
+test('prints the heicha classification boundary exactly once and on A-P101', () => {
+  const manuscript = readText('manuscript/album/04-sheng-and-shou.md')
+  const page = manuscript.match(/<!-- page:A-P101 -->([\s\S]*?)<!-- page:A-P102 -->/u)?.[1] ?? ''
+
+  assert.equal(manuscript.match(/<!-- claim:prod-heicha-classification-boundary -->/gu)?.length ?? 0, 1)
+  assert.match(page, /<!-- claim:prod-heicha-classification-boundary -->/u)
+  assert.match(page, /классификац.*пуэр.*хэй ?ча.*зависит от.*систем/iu)
+  assert.match(page, /GB\/T 22111.*объединяет.*шэн.*шу.*защищ[её]нн.*категор.*пуэр.*не решает.*все классификационные системы/iu)
+  assert.match(page, /выдержка сама по себе.*не переводит шэн.*шу.*(?:другую|иную) технологическую категорию/iu)
+})
+
 test('keeps Ma chemical trajectories nonmonotonic and the Chau result matrix-bound', () => {
   assert.match(claim('micro-ma-chemical-shifts').text, /дню 7/u)
   assert.match(claim('micro-ma-chemical-shifts').text, /неодинаковые временные траектории/u)
