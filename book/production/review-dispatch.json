@@ -1,29 +1,29 @@
 {
   "schemaVersion": 1,
-  "cycleId": "specialist-review-2026-05",
+  "cycleId": "specialist-review-2026-06",
   "status": "prepared-not-dispatched",
   "externalApprovals": 0,
-  "frozenAt": "2026-07-18T17:47:08+03:00",
-  "deadline": "2026-08-29T18:00:00+03:00",
+  "frozenAt": "2026-07-21T08:37:19+03:00",
+  "deadline": "2026-09-01T18:00:00+03:00",
   "deadlineStatus": "proposed",
-  "gitCommit": "a8a1740eeb228539d07ea6d2510e396bbd31593d",
-  "packagePath": "book/output/review/specialist-review-2026-05",
-  "manifestSha256": "232d7f2bfd0417c2e5709491231d048ab76ca2d9c29ff8f2006313c617da4888",
-  "proofSetSha256": "8241bfb4ba1ff24464df9e3e285a448f83e58d313e58586064453a47027aafa0",
-  "snapshotSha256": "170feeb39c8e9f2d62c5bfdb6223c96caeeeb09815b56cc84fedaf5d8fae6d35",
+  "gitCommit": "3521495f3c8d3800f8d8d4faf18fc5df99943071",
+  "packagePath": "book/output/review/specialist-review-2026-06",
+  "manifestSha256": "39ce7ed1c3b05babbf28c1ee9f7df6883902b328a1d435c906646eaa4479c8f8",
+  "proofSetSha256": "63ca637b9d2305955e63108438d2769e0ffc3e6e2fc9d69e45a5a8cac7153b80",
+  "snapshotSha256": "9e9c455f92113d4a0c7079bee9686daca7d7abf260dce96b1efa8a7ccac20cbe",
   "roles": {
     "historian": {
-      "activeClaims": 70,
+      "activeClaims": 71,
       "primaryFocus": 25,
       "excludedFocus": 4
     },
     "technologist": {
-      "activeClaims": 70,
+      "activeClaims": 71,
       "primaryFocus": 41,
       "excludedFocus": 6
     },
     "medical": {
-      "activeClaims": 70,
+      "activeClaims": 71,
       "primaryFocus": 23,
       "excludedFocus": 1
     }

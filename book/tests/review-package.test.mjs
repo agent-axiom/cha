@@ -24,7 +24,7 @@ test('freezes the same active corpus, proof set, snapshot and deadline for all r
     .map(({ claimId }) => claimId)
     .sort()
 
-  assert.equal(activeIds.length, 70)
+  assert.equal(activeIds.length, 71)
   assert.ok(activeIds.includes('hist-ruan-retrospective'))
   assert.equal(result.claimIndex.filter(({ claimStatus }) => claimStatus === 'rejected').length, 11)
   assert.deepEqual(Object.keys(result.requests).sort(), ['historian', 'medical', 'technologist'])
@@ -97,22 +97,94 @@ test('maps active claims to proof pages or an explicit registry-only exception',
   }
 })
 
-test('includes the exact generated bibliography and blank response templates', () => {
+test('includes the exact 61-source registry with dynamic bibliography coverage and blank response templates', () => {
   const result = buildReviewPackage({ root: bookRoot, verifyProofs: false })
   const bibliography = result.files.get('bibliography.md')
-  const sourceIds = JSON.parse(result.files.get('data/sources-frozen.json'))
+  const frozenSources = JSON.parse(result.files.get('data/sources-frozen.json'))
+  const sourceIds = frozenSources
     .map(({ id }) => id)
     .sort()
+  const expectedSourceIds = [
+    'abe-2008',
+    'benn-2015',
+    'chau-2023',
+    'chu-2011',
+    'dayi-history-1973',
+    'db5308-processing-2020',
+    'db5308-storage-2020',
+    'efsa-caffeine',
+    'fan-2022',
+    'fan-chuo-863',
+    'fan-chuo-zhao-1985',
+    'fantianlu-vol18-scan',
+    'fda-caffeine-2024',
+    'fda-water-activity',
+    'fujita-2008-safety',
+    'fujita-2008-trial',
+    'gbt-22111',
+    'gbt-30375-2013',
+    'guangzhou-db4401-258-2024',
+    'haas-2013',
+    'jensen-2016',
+    'jiang-2021-warring-tea',
+    'kiseleva-2021-infusion-transfer',
+    'kubota-2011',
+    'li-2022-patulin-tea',
+    'li-2026-theabrownin-human',
+    'lin-2019-meta',
+    'lu-2016-earliest-tea',
+    'lv-2013',
+    'ma-2017',
+    'nct03613688',
+    'nct06401161',
+    'pku-tea-horse-road-historiography',
+    'puer-wuhou',
+    'qiu-2023-postfermented-fumonisins',
+    'ruan-dianbi-catalog',
+    'ruan-puer-cha-ji-access',
+    'sedova-2018',
+    'sun-2024-y562-human',
+    'sun-2025-citrus-puer-human',
+    'takeda-2019-powdered-beverage',
+    'umin000053941',
+    'unesco-jingmai',
+    'vinogrodsky-user-excerpt',
+    'wan-2025-tea-infusion-mycotoxins',
+    'who-pregnancy',
+    'xie-2012',
+    'xu-2022',
+    'yang-2014-weight',
+    'yang-2019-systematic',
+    'yunnan-2023',
+    'yunnan-agri-2018-shou',
+    'yunnan-net-shou-2021',
+    'zhang-2013',
+    'zhang-microbiome-2016',
+    'zhao-1765',
+    'zhao-2026-ripened-review',
+    'zhao-facsimile-pku',
+    'zhao-metaomics-2019',
+    'zhao-renmin-1957',
+    'zielinska-przyjemska-2005',
+  ]
   const bibliographyIds = [...bibliography.matchAll(/<!-- source:([^ ]+) -->/gu)]
     .map(([, id]) => id)
     .sort()
-  assert.equal(bibliographyIds.length, 49)
-  assert.deepEqual(bibliographyIds, sourceIds)
+  assert.equal(bibliographyIds.length, 61)
+  assert.deepEqual(sourceIds, expectedSourceIds)
+  assert.deepEqual(bibliographyIds, expectedSourceIds)
   assert.match(bibliography, /<!-- source:xu-2022 -->/u)
   assert.match(bibliography, /# Дополнение к замороженному реестру источников/u)
   assert.match(bibliography, /<!-- source:vinogrodsky-user-excerpt -->/u)
   assert.match(bibliography, /Provenance-only запись исключена из читательских библиографических полос/u)
-  assert.equal(result.manifest.bibliography.coverage, '48-publication-sources-plus-1-provenance-only-registry-supplement')
+  const provenanceOnlySources = frozenSources.filter(({ publicationClass, evidenceRole }) => (
+    publicationClass === 'provenance-only' || evidenceRole === 'provenance-only'
+  ))
+  assert.deepEqual(provenanceOnlySources.map(({ id }) => id), ['vinogrodsky-user-excerpt'])
+  assert.equal(
+    result.manifest.bibliography.coverage,
+    '60-publication-sources-plus-1-provenance-only-registry-supplement',
+  )
   assert.equal(result.manifest.bibliography.sha256, sha256(Buffer.from(bibliography)))
   for (const role of ['historian', 'technologist', 'medical']) {
     const template = JSON.parse(result.files.get(`responses/${role}.template.json`))
@@ -214,9 +286,9 @@ test('package scripts expose the frozen review preparation command', () => {
 
 test('documents the marker-derived fail-closed review corpus without a stale status-only count', () => {
   const readme = fs.readFileSync(path.join(bookRoot, 'README.md'), 'utf8')
-  assert.match(readme, /70 тезисов/iu)
+  assert.match(readme, /71 тезис/iu)
   assert.match(readme, /кажд[а-яё]* напечатанн[а-яё]*[^.]*`?claim marker`?[^.]*не отклонён/iu)
-  assert.doesNotMatch(readme, /70 активных утверждений/iu)
+  assert.doesNotMatch(readme, /71 активн[а-яё]* утвержден/iu)
 })
 
 test('prepared tracked state is idempotent and cannot overwrite later review work', () => {

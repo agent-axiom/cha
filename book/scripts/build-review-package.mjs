@@ -451,6 +451,13 @@ const completeBibliography = (manuscriptBibliography, sources) => {
   return `${manuscriptBibliography.trimEnd()}\n\n${supplement.trimEnd()}\n`
 }
 
+const bibliographyCoverage = (sources) => {
+  const provenanceOnlySources = sources.filter(({ publicationClass, evidenceRole }) => (
+    publicationClass === 'provenance-only' || evidenceRole === 'provenance-only'
+  ))
+  return `${sources.length - provenanceOnlySources.length}-publication-sources-plus-${provenanceOnlySources.length}-provenance-only-registry-supplement`
+}
+
 const renderClaim = (claim, focusIds, kind = 'active') => {
   const pages = claim.occurrences.map(({ pageId }) => pageId)
   const pageText = pages.length
@@ -664,7 +671,7 @@ export const buildReviewPackage = ({ root = defaultBookRoot, config: suppliedCon
     bibliography: {
       sourcePath: config.bibliographyPath,
       packagePath: 'bibliography.md',
-      coverage: '48-publication-sources-plus-1-provenance-only-registry-supplement',
+      coverage: bibliographyCoverage(sources),
       sha256: sha256(Buffer.from(bibliography)),
     },
     snapshotFiles: snapshotData.files,
