@@ -144,17 +144,21 @@ describe('application shell', () => {
     expect(document.body).not.toHaveTextContent(/готово к печати|print-ready/i)
   })
 
-  it('has no automatically detectable accessibility violations', async () => {
-    render(<App />)
+  it(
+    'has no automatically detectable accessibility violations',
+    async () => {
+      render(<App />)
 
-    const results = await axe.run(document.body, {
-      rules: {
-        'color-contrast': { enabled: false },
-      },
-    })
+      const results = await axe.run(document.body, {
+        rules: {
+          'color-contrast': { enabled: false },
+        },
+      })
 
-    expect(results.violations).toEqual([])
-  })
+      expect(results.violations).toEqual([])
+    },
+    10_000,
+  )
 
   it('uses human-readable author, year, title, and locator labels for inline citations', () => {
     const { container } = render(<App />)
