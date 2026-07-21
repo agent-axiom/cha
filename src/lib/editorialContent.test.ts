@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import rawClaims from '../../book/data/claims.json'
+import rawSources from '../../book/data/sources.json'
 import { history } from '../content/history'
 import { medicineClaims } from '../content/medicine'
 import { myths } from '../content/mythology'
@@ -18,6 +19,34 @@ function regionEntry(id: string) {
 }
 
 describe('editorial history boundaries', () => {
+  it('registers the disputed heicha classification boundary against official records', () => {
+    const claim = rawClaims.find(
+      ({ id }) => id === 'prod-heicha-classification-boundary',
+    )
+    expect(claim).toBeDefined()
+    expect(claim?.status).toBe('checked')
+    expect(claim?.text).toMatch(/классификац.*спорн/i)
+    expect(claim?.text).toMatch(/GB\/T 22111.*шэн.*шу/i)
+    expect(claim?.text).toMatch(/хэй ча.*систем.*прежде всего.*шу/i)
+    expect(claim?.sourceIds).toEqual(
+      expect.arrayContaining(['gbt-22111', 'yunnan-agri-2018-shou']),
+    )
+
+    const officialResponse = rawSources.find(
+      ({ id }) => id === 'yunnan-agri-2018-shou',
+    )
+    expect(officialResponse).toMatchObject({
+      documentClass: 'institutional-record',
+      evidenceRole: 'institutional-retrospective',
+      status: 'checked',
+      siteVisible: true,
+    })
+    expect(officialResponse?.href).toMatch(/^https:\/\/nync\.yn\.gov\.cn\//)
+    expect(officialResponse?.note).toMatch(/классификац.*спорн/i)
+    expect(officialResponse?.note).toMatch(/GB\/T 22111.*шэн.*шу/i)
+    expect(officialResponse?.note).toMatch(/хэй ча.*систем.*прежде всего.*шу/i)
+  })
+
   it('adds separate archaeological and written thresholds for early tea', () => {
     const archaeological = historyEntry('warring-states-tea-remains')
     expect(

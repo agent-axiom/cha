@@ -62,7 +62,7 @@ export const processSteps: ProcessStep[] = [
   ...sharedSteps.map((step) => ({
     ...step,
     path: 'shared' as const,
-    sourceIds: ['gbt-22111', 'lv-2013'],
+    sourceIds: ['db5308-processing-2020', 'gbt-22111', 'lv-2013'],
   })),
   {
     id: 'sheng-press',
@@ -72,7 +72,7 @@ export const processSteps: ProcessStep[] = [
     chinese: '蒸压 · zhēngyā',
     summary: 'Маоча размягчают паром, придают форму и снова тщательно сушат.',
     transformation: 'Так появляются блины, кирпичи и чашеобразные точа; прессование не означает зрелость.',
-    sourceIds: ['lv-2013', 'zhang-2013'],
+    sourceIds: ['db5308-processing-2020', 'lv-2013', 'zhang-2013'],
   },
   {
     id: 'sheng-storage',
@@ -82,7 +82,7 @@ export const processSteps: ProcessStep[] = [
     chinese: '陈化 · chénhuà',
     summary: 'После изготовления шэн поступает в контролируемое хранение; обязательного срока нет.',
     transformation: 'Профиль чая может меняться; направление зависит от партии и условий хранения.',
-    sourceIds: ['fan-2022', 'zhang-2013'],
+    sourceIds: ['db5308-storage-2020', 'fan-2022', 'zhang-2013'],
   },
   {
     id: 'shou-wodui',
@@ -92,7 +92,7 @@ export const processSteps: ProcessStep[] = [
     chinese: '渥堆 · wòduī',
     summary: 'Маоча увлажняют, затем формируют кучу и укрывают; в ходе водуй процесс ведут, сырьё переворачивают и разбивают комки.',
     transformation: 'В исследованиях наблюдались совместные изменения микробного сообщества и состава сырья. Профиль чая может меняться; направление зависит от партии и условий водуй.',
-    sourceIds: ['lv-2013', 'xu-2022'],
+    sourceIds: ['db5308-processing-2020', 'lv-2013', 'xu-2022'],
   },
   {
     id: 'shou-sort',
@@ -102,7 +102,7 @@ export const processSteps: ProcessStep[] = [
     chinese: '干燥与筛分 · gānzào yǔ shāifēn',
     summary: 'После водуй чай сушат и сортируют.',
     transformation: 'После сушки и сортировки шу уже является готовым чаем; длительное хранение не является обязательным этапом изготовления.',
-    sourceIds: ['lv-2013', 'fan-2022'],
+    sourceIds: ['db5308-processing-2020', 'lv-2013', 'fan-2022'],
   },
   {
     id: 'shou-press',
@@ -112,7 +112,7 @@ export const processSteps: ProcessStep[] = [
     chinese: '散茶 / 紧压茶',
     summary: 'Готовый шу оставляют рассыпным либо пропаривают и прессуют.',
     transformation: 'Рассыпная или прессованная форма не меняет технологическую категорию и сама по себе не доказывает технологический маршрут.',
-    sourceIds: ['gbt-22111', 'lv-2013'],
+    sourceIds: ['db5308-processing-2020', 'gbt-22111', 'lv-2013'],
   },
 ]
 

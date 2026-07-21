@@ -32,6 +32,28 @@ test('represents Guangdong and Yunnan as separate retrospective branches of shou
   }
 })
 
+test('registers the disputed heicha classification boundary without turning aging into a category rule', () => {
+  const classification = claim('prod-heicha-classification-boundary')
+  const officialResponse = source('yunnan-agri-2018-shou')
+
+  assert.ok(classification)
+  assert.equal(classification.status, 'checked')
+  assert.match(classification.text, /классификац.*спорн/iu)
+  assert.match(classification.text, /GB\/T 22111.*шэн.*шу/iu)
+  assert.match(classification.text, /хэй ча.*систем.*прежде всего.*шу/iu)
+  assert.match(classification.text, /выдержка сама по себе.*не переводит шэн.*шу.*технологическую категорию/iu)
+  assert.doesNotMatch(classification.text, /выдержк.*автоматически.*хэй ча/iu)
+  assert.deepEqual(
+    new Set(classification.sourceIds),
+    new Set(['gbt-22111', 'yunnan-agri-2018-shou']),
+  )
+  assert.equal(officialResponse.documentClass, 'institutional-record')
+  assert.equal(officialResponse.evidenceRole, 'institutional-retrospective')
+  assert.match(officialResponse.note, /классификац.*спорн/iu)
+  assert.match(officialResponse.note, /GB\/T 22111.*шэн.*шу/iu)
+  assert.match(officialResponse.note, /хэй ча.*систем.*прежде всего.*шу/iu)
+})
+
 test('keeps Ma chemical trajectories nonmonotonic and the Chau result matrix-bound', () => {
   assert.match(claim('micro-ma-chemical-shifts').text, /дню 7/u)
   assert.match(claim('micro-ma-chemical-shifts').text, /неодинаковые временные траектории/u)

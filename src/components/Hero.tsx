@@ -3,6 +3,9 @@ import { FogCanvas } from './FogCanvas'
 import { InlineDefinition } from './InlineDefinition'
 import { TeaPathSwitch } from './TeaPathSwitch'
 import { ReaderContract } from './ReaderContract'
+import { puerClassificationClaim } from '../content/editorial'
+import { sourceById } from '../content/sources'
+import { SourceCitation } from './SourceCitation'
 
 interface HeroProps {
   teaPath: TeaPath
@@ -44,14 +47,28 @@ export function Hero({ teaPath, onTeaPathChange }: HeroProps) {
           легенд до микробиологии шэн- и шу-пуэра.
         </p>
         <ReaderContract />
-        <p className="hero__taxonomy">
-          В русской торговой речи пуэр часто зовут «чёрным». В китайской
-          классификации выдержанный и постферментированный чай относят к{' '}
+        <p
+          className="hero__taxonomy"
+          data-claim-id={puerClassificationClaim.id}
+        >
+          В русской торговой речи пуэр часто зовут «чёрным». Классификация пуэра
+          спорна: GB/T 22111 объединяет шэн и шу в географическом указании «пуэр»,
+          но не решает этот вопрос одинаково для всех школ. Отнесение к{' '}
           <InlineDefinition
             term="хэй ча"
-            definition="Китайская категория тёмных чаёв, профиль которых формируется с участием постферментационных изменений."
+            definition="Китайская категория тёмных чаёв; её границы применительно к пуэру зависят от принятой классификационной системы."
           />{' '}
-          — «тёмным чаям»; шэн и шу при этом идут разными путями.
+          зависит от принятой системы и часто касается прежде всего шу. Выдержка
+          сама по себе не превращает шэн в шу или в иную технологическую категорию.
+          <span
+            className="source-links hero__taxonomy-sources"
+            aria-label="Источники классификационной оговорки"
+          >
+            {puerClassificationClaim.sourceIds.map((sourceId) => {
+              const source = sourceById.get(sourceId)
+              return source ? <SourceCitation key={sourceId} source={source} /> : null
+            })}
+          </span>
         </p>
         <TeaPathSwitch value={teaPath} onChange={onTeaPathChange} />
         <p className="hero__path-note">

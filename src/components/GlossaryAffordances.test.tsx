@@ -12,7 +12,7 @@ describe('inline glossary affordances', () => {
     for (const term of [
       'хэй ча',
       'шацин',
-      'шайцин',
+      'шайцин-маоча',
       'таксон',
       'суррогатный исход',
     ]) {
@@ -27,6 +27,18 @@ describe('inline glossary affordances', () => {
     expect(control).toHaveAttribute('aria-expanded', 'true')
     expect(screen.getByRole('note', { name: 'Определение термина «хэй ча»' })).toHaveTextContent(
       /китайская категория тёмных чаёв/i,
+    )
+
+    const maochaControl = screen.getByRole('button', {
+      name: 'Определение: шайцин-маоча',
+    })
+    await user.click(maochaControl)
+    expect(
+      screen.getByRole('note', {
+        name: 'Определение термина «шайцин-маоча»',
+      }),
+    ).toHaveTextContent(
+      /чай-сырец.*первичной обработки.*солнечной сушки.*не путать.*шацин/i,
     )
   })
 

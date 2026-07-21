@@ -1,4 +1,5 @@
 import { history } from './history'
+import { puerClassificationClaim } from './editorial'
 import { medicineClaims } from './medicine'
 import { myths } from './mythology'
 import { fermentationLayers, processSteps } from './process'
@@ -7,6 +8,7 @@ import { sources } from './sources'
 import type { SourcedEntry } from './types'
 
 export const siteContentEntries: readonly SourcedEntry[] = [
+  puerClassificationClaim,
   ...history,
   ...myths,
   ...regions,

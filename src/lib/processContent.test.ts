@@ -18,6 +18,31 @@ describe('process content', () => {
     expect(processSteps.filter((step) => step.path === 'shou').map((step) => step.order)).toEqual([8, 9, 10])
   })
 
+  it('links exact production operations to the processing standard without misusing the storage standard', () => {
+    const processingStandardStepIds = processSteps
+      .filter(({ sourceIds }) => sourceIds.includes('db5308-processing-2020'))
+      .map(({ id }) => id)
+    expect(processingStandardStepIds).toEqual([
+      'fresh-leaf',
+      'spread',
+      'fix',
+      'roll',
+      'loosen',
+      'sun-dry',
+      'maocha',
+      'sheng-press',
+      'shou-wodui',
+      'shou-sort',
+      'shou-press',
+    ])
+
+    expect(
+      processSteps
+        .filter(({ sourceIds }) => sourceIds.includes('db5308-storage-2020'))
+        .map(({ id }) => id),
+    ).toEqual(['sheng-storage'])
+  })
+
   it('names maocha as sun-dried raw tea and does not assert hand-picking', () => {
     const text = processSteps.map((step) => `${step.title} ${step.summary} ${step.transformation}`).join(' ')
     const maocha = processSteps.find((step) => step.id === 'maocha')
