@@ -143,17 +143,17 @@ test('cites the deduplicated non-rejected claim union in fixed groups and stable
   const groups = [
     ['Китайские исторические тексты, издания и копии', 8, (source) => source.group === 'primary-asian' && historicalDocumentClasses.has(source.documentClass) && historicalEvidenceRoles.has(source.evidenceRole)],
     ['Институциональные ретроспективы', 6, (source) => retrospectiveDocumentClasses.has(source.documentClass) && retrospectiveEvidenceRoles.has(source.evidenceRole)],
-    ['Азиатские исследования', 19, (source) => source.group === 'research-asian' && source.documentClass === 'research-publication' && source.evidenceRole === 'research-evidence'],
-    ['Западные исследования', 5, (source) => source.group === 'research-western' && source.documentClass === 'research-publication' && source.evidenceRole === 'research-evidence'],
-    ['Реестры исследований', 1, (source) => source.documentClass === 'trial-registration' && source.evidenceRole === 'trial-registry-record'],
+    ['Азиатские исследования', 27, (source) => source.group === 'research-asian' && source.documentClass === 'research-publication' && source.evidenceRole === 'research-evidence'],
+    ['Западные исследования', 6, (source) => source.group === 'research-western' && source.documentClass === 'research-publication' && source.evidenceRole === 'research-evidence'],
+    ['Реестры исследований', 3, (source) => source.documentClass === 'trial-registration' && source.evidenceRole === 'trial-registry-record'],
     ['Стандарты и рекомендации', 10, (source) => source.group === 'guidance' && guidanceDocumentClasses.has(source.documentClass) && guidanceEvidenceRoles.has(source.evidenceRole)],
   ]
   const expectedIds = groups.flatMap(([, , matches]) => cited.filter(matches).sort(compareSources).map(({ id }) => id))
 
-  assert.equal(cited.length, 49)
+  assert.equal(cited.length, 60)
   assert.equal(citedIds.has('xu-2022'), true)
   assert.deepEqual(sourceIds(bibliographyText), expectedIds)
-  assert.equal(new Set(sourceIds(bibliographyText)).size, 49)
+  assert.equal(new Set(sourceIds(bibliographyText)).size, 60)
   assert.equal(sourceIds(bibliographyText).includes('vinogrodsky-user-excerpt'), false)
   for (const [title, count, matches] of groups) {
     assert.equal(cited.filter(matches).length, count)

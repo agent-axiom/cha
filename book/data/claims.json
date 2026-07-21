@@ -353,45 +353,45 @@
   },
   {
     "id": "micro-safety-method-dependent",
-    "text": "Presence/absence микотоксинов зависит от выборки, её provenance, analyte list, экстракции, LOD/LOQ и матрицы: 36 магазинных образцов Haas и 31 отраслево-поставленный образец Chau дали разные профили, а PLOS-выборка обнаружила patulin в 9/15 raw и 2/16 ripened образцах. Ни ДНК потенциального продуцента, ни «не обнаружено» не равны универсальному выводу о риске.",
+    "text": "Presence/absence микотоксинов зависит от выборки, её provenance, analyte list, экстракции, LOD/LOQ и матрицы. Помимо малых наборов Haas и Chau, исследованы 120 post-fermented teas, включая 60 пуэров, и 219 китайских чаёв разных категорий; отдельные работы измеряли перенос из искусственно обогащённой матрицы и из конкретных коммерческих продуктов в настой. Эти разные вопросы и методы нельзя складывать в один процент безопасности: ни ДНК потенциального продуцента, ни «не обнаружено», ни единичная находка не описывают всю категорию.",
     "evidence": "modern",
     "status": "checked",
-    "sourceIds": ["haas-2013", "zhang-microbiome-2016", "chau-2023", "sedova-2018"]
+    "sourceIds": ["haas-2013", "zhang-microbiome-2016", "chau-2023", "sedova-2018", "qiu-2023-postfermented-fumonisins", "li-2022-patulin-tea", "kiseleva-2021-infusion-transfer", "wan-2025-tea-infusion-mycotoxins"]
   },
   {
     "id": "medical-human-efficacy-is-extract-evidence",
-    "text": "В поисковом срезе опубликованных человеческих исследований на 17 июля 2026 года шесть работ об эффективности и/или переносимости пуэра исследовали водорастворимые или концентрированные экстракты, часто в таблетках, капсулах или добавленном порошке; они не доказывают эквивалентный эффект обычного домашнего настоя. Две отдельные beverage records Xie et al. и Zielińska-Przyjemska et al. изучали метаболическую судьбу компонентов либо ROS/CRP biomarkers, а не клиническое лечение; зарегистрированное исследование без опубликованных результатов не считается доказательством эффективности.",
+    "text": "В обновлённом поисковом срезе на 21 июля 2026 года человеческие исследования пуэра остаются разнородными: изучались концентрированный экстракт, порошковый напиток, растворимый пуэр, выделенный теабраунин, цитрусовый пуэр и конкретный коммерческий шу. Работы были преимущественно малыми, короткими, иногда неконтролируемыми и ориентированными на суррогатные показатели; клиническая польза обычного домашнего настоя не установлена. Записи реестров, включая исследование заваренного пакетированного чая, описывают планы, а не результаты и не считаются доказательством эффективности.",
     "evidence": "medical-c",
     "status": "checked",
-    "sourceIds": ["fujita-2008-safety", "fujita-2008-trial", "kubota-2011", "chu-2011", "xie-2012", "jensen-2016", "yang-2014-weight", "zielinska-przyjemska-2005", "nct06401161"]
+    "sourceIds": ["fujita-2008-safety", "fujita-2008-trial", "kubota-2011", "chu-2011", "xie-2012", "jensen-2016", "yang-2014-weight", "zielinska-przyjemska-2005", "takeda-2019-powdered-beverage", "sun-2024-y562-human", "sun-2025-citrus-puer-human", "li-2026-theabrownin-human", "zhao-2026-ripened-review", "nct03613688", "nct06401161", "umin000053941"]
   },
   {
     "id": "medical-weight-extract-evidence",
-    "text": "Несколько малых и коротких human studies экстрактов сообщили изменения массы, BMI, талии или surrogate body-composition endpoints, но неизвестная attrition в большинстве abstracts, multiple outcomes, post-randomization exclusion у Jensen et al. и лишь subgroup signal у Yang et al. не позволяют утверждать, что пуэр как напиток вызывает клинически значимое или устойчивое снижение веса.",
+    "text": "Несколько малых и коротких human studies экстрактов, коммерческого шу и цитрусового пуэра сообщили изменения массы, BMI, талии или surrogate body-composition endpoints. Неизвестная attrition в части abstracts, multiple outcomes, post-randomization exclusion у Jensen et al., subgroup signal у Yang et al., неконтролируемый pre/post дизайн Sun 2024 и краткий pilot Sun 2025 не позволяют утверждать, что пуэр как напиток вызывает клинически значимое или устойчивое снижение веса.",
     "evidence": "medical-c",
     "status": "checked",
-    "sourceIds": ["fujita-2008-safety", "fujita-2008-trial", "kubota-2011", "chu-2011", "jensen-2016", "yang-2014-weight"]
+    "sourceIds": ["fujita-2008-safety", "fujita-2008-trial", "kubota-2011", "chu-2011", "jensen-2016", "yang-2014-weight", "sun-2024-y562-human", "sun-2025-citrus-puer-human"]
   },
   {
     "id": "medical-lipid-extract-evidence",
-    "text": "Малые human studies экстрактов сообщали изменения lipid surrogate endpoints, но они не оценивали инфаркт, инсульт или смертность и не поддерживают замену лекарств; Jensen et al. не показал значимых between-group различий cholesterol/HDL/LDL, а Yang et al. — cholesterol/triglycerides.",
+    "text": "Малые human studies экстрактов и неконтролируемое сравнение до/после коммерческого шу Y562 сообщали изменения липидных суррогатных показателей. У Sun 2024 не было параллельной контрольной группы, а множественные сравнения повышают риск случайных сигналов; эти работы не оценивали инфаркт, инсульт или смертность и не поддерживают замену лекарств. Jensen et al. не показал значимых between-group различий cholesterol/HDL/LDL, а Yang et al. — cholesterol/triglycerides.",
     "evidence": "medical-c",
     "status": "checked",
-    "sourceIds": ["fujita-2008-safety", "fujita-2008-trial", "chu-2011", "jensen-2016", "yang-2014-weight"]
+    "sourceIds": ["fujita-2008-safety", "fujita-2008-trial", "chu-2011", "jensen-2016", "yang-2014-weight", "sun-2024-y562-human"]
   },
   {
     "id": "medical-glycaemia-inconclusive",
-    "text": "Clinical glycaemic evidence пуэра недостаточно и непоследовательно: abstract Chu et al. сообщает ряд glucose changes без дозы, attrition и численных between-group effects, тогда как Jensen et al. не нашёл значимого between-group изменения fasting glucose, а Yang et al. — HbA1c. Пуэр не следует описывать как средство лечения или профилактики диабета.",
+    "text": "Clinical glycaemic evidence пуэра недостаточно и непоследовательно. Старые abstract-only records неполны; Takeda исследовал 17 проанализированных участников после разового порошкового напитка с экстрактом; Sun 2024 использовал неконтролируемое сравнение до/после; Li 2026 — малые подисследования растворимого пуэра и выделенного теабраунина с краткими surrogate endpoints. Эти данные не устанавливают профилактику или лечение диабета и не переносятся автоматически на обычный настой.",
     "evidence": "medical-c",
     "status": "checked",
-    "sourceIds": ["chu-2011", "jensen-2016", "yang-2014-weight"]
+    "sourceIds": ["chu-2011", "jensen-2016", "yang-2014-weight", "takeda-2019-powdered-beverage", "sun-2024-y562-human", "li-2026-theabrownin-human", "nct03613688"]
   },
   {
     "id": "medical-enzyme-review-not-clinical",
-    "text": "Найдены два pu-erh-specific systematic reviews: Yang et al. суммировал heterogeneous enzyme assays/in vitro/mouse work, а Lin et al. meta-analyzed только две mouse studies (16 records). Ни один не устанавливает снижение glucose, осложнений диабета или иных clinical outcomes у людей.",
+    "text": "Три pu-erh-specific systematic reviews отвечают на разные вопросы. Yang 2019 суммировал heterogeneous enzyme assays/in vitro/mouse work, Lin 2019 meta-analyzed только две mouse studies, а обзор Zhao 2026 сообщает 23 clinical trial investigations внутри смешанного корпуса из 351 публикации. Последний смешивает неодинаковые человеческие продукты и дизайны с доклиническими механизмами; поэтому обзор не становится непосредственно применимой опорой типа B для клинической пользы обычного настоя.",
     "evidence": "medical-d",
     "status": "checked",
-    "sourceIds": ["yang-2019-systematic", "lin-2019-meta"]
+    "sourceIds": ["yang-2019-systematic", "lin-2019-meta", "zhao-2026-ripened-review"]
   },
   {
     "id": "medical-caffeine-general-guidance",
@@ -423,10 +423,10 @@
   },
   {
     "id": "medical-microbiome-preclinical",
-    "text": "Pu-erh microbiome/gut findings в доступном корпусе являются главным образом animal, in vitro, cross-sectional tea microbiome или mechanistic associations; они не устанавливают клиническое улучшение кишечника, обмена веществ или иммунитета у людей.",
-    "evidence": "medical-d",
+    "text": "Доклинический слой Type D включает animal, in vitro, cross-sectional tea microbiome и mechanistic associations. Человеческий слой Type C представлен небольшими pilot/pre-post работами 2024–2026 годов: они добавляют гипотезы, но специальные продукты, краткость, отсутствие контроля в части дизайнов и surrogate endpoints не устанавливают клиническое улучшение кишечника, обмена веществ или иммунитета у людей.",
+    "evidence": "medical-c",
     "status": "checked",
-    "sourceIds": ["fan-2022", "zhang-microbiome-2016", "zhao-metaomics-2019", "xie-2012"]
+    "sourceIds": ["fan-2022", "zhang-microbiome-2016", "zhao-metaomics-2019", "xie-2012", "sun-2024-y562-human", "sun-2025-citrus-puer-human", "li-2026-theabrownin-human", "zhao-2026-ripened-review"]
   },
   {
     "id": "medical-antioxidant-assays-not-outcomes",
@@ -451,10 +451,10 @@
   },
   {
     "id": "medical-mycotoxin-evidence-limited",
-    "text": "Pu-erh mycotoxin evidence ограничено небольшими неодинаковыми product samples и target panels; сухой лист, настой и фактическая exposure не взаимозаменяемы, поэтому ни обнаружение в одной выборке, ни `not detected` в другой не доказывает риск или безопасность всей категории.",
+    "text": "Корпус шире нескольких малых выборок: одна работа исследовала 120 post-fermented teas, включая 60 пуэров, другая — 219 китайских чаёв разных категорий; ещё две работы различили перенос из искусственно обогащённой матрицы и из конкретных коммерческих продуктов в настой. Но панели, происхождение и вопросы различаются: сухой лист, настой и фактическая доза не взаимозаменяемы, поэтому ни обнаружение, ни `not detected`, ни низкая расчётная региональная экспозиция не доказывают риск или безопасность всей категории.",
     "evidence": "medical-d",
     "status": "checked",
-    "sourceIds": ["haas-2013", "zhang-microbiome-2016", "chau-2023", "sedova-2018"]
+    "sourceIds": ["haas-2013", "zhang-microbiome-2016", "chau-2023", "sedova-2018", "qiu-2023-postfermented-fumonisins", "li-2022-patulin-tea", "kiseleva-2021-infusion-transfer", "wan-2025-tea-infusion-mycotoxins"]
   },
   {
     "id": "medical-interactions-individualize",
@@ -472,17 +472,17 @@
   },
   {
     "id": "medical-tea-not-treatment",
-    "text": "Пуэр и его экстракты не заменяют диагностику, назначенное лечение, питание и иные доказанные меры; найденный human corpus мал, краток и ориентирован на surrogate endpoints, а clinical outcomes не изучены.",
+    "text": "Пуэр и его экстракты не заменяют диагностику, назначенное лечение, питание и иные доказанные меры. Расширенный human corpus всё ещё состоит преимущественно из малых, коротких и неоднородных исследований специальных продуктов с surrogate endpoints; устойчивые patient-important clinical outcomes и эквивалентность обычному настою не установлены.",
     "evidence": "medical-c",
     "status": "checked",
-    "sourceIds": ["fujita-2008-safety", "fujita-2008-trial", "kubota-2011", "chu-2011", "jensen-2016", "yang-2014-weight", "zielinska-przyjemska-2005"]
+    "sourceIds": ["fujita-2008-safety", "fujita-2008-trial", "kubota-2011", "chu-2011", "jensen-2016", "yang-2014-weight", "zielinska-przyjemska-2005", "takeda-2019-powdered-beverage", "sun-2024-y562-human", "sun-2025-citrus-puer-human", "li-2026-theabrownin-human", "zhao-2026-ripened-review"]
   },
   {
     "id": "medical-disease-claims-rejected",
-    "text": "Для книги отклонены утверждения, что пуэр лечит заболевание, вызывает гарантированное похудение, detoxifies, заменяет лекарства, предотвращает рак или сердечно-сосудистые события: включённые human studies экстрактов и nonhuman reviews таких выводов не поддерживают.",
+    "text": "Для книги отклонены утверждения, что пуэр лечит заболевание, вызывает гарантированное похудение, detoxifies, заменяет лекарства, предотвращает рак или сердечно-сосудистые события. Обновлённый корпус human studies и обзор 2026 года добавляют данные о суррогатных показателях и механизмах, но неоднородные продукты, малые/короткие дизайны и отсутствие patient-important outcomes таких выводов не поддерживают.",
     "evidence": "medical-c",
     "status": "rejected",
-    "sourceIds": ["fujita-2008-trial", "kubota-2011", "chu-2011", "jensen-2016", "yang-2014-weight", "zielinska-przyjemska-2005", "yang-2019-systematic", "lin-2019-meta"]
+    "sourceIds": ["fujita-2008-trial", "kubota-2011", "chu-2011", "jensen-2016", "yang-2014-weight", "zielinska-przyjemska-2005", "takeda-2019-powdered-beverage", "sun-2024-y562-human", "sun-2025-citrus-puer-human", "li-2026-theabrownin-human", "yang-2019-systematic", "lin-2019-meta", "zhao-2026-ripened-review"]
   },
   {
     "id": "mountain-large-leaf-material",

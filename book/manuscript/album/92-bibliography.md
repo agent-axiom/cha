@@ -43,10 +43,6 @@
 
 **Ключ источника:** `puer-wuhou`. **Вид документа:** Институциональная запись. **Роль в книге:** Институциональная ретроспектива. Историко-партийный отдел города Пуэр. *方志里的普洱：普洱茶*. 2024. [Источник](https://www.peds.gov.cn/tp_nr.asp?id=6849)
 
-<!-- page:A-P204 -->
-
-# Библиография
-
 <!-- source:dayi-history-1973 -->
 
 **Ключ источника:** `dayi-history-1973`. **Вид документа:** Корпоративная запись. **Роль в книге:** Корпоративная ретроспектива. 云南大益茶业集团 / Menghai Tea Factory. *大益历史 / TAETEA History*. без даты. [Источник](https://www.dayitea.com/en/da-yi-li-shi)
@@ -58,6 +54,10 @@
 <!-- source:pku-tea-horse-road-historiography -->
 
 **Ключ источника:** `pku-tea-horse-road-historiography`. **Вид документа:** Институциональная запись. **Роль в книге:** Институциональная ретроспектива. 北京大学中国语言文学系；受访人：陈保亚；采访人：何治春. *110系庆 · 中文学人 | 陈保亚：语言研究——田野、材料与理论*. 2023. Опубликовано 15 мая 2023 года; интервью проведено 23 сентября 2020 года. Локатор: раздел вопроса о 30-летии исследования чайно-лошадиного пути. [Источник](https://chinese.pku.edu.cn/xwgg/bdzwr/068939cc34a1446a98e36da34f399b44.htm)
+
+<!-- page:A-P204 -->
+
+# Библиография
 
 <!-- source:guangzhou-db4401-258-2024 -->
 
@@ -77,6 +77,10 @@
 
 **Ключ источника:** `xie-2012`. **Вид документа:** Исследовательская публикация. **Роль в книге:** Исследовательская опора. Guoxiang Xie et al. *Metabolic fate of tea polyphenols in humans*. 2012. С. 3449–3457. [DOI](https://doi.org/10.1021/pr300318m) · [Источник](https://pubmed.ncbi.nlm.nih.gov/22559253/)
 
+<!-- source:li-2022-patulin-tea -->
+
+**Ключ источника:** `li-2022-patulin-tea`. **Вид документа:** Исследовательская публикация. **Роль в книге:** Исследовательская опора. Hai Li et al. *Chromatographic Determination of the Mycotoxin Patulin in 219 Chinese Tea Samples and Implications for Human Health*. 2022. Статья 2852. [DOI](https://doi.org/10.3390/molecules27092852)
+
 <!-- source:lv-2013 -->
 
 **Ключ источника:** `lv-2013`. **Вид документа:** Исследовательская публикация. **Роль в книге:** Исследовательская опора. Hai-peng Lv, Ying-jun Zhang, Zhi Lin, Yue-rong Liang. *Processing and chemical constituents of Pu-erh tea: A review*. 2013. [DOI](https://doi.org/10.1016/j.foodres.2013.02.043)
@@ -88,10 +92,6 @@
 <!-- source:fujita-2008-safety -->
 
 **Ключ источника:** `fujita-2008-safety`. **Вид документа:** Исследовательская публикация. **Роль в книге:** Исследовательская опора. Hiroyuki Fujita, Tomohide Yamagami. *Efficacy and safety of Chinese black tea (Pu-Ehr) extract in healthy and hypercholesterolemic subjects*. 2008. С. 33–42. [DOI](https://doi.org/10.1159/000153006) · [Источник](https://pubmed.ncbi.nlm.nih.gov/18769024/)
-
-<!-- page:A-P205 -->
-
-# Библиография
 
 <!-- source:lu-2016-earliest-tea -->
 
@@ -109,6 +109,10 @@
 
 **Ключ источника:** `jiang-2021-warring-tea`. **Вид документа:** Исследовательская публикация. **Роль в книге:** Исследовательская опора. Jianrong Jiang, Guoquan Lu, Qing Wang, Shuya Wei. *The analysis and identification of charred suspected tea remains unearthed from Warring State Period Tomb*. 2021. С. 1–9. [DOI](https://doi.org/10.1038/s41598-021-95393-w)
 
+<!-- page:A-P205 -->
+
+# Библиография
+
 <!-- source:zhang-2013 -->
 
 **Ключ источника:** `zhang-2013`. **Вид документа:** Исследовательская публикация. **Роль в книге:** Исследовательская опора. Jinghong Zhang. *Puer Tea: Ancient Caravans and Urban Chic*. 2013. [Источник](https://uwapress.uw.edu/book/9780295993232/puer-tea/)
@@ -125,6 +129,14 @@
 
 **Ключ источника:** `zhao-metaomics-2019`. **Вид документа:** Исследовательская публикация. **Роль в книге:** Исследовательская опора. Ming Zhao et al. *Integrated Meta-omics Approaches To Understand the Microbiome of Spontaneous Fermentation of Traditional Chinese Pu-erh Tea*. 2019. Электронный локатор e00680-19. [DOI](https://doi.org/10.1128/mSystems.00680-19)
 
+<!-- source:zhao-2026-ripened-review -->
+
+**Ключ источника:** `zhao-2026-ripened-review`. **Вид документа:** Исследовательская публикация. **Роль в книге:** Исследовательская опора. Ming Zhao, Teng Wang, Lin Zeng, Qiuyue Chen, Dihan Yang, Yiqing Guan, Nianguo Bo, Yong-Quan Xu, Yan Ma. *Ripened Pu-erh tea modulates the gut microbiome to enhance metabolic homeostasis and redox-inflammatory balance: A systematic review of core health benefits and mechanisms*. 2026. Published online in 2025; issue dated January 2026. Статья 105448. [DOI](https://doi.org/10.1016/j.tifs.2025.105448)
+
+<!-- source:takeda-2019-powdered-beverage -->
+
+**Ключ источника:** `takeda-2019-powdered-beverage`. **Вид документа:** Исследовательская публикация. **Роль в книге:** Исследовательская опора. Ryuji Takeda, Yumiko Furuno, Shigeru Imai, Yumiko Ide, Danyong Wu, Kaijing Yan. *Effect of Powdered Beverages Containing Pu-erh Tea Extract on Postprandial Blood Glucose Levels*. 2019. Published 31 August 2019. С. 532–542. [DOI](https://doi.org/10.31989/ffhd.v9i8.635)
+
 <!-- source:chau-2023 -->
 
 **Ключ источника:** `chau-2023`. **Вид документа:** Исследовательская публикация. **Роль в книге:** Исследовательская опора. Siu Leung Chau, Aihua Zhao, Wei Jia, Lu Wang. *Simultaneous Determination of Pesticide Residues and Mycotoxins in Storage Pu-erh Tea Using Ultra-High-Performance Liquid Chromatography Coupled with Tandem Mass Spectrometry*. 2023. Статья 6883. [DOI](https://doi.org/10.3390/molecules28196883)
@@ -133,13 +145,13 @@
 
 **Ключ источника:** `chu-2011`. **Вид документа:** Исследовательская публикация. **Роль в книге:** Исследовательская опора. Song-Ling Chu, Hong Fu, Jin-Xia Yang, Geng-Xin Liu, Pan Dou, Liang Zhang, Peng-Fei Tu, Xue-Mei Wang. *A randomized double-blind placebo-controlled study of Pu'er tea extract on the regulation of metabolic syndrome*. 2011. С. 492–498. [DOI](https://doi.org/10.1007/s11655-011-0781-4) · [Источник](https://pubmed.ncbi.nlm.nih.gov/21725873/)
 
-<!-- page:A-P206 -->
-
-# Библиография
-
 <!-- source:fan-2022 -->
 
 **Ключ источника:** `fan-2022`. **Вид документа:** Исследовательская публикация. **Роль в книге:** Исследовательская опора. Sunan Wang, Yi Qiu, Ren-You Gan, Fan Zhu. *Chemical constituents and biological properties of Pu-erh tea*. 2022. [Источник](https://pubmed.ncbi.nlm.nih.gov/35337597/)
+
+<!-- source:qiu-2023-postfermented-fumonisins -->
+
+**Ключ источника:** `qiu-2023-postfermented-fumonisins`. **Вид документа:** Исследовательская публикация. **Роль в книге:** Исследовательская опора. Taotao Qiu et al. *B-Type Fumonisins in Post-Fermented Tea: Occurrence and Consumer Dietary Exposure in Guangxi, China*. 2023. Статья 534. [DOI](https://doi.org/10.3390/toxins15090534)
 
 <!-- source:yang-2014-weight -->
 
@@ -148,6 +160,26 @@
 <!-- source:ma-2017 -->
 
 **Ключ источника:** `ma-2017`. **Вид документа:** Исследовательская публикация. **Роль в книге:** Исследовательская опора. Yan Ma, Shuangmei Duan, Donglian Zhang, Xiaoqin Su, Dongying Zhang, Caiyou Lv, Ming Zhao. *Microbial Succession and the Dynamics of Chemical Compounds during the Solid-State Fermentation of Pu-erh Tea*. 2017. Статья 166. [DOI](https://doi.org/10.3390/app7020166)
+
+<!-- page:A-P206 -->
+
+# Библиография
+
+<!-- source:li-2026-theabrownin-human -->
+
+**Ключ источника:** `li-2026-theabrownin-human`. **Вид документа:** Исследовательская публикация. **Роль в книге:** Исследовательская опора. Yang Li et al. *Sex-Specific Regulation of Glycemic Homeostasis by Theabrownin from Pu-erh Tea*. 2026. Published online 16 April 2026. Электронный локатор e19337. [DOI](https://doi.org/10.1002/advs.202519337)
+
+<!-- source:sun-2025-citrus-puer-human -->
+
+**Ключ источника:** `sun-2025-citrus-puer-human`. **Вид документа:** Исследовательская публикация. **Роль в книге:** Исследовательская опора. Yi Sun, Xiang Li, Haoxin Cui, Zhiruo Jin, Guowei Hu, Dongze Qin, Haiwei Liu, Huan Lv, Yaxiong Song, Jin Wang, Yuhang Hao, Shuo Wang. *Gut microbiome-mediated effects of citrus Pu-erh tea: body fat reduction in a human pilot study and metabolic disorders improvement in obese mice*. 2025. Accepted 25 June 2025; available online 30 September 2025. [DOI](https://doi.org/10.26599/FSHW.2025.9250750)
+
+<!-- source:sun-2024-y562-human -->
+
+**Ключ источника:** `sun-2024-y562-human`. **Вид документа:** Исследовательская публикация. **Роль в книге:** Исследовательская опора. Ying Sun et al. *普洱熟茶对糖脂代谢异常改善效果的临床研究*. 2024. Online published 10 July 2024. С. 144–156. [DOI](https://doi.org/10.7506/spkx1002-6630-20230929-261)
+
+<!-- source:wan-2025-tea-infusion-mycotoxins -->
+
+**Ключ источника:** `wan-2025-tea-infusion-mycotoxins`. **Вид документа:** Исследовательская публикация. **Роль в книге:** Исследовательская опора. Ying-Chun Wan, Zwe-Lin Kong, Yi-Hsieng Samuel Wu, Chien-Ni Huang, Tomohisa Ogawa, Jau-Tien Lin, Deng-Jye Yang. *Establishment of appropriate conditions for the efficient determination of multiple mycotoxins in tea samples and assessment of their drinking risks*. 2025. Published online 25 September 2024; issue dated 15 January 2025. Статья 141438. [DOI](https://doi.org/10.1016/j.foodchem.2024.141438)
 
 <!-- source:zhang-microbiome-2016 -->
 
@@ -175,6 +207,10 @@
 
 **Ключ источника:** `zielinska-przyjemska-2005`. **Вид документа:** Исследовательская публикация. **Роль в книге:** Исследовательская опора. Małgorzata Zielińska-Przyjemska, Agnieszka Dobrowolska-Zachwieja. *[Effect of tea polyphenols on oxidative metabolism of polymorphonuclear neutrophils in healthy and obese people]*. 2005. Polish-language article; English abstract. С. 41–47. [Источник](https://pubmed.ncbi.nlm.nih.gov/16194025/)
 
+<!-- source:kiseleva-2021-infusion-transfer -->
+
+**Ключ источника:** `kiseleva-2021-infusion-transfer`. **Вид документа:** Исследовательская публикация. **Роль в книге:** Исследовательская опора. Mariya Kiseleva; Zakhar Chalyy; Irina Sedova. *Tea: Transfer of Mycotoxins from the Spiked Matrix into an Infusion*. 2021. Статья 404. [DOI](https://doi.org/10.3390/toxins13060404)
+
 ## Реестры исследований
 
 <!-- source:nct06401161 -->
@@ -184,6 +220,14 @@
 <!-- page:A-P207 -->
 
 # Библиография
+
+<!-- source:nct03613688 -->
+
+**Ключ источника:** `nct03613688`. **Вид документа:** Регистрация исследования. **Роль в книге:** Запись о планируемом исследовании; результатов нет. Tasly Pharmaceuticals. *Effects of Deepure (Pu-erh Tea Extract) on Glycemic Control*. 2018. NCT03613688. [Источник](https://clinicaltrials.gov/study/NCT03613688)
+
+<!-- source:umin000053941 -->
+
+**Ключ источника:** `umin000053941`. **Вид документа:** Регистрация исследования. **Роль в книге:** Запись о планируемом исследовании; результатов нет. University of Shizuoka. *Anti-obesity effect of Pu-erh tea drinking in obese parameters (bodyweight and body fat)*. 2024. UMIN000053941; registered 25 March 2024. [Источник](https://rctportal.mhlw.go.jp/en/detail?trial_id=UMIN000053941)
 
 ## Стандарты и рекомендации
 

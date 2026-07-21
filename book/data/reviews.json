@@ -383,8 +383,8 @@
     "status": "pending",
     "reviewer": "Codex editorial evidence audit",
     "qualification": "internal evidence audit; not a credentialed microbiologist or toxicologist",
-    "reviewedAt": "2026-07-17",
-    "note": "Различия результатов привязаны к выборке, analyte list и аналитическим пределам; медицинский вывод не делается."
+    "reviewedAt": "2026-07-21",
+    "note": "Более крупные occurrence sets и infusion-transfer studies добавлены без pooling несовместимых панелей; выводы остаются привязаны к матрице, методу и выборке."
   },
   {
     "claimId": "medical-human-efficacy-is-extract-evidence",
@@ -392,8 +392,8 @@
     "status": "pending",
     "reviewer": "Codex internal evidence search",
     "qualification": "internal evidence audit; not a licensed clinician",
-    "reviewedAt": "2026-07-18",
-    "note": "Счётчик опубликованных human records привязан к поисковому срезу 17 июля 2026 года; NCT06401161 без результатов не включён как доказательство эффективности. Внешний медицинский reviewer не назначен."
+    "reviewedAt": "2026-07-21",
+    "note": "Целевое обновление добавило экстракт, instant/powdered, citrus и commercial-shou human records и две записи реестров; фиксированный счётчик удалён, ordinary-infusion efficacy не заявлена. Внешний медицинский reviewer не назначен."
   },
   {
     "claimId": "medical-weight-extract-evidence",
@@ -401,8 +401,8 @@
     "status": "pending",
     "reviewer": "Codex internal evidence search",
     "qualification": "internal evidence audit; not a licensed clinician",
-    "reviewedAt": "2026-07-18",
-    "note": "Сохранены ограничения n, duration, attrition, extract-to-beverage applicability и subgroup-only signal Yang et al.; раскрыты финансирование Jensen производителем экстракта и занятость 3/5 авторов у спонсора. Требуется внешняя медицинская рецензия."
+    "reviewedAt": "2026-07-21",
+    "note": "Сохранены ограничения n, duration, attrition, product applicability, subgroup-only signal Yang, pre/post дизайн Sun 2024 и pilot Sun 2025; раскрытия Jensen сохранены. Требуется внешняя медицинская рецензия."
   },
   {
     "claimId": "medical-lipid-extract-evidence",
@@ -410,8 +410,8 @@
     "status": "pending",
     "reviewer": "Codex internal evidence search",
     "qualification": "internal evidence audit; not a licensed clinician",
-    "reviewedAt": "2026-07-17",
-    "note": "Surrogate lipid endpoints, включая null abstract result Yang et al., отделены от clinical cardiovascular outcomes; требуется внешняя медицинская рецензия."
+    "reviewedAt": "2026-07-21",
+    "note": "Sun 2024 и коммерческий шу Y562 добавлены к исследованиям экстрактов с явными ограничениями неконтролируемого сравнения до/после, множественных показателей и суррогатных липидных исходов; они отделены от сердечно-сосудистых событий. Требуется внешняя медицинская рецензия."
   },
   {
     "claimId": "medical-glycaemia-inconclusive",
@@ -419,8 +419,8 @@
     "status": "pending",
     "reviewer": "Codex internal evidence search",
     "qualification": "internal evidence audit; not a licensed clinician",
-    "reviewedAt": "2026-07-17",
-    "note": "Abstract findings, включая отсутствие значимого HbA1c result у Yang et al., сохранены без причинного или лечебного вывода; требуется внешняя медицинская рецензия."
+    "reviewedAt": "2026-07-21",
+    "note": "Takeda 2019, Sun 2024 и два human substudies Li 2026 добавлены как краткие/surrogate данные без причинного, профилактического или лечебного вывода; требуется внешняя медицинская рецензия."
   },
   {
     "claimId": "medical-enzyme-review-not-clinical",
@@ -428,8 +428,8 @@
     "status": "pending",
     "reviewer": "Codex internal evidence search",
     "qualification": "internal evidence audit; not a licensed clinician",
-    "reviewedAt": "2026-07-17",
-    "note": "Systematic review не повышен до human clinical evidence; требуется внешняя медицинская рецензия."
+    "reviewedAt": "2026-07-21",
+    "note": "Обзор Zhao 2026 с 23 clinical trial investigations зарегистрирован, но его смешанный корпус не повышен до непосредственно применимого type B для обычного настоя; требуется внешняя медицинская рецензия."
   },
   {
     "claimId": "medical-caffeine-general-guidance",
@@ -473,8 +473,8 @@
     "status": "pending",
     "reviewer": "Codex internal evidence search",
     "qualification": "internal evidence audit; not a licensed clinician",
-    "reviewedAt": "2026-07-17",
-    "note": "Animal/in vitro/association evidence не превращено в human gut claim; внешний медицинский reviewer pending."
+    "reviewedAt": "2026-07-21",
+    "note": "Новые human pilot/pre-post data добавлены, но microbiome/surrogate changes не превращены в клиническую пользу; внешний медицинский reviewer pending."
   },
   {
     "claimId": "medical-antioxidant-assays-not-outcomes",
@@ -509,8 +509,8 @@
     "status": "pending",
     "reviewer": "Codex internal evidence search",
     "qualification": "internal evidence audit; not a licensed clinician or toxicologist",
-    "reviewedAt": "2026-07-18",
-    "note": "Граница dry leaf → infusion → dose → exposure теперь видима в proof и имеет собственный claim marker; внешний medical/toxicology reviewer pending."
+    "reviewedAt": "2026-07-21",
+    "note": "Добавлены 120 post-fermented teas (60 пуэров), 219 китайских чаёв, spiked-matrix transfer и direct product/infusion study; граница dry leaf → infusion → dose → exposure сохранена. Внешний medical/toxicology reviewer pending."
   },
   {
     "claimId": "medical-interactions-individualize",
@@ -536,8 +536,8 @@
     "status": "pending",
     "reviewer": "Codex internal evidence search",
     "qualification": "internal evidence audit; not a licensed clinician",
-    "reviewedAt": "2026-07-17",
-    "note": "Editorial non-substitution warning обновлён по corrected 8-record human corpus; внешний medical review pending."
+    "reviewedAt": "2026-07-21",
+    "note": "Предупреждение о недопустимости замены лечения синхронизировано с обновлённым корпусом исследований специальных продуктов и суррогатных исходов; внешняя медицинская рецензия не получена."
   },
   {
     "claimId": "medical-disease-claims-rejected",
@@ -545,7 +545,7 @@
     "status": "pending",
     "reviewer": "Codex internal evidence search",
     "qualification": "internal evidence audit; not a licensed clinician",
-    "reviewedAt": "2026-07-17",
-    "note": "Unsupported treatment/detox/cancer/medicine-replacement claims остаются rejected после corrected Puerh search; внешний medical review pending."
+    "reviewedAt": "2026-07-21",
+    "note": "Отклонение лечебных, detox, cancer-prevention и medicine-replacement claims перепроверено по расширенной базе, включающей Takeda 2019, Sun 2024, Sun 2025, Li 2026 и обзор Zhao 2026; внешняя медицинская рецензия не получена."
   }
 ]
