@@ -55,6 +55,10 @@
 
 **Ключ источника:** `yunnan-agri-2018-shou`. **Вид документа:** Институциональная запись. **Роль в книге:** Институциональная ретроспектива. 云南省农业厅. *对云南省十三届人大第一次会议第0270号建议的答复*. 2018. 云农茶〔2018〕2号. [Источник](https://nync.yn.gov.cn/html/2018/tianjianyibanli2018_0612/375055.html?cid=3406)
 
+<!-- source:pku-tea-horse-road-historiography -->
+
+**Ключ источника:** `pku-tea-horse-road-historiography`. **Вид документа:** Институциональная запись. **Роль в книге:** Институциональная ретроспектива. 北京大学中国语言文学系；受访人：陈保亚；采访人：何治春. *110系庆 · 中文学人 | 陈保亚：语言研究——田野、材料与理论*. 2023. Опубликовано 15 мая 2023 года; интервью проведено 23 сентября 2020 года. Локатор: раздел вопроса о 30-летии исследования чайно-лошадиного пути. [Источник](https://chinese.pku.edu.cn/xwgg/bdzwr/068939cc34a1446a98e36da34f399b44.htm)
+
 <!-- source:guangzhou-db4401-258-2024 -->
 
 **Ключ источника:** `guangzhou-db4401-258-2024`. **Вид документа:** Стандарт. **Роль в книге:** Институциональная ретроспектива. 广州市市场监督管理局. *DB4401/T 258—2024 茶文化服务规范*. 2024. DB4401/T 258—2024; приложение A, таблица A.1, строка 10. Локатор: PDF с. 19; печатная с. 13. [Источник](https://scjgj.gz.gov.cn/attachment/7/7575/7575757/9561176.pdf)
@@ -85,13 +89,13 @@
 
 **Ключ источника:** `fujita-2008-safety`. **Вид документа:** Исследовательская публикация. **Роль в книге:** Исследовательская опора. Hiroyuki Fujita, Tomohide Yamagami. *Efficacy and safety of Chinese black tea (Pu-Ehr) extract in healthy and hypercholesterolemic subjects*. 2008. С. 33–42. [DOI](https://doi.org/10.1159/000153006) · [Источник](https://pubmed.ncbi.nlm.nih.gov/18769024/)
 
-<!-- source:lu-2016-earliest-tea -->
-
-**Ключ источника:** `lu-2016-earliest-tea`. **Вид документа:** Исследовательская публикация. **Роль в книге:** Исследовательская опора. Houyuan Lu et al. *Earliest tea as evidence for one branch of the Silk Road across the Tibetan Plateau*. 2016. С. 1–8. [DOI](https://doi.org/10.1038/srep18955)
-
 <!-- page:A-P205 -->
 
 # Библиография
+
+<!-- source:lu-2016-earliest-tea -->
+
+**Ключ источника:** `lu-2016-earliest-tea`. **Вид документа:** Исследовательская публикация. **Роль в книге:** Исследовательская опора. Houyuan Lu et al. *Earliest tea as evidence for one branch of the Silk Road across the Tibetan Plateau*. 2016. С. 1–8. [DOI](https://doi.org/10.1038/srep18955)
 
 <!-- source:lin-2019-meta -->
 

@@ -53,7 +53,7 @@ export type HistoryKind = 'legend' | 'source' | 'retrospective' | 'modern'
 
 export interface HistoryEntry {
   id: string
-  sortYear: number
+  sortYear: number | null
   date: string
   title: string
   summary: string

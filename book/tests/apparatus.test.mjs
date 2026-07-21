@@ -142,7 +142,7 @@ test('cites the deduplicated non-rejected claim union in fixed groups and stable
   const cited = sources.filter(({ id, evidenceRole }) => citedIds.has(id) && evidenceRole !== 'provenance-only')
   const groups = [
     ['Китайские исторические тексты, издания и копии', 8, (source) => source.group === 'primary-asian' && historicalDocumentClasses.has(source.documentClass) && historicalEvidenceRoles.has(source.evidenceRole)],
-    ['Институциональные ретроспективы', 5, (source) => retrospectiveDocumentClasses.has(source.documentClass) && retrospectiveEvidenceRoles.has(source.evidenceRole)],
+    ['Институциональные ретроспективы', 6, (source) => retrospectiveDocumentClasses.has(source.documentClass) && retrospectiveEvidenceRoles.has(source.evidenceRole)],
     ['Азиатские исследования', 19, (source) => source.group === 'research-asian' && source.documentClass === 'research-publication' && source.evidenceRole === 'research-evidence'],
     ['Западные исследования', 5, (source) => source.group === 'research-western' && source.documentClass === 'research-publication' && source.evidenceRole === 'research-evidence'],
     ['Реестры исследований', 1, (source) => source.documentClass === 'trial-registration' && source.evidenceRole === 'trial-registry-record'],
@@ -150,10 +150,10 @@ test('cites the deduplicated non-rejected claim union in fixed groups and stable
   ]
   const expectedIds = groups.flatMap(([, , matches]) => cited.filter(matches).sort(compareSources).map(({ id }) => id))
 
-  assert.equal(cited.length, 48)
+  assert.equal(cited.length, 49)
   assert.equal(citedIds.has('xu-2022'), true)
   assert.deepEqual(sourceIds(bibliographyText), expectedIds)
-  assert.equal(new Set(sourceIds(bibliographyText)).size, 48)
+  assert.equal(new Set(sourceIds(bibliographyText)).size, 49)
   assert.equal(sourceIds(bibliographyText).includes('vinogrodsky-user-excerpt'), false)
   for (const [title, count, matches] of groups) {
     assert.equal(cited.filter(matches).length, count)

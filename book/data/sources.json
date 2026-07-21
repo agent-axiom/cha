@@ -40,6 +40,26 @@
     "bookUse": "core"
   },
   {
+    "id": "pku-tea-horse-road-historiography",
+    "publicationClass": "retrospective",
+    "documentClass": "institutional-record",
+    "evidenceRole": "institutional-retrospective",
+    "title": "110系庆 · 中文学人 | 陈保亚：语言研究——田野、材料与理论",
+    "author": "北京大学中国语言文学系；受访人：陈保亚；采访人：何治春",
+    "year": "2023",
+    "href": "https://chinese.pku.edu.cn/xwgg/bdzwr/068939cc34a1446a98e36da34f399b44.htm",
+    "group": "guidance",
+    "origin": "Официальный сайт факультета китайского языка и литературы Пекинского университета",
+    "note": "Институциональное интервью служит прямой опорой только для историографии термина: Чэнь Баоя датирует полевое именование «чайно-лошадиного пути» 1990 годом, первые публикации — 1992-м, и описывает несколько линий и сетевое распространение маршрутов. Это не архивное свидетельство древности или непрерывности единой дороги.",
+    "edition": "Опубликовано 15 мая 2023 года; интервью проведено 23 сентября 2020 года",
+    "pages": "раздел вопроса о 30-летии исследования чайно-лошадиного пути",
+    "doi": null,
+    "accessedAt": "2026-07-21",
+    "status": "checked",
+    "siteVisible": true,
+    "bookUse": "core"
+  },
+  {
     "id": "fan-chuo-863",
     "publicationClass": "access-copy",
     "documentClass": "historical-access-copy",

@@ -549,14 +549,14 @@ test('publication bibliography excludes provenance-only records while the review
     'primary-text', 'facsimile', 'critical-edition', 'print-edition-catalog', 'manuscript-catalog', 'access-copy',
     'retrospective', 'research', 'standard-guidance', 'trial-registration', 'provenance-only',
   ])
-  assert.equal(sources.length, 49)
+  assert.equal(sources.length, 50)
   assert.ok(sources.every(({ publicationClass }) => allowed.has(publicationClass)))
   assert.equal(sources.find(({ id }) => id === 'vinogrodsky-user-excerpt').publicationClass, 'provenance-only')
   assert.equal(sources.find(({ id }) => id === 'vinogrodsky-user-excerpt').evidenceRole, 'provenance-only')
 
   const bibliography = read('manuscript/album/92-bibliography.md')
   const publishedIds = [...bibliography.matchAll(/<!-- source:([^ ]+) -->/gu)].map(([, id]) => id)
-  assert.equal(publishedIds.length, 48)
+  assert.equal(publishedIds.length, 49)
   assert.equal(publishedIds.includes('vinogrodsky-user-excerpt'), false)
   for (const label of ['Факсимиле', 'Каталогическая запись издания', 'Копия исторического текста', 'Институциональная запись', 'Исследовательская публикация', 'Стандарт', 'Регистрация исследования']) {
     assert.match(bibliography, new RegExp(`\\*\\*Вид документа:\\*\\* ${label}`, 'u'), label)

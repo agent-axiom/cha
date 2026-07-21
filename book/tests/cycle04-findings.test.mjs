@@ -13,6 +13,7 @@ const sources = json('book/data/sources.json')
 const album = json('book/flatplan/album.json')
 const guide = json('book/flatplan/guide.json')
 const assets = json('book/data/assets.json')
+const reviews = json('book/data/reviews.json')
 const claim = (id) => claims.find((item) => item.id === id)
 const source = (id) => sources.find((item) => item.id === id)
 const albumPage = (number) => album.pages[number - 1]
@@ -73,6 +74,32 @@ test('bounds the checked Ruan retrospective without upgrading the rejected Xu cl
   assert.match(site, /приписываем[а-яё]* тексту Жуань Фу/iu)
   assert.match(site, /критическ[а-яё]* издани[а-яё]* и факсимиле[^.]*нет/iu)
   assert.doesNotMatch(site, /date:\s*['"]Около 1825[–—-]1826/iu)
+
+  const review = reviews.find(({ claimId }) => claimId === 'hist-ruan-retrospective')
+  assert.equal(review.status, 'pending')
+  assert.match(review.note, /checked.*ограничен|проверен.*ограничен/iu)
+  assert.doesNotMatch(review.note, /понижен.*draft/iu)
+})
+
+test('anchors the late tea-horse-road frame in direct historiography without inventing an ancient single road', () => {
+  const framing = claim('hist-tea-horse-road-framing')
+  const direct = source('pku-tea-horse-road-historiography')
+
+  assert.ok(framing.sourceIds.includes('pku-tea-horse-road-historiography'))
+  assert.equal(direct.documentClass, 'institutional-record')
+  assert.equal(direct.evidenceRole, 'institutional-retrospective')
+  assert.match(direct.note, /1990.*1992/iu)
+  assert.match(direct.note, /сет/iu)
+  assert.match(direct.note, /не[^.]*архив/iu)
+
+  const site = read('src/content/history.ts')
+  assert.match(site, /pku-tea-horse-road-historiography/u)
+  assert.match(site, /fan-chuo-zhao-1985/u)
+  assert.doesNotMatch(site, /sortYear:\s*-2737/u)
+
+  const research = read('book/research/history.md')
+  assert.match(research, /1990.*1992/iu)
+  assert.match(research, /Пекинск.*университет/iu)
 })
 
 test('keeps the six-mountains map and maocha diagram on their correct proof pages', () => {

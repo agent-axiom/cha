@@ -19,6 +19,32 @@ function regionEntry(id: string) {
 }
 
 describe('editorial history boundaries', () => {
+  it('keeps mythical time non-numeric and strengthens the direct historical source trail', () => {
+    const shennong = historyEntry('shennong-myth')
+    expect(shennong.date).toBe('Мифическое время')
+    expect(shennong.sortYear).toBeNull()
+
+    expect(historyEntry('manshu-yinsheng').sourceIds).toContain(
+      'fan-chuo-zhao-1985',
+    )
+
+    const caravan = historyEntry('caravan-commodity')
+    expect(caravan.sourceIds).toContain('pku-tea-horse-road-historiography')
+
+    const source = rawSources.find(
+      ({ id }) => id === 'pku-tea-horse-road-historiography',
+    )
+    expect(source).toMatchObject({
+      documentClass: 'institutional-record',
+      evidenceRole: 'institutional-retrospective',
+      status: 'checked',
+      siteVisible: true,
+    })
+    expect(source?.href).toMatch(/^https:\/\/chinese\.pku\.edu\.cn\//)
+    expect(source?.note).toMatch(/1990.*1992.*сет|сет.*1990.*1992/i)
+    expect(source?.note).toMatch(/не.*архив/i)
+  })
+
   it('registers the disputed heicha classification boundary against official records', () => {
     const claim = rawClaims.find(
       ({ id }) => id === 'prod-heicha-classification-boundary',

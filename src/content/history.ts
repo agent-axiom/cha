@@ -3,7 +3,7 @@ import type { HistoryEntry } from './types'
 export const history: HistoryEntry[] = [
   {
     id: 'shennong-myth',
-    sortYear: -2737,
+    sortYear: null,
     date: 'Мифическое время',
     title: 'Шэнь-нун пробует сто трав',
     summary: 'Культурный герой распознаёт свойства растений, а чай становится противоядием и знанием.',
@@ -59,7 +59,7 @@ export const history: HistoryEntry[] = [
     summary: 'Фань Чо сообщает о чае, который собирали в горах юньнаньской области Иньшэн.',
     detail: 'Это одно из самых ранних надёжных письменных свидетельств о чае региона. Называть описанный продукт современным пуэром можно только ретроспективно.',
     kind: 'source',
-    sourceIds: ['fan-chuo-863', 'zhang-2013'],
+    sourceIds: ['fan-chuo-863', 'fan-chuo-zhao-1985', 'zhang-2013'],
   },
   {
     id: 'zhao-six-mountains',
@@ -89,7 +89,7 @@ export const history: HistoryEntry[] = [
     summary: 'Прессованный чай становился данью, товаром и спутником дальних караванов.',
     detail: 'Образ единственной «Древней чайно-конной дороги» упрощает сеть меняющихся маршрутов, рынков и политических связей.',
     kind: 'retrospective',
-    sourceIds: ['zhang-2013', 'zhao-1765'],
+    sourceIds: ['zhang-2013', 'pku-tea-horse-road-historiography', 'zhao-1765'],
   },
   {
     id: 'guangdong-shou-line',
